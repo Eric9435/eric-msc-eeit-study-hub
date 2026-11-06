@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-06.5",
+  "version": "2026-11-06.6",
   "description": "Private Google Drive-backed EEIT catalog: 123 original PDFs stored with owner-only Drive permissions; older ChatGPT Library metadata references remain listed where unmatched. File IDs do not grant public access.",
   "statusMeaning": {
     "recordType": "Library filename verified in user-associated Files vs. filename only from archived source audit",
@@ -2797,5 +2797,51 @@
     "verifiedPdfPageLinks": 84,
     "note": "42 original exercise sets mapped to uploaded original questions and official sample-solutions using first matching PDF task headings. Original 10 metadata-only PDF references remain separate; independent practice is not represented as an official PDF exercise."
   },
-  "auditNotes": "Only 42 exercise sets have verified exact question+official-answer PDF page references. EPS II 12 lecture-derived sets have related lecture references rather than exact source PDFs. Independent MEMS practice has related lecture references, not official exercise sheets. 123 uploaded PDFs include lecture/lab/exam/notes, not 123 exercise sheets."
+  "auditNotes": "Only 42 exercise sets have verified exact question+official-answer PDF page references. EPS II 12 lecture-derived sets have related lecture references rather than exact source PDFs. Independent MEMS practice has related lecture references, not official exercise sheets. 123 uploaded PDFs include lecture/lab/exam/notes, not 123 exercise sheets.",
+  "examCoverage": {
+    "date": "2026-11-06",
+    "exerciseEntries": 82,
+    "fullyLinkedOriginal": 42,
+    "lectureReferenceOnly": 22,
+    "standaloneOrUnlinked": 18,
+    "sourceOnlyWithoutSolution": 12,
+    "bySubject": {
+      "digital": {
+        "sets": 21,
+        "exact": 18,
+        "related": 0,
+        "other": 3,
+        "withoutWorkedSolution": 3
+      },
+      "power": {
+        "sets": 17,
+        "exact": 0,
+        "related": 12,
+        "other": 5,
+        "withoutWorkedSolution": 5
+      },
+      "control": {
+        "sets": 11,
+        "exact": 6,
+        "related": 0,
+        "other": 5,
+        "withoutWorkedSolution": 0
+      },
+      "microwave": {
+        "sets": 23,
+        "exact": 18,
+        "related": 0,
+        "other": 5,
+        "withoutWorkedSolution": 4
+      },
+      "micro": {
+        "sets": 10,
+        "exact": 0,
+        "related": 10,
+        "other": 0,
+        "withoutWorkedSolution": 0
+      }
+    },
+    "description": "Exact means question and sample-solution page headings were verified in real owner-private uploaded PDFs. Related means only a topic lecture reference, NOT the exact exercise. Other includes independently authored practice and entries lacking direct source mapping. Source-only means no full worked parts in website, even where PDF source is available."
+  }
 }
