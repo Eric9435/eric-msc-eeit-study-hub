@@ -21,7 +21,7 @@ for(const ex of content.exercises){
  }
 }
 cp.execFileSync(process.execPath,[file('tools/build_public.cjs')],{cwd:root,stdio:'inherit'});
-for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','assets/favicon.svg'])
+for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','reason-ui.css','reason-ui.js','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','assets/favicon.svg'])
  assert(fs.existsSync(file('public/'+name)),'Missing published file '+name);
 assert(!fs.existsSync(file('public/assets/questions')),'Original questions must never publish');
 const walk=(dir)=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(d=>d.isDirectory()?walk(path.join(dir,d.name)):[path.join(dir,d.name)]);

@@ -1,0 +1,22 @@
+/* Explanation popup, flat colors and touch/keyboard accessibility */
+.reason[data-reason-enhanced]{padding:0;background:var(--brand-soft);border:1px solid var(--line);border-left:3px solid var(--brand-hi);border-radius:11px;overflow:hidden}
+.reason-popup-trigger{width:100%;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px 16px;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer}
+.reason-popup-trigger:hover{background:var(--surface-hover)}
+.reason-popup-trigger-text{display:flex;flex-direction:column;gap:5px;min-width:0}
+.reason-popup-trigger-text strong{font-size:13px}
+.reason-popup-trigger-text span{font-family:"Noto Sans Myanmar","Myanmar Text","Padauk",system-ui,sans-serif;font-size:11px;color:var(--muted);line-height:1.7}
+.reason-popup-trigger-arrow{flex:0 0 auto;font-size:23px;color:var(--brand-hi)}
+.reason-popup-active{overflow:hidden}
+.reason-popup-backdrop{position:fixed;inset:0;z-index:90;background:rgba(8,25,47,.6);padding:18px;display:flex;align-items:center;justify-content:center}
+.reason-popup{width:min(100%,640px);max-height:min(88vh,740px);overflow-y:auto;overscroll-behavior:contain;padding:25px;border-radius:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);box-shadow:0 22px 70px #0003}
+.reason-popup-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.reason-popup-eyebrow{display:block;color:var(--brand-hi);font-size:10px;letter-spacing:1.1px;font-weight:800;margin-bottom:8px}
+.reason-popup-header h2{font-size:23px;line-height:1.2;letter-spacing:-.5px;margin:0}
+.reason-popup-close{display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;width:42px;height:42px;min-width:42px;font-size:26px;line-height:1;color:var(--ink);background:var(--surface);cursor:pointer}
+.reason-popup-close:hover{background:var(--surface-hover)}
+.reason-popup-topic{margin-top:20px;padding:13px 15px;border:1px solid var(--line);background:var(--surface-alt);border-radius:10px;font-weight:700;font-size:13px;line-height:1.5}
+.reason-popup-body{font:400 15px/2.1 "Noto Sans Myanmar","Myanmar Text","Padauk",system-ui,sans-serif;white-space:pre-wrap;margin:19px 0 22px;overflow-wrap:anywhere}
+.reason-popup-footer{display:flex;justify-content:flex-end}
+@media(max-width:700px){.reason-popup-backdrop{padding:10px;align-items:center}.reason-popup{padding:19px;max-height:92vh;border-radius:14px}.reason-popup-body{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.reason-popup{scroll-behavior:auto}}
+@media print{.reason-popup-backdrop{display:none!important}}

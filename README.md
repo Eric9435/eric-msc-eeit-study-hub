@@ -58,3 +58,7 @@ Run `node tools/smoke_public.cjs`. Study data remains compatible with the previo
 ## Visual identity
 
 The generated Eric M.Sc EEIT Study Hub logo is included in `source/assets/eeit-study-hub-logo.webp` (optimized for the web), alongside `source/brand-ui.css` for flat, responsive branding. The original logo design is represented in the website sidebar, mobile header and dashboard hero.
+
+### Reasoning popups
+
+Each worked exercise contains a keyboard-accessible **Why this method?** button. It opens a responsive modal displaying the independent Myanmar reasoning for that specific exercise part. Escape, close button and tapping outside dismiss it; focus returns to the original button. No third-party library required.
