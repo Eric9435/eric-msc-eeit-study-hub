@@ -76,3 +76,13 @@
  .a4-paper .paper-equation .math-line{max-width:100%;white-space:normal}
  .a4-paper .paper-topline,.a4-paper .paper-rule{print-color-adjust:exact}
 }
+
+/* From-givens-to-result independent derivations */
+.a4-paper .paper-workline{margin:0 0 13px;padding:0 0 10px;border-bottom:1px solid #ecf0f3;break-inside:avoid}
+.a4-paper .paper-workline:last-child{border-bottom:0}
+.a4-paper .paper-workline-label{font-family:Arial,Inter,system-ui,sans-serif;font-weight:800;font-size:10px;line-height:1.5;letter-spacing:.055em;text-transform:uppercase;color:#52677a;margin-bottom:6px}
+.a4-paper .paper-workline-equation{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;font-size:13px;color:#15293b;font-family:"DejaVu Sans Mono",ui-monospace,Consolas,monospace}
+.a4-paper .paper-workline:nth-last-child(1) .paper-workline-equation{font-weight:650}
+.a4-paper .paper-calculation:has(.paper-workline){padding:4px 0 3px}
+@media(max-width:700px){.a4-paper .paper-workline-equation{font-size:12px;line-height:1.8}.a4-paper .paper-workline-label{font-size:9px}}
+@media print{.a4-paper .paper-workline{break-inside:avoid}.a4-paper .paper-workline-equation{font-size:11px}.a4-paper .paper-workline-label{font-size:9px}}
