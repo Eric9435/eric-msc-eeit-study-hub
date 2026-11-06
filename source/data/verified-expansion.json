@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-independent-derivations-2",
+  "revision": "2026-11-06-independent-derivations-3",
   "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
   "overrides": [
     {
@@ -1792,6 +1792,332 @@
           "method": "Finger f delay ကို channel h_f အတွက် align လုပ်ပါ။ Correlate with spreading code; nonmatching delays cancel by ideal autocorrelation။ Finger output ≈ h_f d_m + noise။ Conjugate h_f ဖြင့် weighted MRC sum လုပ်ပါ။ Practical nonideal sidelobes ကို approximation သာဖြစ်ကြောင်း သတိထားပါ။",
           "finalAnswer": "RAKE finger f ≈ h_f d_m + noise; combined sum ∑_f h_f* z_f.",
           "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        }
+      ]
+    },
+    {
+      "id": "dc-3.1",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Full exercise 3.1 (a–k). Least-squares and regularized normal equations independently evaluated for finite FIR equalizer with n0=0. Assumes white equalizer-input noise and E_s/N0 defined as 0 or 20dB.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Overall impulse response as convolution matrix",
+          "question": "For D+1 channel taps and P+1 equalizer taps, express q=h*e=He with dimensions.",
+          "equations": [
+            "h=[h₀,…,h_D]ᵀ; e=[e₀,…,e_P]ᵀ",
+            "q_n=∑_{k=0}^{D}h_k e_{n−k}; e_j=0 outside 0…P",
+            "q=He, H ∈ ℝ^((D+P+1)×(P+1))",
+            "H_{n,j}=h_{n−j} for 0≤n−j≤D, else 0"
+          ],
+          "display": [
+            {
+              "latex": "h=[h₀,…,h_D]ᵀ; e=[e₀,…,e_P]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">h=[h₀,…,h_D]ᵀ; e=[e₀,…,e_P]ᵀ</div>"
+            },
+            {
+              "latex": "q_n=∑_{k=0}^{D}h_k e_{n−k}; e_j=0 outside 0…P",
+              "html": "<div class=\"verified-equation\" role=\"math\">q_n=∑_{k=0}^{D}h_k e_{n−k}; e_j=0 outside 0…P</div>"
+            },
+            {
+              "latex": "q=He, H ∈ ℝ^((D+P+1)×(P+1))",
+              "html": "<div class=\"verified-equation\" role=\"math\">q=He, H ∈ ℝ^((D+P+1)×(P+1))</div>"
+            },
+            {
+              "latex": "H_{n,j}=h_{n−j} for 0≤n−j≤D, else 0",
+              "html": "<div class=\"verified-equation\" role=\"math\">H_{n,j}=h_{n−j} for 0≤n−j≤D, else 0</div>"
+            }
+          ],
+          "reason": "Channel taps h နဲ့ FIR equalizer taps e ကို convolution လုပ်ထားတဲ့ q နောက်ဆုံး response ဖြစ်တယ်။ Column j တစ်ခုစီမှာ h ကို j samples shift လုပ်ထားတယ်။",
+          "method": "Channel length D+1 နှင့် equalizer length P+1 ကို convolution လုပ်လျှင် q length D+P+1 ဖြစ်သည်။ H rows q indices, columns e taps ဖြစ်စေပါ။",
+          "finalAnswer": "q=He; H dimension (D+P+1)×(P+1).",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        },
+        {
+          "label": "b",
+          "title": "Can a finite-length FIR make all ISI exactly zero?",
+          "question": "For h=[0.5,0.4,0.4], how many FIR coefficients ensure q is exactly a one-tap impulse?",
+          "equations": [
+            "H(z)=0.5+0.4z⁻¹+0.4z⁻²",
+            "E(z)H(z)=z⁻ⁿ⁰ would require E(z)=z⁻ⁿ⁰/H(z)",
+            "Because H(z) is not a monomial, inverse generally has infinite impulse response"
+          ],
+          "display": [
+            {
+              "latex": "H(z)=0.5+0.4z⁻¹+0.4z⁻²",
+              "html": "<div class=\"verified-equation\" role=\"math\">H(z)=0.5+0.4z⁻¹+0.4z⁻²</div>"
+            },
+            {
+              "latex": "E(z)H(z)=z⁻ⁿ⁰ would require E(z)=z⁻ⁿ⁰/H(z)",
+              "html": "<div class=\"verified-equation\" role=\"math\">E(z)H(z)=z⁻ⁿ⁰ would require E(z)=z⁻ⁿ⁰/H(z)</div>"
+            },
+            {
+              "latex": "Because H(z) is not a monomial, inverse generally has infinite impulse response",
+              "html": "<div class=\"verified-equation\" role=\"math\">Because H(z) is not a monomial, inverse generally has infinite impulse response</div>"
+            }
+          ],
+          "reason": "Finite taps နဲ့ multiplication လုပ်ပြီး impulse တစ်ခုတည်းထားဖို့ H(z) က monomial ပုံစံ မဟုတ်တဲ့အတွက် မဖြစ်နိုင်ဘူး။ FIR length တိုးရုံနဲ့ exact cancellation မရ၊ IIR inverse သဘော လိုတယ်။",
+          "method": "Polynomials H(z)E(z) သည် single nonzero monomial ဖြစ်ရန် factors တွေရဲ့ nonzero roots မရှိရမယ်။ H(z)=0.5+0.4z^-1+0.4z^-2 သည် multiple coefficients ပါလို့ nonzero roots ရှိသည်။ Thus no finite FIR exact inverse; finite ZF-LS approximate.",
+          "finalAnswer": "No finite number of FIR taps makes Δ=0 exactly for this nontrivial channel.",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        },
+        {
+          "label": "c",
+          "title": "ZF least-squares formula",
+          "question": "For desired impulse i_(n0), derive finite FIR zero-forcing least squares.",
+          "equations": [
+            "min_e ||He−iₙ₀||₂²",
+            "∇_e ||He−i||² = 2Hᵀ(He−i)=0",
+            "e_ZF=(HᵀH)⁻¹Hᵀiₙ₀  (full column rank)"
+          ],
+          "display": [
+            {
+              "latex": "min_e ||He−iₙ₀||₂²",
+              "html": "<div class=\"verified-equation\" role=\"math\">min_e ||He−iₙ₀||₂²</div>"
+            },
+            {
+              "latex": "∇_e ||He−i||² = 2Hᵀ(He−i)=0",
+              "html": "<div class=\"verified-equation\" role=\"math\">∇_e ||He−i||² = 2Hᵀ(He−i)=0</div>"
+            },
+            {
+              "latex": "e_ZF=(HᵀH)⁻¹Hᵀiₙ₀  (full column rank)",
+              "html": "<div class=\"verified-equation\" role=\"math\">e_ZF=(HᵀH)⁻¹Hᵀiₙ₀  (full column rank)</div>"
+            }
+          ],
+          "reason": "Overdetermined H=7×5 ဖြစ်ပြီး perfect solution မရှိလို့ squared residual အနည်းဆုံးဖြစ်စေတဲ့ normal equations ကို solve လုပ်ရတယ်။",
+          "method": "Squared error ကို expand/differentiate လုပ်၍ HᵀHe=Hᵀi ရယူပါ။ Complex taps ဖြစ်လျှင် transpose နေရာ conjugate transpose Hᴴ သုံးပါ။ Rank-deficient ဖြစ်လျှင် Moore–Penrose pseudoinverse သုံးသည်။",
+          "finalAnswer": "ZF-LS: e=H⁺i; for full rank, e=(HᵀH)⁻¹Hᵀi.",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        },
+        {
+          "label": "d",
+          "title": "Numerical 5-tap ZF equalizer",
+          "question": "For h=[0.5,0.4,0.4], P=4, n0=0 solve 7×5 least squares.",
+          "equations": [
+            "H rows: [0.5,0,0,0,0]; [0.4,0.5,0,0,0]; [0.4,0.4,0.5,0,0]; [0,0.4,0.4,0.5,0]; [0,0,0.4,0.4,0.5]; [0,0,0,0.4,0.4]; [0,0,0,0,0.4]",
+            "i₀=[1,0,0,0,0,0,0]ᵀ",
+            "e_ZF=[1.77375951,−1.32361144,−0.17271402,0.89041070,−0.50176325]ᵀ"
+          ],
+          "display": [
+            {
+              "latex": "H rows: [0.5,0,0,0,0]; [0.4,0.5,0,0,0]; [0.4,0.4,0.5,0,0]; [0,0.4,0.4,0.5,0]; [0,0,0.4,0.4,0.5]; [0,0,0,0.4,0.4]; [0,0,0,0,0.4]",
+              "html": "<div class=\"verified-equation\" role=\"math\">H rows: [0.5,0,0,0,0]; [0.4,0.5,0,0,0]; [0.4,0.4,0.5,0,0]; [0,0.4,0.4,0.5,0]; [0,0,0.4,0.4,0.5]; [0,0,0,0.4,0.4]; [0,0,0,0,0.4]</div>"
+            },
+            {
+              "latex": "i₀=[1,0,0,0,0,0,0]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">i₀=[1,0,0,0,0,0,0]ᵀ</div>"
+            },
+            {
+              "latex": "e_ZF=[1.77375951,−1.32361144,−0.17271402,0.89041070,−0.50176325]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">e_ZF=[1.77375951,−1.32361144,−0.17271402,0.89041070,−0.50176325]ᵀ</div>"
+            }
+          ],
+          "reason": "5-tap equalizer တစ်ခုကို 7 outputs အတွက် optimize လုပ်ရတာပါ။ 7 equations 5 unknowns ဆိုတဲ့ overdetermined LS ဖြစ်လို့ perfect impulse မရဘူး။",
+          "method": "H ကို h0,h1,h2 diagonal bands တွေနဲ့ column shift လုပ်ပြီး HᵀH 5×5 normal equation တည်ဆောက်ပါ။ Hᵀi=(0.5,0,0,0,0)ᵀ ဖြစ်သည်။ Linear system ကို solve လုပ်၍ coefficients ရသည်; independent double precision solve နှင့်စစ်ထားသည်။",
+          "finalAnswer": "e_ZF=[1.77375951,−1.32361144,−0.17271402,0.89041070,−0.50176325]ᵀ.",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        },
+        {
+          "label": "e",
+          "title": "Resulting ZF cascade impulse response",
+          "question": "Compute q_ZF=H e_ZF.",
+          "equations": [
+            "q_ZF=[0.88687975,0.04769809,0.09370222,−0.15332483,0.03619705,0.15545898,−0.20070530]ᵀ",
+            "q₀=0.5×1.77375951=0.886879755",
+            "q₁=0.4×1.77375951+0.5×(−1.32361144)=0.047698084"
+          ],
+          "display": [
+            {
+              "latex": "q_ZF=[0.88687975,0.04769809,0.09370222,−0.15332483,0.03619705,0.15545898,−0.20070530]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">q_ZF=[0.88687975,0.04769809,0.09370222,−0.15332483,0.03619705,0.15545898,−0.20070530]ᵀ</div>"
+            },
+            {
+              "latex": "q₀=0.5×1.77375951=0.886879755",
+              "html": "<div class=\"verified-equation\" role=\"math\">q₀=0.5×1.77375951=0.886879755</div>"
+            },
+            {
+              "latex": "q₁=0.4×1.77375951+0.5×(−1.32361144)=0.047698084",
+              "html": "<div class=\"verified-equation\" role=\"math\">q₁=0.4×1.77375951+0.5×(−1.32361144)=0.047698084</div>"
+            }
+          ],
+          "reason": "q output impulse က 1,0,0,... နဲ့ မတူသေးတာဟာ finite ZF-LS residual ရှိလို့ဖြစ်တယ်။ ဒုတိယ sample ကို product နှစ်ခု add လုပ်ကြည့်ပြီး စစ်နိုင်တယ်။",
+          "method": "Convolution result q0=h0e0, q1=h1e0+h0e1, q2=h2e0+h1e1+h0e2 စသဖြင့် 7 positions အကုန်တွက်ပါ။",
+          "finalAnswer": "q_ZF=[0.88687975,0.04769809,0.09370222,−0.15332483,0.03619705,0.15545898,−0.20070530]ᵀ.",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        },
+        {
+          "label": "f",
+          "title": "Residual error and its energy",
+          "question": "Calculate Δ=q_ZF−i₀ and ||Δ||².",
+          "equations": [
+            "Δ=[−0.11312025,0.04769809,0.09370222,−0.15332483,0.03619705,0.15545898,−0.20070530]ᵀ",
+            "E_ZF=∑_{n=0}^{6}Δ_n²≈0.11312024555",
+            "Check: HᵀΔ≈0 (normal-equation orthogonality)"
+          ],
+          "display": [
+            {
+              "latex": "Δ=[−0.11312025,0.04769809,0.09370222,−0.15332483,0.03619705,0.15545898,−0.20070530]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">Δ=[−0.11312025,0.04769809,0.09370222,−0.15332483,0.03619705,0.15545898,−0.20070530]ᵀ</div>"
+            },
+            {
+              "latex": "E_ZF=∑_{n=0}^{6}Δ_n²≈0.11312024555",
+              "html": "<div class=\"verified-equation\" role=\"math\">E_ZF=∑_{n=0}^{6}Δ_n²≈0.11312024555</div>"
+            },
+            {
+              "latex": "Check: HᵀΔ≈0 (normal-equation orthogonality)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: HᵀΔ≈0 (normal-equation orthogonality)</div>"
+            }
+          ],
+          "reason": "Desired q0=1 ဖြစ်ရမယ့်နေရာမှာ 0.88688 ပဲရှိပြီး error −0.11312 ဖြစ်တယ်။ Energy ကို residual square အကုန်ပေါင်းရတယ်။",
+          "method": "q0 ကနေ 1 နှုတ်ပါ၊ q1...q6 ကို မပြောင်းဘဲ error vector ရမယ်။ Components squared sum = 0.11312024555။ Check HᵀΔ near zero (LS optimality).",
+          "finalAnswer": "Residual squared energy E_ZF≈0.11312025.",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        },
+        {
+          "label": "g",
+          "title": "MMSE objective and physical meaning",
+          "question": "Write an MMSE objective including ISI and amplified receiver noise.",
+          "equations": [
+            "ŷ−d_target = (He−iₙ₀)ᵀ d + eᵀn",
+            "MSE = P_S ||He−iₙ₀||² + P_N ||e||²",
+            "MSE/P_S = ||He−iₙ₀||² + (P_N/P_S)||e||²"
+          ],
+          "display": [
+            {
+              "latex": "ŷ−d_target = (He−iₙ₀)ᵀ d + eᵀn",
+              "html": "<div class=\"verified-equation\" role=\"math\">ŷ−d_target = (He−iₙ₀)ᵀ d + eᵀn</div>"
+            },
+            {
+              "latex": "MSE = P_S ||He−iₙ₀||² + P_N ||e||²",
+              "html": "<div class=\"verified-equation\" role=\"math\">MSE = P_S ||He−iₙ₀||² + P_N ||e||²</div>"
+            },
+            {
+              "latex": "MSE/P_S = ||He−iₙ₀||² + (P_N/P_S)||e||²",
+              "html": "<div class=\"verified-equation\" role=\"math\">MSE/P_S = ||He−iₙ₀||² + (P_N/P_S)||e||²</div>"
+            }
+          ],
+          "reason": "ZF က ISI error ပဲကြည့်တယ်။ MMSE က equalizer tap ကြီးလွန်းရင် noise amplify ဖြစ်တာကိုပါ penalty ထည့်တယ်။",
+          "method": "Independent zero-mean input symbols variance Ps နှင့် white receiver noise variance Pn အတွက် expected square error ကို expand လုပ်ပါ။ Cross terms zero ဖြစ်၍ residual-energy term Ps||He−i||² နှင့် Pn||e||² ရသည်။",
+          "finalAnswer": "MMSE minimizes ISI distortion plus noise enhancement.",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        },
+        {
+          "label": "h",
+          "title": "Regularized MMSE coefficient formula",
+          "question": "Derive optimal MMSE e for signal/noise power ratio P_S/P_N.",
+          "equations": [
+            "min_e {||He−i||²+λ||e||²}, λ=P_N/P_S",
+            "(HᵀH+λI)e=Hᵀi",
+            "e_MMSE=(HᵀH+λI)⁻¹Hᵀi"
+          ],
+          "display": [
+            {
+              "latex": "min_e {||He−i||²+λ||e||²}, λ=P_N/P_S",
+              "html": "<div class=\"verified-equation\" role=\"math\">min_e {||He−i||²+λ||e||²}, λ=P_N/P_S</div>"
+            },
+            {
+              "latex": "(HᵀH+λI)e=Hᵀi",
+              "html": "<div class=\"verified-equation\" role=\"math\">(HᵀH+λI)e=Hᵀi</div>"
+            },
+            {
+              "latex": "e_MMSE=(HᵀH+λI)⁻¹Hᵀi",
+              "html": "<div class=\"verified-equation\" role=\"math\">e_MMSE=(HᵀH+λI)⁻¹Hᵀi</div>"
+            }
+          ],
+          "reason": "Noise ကိုထည့်မကြည့်တာ ZF၊ noise penalty λI ထပ်ထည့်တာ MMSE ဖြစ်တယ်။ SNR 0dB မှာ λ=1၊ 20dB မှာ λ=0.01။",
+          "method": "Objective ကို differentiate လုပ်ပါ။ 2Hᵀ(He−i)+2λe=0 ⇒ (HᵀH+λI)e=Hᵀi။ Complex matrices for general case use Hᴴ.",
+          "finalAnswer": "e_MMSE=(HᴴH+(P_N/P_S)I)⁻¹Hᴴi.",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        },
+        {
+          "label": "i",
+          "title": "MMSE coefficients at SNR 0 dB",
+          "question": "Solve MMSE with Ps/Pn=1, n0=0 and h=[0.5,0.4,0.4].",
+          "equations": [
+            "λ=10^(−0/10)=1",
+            "e_MMSE,0dB≈[0.339029126,−0.072873882,−0.030205649,0.016177718,0.000138313]ᵀ",
+            "Regularized normal equations: (HᵀH+I₅)e=Hᵀi₀"
+          ],
+          "display": [
+            {
+              "latex": "λ=10^(−0/10)=1",
+              "html": "<div class=\"verified-equation\" role=\"math\">λ=10^(−0/10)=1</div>"
+            },
+            {
+              "latex": "e_MMSE,0dB≈[0.339029126,−0.072873882,−0.030205649,0.016177718,0.000138313]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">e_MMSE,0dB≈[0.339029126,−0.072873882,−0.030205649,0.016177718,0.000138313]ᵀ</div>"
+            },
+            {
+              "latex": "Regularized normal equations: (HᵀH+I₅)e=Hᵀi₀",
+              "html": "<div class=\"verified-equation\" role=\"math\">Regularized normal equations: (HᵀH+I₅)e=Hᵀi₀</div>"
+            }
+          ],
+          "reason": "0dB မှာ noise power က signal power နဲ့တူတာကြောင့် tap amplitude ကို အလွန်ချုံ့တယ်။ ZF မှာ e0≈1.77 ဖြစ်တာ MMSE0 မှာ 0.339 ပဲရှိတယ်။",
+          "method": "Computed 5×5 matrix HᵀH ကို identity I5 ထပ်ပေါင်း၍ rhs 0.5 e_first သို့ linear solve လုပ်ပါ။ Returned taps are independently calculated, not copied.",
+          "finalAnswer": "e_MMSE at 0dB shown (five taps).",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        },
+        {
+          "label": "j",
+          "title": "MMSE cascade at SNR 0 dB",
+          "question": "Convolve h with e_MMSE,0dB and report total equalizer-output shape.",
+          "equations": [
+            "q_MMSE,0dB≈[0.169514563,0.099174709,0.091359273,−0.033142953,−0.0055420158,0.0065264124,0.00005532516]ᵀ",
+            "||q−i₀||²≈0.7090599674",
+            "λ||e||²≈0.1214254697; total normalized cost≈0.8304854371"
+          ],
+          "display": [
+            {
+              "latex": "q_MMSE,0dB≈[0.169514563,0.099174709,0.091359273,−0.033142953,−0.0055420158,0.0065264124,0.00005532516]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">q_MMSE,0dB≈[0.169514563,0.099174709,0.091359273,−0.033142953,−0.0055420158,0.0065264124,0.00005532516]ᵀ</div>"
+            },
+            {
+              "latex": "||q−i₀||²≈0.7090599674",
+              "html": "<div class=\"verified-equation\" role=\"math\">||q−i₀||²≈0.7090599674</div>"
+            },
+            {
+              "latex": "λ||e||²≈0.1214254697; total normalized cost≈0.8304854371",
+              "html": "<div class=\"verified-equation\" role=\"math\">λ||e||²≈0.1214254697; total normalized cost≈0.8304854371</div>"
+            }
+          ],
+          "reason": "Noise ကြီးတဲ့ case မှာ equalizer coefficient သေးလို့ desired impulse amplitude 0.1695 ပဲရှိတယ်။ ဒီသဘောက noise amplification ရှောင်ဖို့ ISI error အချို့ကို လက်ခံတာပါ။",
+          "method": "q=He multiply matrix 7×5 by the tap vector. Distortion energy and noise-penalty energy ကို separately တွက်ပြီး objective sum စစ်ပါ။",
+          "finalAnswer": "q_MMSE at 0dB as shown; objective≈0.83048544.",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        },
+        {
+          "label": "k",
+          "title": "MMSE at 20 dB and comparison to ZF",
+          "question": "Solve λ=0.01 and compare e,q to 0dB and ZF.",
+          "equations": [
+            "λ=10^(−20/10)=0.01",
+            "e_MMSE,20dB≈[1.66415541,−1.19843536,−0.16886706,0.78394350,−0.42835560]ᵀ",
+            "q_MMSE,20dB≈[0.83207771,0.06644449,0.10185449,−0.15494922,0.03185278,0.14223516,−0.17134224]ᵀ",
+            "||q−i₀||²≈0.1175999672; λ||e||²≈0.0503223256"
+          ],
+          "display": [
+            {
+              "latex": "λ=10^(−20/10)=0.01",
+              "html": "<div class=\"verified-equation\" role=\"math\">λ=10^(−20/10)=0.01</div>"
+            },
+            {
+              "latex": "e_MMSE,20dB≈[1.66415541,−1.19843536,−0.16886706,0.78394350,−0.42835560]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">e_MMSE,20dB≈[1.66415541,−1.19843536,−0.16886706,0.78394350,−0.42835560]ᵀ</div>"
+            },
+            {
+              "latex": "q_MMSE,20dB≈[0.83207771,0.06644449,0.10185449,−0.15494922,0.03185278,0.14223516,−0.17134224]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">q_MMSE,20dB≈[0.83207771,0.06644449,0.10185449,−0.15494922,0.03185278,0.14223516,−0.17134224]ᵀ</div>"
+            },
+            {
+              "latex": "||q−i₀||²≈0.1175999672; λ||e||²≈0.0503223256",
+              "html": "<div class=\"verified-equation\" role=\"math\">||q−i₀||²≈0.1175999672; λ||e||²≈0.0503223256</div>"
+            }
+          ],
+          "reason": "20dB မှာ noise relative နည်းသွားလို့ MMSE coefficients တွေ ZF အနီးပြန်ရောက်တယ်။ Limit SNR→∞ မှာ λ→0 ဖြစ်၍ ZF-LS နဲ့တူသွားတယ်။",
+          "method": "(HᵀH+0.01I)e=Hᵀi0 ကို independently solve လုပ်ပြီး q=He ကိုတွက်ပါ။ ZF e0=1.774; MMSE20 e0=1.664; MMSE0 e0=0.339 ဆိုပြီး magnitude/shape compare လုပ်ပါ။",
+          "finalAnswer": "At 20dB, e_MMSE approaches e_ZF; q0≈0.83208 versus ZF q0≈0.88688.",
+          "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
         }
       ]
     }
