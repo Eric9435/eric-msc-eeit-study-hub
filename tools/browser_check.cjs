@@ -27,15 +27,10 @@ async function check(){
    await desktop.waitForURL(/#exercise\//);
    // Exercise metadata and verified solution content must render on the live site.
    await desktop.goto(url+'/#exercise/dc-4.1',{waitUntil:'domcontentloaded',timeout:60000});
-   await desktop.locator('.inline-part').first().waitFor({timeout:35000});
-   assert.equal(await desktop.locator('.inline-part').count(),10,'Digital OFDM 4.1 must have all 10 verified subparts');
-   await desktop.locator('.inline-part').first().locator('.eeit-popup-tools .eeit-info-button').first().waitFor({timeout:15000});
-   assert.equal(await desktop.locator('.inline-part').first().locator('.eeit-popup-tools .eeit-info-button').count(),3,'Every part must have Why/Method/Answer buttons');
-   await desktop.locator('.inline-part').first().locator('.eeit-info-button').first().click();
-   const dialog=desktop.locator('.eeit-explanation-dialog');
-   assert(await dialog.isVisible(),'Why popup did not open');
-   await desktop.keyboard.press('Escape');
-   assert(!await dialog.isVisible(),'Escape failed to close dialog');
+   await desktop.locator('.paper-part').first().waitFor({timeout:35000});
+   assert.equal(await desktop.locator('.paper-part').count(),10,'Digital OFDM 4.1 must contain all 10 worked subquestions');
+   assert(await desktop.locator('.a4-paper #paper-overall-heading').isVisible(),'A4 worked solution is not rendered');
+   assert(await desktop.locator('.eeit-viz-svg[role="img"]').count()>0,'Exercise visual SVG missing');
    // Check one representative engineering visual in each of the five subjects.
    for (const sample of [
      ['dc-2.2','ber'],['source-eps-ex-06','bus'],['official-cstd-I1','eigen'],
@@ -80,7 +75,7 @@ async function check(){
    // Main study features should function even if optional remote SDK is unavailable.
    const fatal=pageErrors.filter(s=>/Uncaught|ReferenceError|SyntaxError|TypeError/.test(s) && !/firebase|network request failed/i.test(s));
    assert.deepEqual(fatal,[],'Client runtime exception: '+fatal.join(' | '));
-   console.log('PASS desktop + mobile browser: 5 subjects; accessible diagrams for all subjects, interactive graph slider, source-only disclaimer, 3 dialogs, theme persistence, mobile drawer, formula bank.');
+   console.log('PASS desktop + mobile browser: five subjects, A4 worked solutions, accessible diagrams across all subjects, interactive plot, source-only disclaimer, theme persistence, mobile drawer and formula bank.');
    if(pageErrors.length)console.log('Browser messages (nonfatal): '+pageErrors.slice(0,5).join(' | '));
  }catch(err){
    if(desktop)await desktop.screenshot({path:'artifacts/eeit-browser-failure.png',fullPage:true}).catch(()=>{});
