@@ -62,12 +62,12 @@ assert(!JSON.stringify(ext).includes('data:image/'),'Private images in independe
 assert(!JSON.stringify(originals).includes('data:image/'),'Private images leaked into original practice data');
 assert(!JSON.stringify(sourced).includes('data:image/'),'Private images leaked into source-backed reconstruction');
 cp.execFileSync(process.execPath,[file('tools/build_public.cjs')],{cwd:root,stdio:'inherit'});
-for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','visuals.css','visuals.mjs','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','data/original-practice-reworked.json','data/source-backed-derivations.json','assets/favicon.svg'])
+for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','source-library.css','source-library.mjs','visuals.css','visuals.mjs','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','data/original-practice-reworked.json','data/source-backed-derivations.json','assets/favicon.svg'])
  assert(fs.existsSync(file('public/'+name)),'Missing public file '+name);
 assert(!fs.existsSync(file('public/assets/questions')),'Original course page images published');
 const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?walk(path.join(d,x.name)):[path.join(d,x.name)]);
 assert(!walk(file('public')).some(x=>x.toLowerCase().endsWith('.pdf')),'Private PDF leaked');
-for(const name of ['source/app.js','source/cloud.js','source/visuals.mjs'])cp.execFileSync(process.execPath,['--check',file(name)],{cwd:root,stdio:'inherit'});
+for(const name of ['source/app.js','source/cloud.js','source/visuals.mjs','source/source-library.mjs'])cp.execFileSync(process.execPath,['--check',file(name)],{cwd:root,stdio:'inherit'});
 cp.execFileSync(process.execPath,[file('tools/visuals_check.mjs')],{cwd:root,stdio:'inherit'});
 const index=fs.readFileSync(file('source/index.html'),'utf8');
 assert(index.includes('inline-solutions.css'),'Inline solution stylesheet not loaded');
@@ -84,6 +84,12 @@ assert(fullSource.includes('source-backed-derivations.json'),'Source-backed tuto
 assert(fullSource.includes('Exam-readiness status: not yet certified'),'Exam audit is missing the proper caveat');
 assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('original-practice-reworked.json'),'Original practice data not precached offline');
 assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('source-backed-derivations.json'),'Original tutorial reconstructions not precached offline');
+assert(index.includes('source-library.css')&&index.includes('source-library.mjs'),'Private original document library not loaded');
+assert(fullSource.includes('data-eeit-source-shelf'),'Original PDF attachment panel missing from source tab');
+const privateModule=fs.readFileSync(file('source/source-library.mjs'),'utf8');
+assert(privateModule.includes('indexedDB')&&privateModule.includes('STORE=')&&privateModule.includes('application/pdf'),'Private source module must store PDFs locally with type restrictions');
+assert(!privateModule.includes('fetch('),'Private source documents must never upload via network fetch');
+assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('source-library.mjs'),'Private PDF viewer shell not cached offline');
 assert(index.includes('visuals.css'),'Visual stylesheet not loaded');
 assert(fs.readFileSync(file('source/app.js'),'utf8').includes("from './visuals.mjs'"),'Visual module is not imported');
 assert(fs.readFileSync(file('source/app.js'),'utf8').includes('renderVisual(e,visualSettings.get(e.id))'),'Exercise page lacks visual panel');
