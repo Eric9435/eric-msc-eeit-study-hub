@@ -48,6 +48,10 @@ async function check(){
 
   const linked=pdfCatalog.entries.filter(item=>item.drive_id);
   assert.equal(linked.length,123,'Missing original PDFs in private Google Drive catalog');
+  assert.equal(new Set(linked.flatMap(item=>Object.keys(item.exercisePages||{}))).size,42,'Verified original exercise links missing');
+  assert.equal(new Set(linked.flatMap(item=>item.relatedExerciseIds||[])).size,22,'Related lecture references missing');
+  assert.equal(pdfCatalog.examCoverage?.sourceOnlyWithoutSolution,12,'Source-only incomplete exercises must be disclosed');
+  assert.equal(pdfCatalog.examCoverage?.exerciseEntries,82,'Exam coverage set count differs from study library');
   assert.equal(new Set(linked.map(item=>item.drive_id)).size,123,'Duplicated original Drive IDs');
   const expectedCounts={digital:56,power:17,control:17,microwave:25,micro:6,shared:2};
   for(const [subject,n] of Object.entries(expectedCounts))
@@ -76,6 +80,8 @@ async function check(){
   const privateReader=(await get('/source-library.mjs')).bytes.toString('utf8');
   assert(privateReader.includes('data-document-zip')&&privateReader.includes('zipDirectory'),'ZIP importer missing from deployed source viewer');
   assert(privateReader.includes('dataset.documentDrive')&&privateReader.includes('drive.google.com/file/d/'),'Private Drive PDF viewer missing from live site');
+  assert(privateReader.includes('document-match-exact')&&privateReader.includes('document-match-related'),'Source fidelity banner missing');
+  assert(privateReader.includes('pdf-coverage-audit'),'Source coverage panel missing');
   assert(app.includes('paper-workline-label'),'Step-by-step working not rendered');
   assert(!app.includes('showPartExplanation('),'Obsolete popup still deployed');
   const config=(await get('/cloud-config.js')).bytes.toString('utf8');
