@@ -18,6 +18,9 @@ assert(docCatalog.entries.filter(d=>d.recordType==='archive-index').length>=80,'
 assert(docCatalog.entries.filter(d=>d.recordType==='library-file-identified').length>=10,'Library source PDFs not identified');
 assert(!JSON.stringify(docCatalog).includes('file_00000000'),'Private Library file IDs must not be published');
 
+assert(docCatalog.entries.reduce((n,e)=>n+Object.keys(e.exercisePages||{}).length,0)>=40,'Original exercise-to-PDF-page mappings are incomplete');
+
+
 const ext=JSON.parse(fs.readFileSync(file('source/data/verified-expansion.json'),'utf8'));
 assert(Array.isArray(ext.overrides)&&ext.overrides.length>=21,'Missing independent derivations');
 for(const over of ext.overrides){
@@ -101,6 +104,8 @@ assert(fullSource.includes('data-eeit-document-library'),'PDF catalog page missi
 assert(fullSource.includes("route==='documents'?documentLibrary()"),'PDF document route not connected');
 const pdfModule=fs.readFileSync(file('source/source-library.mjs'),'utf8');
 assert(pdfModule.includes('pdf-catalog.json'),'PDF module does not load catalog');
+assert(pdfModule.includes('data-document-bulk'),'Bulk PDF onboarding missing');
+assert(pdfModule.includes('dataset.documentPage'),'PDF deep-page viewer links missing');
 assert(pdfModule.includes("KEY_PREFIX='catalog:'"),'Individual PDF keys not implemented');
 assert(pdfModule.includes('file.slice(0,5).text()'),'PDF header verification missing');
 assert(!pdfModule.includes('fetch(file'),'PDF files must remain private, not uploaded');
