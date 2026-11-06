@@ -1140,7 +1140,18 @@
             "r_Q3 = s₂₂ + s₂₁s₁₂r_Q/(1−r_Qs₁₁) = 0.01 + 0.027/0.997 = 0.0370812."
           ],
           "finalAnswer": "b_Q3≈0.0902708 √W; r_Q3≈0.0370812.",
-          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention."
+          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention.",
+          "display": [
+            {
+              "latex": "a₂=(b_Q+r_Q s₁₂a₃)/(1−r_Q s₁₁)."
+            },
+            {
+              "latex": "b_Q3 = s₂₁ b_Q/(1−r_Q s₁₁) = (0.9/0.997)√(0.01 W) = 0.0902708 √W."
+            },
+            {
+              "latex": "r_Q3 = s₂₂ + s₂₁s₁₂r_Q/(1−r_Qs₁₁) = 0.01 + 0.027/0.997 = 0.0370812."
+            }
+          ]
         },
         {
           "label": "b",
@@ -1171,7 +1182,15 @@
             "r_Q5 = s₅₅+s₅₄s₄₅r_Q3/(1−r_Q3s₄₄) = 0.0470950."
           ],
           "finalAnswer": "b_Q5≈9.03043 √W; r_Q5≈0.0470950.",
-          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention."
+          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention.",
+          "display": [
+            {
+              "latex": "b_Q5 = s₅₄ b_Q3/(1−r_Q3 s₄₄) = 100×0.0902708124/(1−0.0003708124) = 9.03043 √W."
+            },
+            {
+              "latex": "r_Q5 = s₅₅+s₅₄s₄₅r_Q3/(1−r_Q3s₄₄) = 0.0470950."
+            }
+          ]
         },
         {
           "label": "c",
@@ -1212,7 +1231,21 @@
             "S̄_[2,5]=[[0.0109001,0.0010001],[90.0090,0.0200010]]."
           ],
           "finalAnswer": "S̄_[2,5]≈[[0.0109001,0.0010001],[90.0090,0.0200010]].",
-          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention."
+          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention.",
+          "display": [
+            {
+              "latex": "D=1−s33 s44=1−(0.01)(0.01)=0.9999."
+            },
+            {
+              "latex": "S̄₂₂= s22 +s23 s32 s44 /D =0.01 +(0.1)(0.9)(0.01)/0.9999 =0.01090009."
+            },
+            {
+              "latex": "S̄₅₅= s55 +s54 s45 s33 /D =0.01 +(100)(0.01)(0.01)/0.9999=0.0200010."
+            },
+            {
+              "latex": "S̄_[2,5]=[[0.0109001,0.0010001],[90.0090,0.0200010]]."
+            }
+          ]
         },
         {
           "label": "d",
@@ -1238,7 +1271,12 @@
             "P_L=(|b_Q5|²/2)×(1−|r_L|²)/|1−r_Q5 r_L|²."
           ],
           "finalAnswer": "P_L≈40.7495 W≈46.10 dBm.",
-          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention."
+          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention.",
+          "display": [
+            {
+              "latex": "P_L=(|b_Q5|²/2)×(1−|r_L|²)/|1−r_Q5 r_L|²."
+            }
+          ]
         },
         {
           "label": "e",
@@ -1264,7 +1302,12 @@
             "P_Q=(|b_Q|²/2)/(1−|r_Q|²) =0.01/(2×0.91)=0.00549451 W."
           ],
           "finalAnswer": "a_B≈−38.70 dB; equivalent operating gain≈+38.70 dB.",
-          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention."
+          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention.",
+          "display": [
+            {
+              "latex": "P_Q=(|b_Q|²/2)/(1−|r_Q|²) =0.01/(2×0.91)=0.00549451 W."
+            }
+          ]
         }
       ]
     },
@@ -1311,7 +1354,12 @@
             "S̄=[[ρ+τσ r_x/D, σ+τ²r_x/D],[τ+σ²r_x/D, ρ+τσ r_x/D]]."
           ],
           "finalAnswer": "S̄ with denominator D=1−ρr_x as displayed; conditional on 1−ρr_x≠0.",
-          "verification": "Independently reduced using the original Exercise 3 Task 4 S-matrix and port convention (question p.9, solution pp.28–29)."
+          "verification": "Independently reduced using the original Exercise 3 Task 4 S-matrix and port convention (question p.9, solution pp.28–29).",
+          "display": [
+            {
+              "latex": "S̄=[[ρ+τσ r_x/D, σ+τ²r_x/D],[τ+σ²r_x/D, ρ+τσ r_x/D]]."
+            }
+          ]
         },
         {
           "label": "b",
@@ -1345,7 +1393,12 @@
             "r_x=−exp(−j2βℓ); D=1+ρexp(−j2βℓ)."
           ],
           "finalAnswer": "Matched: S̄=[[ρ,σ],[τ,ρ]]. Short: replace r_x by −e^(−j2βℓ) in the matrix from (a).",
-          "verification": "Independently reduced using the original Exercise 3 Task 4 S-matrix and port convention (question p.9, solution pp.28–29)."
+          "verification": "Independently reduced using the original Exercise 3 Task 4 S-matrix and port convention (question p.9, solution pp.28–29).",
+          "display": [
+            {
+              "latex": "r_x=−exp(−j2βℓ); D=1+ρexp(−j2βℓ)."
+            }
+          ]
         }
       ]
     },
@@ -1393,7 +1446,15 @@
             "(1/2)[[ρout,1−ρout,2,j(ρout,1+ρout,2)],[j(ρout,1+ρout,2),ρout,2−ρout,1]]."
           ],
           "finalAnswer": "Four-port S=(1/2)×the four 2×2 blocks as displayed; external port order (1,2,11,12).",
-          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention."
+          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention.",
+          "display": [
+            {
+              "latex": "(1/2)[[ρin,1−ρin,2, j(ρin,1+ρin,2)],[j(ρin,1+ρin,2),ρin,2−ρin,1]]."
+            },
+            {
+              "latex": "(1/2)[[ρout,1−ρout,2,j(ρout,1+ρout,2)],[j(ρout,1+ρout,2),ρout,2−ρout,1]]."
+            }
+          ]
         },
         {
           "label": "b",
@@ -1419,7 +1480,12 @@
             "S_eq=[[0,jρin,0,jσ],[jρin,0,jσ,0],[0,jA,0,jρout],[jA,0,jρout,0]]."
           ],
           "finalAnswer": "S_eq identical bridge shown above.",
-          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention."
+          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention.",
+          "display": [
+            {
+              "latex": "S_eq=[[0,jρin,0,jσ],[jρin,0,jσ,0],[0,jA,0,jρout],[jA,0,jρout,0]]."
+            }
+          ]
         },
         {
           "label": "c",
@@ -1446,7 +1512,15 @@
             "S_reduced=[[0,jσ],[jA,0]]."
           ],
           "finalAnswer": "Identical balanced bridge: S_reduced=[[0,jσ],[jA,0]].",
-          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention."
+          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention.",
+          "display": [
+            {
+              "latex": "S_reduced=(1/2)[[ρin,1−ρin,2,j(σ1+σ2)],[j(A1+A2),ρout,2−ρout,1]]."
+            },
+            {
+              "latex": "S_reduced=[[0,jσ],[jA,0]]."
+            }
+          ]
         },
         {
           "label": "d",
@@ -1480,7 +1554,12 @@
             "P_failed/P_healthy=(1/2)²=1/4=0.25."
           ],
           "finalAnswer": "Forward amplitude falls to 50%; available output power falls to 25% (−6.02 dB).",
-          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention."
+          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention.",
+          "display": [
+            {
+              "latex": "P_failed/P_healthy=(1/2)²=1/4=0.25."
+            }
+          ]
         }
       ]
     },
@@ -1525,7 +1604,18 @@
             "S_eff=[[0,−j e^(−j2βℓ)],[−j e^(−j2βℓ),0]]."
           ],
           "finalAnswer": "S_eff off-diagonal transfer =−j e^(−j2βℓ), zero reflections; equivalent Φ convention is also shown.",
-          "verification": "Independent network cascade from Microwave Engineering Exercise 5 Task 3 (question p.13, solution pp.39–41); phase reference planes stated explicitly."
+          "verification": "Independent network cascade from Microwave Engineering Exercise 5 Task 3 (question p.13, solution pp.39–41); phase reference planes stated explicitly.",
+          "display": [
+            {
+              "latex": "S_eff=C(r_short I)C=(r_short/2)[[1,j],[j,1]]²."
+            },
+            {
+              "latex": "[[1,j],[j,1]]²=[[0,2j],[2j,0]]."
+            },
+            {
+              "latex": "S_eff=[[0,−j e^(−j2βℓ)],[−j e^(−j2βℓ),0]]."
+            }
+          ]
         },
         {
           "label": "b",
@@ -1564,7 +1654,15 @@
             "S_ext=(1/2)[[0,0,1−Φ,j(1+Φ)],[0,0,j(1+Φ),Φ−1],[1−Φ,j(1+Φ),0,0],[j(1+Φ),Φ−1,0,0]]."
           ],
           "finalAnswer": "S_ext shown above; slider switches output between port 14 at Φ=1 and port 13 at Φ=−1.",
-          "verification": "Independent network cascade from Microwave Engineering Exercise 5 Task 3 (question p.13, solution pp.39–41); phase reference planes stated explicitly."
+          "verification": "Independent network cascade from Microwave Engineering Exercise 5 Task 3 (question p.13, solution pp.39–41); phase reference planes stated explicitly.",
+          "display": [
+            {
+              "latex": "Φ=e^(−j2βℓ), |Φ|=1 for lossless lines."
+            },
+            {
+              "latex": "S_ext=(1/2)[[0,0,1−Φ,j(1+Φ)],[0,0,j(1+Φ),Φ−1],[1−Φ,j(1+Φ),0,0],[j(1+Φ),Φ−1,0,0]]."
+            }
+          ]
         }
       ]
     }
