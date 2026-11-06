@@ -104,6 +104,12 @@ function renderFullSolution(e) {
   const available = p => Boolean((Array.isArray(p.display) && p.display.length) || (Array.isArray(p.equations) && p.equations.length) || p.solution);
   const documented = p => Boolean(p.method && p.reason && (p.finalAnswer || p.solution) && available(p));
   const renderMath = p => {
+    if (Array.isArray(p.working) && p.working.length) {
+      return p.working.map((step,i)=>`<div class="paper-workline">
+        <div class="paper-workline-label">${String(i+1).padStart(2,'0')} · ${escape(step.label||'Calculation')}</div>
+        <div class="paper-workline-equation" role="math">${escape(step.value||'')}</div>
+      </div>`).join('');
+    }
     if (Array.isArray(p.display) && p.display.length) {
       return p.display.map(d => `<div class="paper-equation">${math(d.html || `<code class="raw-tex">${escape(d.latex || '')}</code>`)}</div>`).join('');
     }
@@ -250,17 +256,22 @@ document.addEventListener('keydown',event=>{
 });
 async function start(){
  try{
-  const [r,extra]=await Promise.all([fetch('data/content.json'),fetch('data/verified-expansion.json')]);
-  if(!r.ok)throw Error('Unable to load study content');
-  if(!extra.ok)throw Error('Unable to load verified exercises');
-  const original=await r.json(), extension=await extra.json();
-  if(!Array.isArray(original.exercises)||!Array.isArray(extension.overrides))throw Error('Invalid exercise data');
-  const map=new Map(extension.overrides.map(e=>[e.id,e]));
-  if(map.size!==extension.overrides.length)throw Error('Duplicate verified exercise IDs');
-  for(const entry of extension.overrides){
-   if(!original.exercises.some(e=>e.id===entry.id)||!Array.isArray(entry.parts)||!entry.parts.length)throw Error('Verified content references a missing exercise: '+entry.id);
+  const [r,extra,practice]=await Promise.all([fetch('data/content.json'),fetch('data/verified-expansion.json'),fetch('data/original-practice-reworked.json')]);
+  if(!r.ok||!extra.ok||!practice.ok)throw Error('Unable to load all study exercise data');
+  const [original,extension,reworked]=await Promise.all([r.json(),extra.json(),practice.json()]);
+  if(!Array.isArray(original.exercises)||!Array.isArray(extension.overrides)||!Array.isArray(reworked.overrides))throw Error('Invalid exercise data');
+  const verified=new Map(extension.overrides.map(e=>[e.id,e]));
+  const originals=new Map(reworked.overrides.map(e=>[e.id,e]));
+  if(verified.size!==extension.overrides.length||originals.size!==reworked.overrides.length)throw Error('Duplicate override IDs');
+  for(const item of [...extension.overrides,...reworked.overrides]){
+   const reference=original.exercises.find(e=>e.id===item.id);
+   if(!reference||!Array.isArray(item.parts)||item.parts.length!==reference.parts.length)throw Error('Exercise override does not match source parts: '+item.id);
+   if(!item.parts.every((p,i)=>p.label===reference.parts[i].label))throw Error('Exercise override changed original subpart identifiers: '+item.id);
   }
-  original.exercises=original.exercises.map(e=>map.has(e.id)?{...e,...map.get(e.id),parts:map.get(e.id).parts}:e);
+  original.exercises=original.exercises.map(e=>{
+    const item=originals.get(e.id)||verified.get(e.id);
+    return item?{...e,...item,parts:item.parts}:e;
+  });
   base=original;setRoute();
   if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
  }catch(e){$('#app').innerHTML=`<div class="loading">${escape(e.message)}. Run the site using a local web server (see README.md).</div>`;}
