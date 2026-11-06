@@ -9,7 +9,7 @@ assert.equal(data.subjects.length,5,'Five subjects expected');
 assert.equal(data.exercises.length,82,'Expected 82 merged exercise entries');
 assert(data.formulas.length>=69,'Expected full merged formula library');
 const ext=JSON.parse(fs.readFileSync(file('source/data/verified-expansion.json'),'utf8'));
-assert(Array.isArray(ext.overrides)&&ext.overrides.length>=15,'Missing independent derivations');
+assert(Array.isArray(ext.overrides)&&ext.overrides.length>=21,'Missing independent derivations');
 for(const over of ext.overrides){
  const target=data.exercises.find(e=>e.id===over.id);
  assert(target,'Unmatched override '+over.id);
