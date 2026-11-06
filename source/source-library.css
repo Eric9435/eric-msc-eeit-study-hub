@@ -1,0 +1,22 @@
+/* Private original PDF shelf — read-only on page, browser-local storage. */
+.source-archive{margin:23px 0;padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--surface-alt)}
+.source-archive h3{font-size:16px!important;color:var(--ink);margin:0 0 8px}
+.source-archive>p{font-size:12px;line-height:1.8;color:var(--muted);margin:0 0 16px}
+.source-archive-tools{display:flex;flex-wrap:wrap;gap:11px;margin:0 0 16px}
+.source-upload{display:inline-flex;flex-direction:column;gap:7px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink);font-size:12px;font-weight:700;cursor:pointer;flex:1 1 225px}
+.source-upload:hover{border-color:var(--brand-hi)}
+.source-upload input{display:block;width:100%;min-width:0;font-size:11px;color:var(--text)}
+.source-archive-status{border-top:1px solid var(--line);padding:8px 0}
+.source-file-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 13px;padding:10px 4px;border-bottom:1px dashed var(--line);font-size:12px}
+.source-file-row:last-child{border-bottom:0}
+.source-file-row strong{flex:1 1 180px;color:var(--ink)}
+.source-file-name{flex:1 1 190px;min-width:0;overflow-wrap:anywhere;color:var(--muted)}
+.source-file-row .btn{min-height:35px;font-size:11px}
+.source-empty{font-size:11px;color:var(--muted);font-style:italic}
+.source-archive-reader{margin-top:14px}
+.source-reader-header{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0;font-size:12px;color:var(--ink);overflow-wrap:anywhere}
+.source-pdf-link{color:var(--brand-hi);font-weight:700;text-decoration:underline}
+.source-pdf-frame{display:block;width:100%;height:min(80vh,970px);min-height:450px;border:1px solid var(--line);border-radius:7px;background:#fff}
+.source-pdf-note{font-size:11px!important;color:var(--muted);line-height:1.7;margin-top:11px!important}
+@media(max-width:700px){.source-archive{padding:15px}.source-pdf-frame{min-height:500px;height:65vh}.source-file-row{gap:6px 9px}.source-file-row .btn{flex:1 1 135px}}
+@media print{.source-archive{display:none!important}}
