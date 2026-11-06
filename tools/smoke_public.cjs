@@ -20,6 +20,16 @@ assert(!JSON.stringify(docCatalog).includes('file_00000000'),'Private Library fi
 
 assert(docCatalog.entries.reduce((n,e)=>n+Object.keys(e.exercisePages||{}).length,0)>=40,'Original exercise-to-PDF-page mappings are incomplete');
 
+const originalDriveDocs=docCatalog.entries.filter(d=>d.drive_id);
+assert.equal(originalDriveDocs.length,123,'Expected 123 private Drive PDF references');
+assert.equal(new Set(originalDriveDocs.map(d=>d.drive_id)).size,123,'Private Drive file links must be unique');
+assert(originalDriveDocs.every(d=>/^[A-Za-z0-9_-]{10,160}$/.test(d.drive_id)),'Invalid Drive file id');
+assert(originalDriveDocs.every(d=>d.drive_visibility==='private-owner-only'),'One Drive PDF lacks private owner-only access label');
+const expectedDriveCounts={digital:56,power:17,control:17,microwave:25,micro:6,shared:2};
+for(const [subject,n] of Object.entries(expectedDriveCounts))
+ assert.equal(originalDriveDocs.filter(d=>d.subject===subject).length,n,'Missing Drive PDFs in '+subject);
+
+
 
 const ext=JSON.parse(fs.readFileSync(file('source/data/verified-expansion.json'),'utf8'));
 assert(Array.isArray(ext.overrides)&&ext.overrides.length>=21,'Missing independent derivations');
@@ -109,6 +119,12 @@ assert(pdfModule.includes('data-document-zip'),'ZIP archive onboarding missing')
 assert(pdfModule.includes('zipDirectory')&&pdfModule.includes('zipMember'),'ZIP archive parser missing');
 assert(pdfModule.includes('findZipCatalogMatch'),'ZIP source path matching missing');
 assert(pdfModule.includes('dataset.documentPage'),'PDF deep-page viewer links missing');
+
+assert(pdfModule.includes('dataset.documentDrive'),'Drive PDF control is not rendered');
+assert(pdfModule.includes('drive.google.com/file/d/'),'Private Google Drive preview is not connected');
+assert(pdfModule.includes('Owner-restricted Google Drive'),'Drive account permissions not explained');
+assert(fullSource.includes('All 123 PDF files are stored'),'Private PDF completion text missing');
+
 assert(pdfModule.includes("KEY_PREFIX='catalog:'"),'Individual PDF keys not implemented');
 assert(pdfModule.includes('file.slice(0,5).text()'),'PDF header verification missing');
 assert(!pdfModule.includes('fetch(file'),'PDF files must remain private, not uploaded');
