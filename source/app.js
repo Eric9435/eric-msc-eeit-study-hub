@@ -133,6 +133,7 @@ function renderFullSolution(e) {
     <h1>Exercise ${escape(e.number)} <span>${escape(e.title)}</span></h1>
     <div class="paper-rule"></div>
     <div class="paper-document-meta"><span>Source: ${escape(courseRef)}</span><span>${parts.length} subquestion${parts.length === 1 ? '' : 's'}</span></div>
+    <p class="paper-provenance">${escape(e.verificationNote || (e.originalPractice===false ? 'Course-source question · independently prepared study derivation (not an official answer key).' : 'Independent engineering practice · do not confuse with an official tutorial question.'))}</p>
   </header>`;
   if (!parts.length) {
     return `<article class="paper full-solution-page a4-paper" aria-label="Exercise ${escape(e.number)} paper view">
@@ -146,20 +147,17 @@ function renderFullSolution(e) {
   const available = p => Boolean((Array.isArray(p.display) && p.display.length) || (Array.isArray(p.equations) && p.equations.length) || p.solution);
   const documented = p => Boolean(p.method && p.reason && (p.finalAnswer || p.solution) && available(p));
   const renderMath = p => {
-    if (Array.isArray(p.working) && p.working.length) {
-      return p.working.map((step,i)=>`<div class="paper-workline">
-        <div class="paper-workline-label">${String(i+1).padStart(2,'0')} · ${escape(step.label||'Calculation')}</div>
-        <div class="paper-workline-equation" role="math">${escape(step.value||'')}</div>
-      </div>`).join('');
-    }
-    if (Array.isArray(p.display) && p.display.length) {
-      return p.display.map(d => `<div class="paper-equation">${math(d.html || `<code class="raw-tex">${escape(d.latex || '')}</code>`)}</div>`).join('');
-    }
-    if (Array.isArray(p.equations) && p.equations.length) {
-      return p.equations.map(x => `<div class="paper-equation"><code class="raw-tex">${escape(x)}</code></div>`).join('');
-    }
-    if (p.solution) return `<div class="paper-equation"><p class="paper-raw-solution">${escape(p.solution)}</p></div>`;
-    return `<p class="paper-pending">Calculation not yet independently documented for this part.</p>`;
+    const symbolic = Array.isArray(p.display) && p.display.length
+      ? p.display.map(d => `<div class="paper-equation">${math(d.html || `<code class="raw-tex">${escape(d.latex || '')}</code>`)}</div>`).join('')
+      : Array.isArray(p.equations) && p.equations.length
+        ? p.equations.map(x => `<div class="paper-equation"><code class="raw-tex">${escape(x)}</code></div>`).join('')
+        : '';
+    const detailed = Array.isArray(p.working) && p.working.length
+      ? `<div class="paper-annotated-working"><h5>Given · Formula · Substitution · Calculation · Verification</h5>${p.working.map(step => `<div class="paper-workline"><div class="paper-workline-label">${escape(step.label || 'Calculation')}</div><div class="paper-workline-equation" role="math">${escape(step.value || '')}</div></div>`).join('')}</div>`
+      : '';
+    if(symbolic || detailed)return `<div class="paper-math-full">${symbolic ? `<div class="paper-symbolic-working">${symbolic}</div>` : ''}${detailed}</div>`;
+    if(p.solution)return `<div class="paper-equation"><p class="paper-raw-solution">${escape(p.solution)}</p></div>`;
+    return '<p class="paper-pending">Calculation not yet independently documented for this part.</p>';
   };
   const renderPart = (p, i) => {
     const key = e.id + ':' + p.label;
