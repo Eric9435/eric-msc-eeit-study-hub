@@ -39,6 +39,10 @@ async function check(){
   assert(sourceDerived.overrides.length>=3,'Missing reconstructed original tutorial sets');
   assert(sourceDerived.overrides.reduce((n,e)=>n+e.parts.length,0)>=34,'Source-aligned tutorial set is incomplete');
   assert(sourceDerived.overrides.every(e=>e.parts.every(p=>p.method&&p.finalAnswer&&p.display?.length)),'Source-aligned tutorial method/formula missing');
+  const projectArchive=JSON.parse((await get('/data/project-practice.json')).bytes.toString('utf8'));
+  assert.equal(projectArchive.exercises.length,23,'23 recovered project practices missing');
+  assert(projectArchive.exercises.every(x=>x.contentProvenance==='chatgpt-project-practice' && x.parts.every(p=>p.working?.length>=4)),'Project practice metadata/steps invalid');
+  assert(app.includes('project-practice.json'),'Project practice not loaded in deployed app');
   const pdfCatalog=JSON.parse((await get('/data/pdf-catalog.json')).bytes.toString('utf8'));
   assert(pdfCatalog.entries.length>=90,'Five-subject PDF catalog is not deployed');
   assert(['digital','power','control','microwave','micro'].every(subject=>pdfCatalog.entries.some(item=>item.subject===subject)),'PDF library must cover all five subjects');
@@ -50,7 +54,7 @@ async function check(){
   assert.equal(linked.length,123,'Missing original PDFs in private Google Drive catalog');
   assert.equal(new Set(linked.flatMap(item=>Object.keys(item.exercisePages||{}))).size,42,'Verified original exercise links missing');
   assert.equal(new Set(linked.flatMap(item=>item.relatedExerciseIds||[])).size,22,'Related lecture references missing');
-  assert.equal(pdfCatalog.examCoverage?.sourceOnlyWithoutSolution,12,'Source-only incomplete exercises must be disclosed');
+  assert.equal(pdfCatalog.examCoverage?.sourceOnlyWithoutSolution,8,'Eight incomplete source-only exercises must be disclosed');
   assert.equal(pdfCatalog.examCoverage?.exerciseEntries,82,'Exam coverage set count differs from study library');
   assert.equal(new Set(linked.map(item=>item.drive_id)).size,123,'Duplicated original Drive IDs');
   const expectedCounts={digital:56,power:17,control:17,microwave:25,micro:6,shared:2};
