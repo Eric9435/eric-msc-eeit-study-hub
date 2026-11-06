@@ -201,6 +201,22 @@ function addCustom(data){const id='custom-'+Date.now();const p={label:'a',title:
 document.addEventListener('submit',e=>{if(e.target.id==='custom-form'){e.preventDefault();const f=new FormData(e.target);const obj=Object.fromEntries(f.entries());if(!obj.title?.trim()||!obj.question?.trim())return;addCustom(obj);}});
 document.addEventListener('click',async e=>{
 const node=e.target.closest('[data-action]');if(!node)return;const a=node.dataset.action,id=node.dataset.id;if(['zoom'].includes(a)){node.classList.toggle('zoom');return;}if(a==='backdrop'&&e.target===node){modal='';render();return;}
+if(a==='visual-export'){
+ const panel=node.closest('.eeit-viz-panel'),original=panel?.querySelector('svg');
+ if(!original)return;
+ const clone=original.cloneNode(true);
+ clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+ clone.setAttribute('width','1360');
+ clone.setAttribute('height','520');
+ const xml=new XMLSerializer().serializeToString(clone);
+ const blob=new Blob(['<?xml version="1.0" encoding="UTF-8"?>\n',xml],{type:'image/svg+xml;charset=utf-8'});
+ const downloadUrl=URL.createObjectURL(blob),link=document.createElement('a');
+ link.href=downloadUrl;
+ link.download='eric-eeit-'+String(id||'engineering-diagram').replace(/[^a-zA-Z0-9_-]/g,'-')+'.svg';
+ document.body.appendChild(link);link.click();link.remove();
+ setTimeout(()=>URL.revokeObjectURL(downloadUrl),1000);
+ return;
+}
 if(a==='navigate'){modal='';navigate(id);return;}if(a==='subject'){filterSubject=id;filterState='all';keyword='';navigate('library');render();return;}if(a==='open'){showExercise(id);return;}if(a==='open-part'){showExercise(id);activePart=node.dataset.part;render();return;}if(a==='mobile-menu'){sideOpen=!sideOpen;render();return;}if(a==='mobile-close'){sideOpen=false;render();return;}
 if(a==='theme'){study.theme=study.theme==='dark'?'light':'dark';persist();render();return;}
 if(a==='part'){activePart=id;hideSolution=false;render();return;}if(a==='next-part'){nextPart();return;}if(a==='tab'){exerciseTab=id;render();return;}if(a==='solution-toggle'){hideSolution=!hideSolution;render();return;}
