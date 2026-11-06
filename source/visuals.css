@@ -16,3 +16,8 @@
 .eeit-viz-graphic svg text{user-select:none}
 @media(max-width:700px){.eeit-viz-panel{margin:14px 0 19px;padding:12px}.eeit-viz-header{gap:9px;flex-wrap:wrap}.eeit-viz-tag{font-size:9px}.eeit-viz-graphic{overflow-x:auto;-webkit-overflow-scrolling:touch}.eeit-viz-svg{min-width:470px;width:100%;max-height:none}.eeit-viz-control{margin-top:11px}.eeit-viz-header h3{font-size:16px}}
 @media print{.eeit-viz-panel{page-break-inside:avoid;break-inside:avoid;box-shadow:none;padding:9px;margin:9px 0}.eeit-viz-svg{max-height:220px}.eeit-viz-control{display:none}.eeit-viz-tag{display:none}.eeit-viz-note{font-size:9px}}
+
+.eeit-viz-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.eeit-viz-download{padding:6px 10px;font-size:11px;white-space:nowrap;border:1px solid var(--line);background:var(--surface-alt);border-radius:7px;color:var(--ink);font-weight:750}
+.eeit-viz-download:hover{background:var(--surface-hover)}
+@media print{.eeit-viz-actions{display:none}}
