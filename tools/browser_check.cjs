@@ -25,13 +25,12 @@ async function check(){
    assert(await desktop.locator('.exercise-row').count()>0,'Subject exercise list empty');
    await desktop.locator('.exercise-row').first().click();
    await desktop.waitForURL(/#exercise\//);
-   await desktop.locator('.eeit-popup-tools .eeit-info-button').first().waitFor({timeout:15000});
-   assert.equal(await desktop.locator('.eeit-popup-tools .eeit-info-button').count(),3,'Expected Why/Method/Answer popup buttons');
    // Exercise metadata and verified solution content must render on the live site.
    await desktop.goto(url+'/#exercise/dc-4.1',{waitUntil:'domcontentloaded',timeout:60000});
-   await desktop.locator('.part-button').first().waitFor({timeout:35000});
-   assert.equal(await desktop.locator('.part-button').count(),10,'Digital OFDM 4.1 must have all 10 verified subparts');
-   await desktop.locator('.eeit-popup-tools .eeit-info-button').first().waitFor({timeout:15000});
+   await desktop.locator('.inline-part').first().waitFor({timeout:35000});
+   assert.equal(await desktop.locator('.inline-part').count(),10,'Digital OFDM 4.1 must have all 10 verified subparts');
+   await desktop.locator('.inline-part').first().locator('.eeit-popup-tools .eeit-info-button').first().waitFor({timeout:15000});
+   assert.equal(await desktop.locator('.inline-part').first().locator('.eeit-popup-tools .eeit-info-button').count(),3,'Every part must have Why/Method/Answer buttons');
    await desktop.locator('.eeit-popup-tools .eeit-info-button').first().click();
    const dialog=desktop.locator('.eeit-explanation-dialog');
    assert(await dialog.isVisible(),'Why popup did not open');
