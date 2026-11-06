@@ -1,0 +1,10 @@
+# Local, generated and developer files
+.DS_Store
+*.log
+_preview*.html
+node_modules/
+__pycache__/
+public/
+.env
+.env.local
+.env.*.local

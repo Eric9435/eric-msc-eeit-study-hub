@@ -1,0 +1,22 @@
+/* Cloud controls: deliberately flat, no gradients. */
+.cloud-control{display:flex;align-items:center;gap:9px;margin-left:3px}
+.cloud-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border,#dce3eb);border-radius:10px;background:var(--surface,#fff);color:inherit;min-height:36px;padding:7px 12px;cursor:pointer;font:inherit;font-size:12px;font-weight:600;line-height:1.2;white-space:nowrap;transition:border-color .15s,background .15s}
+.cloud-button:hover,.cloud-button:focus-visible{border-color:#536dd9;outline-offset:3px}
+.cloud-button[data-mode="signed"]{background:#1e3a5f;color:#fff;border-color:#1e3a5f}
+.cloud-button[data-mode="offline"]{background:transparent}
+.cloud-avatar{display:block;width:22px;height:22px;border-radius:50%;object-fit:cover}
+.cloud-indicator{display:inline-block;width:7px;height:7px;background:#64748b;border-radius:50%;flex:none}
+.cloud-indicator.online{background:#16a34a}
+.cloud-indicator.warning{background:#d97706}
+.cloud-status{font-size:11px;color:var(--text-muted,#64748b);white-space:nowrap}
+.cloud-alert{position:fixed;right:18px;bottom:18px;z-index:9999;max-width:min(420px,calc(100vw - 36px));background:var(--surface,#fff);border:1px solid var(--border,#dce3eb);color:var(--text,#182238);box-shadow:0 8px 30px #0002;border-radius:12px;padding:13px 16px;font:500 13px/1.5 system-ui,sans-serif}
+.cloud-alert button{font:inherit;background:none;border:0;cursor:pointer;text-decoration:underline;padding-left:10px;color:inherit}
+@media(max-width:980px){.cloud-status{display:none}.cloud-button{padding:8px}.cloud-control{gap:5px}}
+@media(max-width:640px){.cloud-button{font-size:11px}.cloud-avatar{width:19px;height:19px}.topbar-actions{gap:6px!important}.cloud-control{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.cloud-button{transition:none}}
+
+.cloud-control{position:relative}
+.cloud-menu{position:absolute;right:0;top:calc(100% + 10px);z-index:100;min-width:210px;padding:7px;border-radius:12px;background:var(--surface,#fff);border:1px solid var(--line,#dce3eb);box-shadow:0 12px 34px #0002}
+.cloud-menu-account{font-size:11px;font-weight:600;color:var(--muted,#64748b);padding:10px 10px 8px;overflow-wrap:anywhere;border-bottom:1px solid var(--line,#e5e7eb);margin-bottom:5px}
+.cloud-menu button{display:block;width:100%;border:0;border-radius:8px;background:transparent;color:var(--ink,#182238);padding:10px;text-align:left;cursor:pointer;font:600 12px/1.3 system-ui,sans-serif}
+.cloud-menu button:hover,.cloud-menu button:focus-visible{background:var(--surface-hover,#f1f5f9)}
