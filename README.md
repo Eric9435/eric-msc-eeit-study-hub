@@ -130,3 +130,15 @@ The Google Drive file is **not public**: sample metadata readbacks returned `sha
 All 123 Google Drive uploads returned successful write results. Original source filenames are preserved in the private Drive folder hierarchy under `Eric MSc EEIT - Private Course PDFs`; the website's catalog has source paths and Drive file IDs for navigation. The separate `source/data/private-drive-pdfs.json` mirrors the upload inventory, not the PDF bytes. These IDs alone do not grant file access. Google Drive sharing must remain owner-only until an explicit authorized change.
 
 **Updated workflow:** It is no longer necessary to import the user-provided ZIP to open the 123 Drive-backed PDFs. The ZIP importer remains available for offline, browser-local copies and other previously uncatalogued documents. Older README sections describing metadata-only or manually attached PDFs were the pre-integration state.
+
+## Source-to-exercise completeness audit — corrected 6 November 2026
+
+Uploading all 123 user-provided PDFs to owner-only Google Drive was successful, but **upload count alone was not exercise completeness**. A subsequent audit discovered that the prior 49 exercise/page references were attached to metadata-only *compiled* PDF records, not the actual uploaded Drive PDFs, so none of 82 exercise entries had a working exact original page pair at that point. This is now corrected:
+
+- **42 / 82 exercises** are linked to actual uploaded question AND solution PDFs, with 84 verified page references, based on real Problem/Exercise/Task headings. These are 18 Digital Communications, 6 Control Systems, and 18 Microwave Engineering source exercises.
+- **22 / 82 exercises** have only **related lecture references**, including 12 EPS II lecture-derived examples and 10 independent Microsystem practice items. These are explicitly *not* original tutorial/official-solution matches.
+- **18 / 82 exercises** are independent practice without a direct source match in the uploaded PDFs.
+- **12 exercise sets** (3 Digital, 5 EPS II, 4 Microwave) still lack a complete authored worked solution despite some being covered by an official-solution PDF.
+- The PDF Library lists **123 Drive-backed course PDFs plus 10 metadata-only compilation records**. The 123 PDFs include past papers, lecture material, labs, and independent notes; they are not 123 unique official exercise sheets. No direct official exercise sheets for the EPS II or Microsystem course were confirmed in this ZIP.
+
+The Source tab now prioritizes a verified original question and sample-solution page pair, marks lecture-only references separately, and warns when authored working is incomplete. A coverage overview is visible on the PDF Library page, rather than equating file uploads with exam readiness. Original PDF bytes remain owner-private in Google Drive and are not included in the public repository. Direct page navigation inside Google's embedded PDF viewer depends on the browser; the page number shown on the source record is the authoritative reference.
