@@ -219,8 +219,8 @@ function newExerciseModal(){return `<div class="modal-backdrop" data-action="bac
 function documentLibrary(){
  return `<div class="eyebrow">Course originals / archived references / independent solutions</div>
  <h1 class="page-title">PDF Document Library</h1>
- <p class="page-sub">Five subjects · original questions, official answers, lecture materials, labs and your independent worked solutions. Documents are listed individually, then attached and read locally on this device.</p>
- <section class="document-privacy-note"><strong>Privacy:</strong> The original PDF files are not publicly uploaded to this website. Library filenames are catalogued; select the actual PDF from your device to attach it. Attached PDF bytes stay inside your browser's storage and do not sync with Firebase.</section>
+ <p class="page-sub">Five engineering subjects · 123 original PDFs in your private Google Drive. Browse exercise sheets, official solutions, previous exams, lab PDFs, lectures and study handbooks.</p>
+ <section class="document-privacy-note"><strong>Privacy:</strong> All 123 PDF files are stored in your private Google Drive with owner-only access. Click Read original PDF to view one inside this website, or open it in Google Drive. If prompted, sign in with the Google account that owns these files. GitHub and Render do not host the original PDFs.</section>
  <section class="document-library" data-eeit-document-library aria-label="Five-subject PDF document library">
   <p class="document-loading">Loading your categorized PDF catalog…</p>
  </section>`;
