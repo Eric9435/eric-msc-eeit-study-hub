@@ -132,7 +132,7 @@ function renderFullSolution(e) {
     <div class="solution-overview-head">
       <div class="mini-label">Complete exercise view · all subquestions on one page</div>
       <h2>Exercise ${escape(e.number)} — ${escape(e.title)}</h2>
-      <p class="page-sub">Read the full solution from the first subquestion to the final answer. Calculations are shown directly in the webpage — no popups.</p>
+      <p class="page-sub">Read the full solution from the first subquestion to the final answer. Calculations are shown inline, with optional Why / Method / Final Answer popups for every subquestion.</p>
       <div class="inline-meta"><span>${parts.length} subquestions</span><span>${escape(e.topic || 'Engineering')}</span><span>${allFullyDocumented ? 'Written method and final answers available for each part' : 'Some derivations or final answers still require independent audit'}</span></div>
       <div class="buttons no-print"><button class="btn small" data-action="solution-toggle">${icon(hideSolution ? 'eye' : 'eyeoff', 14)} ${hideSolution ? 'Show all calculations' : 'Hide all calculations'}</button><button class="btn small" data-action="tab" data-id="source">${icon('file', 14)} Source reference</button></div>
     </div>
