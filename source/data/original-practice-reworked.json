@@ -1,0 +1,2391 @@
+{
+  "revision": "2026-11-06-original-practice-rederived-v1",
+  "kind": "independent-original-practice-step-by-step",
+  "description": "Detailed start-to-finish calculations for all 16 original 3-part practice sets, with original user-facing prompts, systematic equations, substitution and checking; not TUHH official solutions.",
+  "overrides": [
+    {
+      "id": "original-p1",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Find base impedance",
+          "question": "Calculate the three-phase impedance base in ohms.",
+          "solution": "Use the line-to-line base voltage: Zbase = Vbase²/Sbase = (110 kV)²/(100 MVA) = 121 Ω.",
+          "reason": "Per-unit ဆိုတာ ပမာဏမတူတဲ့ system တွေကို တူညီတဲ့ base နဲ့ နှိုင်းနိုင်အောင် normalize လုပ်တာပါ။",
+          "equations": [
+            "Zbase = Vbase,LL² / Sbase",
+            "Zbase = (110 × 10³)² / (100 × 10⁶) = 121 Ω",
+            "Dimension: V²/VA = Ω; the three-phase base is already included."
+          ],
+          "display": [
+            {
+              "latex": "Zbase = Vbase,LL² / Sbase",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zbase = Vbase,LL² / Sbase</div>"
+            },
+            {
+              "latex": "Zbase = (110 × 10³)² / (100 × 10⁶) = 121 Ω",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zbase = (110 × 10³)² / (100 × 10⁶) = 121 Ω</div>"
+            },
+            {
+              "latex": "Dimension: V²/VA = Ω; the three-phase base is already included.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Dimension: V²/VA = Ω; the three-phase base is already included.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Find base impedance\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Sbase = 100 MVA; Vbase,LL = 110 kV"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Zbase = Vbase,LL² / Sbase"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Zbase = (110 × 10³)² / (100 × 10⁶) = 121 Ω"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Dimension: V²/VA = Ω; the three-phase base is already included."
+            }
+          ],
+          "finalAnswer": "Use the line-to-line base voltage: Zbase = Vbase²/Sbase = (110 kV)²/(100 MVA) = 121 Ω.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Convert line impedance",
+          "question": "Express the given complex impedance in per-unit.",
+          "solution": "Zpu = Zactual/Zbase = (12.1 + j24.2)/121 = 0.10 + j0.20 pu. Resistive and reactive terms divide by the same base.",
+          "reason": "Resistance နဲ့ Reactance နှစ်ခုစလုံးကို base impedance တစ်ခုတည်းနဲ့ စားရပါတယ်။",
+          "equations": [
+            "Zpu = Zactual / Zbase",
+            "Zpu = 12.1/121 + j(24.2/121) = 0.10 + j0.20 pu",
+            "Check: Zpu × 121 Ω = 12.1 + j24.2 Ω."
+          ],
+          "display": [
+            {
+              "latex": "Zpu = Zactual / Zbase",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zpu = Zactual / Zbase</div>"
+            },
+            {
+              "latex": "Zpu = 12.1/121 + j(24.2/121) = 0.10 + j0.20 pu",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zpu = 12.1/121 + j(24.2/121) = 0.10 + j0.20 pu</div>"
+            },
+            {
+              "latex": "Check: Zpu × 121 Ω = 12.1 + j24.2 Ω.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: Zpu × 121 Ω = 12.1 + j24.2 Ω.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Convert line impedance\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Zactual = 12.1 + j24.2 Ω; Zbase = 121 Ω"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Zpu = Zactual / Zbase"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Zpu = 12.1/121 + j(24.2/121) = 0.10 + j0.20 pu"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: Zpu × 121 Ω = 12.1 + j24.2 Ω."
+            }
+          ],
+          "finalAnswer": "Zpu = Zactual/Zbase = (12.1 + j24.2)/121 = 0.10 + j0.20 pu. Resistive and reactive terms divide by the same base.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Change MVA base",
+          "question": "Find the per-unit value on a 50 MVA base at the same 110 kV.",
+          "solution": "Zpu,new = Zpu,old × (Snew/Sold) × (Vold/Vnew)² = (0.10 + j0.20) × (50/100) = 0.05 + j0.10 pu.",
+          "reason": "Voltage base မပြောင်းရင် MVA base ratio တစ်ခုတည်းကို မြှောက်ရုံပါ။",
+          "equations": [
+            "Zpu,new = Zpu,old × (Snew/Sold) × (Vold/Vnew)²",
+            "Zpu,new = (0.10 + j0.20) × 0.5 × 1² = 0.05 + j0.10 pu",
+            "Check: Zbase,new = (110 kV)²/(50 MVA) = 242 Ω; Zactual/242 = 0.05 + j0.10 pu."
+          ],
+          "display": [
+            {
+              "latex": "Zpu,new = Zpu,old × (Snew/Sold) × (Vold/Vnew)²",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zpu,new = Zpu,old × (Snew/Sold) × (Vold/Vnew)²</div>"
+            },
+            {
+              "latex": "Zpu,new = (0.10 + j0.20) × 0.5 × 1² = 0.05 + j0.10 pu",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zpu,new = (0.10 + j0.20) × 0.5 × 1² = 0.05 + j0.10 pu</div>"
+            },
+            {
+              "latex": "Check: Zbase,new = (110 kV)²/(50 MVA) = 242 Ω; Zactual/242 = 0.05 + j0.10 pu.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: Zbase,new = (110 kV)²/(50 MVA) = 242 Ω; Zactual/242 = 0.05 + j0.10 pu.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Change MVA base\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Sold = 100 MVA; Snew = 50 MVA; voltage bases unchanged"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Zpu,new = Zpu,old × (Snew/Sold) × (Vold/Vnew)²"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Zpu,new = (0.10 + j0.20) × 0.5 × 1² = 0.05 + j0.10 pu"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: Zbase,new = (110 kV)²/(50 MVA) = 242 Ω; Zactual/242 = 0.05 + j0.10 pu."
+            }
+          ],
+          "finalAnswer": "Zpu,new = Zpu,old × (Snew/Sold) × (Vold/Vnew)² = (0.10 + j0.20) × (50/100) = 0.05 + j0.10 pu.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-p2",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Apparent power",
+          "question": "Calculate the apparent power S.",
+          "solution": "S = √3 × VL × IL = √3 × 400 × 20 = 13,856 VA ≈ 13.86 kVA.",
+          "reason": "Three-phase မှာ line voltage နဲ့ line current သုံးရင် √3 ထည့်ရပါတယ်။",
+          "equations": [
+            "|S3φ| = √3 VLL IL",
+            "|S3φ| = √3 × 400 × 20 = 13,856.406 VA",
+            "Unit check: voltage × current = VA; |S| ≈ 13.856 kVA."
+          ],
+          "display": [
+            {
+              "latex": "|S3φ| = √3 VLL IL",
+              "html": "<div class=\"verified-equation\" role=\"math\">|S3φ| = √3 VLL IL</div>"
+            },
+            {
+              "latex": "|S3φ| = √3 × 400 × 20 = 13,856.406 VA",
+              "html": "<div class=\"verified-equation\" role=\"math\">|S3φ| = √3 × 400 × 20 = 13,856.406 VA</div>"
+            },
+            {
+              "latex": "Unit check: voltage × current = VA; |S| ≈ 13.856 kVA.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Unit check: voltage × current = VA; |S| ≈ 13.856 kVA.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Apparent power\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Balanced 3-phase system: VLL = 400 V, IL = 20 A"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "|S3φ| = √3 VLL IL"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "|S3φ| = √3 × 400 × 20 = 13,856.406 VA"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Unit check: voltage × current = VA; |S| ≈ 13.856 kVA."
+            }
+          ],
+          "finalAnswer": "S = √3 × VL × IL = √3 × 400 × 20 = 13,856 VA ≈ 13.86 kVA.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Real power",
+          "question": "Find the real electrical power P.",
+          "solution": "P = S × cosφ = 13.856 kVA × 0.8 = 11.085 kW ≈ 11.09 kW.",
+          "reason": "Power factor က တကယ်အလုပ်လုပ်တဲ့ power proportion ကို ပြောတာဖြစ်ပါတယ်။",
+          "equations": [
+            "P = |S| cosφ",
+            "P = 13.856406 × 0.8 = 11.085125 kW",
+            "Consistency check: P/|S| = 0.8."
+          ],
+          "display": [
+            {
+              "latex": "P = |S| cosφ",
+              "html": "<div class=\"verified-equation\" role=\"math\">P = |S| cosφ</div>"
+            },
+            {
+              "latex": "P = 13.856406 × 0.8 = 11.085125 kW",
+              "html": "<div class=\"verified-equation\" role=\"math\">P = 13.856406 × 0.8 = 11.085125 kW</div>"
+            },
+            {
+              "latex": "Consistency check: P/|S| = 0.8.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Consistency check: P/|S| = 0.8.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Real power\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Power factor cosφ = 0.8; |S| = 13.856406 kVA"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "P = |S| cosφ"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "P = 13.856406 × 0.8 = 11.085125 kW"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Consistency check: P/|S| = 0.8."
+            }
+          ],
+          "finalAnswer": "P = S × cosφ = 13.856 kVA × 0.8 = 11.085 kW ≈ 11.09 kW.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Reactive power",
+          "question": "Calculate the reactive power Q.",
+          "solution": "sinφ = √(1 − 0.8²) = 0.6. Q = S × sinφ = 13.856 kVA × 0.6 = 8.314 kVAr, lagging.",
+          "reason": "Q ကို ရှာဖို့ sinφ လိုပါတယ်။ cosφ ပေးထားလို့ Pythagoras နဲ့ ပြောင်းပါတယ်။",
+          "equations": [
+            "sinφ = √(1 − cos²φ) = 0.6; Q = |S| sinφ",
+            "Q = 13.856406 × 0.6 = 8.313844 kVAr",
+            "Check: √(P² + Q²) ≈ 13.856406 kVA; lagging Q > 0 under load-sign convention."
+          ],
+          "display": [
+            {
+              "latex": "sinφ = √(1 − cos²φ) = 0.6; Q = |S| sinφ",
+              "html": "<div class=\"verified-equation\" role=\"math\">sinφ = √(1 − cos²φ) = 0.6; Q = |S| sinφ</div>"
+            },
+            {
+              "latex": "Q = 13.856406 × 0.6 = 8.313844 kVAr",
+              "html": "<div class=\"verified-equation\" role=\"math\">Q = 13.856406 × 0.6 = 8.313844 kVAr</div>"
+            },
+            {
+              "latex": "Check: √(P² + Q²) ≈ 13.856406 kVA; lagging Q > 0 under load-sign convention.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: √(P² + Q²) ≈ 13.856406 kVA; lagging Q &gt; 0 under load-sign convention.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Reactive power\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "cosφ = 0.8 (lagging), |S| = 13.856406 kVA"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "sinφ = √(1 − cos²φ) = 0.6; Q = |S| sinφ"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Q = 13.856406 × 0.6 = 8.313844 kVAr"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: √(P² + Q²) ≈ 13.856406 kVA; lagging Q > 0 under load-sign convention."
+            }
+          ],
+          "finalAnswer": "sinφ = √(1 − 0.8²) = 0.6. Q = S × sinφ = 13.856 kVA × 0.6 = 8.314 kVAr, lagging.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-p3",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Per-unit flow",
+          "question": "Estimate active power from bus 1 to bus 2.",
+          "solution": "With V1 ≈ V2 ≈ 1 pu and small angles, P12 ≈ (θ1 − θ2)/x = (0.10 − 0)/0.20 = 0.50 pu.",
+          "reason": "DC power flow approximation မှာ voltage magnitude 1 pu နီးပါးနဲ့ angle ကွာခြားချက်ကို သုံးတာပါ။",
+          "equations": [
+            "DC approximation: P12,pu ≈ (θ1 − θ2)/x12",
+            "P12,pu = (0.10 − 0)/0.20 = +0.50 pu",
+            "Assumptions: near-unity voltages, small angles, negligible resistance/losses."
+          ],
+          "display": [
+            {
+              "latex": "DC approximation: P12,pu ≈ (θ1 − θ2)/x12",
+              "html": "<div class=\"verified-equation\" role=\"math\">DC approximation: P12,pu ≈ (θ1 − θ2)/x12</div>"
+            },
+            {
+              "latex": "P12,pu = (0.10 − 0)/0.20 = +0.50 pu",
+              "html": "<div class=\"verified-equation\" role=\"math\">P12,pu = (0.10 − 0)/0.20 = +0.50 pu</div>"
+            },
+            {
+              "latex": "Assumptions: near-unity voltages, small angles, negligible resistance/losses.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Assumptions: near-unity voltages, small angles, negligible resistance/losses.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Per-unit flow\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Angle θ1 = 0.10 rad, θ2 = 0 rad; x12 = 0.20 pu; V ≈ 1 pu"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "DC approximation: P12,pu ≈ (θ1 − θ2)/x12"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "P12,pu = (0.10 − 0)/0.20 = +0.50 pu"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Assumptions: near-unity voltages, small angles, negligible resistance/losses."
+            }
+          ],
+          "finalAnswer": "With V1 ≈ V2 ≈ 1 pu and small angles, P12 ≈ (θ1 − θ2)/x = (0.10 − 0)/0.20 = 0.50 pu.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Megawatt result",
+          "question": "Convert the estimated flow to MW.",
+          "solution": "P12 = 0.50 pu × 100 MVA = 50 MW. Since only active power is calculated, MVA base works as the MW scaling base.",
+          "reason": "Per-unit ကနေ MW ပြန်ချင်ရင် system base ကို ပြန်မြှောက်ပါ။",
+          "equations": [
+            "P12,MW = P12,pu × Sbase,MVA",
+            "P12 = 0.50 × 100 = 50 MW",
+            "Check: active-power pu has the numerical value relative to the three-phase MVA base."
+          ],
+          "display": [
+            {
+              "latex": "P12,MW = P12,pu × Sbase,MVA",
+              "html": "<div class=\"verified-equation\" role=\"math\">P12,MW = P12,pu × Sbase,MVA</div>"
+            },
+            {
+              "latex": "P12 = 0.50 × 100 = 50 MW",
+              "html": "<div class=\"verified-equation\" role=\"math\">P12 = 0.50 × 100 = 50 MW</div>"
+            },
+            {
+              "latex": "Check: active-power pu has the numerical value relative to the three-phase MVA base.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: active-power pu has the numerical value relative to the three-phase MVA base.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Megawatt result\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Power base = 100 MVA; P12 = 0.50 pu"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "P12,MW = P12,pu × Sbase,MVA"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "P12 = 0.50 × 100 = 50 MW"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: active-power pu has the numerical value relative to the three-phase MVA base."
+            }
+          ],
+          "finalAnswer": "P12 = 0.50 pu × 100 MVA = 50 MW. Since only active power is calculated, MVA base works as the MW scaling base.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Direction and scope",
+          "question": "Explain the sign and approximation.",
+          "solution": "Positive P12 = 50 MW means bus 1 supplies bus 2. Neglecting losses, P21 = −50 MW. This is not a full AC load flow.",
+          "reason": "Angle ပိုကြီးတဲ့ bus ကနေ ပိုနည်းတဲ့ bus ဘက် စီးတာကို positive လို့ သတ်မှတ်ထားပါတယ်။",
+          "equations": [
+            "In lossless two-bus approximation, P21 = −P12",
+            "P12 = +50 MW; P21 = −50 MW",
+            "This sign convention and approximation do not replace an AC power-flow solution."
+          ],
+          "display": [
+            {
+              "latex": "In lossless two-bus approximation, P21 = −P12",
+              "html": "<div class=\"verified-equation\" role=\"math\">In lossless two-bus approximation, P21 = −P12</div>"
+            },
+            {
+              "latex": "P12 = +50 MW; P21 = −50 MW",
+              "html": "<div class=\"verified-equation\" role=\"math\">P12 = +50 MW; P21 = −50 MW</div>"
+            },
+            {
+              "latex": "This sign convention and approximation do not replace an AC power-flow solution.",
+              "html": "<div class=\"verified-equation\" role=\"math\">This sign convention and approximation do not replace an AC power-flow solution.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Direction and scope\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "P12 = +0.50 pu, defined positive from bus 1 to bus 2"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "In lossless two-bus approximation, P21 = −P12"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "P12 = +50 MW; P21 = −50 MW"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "This sign convention and approximation do not replace an AC power-flow solution."
+            }
+          ],
+          "finalAnswer": "Positive P12 = 50 MW means bus 1 supplies bus 2. Neglecting losses, P21 = −50 MW. This is not a full AC load flow.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-p4",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Voltage ratio",
+          "question": "Determine the line-to-line voltage ratio.",
+          "solution": "a = Vprimary / Vsecondary = 20,000 / 400 = 50. This is the line-voltage ratio, not necessarily the winding turns ratio for every connection.",
+          "reason": "Δ/Y connection ကို မသိသေးရင် line voltage ratio နဲ့ winding turns ratio ကို မရောပါနဲ့။",
+          "equations": [
+            "Line-voltage ratio aLL = VHV/VLV",
+            "aLL = 20,000/400 = 50",
+            "A winding turns ratio additionally depends on transformer winding configuration."
+          ],
+          "display": [
+            {
+              "latex": "Line-voltage ratio aLL = VHV/VLV",
+              "html": "<div class=\"verified-equation\" role=\"math\">Line-voltage ratio aLL = VHV/VLV</div>"
+            },
+            {
+              "latex": "aLL = 20,000/400 = 50",
+              "html": "<div class=\"verified-equation\" role=\"math\">aLL = 20,000/400 = 50</div>"
+            },
+            {
+              "latex": "A winding turns ratio additionally depends on transformer winding configuration.",
+              "html": "<div class=\"verified-equation\" role=\"math\">A winding turns ratio additionally depends on transformer winding configuration.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Voltage ratio\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Line voltages: VHV = 20 kV and VLV = 0.4 kV"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Line-voltage ratio aLL = VHV/VLV"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "aLL = 20,000/400 = 50"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "A winding turns ratio additionally depends on transformer winding configuration."
+            }
+          ],
+          "finalAnswer": "a = Vprimary / Vsecondary = 20,000 / 400 = 50. This is the line-voltage ratio, not necessarily the winding turns ratio for every connection.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "LV rated current",
+          "question": "Find the nominal secondary line current.",
+          "solution": "ILV = S/(√3 × VLV) = 500,000/(√3 × 400) ≈ 721.7 A.",
+          "reason": "Transformer rating kVA က three-phase apparent power ဖြစ်လို့ √3 ပါပါတယ်။",
+          "equations": [
+            "S = √3 VLL IL  ⇒  ILV = S/(√3 VLV,LL)",
+            "ILV = 500,000/(√3 × 400) = 721.688 A",
+            "Unit check: VA/V = A; current is an LV line current."
+          ],
+          "display": [
+            {
+              "latex": "S = √3 VLL IL  ⇒  ILV = S/(√3 VLV,LL)",
+              "html": "<div class=\"verified-equation\" role=\"math\">S = √3 VLL IL  ⇒  ILV = S/(√3 VLV,LL)</div>"
+            },
+            {
+              "latex": "ILV = 500,000/(√3 × 400) = 721.688 A",
+              "html": "<div class=\"verified-equation\" role=\"math\">ILV = 500,000/(√3 × 400) = 721.688 A</div>"
+            },
+            {
+              "latex": "Unit check: VA/V = A; current is an LV line current.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Unit check: VA/V = A; current is an LV line current.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"LV rated current\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Balanced 3φ rated S = 500 kVA; VLV,LL = 400 V"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "S = √3 VLL IL  ⇒  ILV = S/(√3 VLV,LL)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "ILV = 500,000/(√3 × 400) = 721.688 A"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Unit check: VA/V = A; current is an LV line current."
+            }
+          ],
+          "finalAnswer": "ILV = S/(√3 × VLV) = 500,000/(√3 × 400) ≈ 721.7 A.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "HV rated current",
+          "question": "Find nominal primary line current.",
+          "solution": "IHV = S/(√3 × VHV) = 500,000/(√3 × 20,000) ≈ 14.43 A.",
+          "reason": "Voltage တိုးရင် တူညီတဲ့ kVA အတွက် current လျော့သွားပါတယ်။",
+          "equations": [
+            "IHV = S/(√3 VHV,LL)",
+            "IHV = 500,000/(√3 × 20,000) = 14.4338 A",
+            "Check: ILV/IHV = VHV/VLV = 50, assuming equal rated apparent powers."
+          ],
+          "display": [
+            {
+              "latex": "IHV = S/(√3 VHV,LL)",
+              "html": "<div class=\"verified-equation\" role=\"math\">IHV = S/(√3 VHV,LL)</div>"
+            },
+            {
+              "latex": "IHV = 500,000/(√3 × 20,000) = 14.4338 A",
+              "html": "<div class=\"verified-equation\" role=\"math\">IHV = 500,000/(√3 × 20,000) = 14.4338 A</div>"
+            },
+            {
+              "latex": "Check: ILV/IHV = VHV/VLV = 50, assuming equal rated apparent powers.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: ILV/IHV = VHV/VLV = 50, assuming equal rated apparent powers.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"HV rated current\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Balanced 3φ rated S = 500 kVA; VHV,LL = 20,000 V"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "IHV = S/(√3 VHV,LL)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "IHV = 500,000/(√3 × 20,000) = 14.4338 A"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: ILV/IHV = VHV/VLV = 50, assuming equal rated apparent powers."
+            }
+          ],
+          "finalAnswer": "IHV = S/(√3 × VHV) = 500,000/(√3 × 20,000) ≈ 14.43 A.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-c1",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Choose states",
+          "question": "Express the first state derivative.",
+          "solution": "x1 = y, x2 = y'. Therefore x1' = y' = x2. The state vector is x = [x1, x2]ᵀ.",
+          "reason": "State တစ်ခုစီဟာ differential equation ရဲ့ order ကို first-order အဖြစ် ခွဲဖို့ သတ်မှတ်တာပါ။",
+          "equations": [
+            "Differentiate x1: ẋ1 = d(y)/dt = y˙",
+            "Therefore ẋ1 = x2; x = [y, y˙]ᵀ",
+            "A 2nd-order scalar ODE needs two 1st-order state equations."
+          ],
+          "display": [
+            {
+              "latex": "Differentiate x1: ẋ1 = d(y)/dt = y˙",
+              "html": "<div class=\"verified-equation\" role=\"math\">Differentiate x1: ẋ1 = d(y)/dt = y˙</div>"
+            },
+            {
+              "latex": "Therefore ẋ1 = x2; x = [y, y˙]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">Therefore ẋ1 = x2; x = [y, y˙]ᵀ</div>"
+            },
+            {
+              "latex": "A 2nd-order scalar ODE needs two 1st-order state equations.",
+              "html": "<div class=\"verified-equation\" role=\"math\">A 2nd-order scalar ODE needs two 1st-order state equations.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Choose states\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Model: y¨ + 3 y˙ + 2y = u; choose x1 = y, x2 = y˙"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Differentiate x1: ẋ1 = d(y)/dt = y˙"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Therefore ẋ1 = x2; x = [y, y˙]ᵀ"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "A 2nd-order scalar ODE needs two 1st-order state equations."
+            }
+          ],
+          "finalAnswer": "x1 = y, x2 = y'. Therefore x1' = y' = x2. The state vector is x = [x1, x2]ᵀ.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Matrices A and B",
+          "question": "Find the state dynamics x' = Ax + Bu.",
+          "solution": "Rearrange: y'' = −2y − 3y' + u. Thus x2' = −2x1 − 3x2 + u; A = [[0,1], [−2,−3]] and B = [[0],[1]].",
+          "reason": "x1, x2 coefficient ကို A ထဲ ထည့်ပြီး input u coefficient ကို B ထဲ ထည့်ပါ။",
+          "equations": [
+            "Rearrange y¨ = −2y −3y˙ + u",
+            "ẋ2 = −2x1 −3x2 + u",
+            "ẋ = [[0,1],[−2,−3]]x + [0,1]ᵀu."
+          ],
+          "display": [
+            {
+              "latex": "Rearrange y¨ = −2y −3y˙ + u",
+              "html": "<div class=\"verified-equation\" role=\"math\">Rearrange y¨ = −2y −3y˙ + u</div>"
+            },
+            {
+              "latex": "ẋ2 = −2x1 −3x2 + u",
+              "html": "<div class=\"verified-equation\" role=\"math\">ẋ2 = −2x1 −3x2 + u</div>"
+            },
+            {
+              "latex": "ẋ = [[0,1],[−2,−3]]x + [0,1]ᵀu.",
+              "html": "<div class=\"verified-equation\" role=\"math\">ẋ = [[0,1],[−2,−3]]x + [0,1]ᵀu.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Matrices A and B\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Original ODE: y¨ + 3 y˙ + 2y = u"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Rearrange y¨ = −2y −3y˙ + u"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "ẋ2 = −2x1 −3x2 + u"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "ẋ = [[0,1],[−2,−3]]x + [0,1]ᵀu."
+            }
+          ],
+          "finalAnswer": "Rearrange: y'' = −2y − 3y' + u. Thus x2' = −2x1 − 3x2 + u; A = [[0,1], [−2,−3]] and B = [[0],[1]].",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Matrices C and D",
+          "question": "Find the output y = Cx + Du and transfer function.",
+          "solution": "Because y = x1, C = [1,0], D = 0. With zero initial conditions, G(s) = Y(s)/U(s) = 1/(s² + 3s + 2).",
+          "reason": "Output မှာ x1 တစ်ခုတည်းပါလို့ C=[1,0]၊ input တိုက်ရိုက်မပါလို့ D=0 ပါ။",
+          "equations": [
+            "C = [1,0], D = 0; (s² +3s+2)Y(s) = U(s)",
+            "G(s) = Y(s)/U(s) = 1/(s²+3s+2)",
+            "Poles −1 and −2 confirm the denominator factorization."
+          ],
+          "display": [
+            {
+              "latex": "C = [1,0], D = 0; (s² +3s+2)Y(s) = U(s)",
+              "html": "<div class=\"verified-equation\" role=\"math\">C = [1,0], D = 0; (s² +3s+2)Y(s) = U(s)</div>"
+            },
+            {
+              "latex": "G(s) = Y(s)/U(s) = 1/(s²+3s+2)",
+              "html": "<div class=\"verified-equation\" role=\"math\">G(s) = Y(s)/U(s) = 1/(s²+3s+2)</div>"
+            },
+            {
+              "latex": "Poles −1 and −2 confirm the denominator factorization.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Poles −1 and −2 confirm the denominator factorization.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Matrices C and D\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Measured output y = x1; zero initial conditions for transfer"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "C = [1,0], D = 0; (s² +3s+2)Y(s) = U(s)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "G(s) = Y(s)/U(s) = 1/(s²+3s+2)"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Poles −1 and −2 confirm the denominator factorization."
+            }
+          ],
+          "finalAnswer": "Because y = x1, C = [1,0], D = 0. With zero initial conditions, G(s) = Y(s)/U(s) = 1/(s² + 3s + 2).",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-c2",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Compute AB",
+          "question": "Multiply A by B.",
+          "solution": "AB = [[0,1], [−2,−3]] × [[0],[1]] = [[1],[−3]].",
+          "reason": "AB ကို column-by-column တွက်ပြီး controllability matrix အတွက် ဒုတိယ column ရယူတာပါ။",
+          "equations": [
+            "AB = A × B",
+            "AB = [0×0+1×1, −2×0−3×1]ᵀ = [1,−3]ᵀ",
+            "Result is a 2×1 column, needed for a 2-state controllability test."
+          ],
+          "display": [
+            {
+              "latex": "AB = A × B",
+              "html": "<div class=\"verified-equation\" role=\"math\">AB = A × B</div>"
+            },
+            {
+              "latex": "AB = [0×0+1×1, −2×0−3×1]ᵀ = [1,−3]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">AB = [0×0+1×1, −2×0−3×1]ᵀ = [1,−3]ᵀ</div>"
+            },
+            {
+              "latex": "Result is a 2×1 column, needed for a 2-state controllability test.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Result is a 2×1 column, needed for a 2-state controllability test.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Compute AB\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "A = [[0,1],[−2,−3]], B = [0,1]ᵀ"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "AB = A × B"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "AB = [0×0+1×1, −2×0−3×1]ᵀ = [1,−3]ᵀ"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Result is a 2×1 column, needed for a 2-state controllability test."
+            }
+          ],
+          "finalAnswer": "AB = [[0,1], [−2,−3]] × [[0],[1]] = [[1],[−3]].",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Form the matrix",
+          "question": "Build the controllability matrix.",
+          "solution": "Cmat = [B AB] = [[0,1], [1,−3]]. There are two rows because the system has two states.",
+          "reason": "State 2 ခုရှိလို့ controllability matrix မှာ independent row 2 ခု လိုပါတယ်။",
+          "equations": [
+            "Cc = [ [0,1]ᵀ, [1,−3]ᵀ ]",
+            "Cc = [[0,1],[1,−3]]",
+            "Cc has dimensions 2×2."
+          ],
+          "display": [
+            {
+              "latex": "Cc = [ [0,1]ᵀ, [1,−3]ᵀ ]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Cc = [ [0,1]ᵀ, [1,−3]ᵀ ]</div>"
+            },
+            {
+              "latex": "Cc = [[0,1],[1,−3]]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Cc = [[0,1],[1,−3]]</div>"
+            },
+            {
+              "latex": "Cc has dimensions 2×2.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Cc has dimensions 2×2.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Form the matrix\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "System order n = 2; controllability matrix Cc = [B, AB]"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Cc = [ [0,1]ᵀ, [1,−3]ᵀ ]"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Cc = [[0,1],[1,−3]]"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Cc has dimensions 2×2."
+            }
+          ],
+          "finalAnswer": "Cmat = [B AB] = [[0,1], [1,−3]]. There are two rows because the system has two states.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Check rank",
+          "question": "Compute the determinant and conclusion.",
+          "solution": "det(Cmat) = 0×(−3) − 1×1 = −1 ≠ 0. Hence rank(Cmat) = 2 = n: the pair (A,B) is controllable.",
+          "reason": "Determinant သုညမဟုတ်ရင် rank ပြည့်လို့ input နဲ့ state အားလုံးကို ထိန်းနိုင်ပါတယ်။",
+          "equations": [
+            "det(Cc) = ad−bc",
+            "det(Cc) = 0(−3) − 1(1) = −1 ≠ 0",
+            "rank(Cc) = 2 = n; the pair (A,B) is controllable."
+          ],
+          "display": [
+            {
+              "latex": "det(Cc) = ad−bc",
+              "html": "<div class=\"verified-equation\" role=\"math\">det(Cc) = ad−bc</div>"
+            },
+            {
+              "latex": "det(Cc) = 0(−3) − 1(1) = −1 ≠ 0",
+              "html": "<div class=\"verified-equation\" role=\"math\">det(Cc) = 0(−3) − 1(1) = −1 ≠ 0</div>"
+            },
+            {
+              "latex": "rank(Cc) = 2 = n; the pair (A,B) is controllable.",
+              "html": "<div class=\"verified-equation\" role=\"math\">rank(Cc) = 2 = n; the pair (A,B) is controllable.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Check rank\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Cc = [[0,1],[1,−3]]"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "det(Cc) = ad−bc"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "det(Cc) = 0(−3) − 1(1) = −1 ≠ 0"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "rank(Cc) = 2 = n; the pair (A,B) is controllable."
+            }
+          ],
+          "finalAnswer": "det(Cmat) = 0×(−3) − 1×1 = −1 ≠ 0. Hence rank(Cmat) = 2 = n: the pair (A,B) is controllable.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-c3",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Eigenvalues",
+          "question": "Determine the eigenvalues of A.",
+          "solution": "A is upper triangular; its eigenvalues are the diagonal entries: λ1 = −1 and λ2 = −3.",
+          "reason": "Triangular matrix ရဲ့ eigenvalue တွေက diagonal ပေါ်က number တွေဖြစ်ပါတယ်။",
+          "equations": [
+            "det(λI−A) = (λ+1)(λ+3)",
+            "Set det = 0: λ1 = −1 and λ2 = −3",
+            "For triangular matrices, off-diagonal entries do not change eigenvalues."
+          ],
+          "display": [
+            {
+              "latex": "det(λI−A) = (λ+1)(λ+3)",
+              "html": "<div class=\"verified-equation\" role=\"math\">det(λI−A) = (λ+1)(λ+3)</div>"
+            },
+            {
+              "latex": "Set det = 0: λ1 = −1 and λ2 = −3",
+              "html": "<div class=\"verified-equation\" role=\"math\">Set det = 0: λ1 = −1 and λ2 = −3</div>"
+            },
+            {
+              "latex": "For triangular matrices, off-diagonal entries do not change eigenvalues.",
+              "html": "<div class=\"verified-equation\" role=\"math\">For triangular matrices, off-diagonal entries do not change eigenvalues.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Eigenvalues\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "A is triangular with diagonal entries −1 and −3"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "det(λI−A) = (λ+1)(λ+3)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Set det = 0: λ1 = −1 and λ2 = −3"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "For triangular matrices, off-diagonal entries do not change eigenvalues."
+            }
+          ],
+          "finalAnswer": "A is upper triangular; its eigenvalues are the diagonal entries: λ1 = −1 and λ2 = −3.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Stability",
+          "question": "Classify the origin's stability.",
+          "solution": "Both eigenvalues have strictly negative real part. The equilibrium x = 0 is exponentially asymptotically stable.",
+          "reason": "Eigenvalue real part အားလုံး negative ဖြစ်ရင် disturbance လေးတွေ အချိန်ကြာလာတာနဲ့ ပျောက်သွားပါတယ်။",
+          "equations": [
+            "Asymptotic/exponential stability criterion: Re(λi) < 0 for all i",
+            "Re(−1) < 0 and Re(−3) < 0",
+            "Therefore the origin is exponentially stable."
+          ],
+          "display": [
+            {
+              "latex": "Asymptotic/exponential stability criterion: Re(λi) < 0 for all i",
+              "html": "<div class=\"verified-equation\" role=\"math\">Asymptotic/exponential stability criterion: Re(λi) &lt; 0 for all i</div>"
+            },
+            {
+              "latex": "Re(−1) < 0 and Re(−3) < 0",
+              "html": "<div class=\"verified-equation\" role=\"math\">Re(−1) &lt; 0 and Re(−3) &lt; 0</div>"
+            },
+            {
+              "latex": "Therefore the origin is exponentially stable.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Therefore the origin is exponentially stable.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Stability\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Continuous-time LTI origin: ẋ = Ax; eigenvalues −1 and −3"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Asymptotic/exponential stability criterion: Re(λi) < 0 for all i"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Re(−1) < 0 and Re(−3) < 0"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Therefore the origin is exponentially stable."
+            }
+          ],
+          "finalAnswer": "Both eigenvalues have strictly negative real part. The equilibrium x = 0 is exponentially asymptotically stable.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Physical meaning",
+          "question": "Explain what time evolution does.",
+          "solution": "The natural modes contain e^(−t) and e^(−3t). Both decay to zero, although the second mode decays faster.",
+          "reason": "Exponent −3 နဲ့ mode က −1 ထက် မြန်မြန်လျော့ပါတယ်။",
+          "equations": [
+            "Eigenmodes depend on exp(λi t)",
+            "exp(−t) and exp(−3t) both → 0 as t → ∞",
+            "The −3 mode decays faster; exact eigenvectors depend on the full A matrix."
+          ],
+          "display": [
+            {
+              "latex": "Eigenmodes depend on exp(λi t)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Eigenmodes depend on exp(λi t)</div>"
+            },
+            {
+              "latex": "exp(−t) and exp(−3t) both → 0 as t → ∞",
+              "html": "<div class=\"verified-equation\" role=\"math\">exp(−t) and exp(−3t) both → 0 as t → ∞</div>"
+            },
+            {
+              "latex": "The −3 mode decays faster; exact eigenvectors depend on the full A matrix.",
+              "html": "<div class=\"verified-equation\" role=\"math\">The −3 mode decays faster; exact eigenvectors depend on the full A matrix.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Physical meaning\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Natural state response x(t) = exp(At)x(0)"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Eigenmodes depend on exp(λi t)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "exp(−t) and exp(−3t) both → 0 as t → ∞"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "The −3 mode decays faster; exact eigenvectors depend on the full A matrix."
+            }
+          ],
+          "finalAnswer": "The natural modes contain e^(−t) and e^(−3t). Both decay to zero, although the second mode decays faster.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-c4",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Closed-loop model",
+          "question": "Write Acl = A − BK.",
+          "solution": "BK = [[0,0],[k1,k2]]. Therefore Acl = [[0,1],[−2−k1,−3−k2]].",
+          "reason": "u=−Kx ဆိုတော့ closed-loop A matrix က A−BK ဖြစ်သွားပါတယ်။",
+          "equations": [
+            "Acl = A − BK; BK = [[0,0],[k1,k2]]",
+            "Acl = [[0,1],[−2−k1,−3−k2]]",
+            "Check: u enters only the second state equation."
+          ],
+          "display": [
+            {
+              "latex": "Acl = A − BK; BK = [[0,0],[k1,k2]]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Acl = A − BK; BK = [[0,0],[k1,k2]]</div>"
+            },
+            {
+              "latex": "Acl = [[0,1],[−2−k1,−3−k2]]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Acl = [[0,1],[−2−k1,−3−k2]]</div>"
+            },
+            {
+              "latex": "Check: u enters only the second state equation.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: u enters only the second state equation.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Closed-loop model\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "A = [[0,1],[−2,−3]], B = [0,1]ᵀ, u = −Kx, K=[k1,k2]"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Acl = A − BK; BK = [[0,0],[k1,k2]]"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Acl = [[0,1],[−2−k1,−3−k2]]"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: u enters only the second state equation."
+            }
+          ],
+          "finalAnswer": "BK = [[0,0],[k1,k2]]. Therefore Acl = [[0,1],[−2−k1,−3−k2]].",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Target polynomial",
+          "question": "Expand the desired characteristic polynomial.",
+          "solution": "(s + 4)(s + 5) = s² + 9s + 20.",
+          "reason": "Desired pole တွေကို factor အဖြစ် ရေးပြီး polynomial coefficient တွေ နှိုင်းရပါတယ်။",
+          "equations": [
+            "Desired polynomial ptarget(s) = (s−p1)(s−p2)",
+            "ptarget(s) = (s+4)(s+5) = s²+9s+20",
+            "Coefficients: target s coefficient = 9; constant = 20."
+          ],
+          "display": [
+            {
+              "latex": "Desired polynomial ptarget(s) = (s−p1)(s−p2)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Desired polynomial ptarget(s) = (s−p1)(s−p2)</div>"
+            },
+            {
+              "latex": "ptarget(s) = (s+4)(s+5) = s²+9s+20",
+              "html": "<div class=\"verified-equation\" role=\"math\">ptarget(s) = (s+4)(s+5) = s²+9s+20</div>"
+            },
+            {
+              "latex": "Coefficients: target s coefficient = 9; constant = 20.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Coefficients: target s coefficient = 9; constant = 20.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Target polynomial\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Requested closed-loop poles p1=−4, p2=−5"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Desired polynomial ptarget(s) = (s−p1)(s−p2)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "ptarget(s) = (s+4)(s+5) = s²+9s+20"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Coefficients: target s coefficient = 9; constant = 20."
+            }
+          ],
+          "finalAnswer": "(s + 4)(s + 5) = s² + 9s + 20.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Solve gains",
+          "question": "Find k1 and k2.",
+          "solution": "Closed-loop polynomial is s² + (3+k2)s + (2+k1). Match coefficients: 3+k2 = 9 ⇒ k2 = 6; 2+k1 = 20 ⇒ k1 = 18.",
+          "reason": "Target polynomial coefficient နဲ့ closed-loop coefficient ကို တစ်ခုချင်းညှိတာပါ။",
+          "equations": [
+            "det(sI−Acl) = s²+(3+k2)s+(2+k1)",
+            "3+k2=9 ⇒ k2=6; 2+k1=20 ⇒ k1=18",
+            "Verification: det(sI−Acl) = s²+9s+20; eig(Acl) = {−4,−5}."
+          ],
+          "display": [
+            {
+              "latex": "det(sI−Acl) = s²+(3+k2)s+(2+k1)",
+              "html": "<div class=\"verified-equation\" role=\"math\">det(sI−Acl) = s²+(3+k2)s+(2+k1)</div>"
+            },
+            {
+              "latex": "3+k2=9 ⇒ k2=6; 2+k1=20 ⇒ k1=18",
+              "html": "<div class=\"verified-equation\" role=\"math\">3+k2=9 ⇒ k2=6; 2+k1=20 ⇒ k1=18</div>"
+            },
+            {
+              "latex": "Verification: det(sI−Acl) = s²+9s+20; eig(Acl) = {−4,−5}.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Verification: det(sI−Acl) = s²+9s+20; eig(Acl) = {−4,−5}.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Solve gains\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Acl = [[0,1],[−2−k1,−3−k2]]"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "det(sI−Acl) = s²+(3+k2)s+(2+k1)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "3+k2=9 ⇒ k2=6; 2+k1=20 ⇒ k1=18"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Verification: det(sI−Acl) = s²+9s+20; eig(Acl) = {−4,−5}."
+            }
+          ],
+          "finalAnswer": "Closed-loop polynomial is s² + (3+k2)s + (2+k1). Match coefficients: 3+k2 = 9 ⇒ k2 = 6; 2+k1 = 20 ⇒ k1 = 18.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-m1",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Phase velocity",
+          "question": "Compute the signal propagation velocity.",
+          "solution": "v = c/√εr = (3.0×10⁸ m/s)/2 = 1.5×10⁸ m/s.",
+          "reason": "Material dielectric constant ပိုကြီးရင် wave speed လျော့ပါတယ်။",
+          "equations": [
+            "Phase speed v = c/√(εr μr)",
+            "v = 3.0×10⁸/√4 = 1.50×10⁸ m/s",
+            "Check: a dielectric reduces the phase velocity relative to vacuum."
+          ],
+          "display": [
+            {
+              "latex": "Phase speed v = c/√(εr μr)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Phase speed v = c/√(εr μr)</div>"
+            },
+            {
+              "latex": "v = 3.0×10⁸/√4 = 1.50×10⁸ m/s",
+              "html": "<div class=\"verified-equation\" role=\"math\">v = 3.0×10⁸/√4 = 1.50×10⁸ m/s</div>"
+            },
+            {
+              "latex": "Check: a dielectric reduces the phase velocity relative to vacuum.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: a dielectric reduces the phase velocity relative to vacuum.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Phase velocity\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Dielectric εr = 4, μr≈1, c = 3.0×10⁸ m/s"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Phase speed v = c/√(εr μr)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "v = 3.0×10⁸/√4 = 1.50×10⁸ m/s"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: a dielectric reduces the phase velocity relative to vacuum."
+            }
+          ],
+          "finalAnswer": "v = c/√εr = (3.0×10⁸ m/s)/2 = 1.5×10⁸ m/s.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Guided wavelength",
+          "question": "Calculate the wavelength in this medium.",
+          "solution": "λ = v/f = (1.5×10⁸)/(2.4×10⁹) = 0.0625 m = 62.5 mm.",
+          "reason": "Vacuum wavelength မဟုတ်ဘဲ line ထဲက velocity ကို သုံးရပါတယ်။",
+          "equations": [
+            "Wavelength λ = v/f",
+            "λ = (1.50×10⁸)/(2.4×10⁹) = 0.0625 m = 62.5 mm",
+            "Check: f λ = 2.4×10⁹ × 0.0625 = 1.50×10⁸ m/s."
+          ],
+          "display": [
+            {
+              "latex": "Wavelength λ = v/f",
+              "html": "<div class=\"verified-equation\" role=\"math\">Wavelength λ = v/f</div>"
+            },
+            {
+              "latex": "λ = (1.50×10⁸)/(2.4×10⁹) = 0.0625 m = 62.5 mm",
+              "html": "<div class=\"verified-equation\" role=\"math\">λ = (1.50×10⁸)/(2.4×10⁹) = 0.0625 m = 62.5 mm</div>"
+            },
+            {
+              "latex": "Check: f λ = 2.4×10⁹ × 0.0625 = 1.50×10⁸ m/s.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: f λ = 2.4×10⁹ × 0.0625 = 1.50×10⁸ m/s.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Guided wavelength\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Frequency f = 2.4 GHz, v = 1.50×10⁸ m/s"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Wavelength λ = v/f"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "λ = (1.50×10⁸)/(2.4×10⁹) = 0.0625 m = 62.5 mm"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: f λ = 2.4×10⁹ × 0.0625 = 1.50×10⁸ m/s."
+            }
+          ],
+          "finalAnswer": "λ = v/f = (1.5×10⁸)/(2.4×10⁹) = 0.0625 m = 62.5 mm.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Quarter wavelength",
+          "question": "Find the quarter-wave section length.",
+          "solution": "l = λ/4 = 62.5 mm / 4 = 15.625 mm.",
+          "reason": "Quarter-wave transformer အတွက် phase change 90° ဖြစ်စေတဲ့ physical length ပါ။",
+          "equations": [
+            "For a 90° (quarter-wave) section, length ℓ = λ/4",
+            "ℓ = 62.5/4 = 15.625 mm",
+            "Check: βℓ = (2π/λ)(λ/4) = π/2."
+          ],
+          "display": [
+            {
+              "latex": "For a 90° (quarter-wave) section, length ℓ = λ/4",
+              "html": "<div class=\"verified-equation\" role=\"math\">For a 90° (quarter-wave) section, length ℓ = λ/4</div>"
+            },
+            {
+              "latex": "ℓ = 62.5/4 = 15.625 mm",
+              "html": "<div class=\"verified-equation\" role=\"math\">ℓ = 62.5/4 = 15.625 mm</div>"
+            },
+            {
+              "latex": "Check: βℓ = (2π/λ)(λ/4) = π/2.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: βℓ = (2π/λ)(λ/4) = π/2.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Quarter wavelength\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Guided wavelength λ = 62.5 mm"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "For a 90° (quarter-wave) section, length ℓ = λ/4"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "ℓ = 62.5/4 = 15.625 mm"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: βℓ = (2π/λ)(λ/4) = π/2."
+            }
+          ],
+          "finalAnswer": "l = λ/4 = 62.5 mm / 4 = 15.625 mm.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-m2",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Reflection coefficient",
+          "question": "Compute the voltage reflection coefficient.",
+          "solution": "Γ = (ZL − Z0)/(ZL + Z0) = (75−50)/(75+50) = 0.20.",
+          "reason": "Load impedance နဲ့ line impedance မတူလို့ wave တစ်ချို့ ပြန်လှန်ပါတယ်။",
+          "equations": [
+            "ΓL = (ZL−Z0)/(ZL+Z0)",
+            "ΓL = (75−50)/(75+50) = 25/125 = +0.20",
+            "Positive real Γ means reflected voltage has zero phase shift at the load."
+          ],
+          "display": [
+            {
+              "latex": "ΓL = (ZL−Z0)/(ZL+Z0)",
+              "html": "<div class=\"verified-equation\" role=\"math\">ΓL = (ZL−Z0)/(ZL+Z0)</div>"
+            },
+            {
+              "latex": "ΓL = (75−50)/(75+50) = 25/125 = +0.20",
+              "html": "<div class=\"verified-equation\" role=\"math\">ΓL = (75−50)/(75+50) = 25/125 = +0.20</div>"
+            },
+            {
+              "latex": "Positive real Γ means reflected voltage has zero phase shift at the load.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Positive real Γ means reflected voltage has zero phase shift at the load.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Reflection coefficient\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Lossless line Z0=50 Ω, resistive load ZL=75 Ω"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "ΓL = (ZL−Z0)/(ZL+Z0)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "ΓL = (75−50)/(75+50) = 25/125 = +0.20"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Positive real Γ means reflected voltage has zero phase shift at the load."
+            }
+          ],
+          "finalAnswer": "Γ = (ZL − Z0)/(ZL + Z0) = (75−50)/(75+50) = 0.20.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Return loss",
+          "question": "Calculate the return loss in dB.",
+          "solution": "RL = −20 log10(|Γ|) = −20 log10(0.20) ≈ 13.98 dB.",
+          "reason": "Reflection အနည်းဆုံးဆို return loss value မြင့်ပါတယ်။",
+          "equations": [
+            "Return loss RL = −20 log10|ΓL|",
+            "RL = −20 log10(0.2) = 13.9794 dB",
+            "Reflection power fraction = |Γ|² = 0.04 = 4%."
+          ],
+          "display": [
+            {
+              "latex": "Return loss RL = −20 log10|ΓL|",
+              "html": "<div class=\"verified-equation\" role=\"math\">Return loss RL = −20 log10|ΓL|</div>"
+            },
+            {
+              "latex": "RL = −20 log10(0.2) = 13.9794 dB",
+              "html": "<div class=\"verified-equation\" role=\"math\">RL = −20 log10(0.2) = 13.9794 dB</div>"
+            },
+            {
+              "latex": "Reflection power fraction = |Γ|² = 0.04 = 4%.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Reflection power fraction = |Γ|² = 0.04 = 4%.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Return loss\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "|ΓL| = 0.20"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Return loss RL = −20 log10|ΓL|"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "RL = −20 log10(0.2) = 13.9794 dB"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Reflection power fraction = |Γ|² = 0.04 = 4%."
+            }
+          ],
+          "finalAnswer": "RL = −20 log10(|Γ|) = −20 log10(0.20) ≈ 13.98 dB.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "VSWR",
+          "question": "Calculate voltage standing-wave ratio.",
+          "solution": "VSWR = (1+|Γ|)/(1−|Γ|) = 1.20/0.80 = 1.5.",
+          "reason": "Perfect match မှာ Γ=0 ဖြစ်လို့ VSWR=1 ပါ။",
+          "equations": [
+            "VSWR = (1+|Γ|)/(1−|Γ|)",
+            "VSWR = 1.20/0.80 = 1.5",
+            "Check: VSWR ≥ 1, equality only for Γ = 0."
+          ],
+          "display": [
+            {
+              "latex": "VSWR = (1+|Γ|)/(1−|Γ|)",
+              "html": "<div class=\"verified-equation\" role=\"math\">VSWR = (1+|Γ|)/(1−|Γ|)</div>"
+            },
+            {
+              "latex": "VSWR = 1.20/0.80 = 1.5",
+              "html": "<div class=\"verified-equation\" role=\"math\">VSWR = 1.20/0.80 = 1.5</div>"
+            },
+            {
+              "latex": "Check: VSWR ≥ 1, equality only for Γ = 0.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: VSWR ≥ 1, equality only for Γ = 0.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"VSWR\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "|ΓL| = 0.20, passive termination"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "VSWR = (1+|Γ|)/(1−|Γ|)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "VSWR = 1.20/0.80 = 1.5"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: VSWR ≥ 1, equality only for Γ = 0."
+            }
+          ],
+          "finalAnswer": "VSWR = (1+|Γ|)/(1−|Γ|) = 1.20/0.80 = 1.5.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-m3",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Input dBm",
+          "question": "Convert 10 mW into dBm.",
+          "solution": "Pin(dBm) = 10 log10(Pin/1 mW) = 10 log10(10) = 10 dBm.",
+          "reason": "dBm က 1 mW ကို reference ထားတဲ့ power unit ပါ။",
+          "equations": [
+            "Pin,dBm = 10 log10(Pin/1mW)",
+            "Pin,dBm = 10 log10(10) = 10 dBm",
+            "Check: 10 dBm corresponds exactly to 10 mW."
+          ],
+          "display": [
+            {
+              "latex": "Pin,dBm = 10 log10(Pin/1mW)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Pin,dBm = 10 log10(Pin/1mW)</div>"
+            },
+            {
+              "latex": "Pin,dBm = 10 log10(10) = 10 dBm",
+              "html": "<div class=\"verified-equation\" role=\"math\">Pin,dBm = 10 log10(10) = 10 dBm</div>"
+            },
+            {
+              "latex": "Check: 10 dBm corresponds exactly to 10 mW.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: 10 dBm corresponds exactly to 10 mW.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Input dBm\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Input power Pin = 10 mW; reference power = 1 mW"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Pin,dBm = 10 log10(Pin/1mW)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Pin,dBm = 10 log10(10) = 10 dBm"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Check: 10 dBm corresponds exactly to 10 mW."
+            }
+          ],
+          "finalAnswer": "Pin(dBm) = 10 log10(Pin/1 mW) = 10 log10(10) = 10 dBm.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Output dBm",
+          "question": "Find output power in dBm.",
+          "solution": "Pout(dBm) = Pin(dBm) − insertion loss = 10 − 3 = 7 dBm.",
+          "reason": "Loss dB ကို power level dBm ထဲက တိုက်ရိုက်နုတ်လို့ရပါတယ်။",
+          "equations": [
+            "Pout,dBm = Pin,dBm − LdB",
+            "Pout,dBm = 10−3 = 7 dBm",
+            "Absolute power levels dBm, gain/loss differences dB."
+          ],
+          "display": [
+            {
+              "latex": "Pout,dBm = Pin,dBm − LdB",
+              "html": "<div class=\"verified-equation\" role=\"math\">Pout,dBm = Pin,dBm − LdB</div>"
+            },
+            {
+              "latex": "Pout,dBm = 10−3 = 7 dBm",
+              "html": "<div class=\"verified-equation\" role=\"math\">Pout,dBm = 10−3 = 7 dBm</div>"
+            },
+            {
+              "latex": "Absolute power levels dBm, gain/loss differences dB.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Absolute power levels dBm, gain/loss differences dB.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Output dBm\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Input = 10 dBm, insertion loss = 3 dB"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Pout,dBm = Pin,dBm − LdB"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Pout,dBm = 10−3 = 7 dBm"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Absolute power levels dBm, gain/loss differences dB."
+            }
+          ],
+          "finalAnswer": "Pout(dBm) = Pin(dBm) − insertion loss = 10 − 3 = 7 dBm.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Output mW",
+          "question": "Convert 7 dBm to milliwatts.",
+          "solution": "Pout = 10^(7/10) mW ≈ 5.012 mW; equivalently 10 mW × 10^(−3/10).",
+          "reason": "3 dB loss ဆို input power အနည်းဆုံးတစ်ဝက်နီးပါးကျပါတယ်။",
+          "equations": [
+            "Pout,mW = 10^(Pout,dBm/10)",
+            "Pout = 10^0.7 = 5.011872336 mW",
+            "Alternative: 10 mW × 10^(−3/10)=5.011872336 mW."
+          ],
+          "display": [
+            {
+              "latex": "Pout,mW = 10^(Pout,dBm/10)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Pout,mW = 10^(Pout,dBm/10)</div>"
+            },
+            {
+              "latex": "Pout = 10^0.7 = 5.011872336 mW",
+              "html": "<div class=\"verified-equation\" role=\"math\">Pout = 10^0.7 = 5.011872336 mW</div>"
+            },
+            {
+              "latex": "Alternative: 10 mW × 10^(−3/10)=5.011872336 mW.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Alternative: 10 mW × 10^(−3/10)=5.011872336 mW.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Output mW\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Output level Pout,dBm = 7 dBm"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Pout,mW = 10^(Pout,dBm/10)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Pout = 10^0.7 = 5.011872336 mW"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Alternative: 10 mW × 10^(−3/10)=5.011872336 mW."
+            }
+          ],
+          "finalAnswer": "Pout = 10^(7/10) mW ≈ 5.012 mW; equivalently 10 mW × 10^(−3/10).",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-m4",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Cutoff frequency",
+          "question": "Find cutoff frequency of the TE10 mode.",
+          "solution": "fc,10 = c/(2a) = (3.0×10⁸)/(2×0.02286) ≈ 6.56 GHz.",
+          "reason": "TE10 mode အတွက် broad side dimension a တစ်ခုတည်းနဲ့ cutoff ကို တွက်ပါတယ်။",
+          "equations": [
+            "TE10 cutoff fc10 = c/(2a)",
+            "fc10 = 3×10⁸/(2×0.02286)=6.56168 GHz",
+            "Cutoff depends on broad-wall dimension a, assuming vacuum/air filling."
+          ],
+          "display": [
+            {
+              "latex": "TE10 cutoff fc10 = c/(2a)",
+              "html": "<div class=\"verified-equation\" role=\"math\">TE10 cutoff fc10 = c/(2a)</div>"
+            },
+            {
+              "latex": "fc10 = 3×10⁸/(2×0.02286)=6.56168 GHz",
+              "html": "<div class=\"verified-equation\" role=\"math\">fc10 = 3×10⁸/(2×0.02286)=6.56168 GHz</div>"
+            },
+            {
+              "latex": "Cutoff depends on broad-wall dimension a, assuming vacuum/air filling.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Cutoff depends on broad-wall dimension a, assuming vacuum/air filling.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Cutoff frequency\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Air-filled rectangular waveguide, broad dimension a=22.86 mm"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "TE10 cutoff fc10 = c/(2a)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "fc10 = 3×10⁸/(2×0.02286)=6.56168 GHz"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Cutoff depends on broad-wall dimension a, assuming vacuum/air filling."
+            }
+          ],
+          "finalAnswer": "fc,10 = c/(2a) = (3.0×10⁸)/(2×0.02286) ≈ 6.56 GHz.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Propagation check",
+          "question": "Does TE10 propagate at 10 GHz?",
+          "solution": "Since f = 10 GHz > fc ≈ 6.56 GHz, TE10 can propagate. Other higher-order modes need separate checks.",
+          "reason": "Operating frequency က cutoff ထက်ကြီးမှ mode က propagating ဖြစ်ပါတယ်။",
+          "equations": [
+            "TE10 propagates when f > fc10",
+            "10 GHz > 6.56168 GHz: TE10 propagates",
+            "This does not prove single-mode operation without the other dimensions and cutoffs."
+          ],
+          "display": [
+            {
+              "latex": "TE10 propagates when f > fc10",
+              "html": "<div class=\"verified-equation\" role=\"math\">TE10 propagates when f &gt; fc10</div>"
+            },
+            {
+              "latex": "10 GHz > 6.56168 GHz: TE10 propagates",
+              "html": "<div class=\"verified-equation\" role=\"math\">10 GHz &gt; 6.56168 GHz: TE10 propagates</div>"
+            },
+            {
+              "latex": "This does not prove single-mode operation without the other dimensions and cutoffs.",
+              "html": "<div class=\"verified-equation\" role=\"math\">This does not prove single-mode operation without the other dimensions and cutoffs.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Propagation check\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Operating frequency f=10 GHz and fc10=6.56168 GHz"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "TE10 propagates when f > fc10"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "10 GHz > 6.56168 GHz: TE10 propagates"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "This does not prove single-mode operation without the other dimensions and cutoffs."
+            }
+          ],
+          "finalAnswer": "Since f = 10 GHz > fc ≈ 6.56 GHz, TE10 can propagate. Other higher-order modes need separate checks.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Guide wavelength",
+          "question": "Estimate guide wavelength for TE10.",
+          "solution": "λ0 = c/f = 30 mm. λg = λ0/√(1−(fc/f)²) = 30/√(1−0.656²) ≈ 39.7 mm.",
+          "reason": "Guide wavelength ဟာ free-space wavelength ထက် ပိုရှည်ပါတယ်။",
+          "equations": [
+            "Guide wavelength λg=λ0/√[1−(fc/f)²]",
+            "λg=30/√[1−(6.56168/10)²] ≈39.73 mm",
+            "As f approaches fc from above, λg grows without bound."
+          ],
+          "display": [
+            {
+              "latex": "Guide wavelength λg=λ0/√[1−(fc/f)²]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Guide wavelength λg=λ0/√[1−(fc/f)²]</div>"
+            },
+            {
+              "latex": "λg=30/√[1−(6.56168/10)²] ≈39.73 mm",
+              "html": "<div class=\"verified-equation\" role=\"math\">λg=30/√[1−(6.56168/10)²] ≈39.73 mm</div>"
+            },
+            {
+              "latex": "As f approaches fc from above, λg grows without bound.",
+              "html": "<div class=\"verified-equation\" role=\"math\">As f approaches fc from above, λg grows without bound.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Guide wavelength\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "At 10 GHz, λ0 = c/f = 30 mm; fc10/f = 0.656168"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Guide wavelength λg=λ0/√[1−(fc/f)²]"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "λg=30/√[1−(6.56168/10)²] ≈39.73 mm"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "As f approaches fc from above, λg grows without bound."
+            }
+          ],
+          "finalAnswer": "λ0 = c/f = 30 mm. λg = λ0/√(1−(fc/f)²) = 30/√(1−0.656²) ≈ 39.7 mm.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-mse1",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Second moment",
+          "question": "Calculate cross-sectional second moment I.",
+          "solution": "I = bt³/12 = (1×10⁻⁴ m)(1×10⁻⁵ m)³ / 12 ≈ 8.33×10⁻²¹ m⁴.",
+          "reason": "Thickness t က power 3 ပါလို့ MEMS beam stiffness အပေါ် အလွန်အရေးကြီးပါတယ်။",
+          "equations": [
+            "Area moment of inertia I = b t³/12",
+            "I = (1×10⁻⁴)(1×10⁻⁵)³/12 = 8.3333×10⁻²¹ m⁴",
+            "Beam bending stiffness scales with t³; keep SI units throughout."
+          ],
+          "display": [
+            {
+              "latex": "Area moment of inertia I = b t³/12",
+              "html": "<div class=\"verified-equation\" role=\"math\">Area moment of inertia I = b t³/12</div>"
+            },
+            {
+              "latex": "I = (1×10⁻⁴)(1×10⁻⁵)³/12 = 8.3333×10⁻²¹ m⁴",
+              "html": "<div class=\"verified-equation\" role=\"math\">I = (1×10⁻⁴)(1×10⁻⁵)³/12 = 8.3333×10⁻²¹ m⁴</div>"
+            },
+            {
+              "latex": "Beam bending stiffness scales with t³; keep SI units throughout.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Beam bending stiffness scales with t³; keep SI units throughout.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Second moment\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Rectangular cantilever width b=100 μm; thickness t=10 μm"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Area moment of inertia I = b t³/12"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "I = (1×10⁻⁴)(1×10⁻⁵)³/12 = 8.3333×10⁻²¹ m⁴"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Beam bending stiffness scales with t³; keep SI units throughout."
+            }
+          ],
+          "finalAnswer": "I = bt³/12 = (1×10⁻⁴ m)(1×10⁻⁵ m)³ / 12 ≈ 8.33×10⁻²¹ m⁴.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "End deflection",
+          "question": "Calculate small-deflection tip displacement.",
+          "solution": "δ = FL³/(3EI) = (1×10⁻⁵×(1×10⁻³)³)/(3×160×10⁹×8.33×10⁻²¹) ≈ 2.50×10⁻⁶ m = 2.50 μm.",
+          "reason": "Cantilever က fixed end တစ်ဖက်၊ free end တစ်ဖက် ဖြစ်တဲ့ beam formula ကို သုံးပါတယ်။",
+          "equations": [
+            "For end load on Euler–Bernoulli cantilever, δ=F L³/(3EI)",
+            "δ=(1×10⁻⁵)(1×10⁻³)³ /[3(160×10⁹)(8.3333×10⁻²¹)]",
+            "δ = 2.5×10⁻⁶ m = 2.50 μm (small-deflection linear beam estimate)."
+          ],
+          "display": [
+            {
+              "latex": "For end load on Euler–Bernoulli cantilever, δ=F L³/(3EI)",
+              "html": "<div class=\"verified-equation\" role=\"math\">For end load on Euler–Bernoulli cantilever, δ=F L³/(3EI)</div>"
+            },
+            {
+              "latex": "δ=(1×10⁻⁵)(1×10⁻³)³ /[3(160×10⁹)(8.3333×10⁻²¹)]",
+              "html": "<div class=\"verified-equation\" role=\"math\">δ=(1×10⁻⁵)(1×10⁻³)³ /[3(160×10⁹)(8.3333×10⁻²¹)]</div>"
+            },
+            {
+              "latex": "δ = 2.5×10⁻⁶ m = 2.50 μm (small-deflection linear beam estimate).",
+              "html": "<div class=\"verified-equation\" role=\"math\">δ = 2.5×10⁻⁶ m = 2.50 μm (small-deflection linear beam estimate).</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"End deflection\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "F=10 μN; L=1 mm; E=160 GPa; I=8.3333×10⁻²¹ m⁴"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "For end load on Euler–Bernoulli cantilever, δ=F L³/(3EI)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "δ=(1×10⁻⁵)(1×10⁻³)³ /[3(160×10⁹)(8.3333×10⁻²¹)]"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "δ = 2.5×10⁻⁶ m = 2.50 μm (small-deflection linear beam estimate)."
+            }
+          ],
+          "finalAnswer": "δ = FL³/(3EI) = (1×10⁻⁵×(1×10⁻³)³)/(3×160×10⁹×8.33×10⁻²¹) ≈ 2.50×10⁻⁶ m = 2.50 μm.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Root stress",
+          "question": "Find maximum bending stress at the fixed end.",
+          "solution": "σmax = 6FL/(bt²) = 6×10⁻⁵×10⁻³/(10⁻⁴×(10⁻⁵)²) = 6×10⁶ Pa = 6 MPa.",
+          "reason": "အမြင့်ဆုံး bending stress က fixed root မှာ ဖြစ်တတ်ပါတယ်။",
+          "equations": [
+            "Max root bending stress σmax = M c/I = 6 F L/(b t²)",
+            "σmax=6(1×10⁻⁵)(1×10⁻³)/[(1×10⁻⁴)(1×10⁻⁵)²]",
+            "σmax = 6.0×10⁶ Pa = 6 MPa."
+          ],
+          "display": [
+            {
+              "latex": "Max root bending stress σmax = M c/I = 6 F L/(b t²)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Max root bending stress σmax = M c/I = 6 F L/(b t²)</div>"
+            },
+            {
+              "latex": "σmax=6(1×10⁻⁵)(1×10⁻³)/[(1×10⁻⁴)(1×10⁻⁵)²]",
+              "html": "<div class=\"verified-equation\" role=\"math\">σmax=6(1×10⁻⁵)(1×10⁻³)/[(1×10⁻⁴)(1×10⁻⁵)²]</div>"
+            },
+            {
+              "latex": "σmax = 6.0×10⁶ Pa = 6 MPa.",
+              "html": "<div class=\"verified-equation\" role=\"math\">σmax = 6.0×10⁶ Pa = 6 MPa.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Root stress\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "F=10 μN; L=1 mm; b=100 μm; t=10 μm"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Max root bending stress σmax = M c/I = 6 F L/(b t²)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "σmax=6(1×10⁻⁵)(1×10⁻³)/[(1×10⁻⁴)(1×10⁻⁵)²]"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "σmax = 6.0×10⁶ Pa = 6 MPa."
+            }
+          ],
+          "finalAnswer": "σmax = 6FL/(bt²) = 6×10⁻⁵×10⁻³/(10⁻⁴×(10⁻⁵)²) = 6×10⁶ Pa = 6 MPa.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-mse2",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Inertial force",
+          "question": "Find the equivalent inertial force.",
+          "solution": "F = ma = (1×10⁻⁹ kg)(9.81 m/s²) = 9.81×10⁻⁹ N = 9.81 nN.",
+          "reason": "Accelerometer ထဲမှာ acceleration ကို proof mass ပေါ်က force အဖြစ် ပြောင်းပါတယ်။",
+          "equations": [
+            "Equivalent inertial force magnitude F = m a",
+            "F=1×10⁻⁹ × 9.81 = 9.81×10⁻⁹ N",
+            "F=9.81 nN. Acceleration direction controls displacement sign."
+          ],
+          "display": [
+            {
+              "latex": "Equivalent inertial force magnitude F = m a",
+              "html": "<div class=\"verified-equation\" role=\"math\">Equivalent inertial force magnitude F = m a</div>"
+            },
+            {
+              "latex": "F=1×10⁻⁹ × 9.81 = 9.81×10⁻⁹ N",
+              "html": "<div class=\"verified-equation\" role=\"math\">F=1×10⁻⁹ × 9.81 = 9.81×10⁻⁹ N</div>"
+            },
+            {
+              "latex": "F=9.81 nN. Acceleration direction controls displacement sign.",
+              "html": "<div class=\"verified-equation\" role=\"math\">F=9.81 nN. Acceleration direction controls displacement sign.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Inertial force\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Proof mass m=1×10⁻⁹ kg; acceleration a=9.81 m/s²"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Equivalent inertial force magnitude F = m a"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "F=1×10⁻⁹ × 9.81 = 9.81×10⁻⁹ N"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "F=9.81 nN. Acceleration direction controls displacement sign."
+            }
+          ],
+          "finalAnswer": "F = ma = (1×10⁻⁹ kg)(9.81 m/s²) = 9.81×10⁻⁹ N = 9.81 nN.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Static displacement",
+          "question": "Calculate the quasi-static displacement.",
+          "solution": "x = F/k = (9.81×10⁻⁹ N)/(0.1 N/m) = 9.81×10⁻⁸ m = 98.1 nm.",
+          "reason": "Spring law F=kx ကို သုံးပြီး motion နည်းတဲ့ low-frequency region ကို ခန့်မှန်းတာပါ။",
+          "equations": [
+            "Quasi-static Hooke law |x|=F/k",
+            "|x|=9.81×10⁻⁹ / 0.1 = 9.81×10⁻⁸ m",
+            "|x|=98.1 nm; valid when excitation frequency is well below resonance."
+          ],
+          "display": [
+            {
+              "latex": "Quasi-static Hooke law |x|=F/k",
+              "html": "<div class=\"verified-equation\" role=\"math\">Quasi-static Hooke law |x|=F/k</div>"
+            },
+            {
+              "latex": "|x|=9.81×10⁻⁹ / 0.1 = 9.81×10⁻⁸ m",
+              "html": "<div class=\"verified-equation\" role=\"math\">|x|=9.81×10⁻⁹ / 0.1 = 9.81×10⁻⁸ m</div>"
+            },
+            {
+              "latex": "|x|=98.1 nm; valid when excitation frequency is well below resonance.",
+              "html": "<div class=\"verified-equation\" role=\"math\">|x|=98.1 nm; valid when excitation frequency is well below resonance.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Static displacement\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Force magnitude F=9.81×10⁻⁹ N; spring k=0.1 N/m"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Quasi-static Hooke law |x|=F/k"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "|x|=9.81×10⁻⁹ / 0.1 = 9.81×10⁻⁸ m"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "|x|=98.1 nm; valid when excitation frequency is well below resonance."
+            }
+          ],
+          "finalAnswer": "x = F/k = (9.81×10⁻⁹ N)/(0.1 N/m) = 9.81×10⁻⁸ m = 98.1 nm.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Natural frequency",
+          "question": "Find natural frequency with no damping.",
+          "solution": "f0 = (1/(2π))√(k/m) = (1/(2π))√(0.1/10⁻⁹) ≈ 1591.5 Hz.",
+          "reason": "Mass နဲ့ stiffness က sensor ရဲ့ resonant frequency ကို သတ်မှတ်ပေးပါတယ်။",
+          "equations": [
+            "ω0=√(k/m), f0=ω0/(2π)",
+            "ω0=√(0.1/10⁻⁹)=10000 rad/s; f0=10000/(2π)",
+            "f0=1591.55 Hz ≈1.592 kHz."
+          ],
+          "display": [
+            {
+              "latex": "ω0=√(k/m), f0=ω0/(2π)",
+              "html": "<div class=\"verified-equation\" role=\"math\">ω0=√(k/m), f0=ω0/(2π)</div>"
+            },
+            {
+              "latex": "ω0=√(0.1/10⁻⁹)=10000 rad/s; f0=10000/(2π)",
+              "html": "<div class=\"verified-equation\" role=\"math\">ω0=√(0.1/10⁻⁹)=10000 rad/s; f0=10000/(2π)</div>"
+            },
+            {
+              "latex": "f0=1591.55 Hz ≈1.592 kHz.",
+              "html": "<div class=\"verified-equation\" role=\"math\">f0=1591.55 Hz ≈1.592 kHz.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Natural frequency\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "m=10⁻⁹ kg, k=0.1 N/m, negligible damping"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "ω0=√(k/m), f0=ω0/(2π)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "ω0=√(0.1/10⁻⁹)=10000 rad/s; f0=10000/(2π)"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "f0=1591.55 Hz ≈1.592 kHz."
+            }
+          ],
+          "finalAnswer": "f0 = (1/(2π))√(k/m) = (1/(2π))√(0.1/10⁻⁹) ≈ 1591.5 Hz.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-mse3",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Initial capacitance",
+          "question": "Calculate plate capacitance.",
+          "solution": "C = ε0 A/d = 8.854×10⁻¹² × (1×10⁻⁶)/(1×10⁻⁵) = 8.854×10⁻¹³ F = 0.8854 pF.",
+          "reason": "Gap d နည်းလေလေ capacitance တိုးလေလေ ဖြစ်ပါတယ်။",
+          "equations": [
+            "C=ε0 A/d for ideal parallel plates",
+            "C=(8.854×10⁻¹²)(1×10⁻⁶)/(10×10⁻⁶)",
+            "C=8.854×10⁻¹³ F = 0.8854 pF; fringe effects neglected."
+          ],
+          "display": [
+            {
+              "latex": "C=ε0 A/d for ideal parallel plates",
+              "html": "<div class=\"verified-equation\" role=\"math\">C=ε0 A/d for ideal parallel plates</div>"
+            },
+            {
+              "latex": "C=(8.854×10⁻¹²)(1×10⁻⁶)/(10×10⁻⁶)",
+              "html": "<div class=\"verified-equation\" role=\"math\">C=(8.854×10⁻¹²)(1×10⁻⁶)/(10×10⁻⁶)</div>"
+            },
+            {
+              "latex": "C=8.854×10⁻¹³ F = 0.8854 pF; fringe effects neglected.",
+              "html": "<div class=\"verified-equation\" role=\"math\">C=8.854×10⁻¹³ F = 0.8854 pF; fringe effects neglected.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Initial capacitance\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Parallel plates, ε0=8.854×10⁻¹² F/m; A=1×10⁻⁶ m²; d=10 μm"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "C=ε0 A/d for ideal parallel plates"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "C=(8.854×10⁻¹²)(1×10⁻⁶)/(10×10⁻⁶)"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "C=8.854×10⁻¹³ F = 0.8854 pF; fringe effects neglected."
+            }
+          ],
+          "finalAnswer": "C = ε0 A/d = 8.854×10⁻¹² × (1×10⁻⁶)/(1×10⁻⁵) = 8.854×10⁻¹³ F = 0.8854 pF.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Reduced gap",
+          "question": "Find C when the gap shrinks to 8 μm.",
+          "solution": "Cnew = ε0 A/(8×10⁻⁶ m) ≈ 1.10675 pF.",
+          "reason": "Distance က denominator ဖြစ်လို့ gap 20% လျော့တာနဲ့ C 25% တိုးပါတယ်။",
+          "equations": [
+            "Cnew=ε0 A/dnew",
+            "Cnew=(8.854×10⁻¹²)(1×10⁻⁶)/(8×10⁻⁶)",
+            "Cnew=1.10675 pF."
+          ],
+          "display": [
+            {
+              "latex": "Cnew=ε0 A/dnew",
+              "html": "<div class=\"verified-equation\" role=\"math\">Cnew=ε0 A/dnew</div>"
+            },
+            {
+              "latex": "Cnew=(8.854×10⁻¹²)(1×10⁻⁶)/(8×10⁻⁶)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Cnew=(8.854×10⁻¹²)(1×10⁻⁶)/(8×10⁻⁶)</div>"
+            },
+            {
+              "latex": "Cnew=1.10675 pF.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Cnew=1.10675 pF.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Reduced gap\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Same A, vacuum gap decreases from 10 μm to 8 μm"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Cnew=ε0 A/dnew"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Cnew=(8.854×10⁻¹²)(1×10⁻⁶)/(8×10⁻⁶)"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Cnew=1.10675 pF."
+            }
+          ],
+          "finalAnswer": "Cnew = ε0 A/(8×10⁻⁶ m) ≈ 1.10675 pF.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Sensor signal",
+          "question": "Find absolute and percentage changes.",
+          "solution": "ΔC = 1.10675 − 0.8854 ≈ 0.22135 pF; percentage change = 0.22135/0.8854 × 100% ≈ 25%.",
+          "reason": "Capacitive sensor က displacement ကို capacitance change အဖြစ် တိုင်းတာပါတယ်။",
+          "equations": [
+            "ΔC=Cnew−Cold; fractional change ΔC/Cold",
+            "ΔC=1.10675−0.8854=0.22135 pF; ΔC/Cold=0.25",
+            "Capacitance rises by 25% when the gap falls from 10 to 8 μm."
+          ],
+          "display": [
+            {
+              "latex": "ΔC=Cnew−Cold; fractional change ΔC/Cold",
+              "html": "<div class=\"verified-equation\" role=\"math\">ΔC=Cnew−Cold; fractional change ΔC/Cold</div>"
+            },
+            {
+              "latex": "ΔC=1.10675−0.8854=0.22135 pF; ΔC/Cold=0.25",
+              "html": "<div class=\"verified-equation\" role=\"math\">ΔC=1.10675−0.8854=0.22135 pF; ΔC/Cold=0.25</div>"
+            },
+            {
+              "latex": "Capacitance rises by 25% when the gap falls from 10 to 8 μm.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Capacitance rises by 25% when the gap falls from 10 to 8 μm.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Sensor signal\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Cold=0.8854 pF, Cnew=1.10675 pF"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "ΔC=Cnew−Cold; fractional change ΔC/Cold"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "ΔC=1.10675−0.8854=0.22135 pF; ΔC/Cold=0.25"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "Capacitance rises by 25% when the gap falls from 10 to 8 μm."
+            }
+          ],
+          "finalAnswer": "ΔC = 1.10675 − 0.8854 ≈ 0.22135 pF; percentage change = 0.22135/0.8854 × 100% ≈ 25%.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "original-mse4",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "Original workspace practice; every displayed line is independently organized from the established study givens. Not an official course exercise or instructor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Free expansion",
+          "question": "Calculate the increase in length if unconstrained.",
+          "solution": "ΔL = αLΔT = 2.6×10⁻⁶ × 1×10⁻³ × 50 = 1.30×10⁻⁷ m = 130 nm.",
+          "reason": "Temperature တက်ရင် silicon beam ရဲ့ length အနည်းငယ် တိုးပါတယ်။",
+          "equations": [
+            "Free thermal expansion ΔL=α L ΔT",
+            "ΔL=(2.6×10⁻⁶)(1×10⁻³)(50)=1.30×10⁻⁷ m",
+            "ΔL=130 nm, assuming constant α and uniform temperature."
+          ],
+          "display": [
+            {
+              "latex": "Free thermal expansion ΔL=α L ΔT",
+              "html": "<div class=\"verified-equation\" role=\"math\">Free thermal expansion ΔL=α L ΔT</div>"
+            },
+            {
+              "latex": "ΔL=(2.6×10⁻⁶)(1×10⁻³)(50)=1.30×10⁻⁷ m",
+              "html": "<div class=\"verified-equation\" role=\"math\">ΔL=(2.6×10⁻⁶)(1×10⁻³)(50)=1.30×10⁻⁷ m</div>"
+            },
+            {
+              "latex": "ΔL=130 nm, assuming constant α and uniform temperature.",
+              "html": "<div class=\"verified-equation\" role=\"math\">ΔL=130 nm, assuming constant α and uniform temperature.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Free expansion\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "α=2.6×10⁻⁶ K⁻¹; beam length L=1 mm; ΔT=50 K"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Free thermal expansion ΔL=α L ΔT"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "ΔL=(2.6×10⁻⁶)(1×10⁻³)(50)=1.30×10⁻⁷ m"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "ΔL=130 nm, assuming constant α and uniform temperature."
+            }
+          ],
+          "finalAnswer": "ΔL = αLΔT = 2.6×10⁻⁶ × 1×10⁻³ × 50 = 1.30×10⁻⁷ m = 130 nm.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "b",
+          "title": "Thermal strain",
+          "question": "Calculate the free thermal strain.",
+          "solution": "εthermal = αΔT = (2.6×10⁻⁶)(50) = 130×10⁻⁶ = 130 microstrain.",
+          "reason": "Thermal strain က length အပေါ် မမူတည်ပါဘူး။",
+          "equations": [
+            "Unrestrained thermal strain εth=αΔT",
+            "εth=(2.6×10⁻⁶)(50)=130×10⁻⁶",
+            "εth=130 μstrain. Strain is dimensionless."
+          ],
+          "display": [
+            {
+              "latex": "Unrestrained thermal strain εth=αΔT",
+              "html": "<div class=\"verified-equation\" role=\"math\">Unrestrained thermal strain εth=αΔT</div>"
+            },
+            {
+              "latex": "εth=(2.6×10⁻⁶)(50)=130×10⁻⁶",
+              "html": "<div class=\"verified-equation\" role=\"math\">εth=(2.6×10⁻⁶)(50)=130×10⁻⁶</div>"
+            },
+            {
+              "latex": "εth=130 μstrain. Strain is dimensionless.",
+              "html": "<div class=\"verified-equation\" role=\"math\">εth=130 μstrain. Strain is dimensionless.</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Thermal strain\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "α=2.6×10⁻⁶ K⁻¹, ΔT=50 K"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Unrestrained thermal strain εth=αΔT"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "εth=(2.6×10⁻⁶)(50)=130×10⁻⁶"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "εth=130 μstrain. Strain is dimensionless."
+            }
+          ],
+          "finalAnswer": "εthermal = αΔT = (2.6×10⁻⁶)(50) = 130×10⁻⁶ = 130 microstrain.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        },
+        {
+          "label": "c",
+          "title": "Fully restrained stress",
+          "question": "Find stress magnitude for an axially constrained, linear-elastic beam.",
+          "solution": "|σ| = EαΔT = 160×10⁹ × 130×10⁻⁶ = 20.8 MPa. Heating while restrained produces compressive stress under this idealization.",
+          "reason": "Free expansion ကို တားထားရင် expansion အစား internal compressive stress ဖြစ်လာပါတယ်။",
+          "equations": [
+            "Fully constrained axial total strain: 0=σ/E+αΔT",
+            "σ=−EαΔT=−(160×10⁹)(2.6×10⁻⁶)(50)",
+            "σ=−20.8 MPa (compressive for constrained heating)."
+          ],
+          "display": [
+            {
+              "latex": "Fully constrained axial total strain: 0=σ/E+αΔT",
+              "html": "<div class=\"verified-equation\" role=\"math\">Fully constrained axial total strain: 0=σ/E+αΔT</div>"
+            },
+            {
+              "latex": "σ=−EαΔT=−(160×10⁹)(2.6×10⁻⁶)(50)",
+              "html": "<div class=\"verified-equation\" role=\"math\">σ=−EαΔT=−(160×10⁹)(2.6×10⁻⁶)(50)</div>"
+            },
+            {
+              "latex": "σ=−20.8 MPa (compressive for constrained heating).",
+              "html": "<div class=\"verified-equation\" role=\"math\">σ=−20.8 MPa (compressive for constrained heating).</div>"
+            }
+          ],
+          "method": "Given/လိုအပ်တဲ့ data ကို အရင်ကြည့်ပြီး \"Fully restrained stress\" အတွက် သင့်တော်တဲ့ governing equation ကိုရွေးပါ။ Units နှင့် assumptions ကို အတည်ပြုပြီး substitution → intermediate result → independent check အစဉ်အတိုင်းတွက်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "E=160 GPa, α=2.6×10⁻⁶ K⁻¹, ΔT=50 K"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Fully constrained axial total strain: 0=σ/E+αΔT"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "σ=−EαΔT=−(160×10⁹)(2.6×10⁻⁶)(50)"
+            },
+            {
+              "label": "Unit / physical consistency check",
+              "value": "σ=−20.8 MPa (compressive for constrained heating)."
+            }
+          ],
+          "finalAnswer": "|σ| = EαΔT = 160×10⁹ × 130×10⁻⁶ = 20.8 MPa. Heating while restrained produces compressive stress under this idealization.",
+          "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    }
+  ]
+}
