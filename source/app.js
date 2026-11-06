@@ -66,8 +66,19 @@ return `<div class="eyebrow">Your library</div><h1 class="page-title">Exercise L
 ${arr.length?`<div class="exercise-list">${arr.map(exerciseRow).join('')}</div>`:`<div class="empty-state">No exercises found for this selection. Try another subject or add a new exercise.</div>`}
 <div class="note-panel" style="margin-top:17px"><strong>Source note:</strong> The supplied 2026/27 Digital Communications tutorial has 18 numbered headings. Titles 1.2, 1.4 and 2.4 have no question text in the supplied source; the library therefore lists 15 question-bearing sets.</div>`;}
 function math(html){return `<div class="math-line">${html||''}</div>`;}
-function renderSource(e){if(e.sourcePages?.length){return `<div class="paper"><div class="mini-label">Official original questions • source pages ${e.sourcePages.join(', ')}</div><h2>Question sheet — Exercise ${escape(e.number)}</h2><div class="source-pages">${e.sourcePages.map(n=>`<div class="image-scroll"><img loading="lazy" class="source-img" data-action="zoom" src="assets/questions/dc-page-${String(n).padStart(2,'0')}.webp" alt="Original Digital Communications Tutorial question page ${n}"></div>`).join('')}</div><div class="resource">Tap a page to zoom. The full private package includes the original question-sheet PDF.</div></div>`;}
-return `<div class="paper"><div class="mini-label">Question</div><h2>${escape(e.title)}</h2><p>${escape(e.question||'Question text has not yet been imported.')}</p></div>`;}
+function renderSource(e) {
+  const pages = Array.isArray(e.sourcePages) ? e.sourcePages : [];
+  const source = e.source || 'Personal course question reference';
+  const reference = e.sourcePageRef || (pages.length ? 'Pages ' + pages.join(', ') : 'No page number supplied');
+  return `<div class="paper"><div class="mini-label">Source wording and figures · private study materials</div>
+    <h2>Exercise ${escape(e.number)} — Source reference</h2>
+    <p>${escape(e.question || 'The full official question text and diagrams are not included in this public site.')}</p>
+    <div class="inline-caution"><strong>Original material is private.</strong> Instructor-owned exercise PDFs and page images are intentionally excluded from the public website. Use your legally obtained local tutorial/lecture file for the exact problem statement, givens and diagrams.</div>
+    <div class="side-info"><span>Document</span><strong>${escape(source)}</strong></div>
+    <div class="side-info"><span>Reference</span><strong>${escape(reference)}</strong></div>
+    <button class="btn btn-primary" data-action="tab" data-id="worked">Return to inline worked solution</button>
+  </div>`;
+}
 function renderFullSolution(e) {
   const parts = Array.isArray(e.parts) ? e.parts : [];
   if (!parts.length) {
