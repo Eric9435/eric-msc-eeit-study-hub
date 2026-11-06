@@ -143,13 +143,15 @@
   }
   const observer = new MutationObserver(() => decorate());
   if (document.querySelector('#app')) observer.observe($('#app'), { childList: true, subtree: true });
-  fetch('data/content.json').then(r => {
-    if (!r.ok) throw new Error('Failed to load study content');
-    return r.json();
-  }).then(data => {
-    if (!Array.isArray(data.exercises)) throw new Error('Invalid exercise content');
-    content = data;
-    decorate();
-  }).catch(error => { console.warn('Explanation enhancements are unavailable:', error.message); });
+  Promise.all([fetch('data/content.json'), fetch('data/verified-expansion.json')])
+    .then(async ([originalResponse, extensionResponse]) => {
+      if (!originalResponse.ok || !extensionResponse.ok) throw new Error('Failed to load verified exercise data');
+      const [data, extension] = await Promise.all([originalResponse.json(), extensionResponse.json()]);
+      if (!Array.isArray(data.exercises) || !Array.isArray(extension.overrides)) throw new Error('Invalid exercise content');
+      const overrides = new Map(extension.overrides.map(ex => [ex.id, ex]));
+      data.exercises = data.exercises.map(ex => overrides.has(ex.id) ? { ...ex, ...overrides.get(ex.id) } : ex);
+      content = data;
+      decorate();
+    }).catch(error => { console.warn('Explanation enhancements are unavailable:', error.message); });
   window.addEventListener('hashchange', () => queueMicrotask(decorate));
 })();
