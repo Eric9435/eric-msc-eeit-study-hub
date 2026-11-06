@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-independent-derivations-5",
+  "revision": "2026-11-06-independent-derivations-6",
   "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
   "overrides": [
     {
@@ -2671,6 +2671,235 @@
           "method": "At n0 compute both outgoing metrics. n1 compute all reachable states, n2 every new-state predecessor and discard larger metric. At final choose state3 with 1.1781, traceback (+1,+1,+1). Other final state best 1.7381,2.3621,4.7381။ Initial state indexing original table follow.",
           "finalAnswer": "Decoded sequence [+1,+1,+1]; ML metric 1.1781.",
           "verification": "Independently calculated from exact 3.3 h=[1,−0.6,0.3], r=[0.89,−0.42,−0.16], state 0=(−1,−1)"
+        }
+      ]
+    },
+    {
+      "id": "dc-2.2",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "All 7 subtasks. The source diagram was inspected to determine that d is nearest-neighbour spacing on the 4×4 grid, and the precise Gray/natural quadrant labeling.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "QPSK symbol error probability",
+          "question": "Derive SER of Gray-independent QPSK in AWGN as a function of γ_b=E_b/N₀.",
+          "equations": [
+            "q=Q(√(2γ_b))=½erfc(√γ_b)",
+            "P_S=1−(1−q)²=2q−q²",
+            "P_S=erfc(√γ_b)−¼erfc²(√γ_b)"
+          ],
+          "display": [
+            {
+              "latex": "q=Q(√(2γ_b))=½erfc(√γ_b)",
+              "html": "<div class=\"verified-equation\" role=\"math\">q=Q(√(2γ_b))=½erfc(√γ_b)</div>"
+            },
+            {
+              "latex": "P_S=1−(1−q)²=2q−q²",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_S=1−(1−q)²=2q−q²</div>"
+            },
+            {
+              "latex": "P_S=erfc(√γ_b)−¼erfc²(√γ_b)",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_S=erfc(√γ_b)−¼erfc²(√γ_b)</div>"
+            }
+          ],
+          "reason": "QPSK မှာ I/Q coordinate နှစ်ခုလုံး မှန်မှ symbol မှန်တယ်။ I/Q error probability q တူပြီး independent ဖြစ်တာကြောင့် both-correct (1−q)² ဖြစ်တယ်။",
+          "method": "Each coordinate BPSK-like threshold at 0, Gaussian probability of sign crossing q=Q(√(2Eb/N0))။ SER=1−Pr(both correct)=1−(1−q)²။ No BPSK BER formula assumed as given; obtain q by integrating 1D Gaussian tail.",
+          "finalAnswer": "P_S,QPSK=2Q(√(2γ_b))−Q²(√(2γ_b)).",
+          "verification": "Re-derived from AWGN Gaussian tail and independently inspected original 2026/27 constellation image"
+        },
+        {
+          "label": "b",
+          "title": "Normalize 16-QAM constellation point spacing",
+          "question": "The diagram marks horizontal nearest-neighbour spacing d; find d for E|d_n|²=1.",
+          "equations": [
+            "16-QAM I,Q levels = {−3d/2,−d/2,+d/2,+3d/2}",
+            "E[I²]=(9d²/4+d²/4+d²/4+9d²/4)/4=5d²/4",
+            "E[|d_n|²]=E[I²]+E[Q²]=5d²/2=1",
+            "d=√(2/5)≈0.632455532 (normalised amplitudes)"
+          ],
+          "display": [
+            {
+              "latex": "16-QAM I,Q levels = {−3d/2,−d/2,+d/2,+3d/2}",
+              "html": "<div class=\"verified-equation\" role=\"math\">16-QAM I,Q levels = {−3d/2,−d/2,+d/2,+3d/2}</div>"
+            },
+            {
+              "latex": "E[I²]=(9d²/4+d²/4+d²/4+9d²/4)/4=5d²/4",
+              "html": "<div class=\"verified-equation\" role=\"math\">E[I²]=(9d²/4+d²/4+d²/4+9d²/4)/4=5d²/4</div>"
+            },
+            {
+              "latex": "E[|d_n|²]=E[I²]+E[Q²]=5d²/2=1",
+              "html": "<div class=\"verified-equation\" role=\"math\">E[|d_n|²]=E[I²]+E[Q²]=5d²/2=1</div>"
+            },
+            {
+              "latex": "d=√(2/5)≈0.632455532 (normalised amplitudes)",
+              "html": "<div class=\"verified-equation\" role=\"math\">d=√(2/5)≈0.632455532 (normalised amplitudes)</div>"
+            }
+          ],
+          "reason": "16QAM အတွင်း point တစ်ခုနဲ့ နောက်တစ်ခု ကြား distance d ဆိုရင် axes level တွေ ±d/2, ±3d/2 ဖြစ်တယ်။ I/Q total energy average1 ဆိုတဲ့ normalization ကိုသုံးထားတယ်။",
+          "method": "All 16 symbols equiprobable; one axis has two inner levels ±d/2 and two outer ±3d/2။ Average squared I=5d²/4။ Both axes equal ⇒ total 5d²/2=1; solve d=√(2/5).",
+          "finalAnswer": "Nearest-neighbour spacing d≈0.632456.",
+          "verification": "Re-derived from AWGN Gaussian tail and independently inspected original 2026/27 constellation image"
+        },
+        {
+          "label": "c",
+          "title": "Direct 16-QAM SER by boundary regions",
+          "question": "Without 4-ASK SER formula, count inner/edge/corner decision regions.",
+          "equations": [
+            "q=Q(d/√(2N₀))=Q(√(4γ_b/5)), E_s=4E_b=1",
+            "4 corners correct: (1−q)²; 8 edge points correct: (1−q)(1−2q)",
+            "4 interior points correct: (1−2q)²",
+            "P_correct=[4(1−q)²+8(1−q)(1−2q)+4(1−2q)²]/16=(1−1.5q)²",
+            "P_S=1−(1−1.5q)²=3q−2.25q²"
+          ],
+          "display": [
+            {
+              "latex": "q=Q(d/√(2N₀))=Q(√(4γ_b/5)), E_s=4E_b=1",
+              "html": "<div class=\"verified-equation\" role=\"math\">q=Q(d/√(2N₀))=Q(√(4γ_b/5)), E_s=4E_b=1</div>"
+            },
+            {
+              "latex": "4 corners correct: (1−q)²; 8 edge points correct: (1−q)(1−2q)",
+              "html": "<div class=\"verified-equation\" role=\"math\">4 corners correct: (1−q)²; 8 edge points correct: (1−q)(1−2q)</div>"
+            },
+            {
+              "latex": "4 interior points correct: (1−2q)²",
+              "html": "<div class=\"verified-equation\" role=\"math\">4 interior points correct: (1−2q)²</div>"
+            },
+            {
+              "latex": "P_correct=[4(1−q)²+8(1−q)(1−2q)+4(1−2q)²]/16=(1−1.5q)²",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_correct=[4(1−q)²+8(1−q)(1−2q)+4(1−2q)²]/16=(1−1.5q)²</div>"
+            },
+            {
+              "latex": "P_S=1−(1−1.5q)²=3q−2.25q²",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_S=1−(1−1.5q)²=3q−2.25q²</div>"
+            }
+          ],
+          "reason": "Corner တွေမှာ outer side မှာ threshold မရှိလို့ one-sided error q။ Interior coordinates မှာ ± နှစ်ဖက်ရှိလို့ 2q error။ အဖြစ်နိုင်ဆုံး correct regions ကို အမျိုးအစားခွဲတွက်ထားတယ်။",
+          "method": "16 equal symbols =4 corner,8 edge,4 interior။ For each region correct probability = product of independent coordinate correct probs। Weighted average simplify to (1−3q/2)²; SER 1−that။ Distance to nearest decision boundary d/2; noise std √(N0/2).",
+          "finalAnswer": "P_S,16QAM=3Q(√(4γ_b/5))−(9/4)Q²(√(4γ_b/5)).",
+          "verification": "Re-derived from AWGN Gaussian tail and independently inspected original 2026/27 constellation image"
+        },
+        {
+          "label": "d",
+          "title": "4-ASK alternative and equality check",
+          "question": "Compute SER via two independent 4-ASK dimensions.",
+          "equations": [
+            "P_axis=2·(4−1)/4 Q(√[3E_s/((16−1)N₀)])=1.5Q(√(4γ_b/5))",
+            "P_S=1−(1−P_axis)²=2P_axis−P_axis²",
+            "=3q−(9/4)q² (same as direct counting)"
+          ],
+          "display": [
+            {
+              "latex": "P_axis=2·(4−1)/4 Q(√[3E_s/((16−1)N₀)])=1.5Q(√(4γ_b/5))",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_axis=2·(4−1)/4 Q(√[3E_s/((16−1)N₀)])=1.5Q(√(4γ_b/5))</div>"
+            },
+            {
+              "latex": "P_S=1−(1−P_axis)²=2P_axis−P_axis²",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_S=1−(1−P_axis)²=2P_axis−P_axis²</div>"
+            },
+            {
+              "latex": "=3q−(9/4)q² (same as direct counting)",
+              "html": "<div class=\"verified-equation\" role=\"math\">=3q−(9/4)q² (same as direct counting)</div>"
+            }
+          ],
+          "reason": "16QAM ကို I-axis 4-ASK နဲ့ Q-axis 4-ASK နှစ်ခုပေါင်းထားတယ်။ တစ်ခုမှားရင် symbol မှားတာကြောင့် direct region count နဲ့တူရမယ်။",
+          "method": "Problem-provided M-ASK formula with M=4 ကို source parameterization မှန်အောင် substitute လုပ်ပါ။ Ps-axis=(3/4) erfc(√(2γ_b/5))=1.5Q(√(4γ_b/5)). Two independent axes correct (1−Ps_axis)²။",
+          "finalAnswer": "Both derivations give the same 16-QAM SER.",
+          "verification": "Re-derived from AWGN Gaussian tail and independently inspected original 2026/27 constellation image"
+        },
+        {
+          "label": "e",
+          "title": "Exact QPSK Gray-mapped BER",
+          "question": "From quadrant labeling Gray 00/01/11/10, derive Pb using I/Q error events.",
+          "equations": [
+            "q=Q(√(2γ_b))",
+            "Gray bits correspond to orthogonal I and Q sign decisions",
+            "P_bit1=q; P_bit2=q; P_b,Gray=(q+q)/2=q",
+            "P_b,Gray=½erfc(√γ_b)"
+          ],
+          "display": [
+            {
+              "latex": "q=Q(√(2γ_b))",
+              "html": "<div class=\"verified-equation\" role=\"math\">q=Q(√(2γ_b))</div>"
+            },
+            {
+              "latex": "Gray bits correspond to orthogonal I and Q sign decisions",
+              "html": "<div class=\"verified-equation\" role=\"math\">Gray bits correspond to orthogonal I and Q sign decisions</div>"
+            },
+            {
+              "latex": "P_bit1=q; P_bit2=q; P_b,Gray=(q+q)/2=q",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_bit1=q; P_bit2=q; P_b,Gray=(q+q)/2=q</div>"
+            },
+            {
+              "latex": "P_b,Gray=½erfc(√γ_b)",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_b,Gray=½erfc(√γ_b)</div>"
+            }
+          ],
+          "reason": "Gray mapping မှာ I sign ပြောင်းရင် bit တစ်လုံး၊ Q sign ပြောင်းရင် bit တစ်လုံးပဲ သက်ရောက်တယ်။ Coordinate 2 ခု independent threshold errors q ဖြစ်လို့ bit error q တိတိကျကျရတယ်။",
+          "method": "Figure 2.5 labels d0 00 NE,d1 01 NW,d2 11 SW,d3 10 SE။ Bit 1 determines top/bottom; bit2 right/left. Integrate independent Gaussian crossing events per axis; each bit error=q။",
+          "finalAnswer": "Exact QPSK Gray Pb=Q(√(2γ_b)).",
+          "verification": "Re-derived from AWGN Gaussian tail and independently inspected original 2026/27 constellation image"
+        },
+        {
+          "label": "f",
+          "title": "Approximation Pb≈Ps/log₂ M",
+          "question": "For QPSK M=4 compare Ps/2 to exact Pb.",
+          "equations": [
+            "P_b,approx=P_S/2=(2q−q²)/2=q−q²/2",
+            "P_b,exact=q",
+            "Approximation underestimates exact by q²/2"
+          ],
+          "display": [
+            {
+              "latex": "P_b,approx=P_S/2=(2q−q²)/2=q−q²/2",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_b,approx=P_S/2=(2q−q²)/2=q−q²/2</div>"
+            },
+            {
+              "latex": "P_b,exact=q",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_b,exact=q</div>"
+            },
+            {
+              "latex": "Approximation underestimates exact by q²/2",
+              "html": "<div class=\"verified-equation\" role=\"math\">Approximation underestimates exact by q²/2</div>"
+            }
+          ],
+          "reason": "SER ကို bits/symbol=2 နဲ့စားတာက error ဖြစ်တိုင်း bit တစ်လုံးသာမှားတယ်လို့ approximate လုပ်တာပါ။ I,Q နှစ်ခုလုံးမှားတဲ့ event q² မှာ bit နှစ်လုံးမှားတဲ့အတွက် approximation အနည်းငယ်လွဲတယ်။",
+          "method": "Subpart a ရဲ့ Ps=2q−q² ကို 2 နဲ့စားပါ။ Exact Gray BER=q ကို နှိုင်းယှဉ်မယ်။ High SNR (q small) approximation ပိုနီးတယ်။",
+          "finalAnswer": "Pb,approx=q−q²/2 versus exact q.",
+          "verification": "Re-derived from AWGN Gaussian tail and independently inspected original 2026/27 constellation image"
+        },
+        {
+          "label": "g",
+          "title": "Exact QPSK natural-mapped BER",
+          "question": "For source figure natural labels 00 NE,01 NW,10 SW,11 SE, compute bit errors.",
+          "equations": [
+            "One bit = Q sign → Pb1=q",
+            "Other bit = XOR(sign I,sign Q) → Pb2=2q(1−q)",
+            "P_b,Natural=[q+2q(1−q)]/2",
+            "P_b,Natural=1.5q−q²; q=Q(√(2γ_b))"
+          ],
+          "display": [
+            {
+              "latex": "One bit = Q sign → Pb1=q",
+              "html": "<div class=\"verified-equation\" role=\"math\">One bit = Q sign → Pb1=q</div>"
+            },
+            {
+              "latex": "Other bit = XOR(sign I,sign Q) → Pb2=2q(1−q)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Other bit = XOR(sign I,sign Q) → Pb2=2q(1−q)</div>"
+            },
+            {
+              "latex": "P_b,Natural=[q+2q(1−q)]/2",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_b,Natural=[q+2q(1−q)]/2</div>"
+            },
+            {
+              "latex": "P_b,Natural=1.5q−q²; q=Q(√(2γ_b))",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_b,Natural=1.5q−q²; q=Q(√(2γ_b))</div>"
+            }
+          ],
+          "reason": "Natural mapping label တွေမှာ bits အနက်တစ်ခုဟာ I/Q sign နှစ်ခု XOR ပုံစံဖြစ်တယ်။ Axis တစ်ခုတည်းမှားရင် XOR bit မှား၊ နှစ်ခုလုံးမှားရင် XOR ပြန်မှန်သွားတယ်။",
+          "method": "Read labels from original Fig.2.5. Top/bottom bit direct q, second bit parity of signs, so exactly one of independent I,Q errors probability 2q(1−q). Average two bit errors။",
+          "finalAnswer": "Natural-mapped Pb=(3/2)Q(√(2γ_b))−Q²(√(2γ_b)).",
+          "verification": "Re-derived from AWGN Gaussian tail and independently inspected original 2026/27 constellation image"
         }
       ]
     }
