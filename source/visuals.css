@@ -1,0 +1,18 @@
+/* Accessible, original engineering SVG explorer — flat and mobile-first. */
+.eeit-viz-panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:clamp(15px,2.8vw,23px);margin:18px 0 22px;box-shadow:var(--shadow)}
+.eeit-viz-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:15px}
+.eeit-viz-kicker{font-size:10px;color:var(--brand-hi);font-weight:850;letter-spacing:.085em;text-transform:uppercase;margin-bottom:7px}
+.eeit-viz-header h3{color:var(--ink);font-size:clamp(16px,2.2vw,20px);font-weight:780;letter-spacing:-.025em;margin:0 0 5px}
+.eeit-viz-header p{font-size:12px;line-height:1.65;color:var(--muted);margin:0;max-width:59ch}
+.eeit-viz-tag{border:1px solid var(--line);background:var(--surface-alt);font-size:10px;letter-spacing:.035em;white-space:nowrap;color:var(--muted);border-radius:7px;padding:6px 9px;font-weight:680}
+.eeit-viz-graphic{background:#fff;border:1px solid #e3e9f1;border-radius:11px;overflow:hidden;padding:5px;position:relative}
+.eeit-viz-svg{width:100%;height:auto;min-height:160px;max-height:350px;display:block;overflow:visible}
+.eeit-viz-control{display:grid;grid-template-columns:minmax(130px,1fr) 50px;column-gap:12px;align-items:center;margin:15px 0 2px}
+.eeit-viz-control span{font-size:12px;color:var(--text);font-weight:720}
+.eeit-viz-control strong{text-align:right;color:var(--ink);font-size:13px;font-variant-numeric:tabular-nums}
+.eeit-viz-control input[type=range]{grid-column:1 / -1;width:100%;accent-color:var(--brand-hi);margin:9px 0 0;height:22px;cursor:ew-resize}
+.eeit-viz-note{font-size:11px;color:var(--muted);line-height:1.7;margin:13px 0 0}
+.eeit-viz-note:before{content:"ⓘ ";font-weight:750}
+.eeit-viz-graphic svg text{user-select:none}
+@media(max-width:700px){.eeit-viz-panel{margin:14px 0 19px;padding:12px}.eeit-viz-header{gap:9px;flex-wrap:wrap}.eeit-viz-tag{font-size:9px}.eeit-viz-graphic{overflow-x:auto;-webkit-overflow-scrolling:touch}.eeit-viz-svg{min-width:470px;width:100%;max-height:none}.eeit-viz-control{margin-top:11px}.eeit-viz-header h3{font-size:16px}}
+@media print{.eeit-viz-panel{page-break-inside:avoid;break-inside:avoid;box-shadow:none;padding:9px;margin:9px 0}.eeit-viz-svg{max-height:220px}.eeit-viz-control{display:none}.eeit-viz-tag{display:none}.eeit-viz-note{font-size:9px}}
