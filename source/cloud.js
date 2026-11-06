@@ -3,6 +3,22 @@
  * The database is never a place to upload course PDFs or supplied question images.
  */
 const STORE='eric-eeit-exercise:v1';
+const OWNER_KEY=STORE+':owner-uid';
+const PER_USER_PREFIX=STORE+':cached-user:';
+/* Never sync one account's browser data to another Google account.
+ * Preserve each account's offline cache independently when account switching. */
+function isolateAccount(uid){
+ if(!uid)return false;
+ const owner=localStorage.getItem(OWNER_KEY);
+ if(owner && owner!==uid){
+   localStorage.setItem(PER_USER_PREFIX+owner,localStorage.getItem(STORE)||'{}');
+   localStorage.setItem(STORE,localStorage.getItem(PER_USER_PREFIX+uid)||'{}');
+   localStorage.setItem(OWNER_KEY,uid);
+   return true;
+ }
+ if(!owner)localStorage.setItem(OWNER_KEY,uid);
+ return false;
+}
 const CONFIG=globalThis.EEIT_FIREBASE_CONFIG||null;
 const READY=Boolean(CONFIG && CONFIG.apiKey && CONFIG.authDomain && CONFIG.projectId && CONFIG.appId);
 const DOC_ID='eric-eeit';
@@ -157,7 +173,10 @@ async function init(){
    auth=api.getAuth(app);db=api.getFirestore(app);
    api.onAuthStateChanged(auth,async next=>{
      user=next;phase=user?'Loading cloud progress…':'Local backup active';lastSynced='';lastChecked=0;mount();
-     if(user)await sync(true);
+     if(user){
+       if(isolateAccount(user.uid)){location.reload();return;}
+       await sync(true);
+     }
    },err=>{cloudError=err.message;phase='Google auth error';mount();});
    window.addEventListener('online',()=>sync(true));
    window.addEventListener('storage',event=>{if(event.key===STORE && user)void sync(true);});
