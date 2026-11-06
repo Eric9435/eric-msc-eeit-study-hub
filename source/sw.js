@@ -1,13 +1,46 @@
-const CACHE='eeit-source-derivations-v12';
-const CORE=['./','./index.html','./styles.css','./app.js','./visuals.mjs','./cloud.css','./brand-ui.css','./inline-solutions.css','./visuals.css','./a4-paper.css','./cloud.js','./assets/eeit-study-hub-logo.webp','./data/content.json','./data/verified-expansion.json','./data/original-practice-reworked.json','./data/source-backed-derivations.json','./manifest.webmanifest','./assets/favicon.svg'];
-self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',e=>{
- const url=new URL(e.request.url);
- if(e.request.method!=='GET'||url.origin!==location.origin)return;
- if(url.pathname.endsWith('/cloud-config.js')){e.respondWith(fetch(e.request).catch(()=>new Response('window.EEIT_FIREBASE_CONFIG=null;', {headers:{'Content-Type':'application/javascript'}})));return;}
- e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).then(resp=>{
-   if(resp.ok && (url.pathname.includes('/assets/')))caches.open(CACHE).then(c=>c.put(e.request,resp.clone()));
-   return resp;
- }).catch(()=>new Response('Offline. Reload after network is restored.',{status:503}))));
+/* Network-first versioned PWA: online changes must never be masked by stale exercise JS. */
+const CACHE='eeit-verified-visuals-v12';
+const CORE=[
+ './','./index.html','./styles.css','./app.js','./visuals.mjs',
+ './cloud.css','./brand-ui.css','./inline-solutions.css','./a4-paper.css',
+ './visuals.css','./cloud.js','./assets/eeit-study-hub-logo.webp',
+ './data/content.json','./data/verified-expansion.json',
+ './data/original-practice-reworked.json','./manifest.webmanifest','./assets/favicon.svg'
+];
+self.addEventListener('install',event=>{
+ event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
+});
+self.addEventListener('activate',event=>{
+ event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));
+});
+self.addEventListener('fetch',event=>{
+ const request=event.request;
+ if(request.method!=='GET')return;
+ const url=new URL(request.url);
+ if(url.origin!==self.location.origin)return;
+ if(url.pathname.endsWith('/cloud-config.js')){
+   event.respondWith(fetch(request).catch(()=>new Response('window.EEIT_FIREBASE_CONFIG=null;', {headers:{'Content-Type':'application/javascript'}})));
+   return;
+ }
+ event.respondWith((async()=>{
+   const cache=await caches.open(CACHE);
+   try{
+     const response=await fetch(request);
+     if(response.ok && response.type!=='opaque'){
+       const pathname=url.pathname.toLowerCase();
+       if(request.mode==='navigate'||/\.(?:js|mjs|css|json|svg|webp|png|webmanifest)$/.test(pathname)||pathname.endsWith('/')){
+         await cache.put(request,response.clone()).catch(()=>{});
+       }
+     }
+     return response;
+   }catch(error){
+     const saved=await cache.match(request);
+     if(saved)return saved;
+     if(request.mode==='navigate'){
+       const fallback=await cache.match('./index.html');
+       if(fallback)return fallback;
+     }
+     return new Response('Offline. Reload after network is restored.',{status:503,headers:{'Content-Type':'text/plain'}});
+   }
+ })());
 });
