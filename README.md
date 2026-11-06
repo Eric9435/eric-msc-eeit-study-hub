@@ -14,11 +14,11 @@ A five-subject, responsive, installable study workspace for M.Sc Electrical Engi
 | Microwave Engineering | 4 new original practice sets × 3 worked parts |
 | Microsystem Engineering | 4 new original practice sets × 3 worked parts |
 
-**Professional project integration (6 November 2026):** The source catalog retains its original 82 entries. Runtime now merges independent reconstructions and **13 recovered, recalculated Micro TUHH project practice entries** into **95 visible exercise sets, 306 guided subquestions and 69 formula references**. Four source-identified Microwave tasks (3.3, 3.4, 5.2, 5.3) now have fresh working. **Eight source-only entries** remain because the full question/diagram/numerical givens are not available. Recorded solutions and regression tests do not imply an exhaustive mathematical audit of every older calculation or official exam certification.
+**Professional project integration (6 November 2026):** The source catalog retains its original 82 entries. Runtime now merges independent reconstructions and **23 recovered, recalculated Micro TUHH project practice entries** into **105 visible exercise sets, 316 guided subquestions and 69 formula references**. Four source-identified Microwave tasks (3.3, 3.4, 5.2, 5.3) now have fresh working. **Eight source-only entries** remain because the full question/diagram/numerical givens are not available. Recorded solutions and regression tests do not imply an exhaustive mathematical audit of every older calculation or official exam certification.
 
 ## Project practice recovered from earlier ChatGPT work — 6 November 2026
 
-The `source/data/project-practice.json` archive contains independently recomputed MEMS exercises **1, 5, 7, 8, 10, 11, 12, 13, 14, 25, 26, 29, 30**. Their previously assigned numbers are retained, but they are *not* claimed to be official TUHH exercises. Original question data for the remaining numbered project exercises was not reliably recoverable, so gaps are disclosed instead of invented. A prior comb-drive example gave 4.427 pF; the stated N=50, t=10 μm, L=100 μm, g=2 μm values recompute to **0.4427 pF**.
+The `source/data/project-practice.json` archive contains independently recomputed MEMS exercises **1–16, 18, 20, 25–27, 29–30**. Their previously assigned numbers are retained, but they are *not* claimed to be official TUHH exercises. Original question data for the remaining numbered project exercises was not reliably recoverable, so gaps are disclosed instead of invented. A prior comb-drive example gave 4.427 pF; the stated N=50, t=10 μm, L=100 μm, g=2 μm values recompute to **0.4427 pF**.
 
 ## Core capabilities
 
