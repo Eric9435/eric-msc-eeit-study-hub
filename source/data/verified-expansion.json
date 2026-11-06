@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-independent-derivations-3",
+  "revision": "2026-11-06-independent-derivations-4",
   "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
   "overrides": [
     {
@@ -2118,6 +2118,317 @@
           "method": "(HᵀH+0.01I)e=Hᵀi0 ကို independently solve လုပ်ပြီး q=He ကိုတွက်ပါ။ ZF e0=1.774; MMSE20 e0=1.664; MMSE0 e0=0.339 ဆိုပြီး magnitude/shape compare လုပ်ပါ။",
           "finalAnswer": "At 20dB, e_MMSE approaches e_ZF; q0≈0.83208 versus ZF q0≈0.88688.",
           "verification": "Independently re-computed from original 2026/27 tutorial h=[0.5,0.4,0.4] and explicit SNR assumptions"
+        }
+      ]
+    },
+    {
+      "id": "dc-3.2",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Full 3.2 (a–k) re-derived. Assumes equally likely BPSK symbols for trellis numerical section and known initial symbol +1. Evidence: original exercise coefficient h1=3/4.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Maximum a posteriori sequence estimation",
+          "question": "Write MAP criterion for transmit d and received r.",
+          "equations": [
+            "d̂_MAP = argmax_{d∈𝒜^N} P(d|r)",
+            "P(d|r)=P(r|d)P(d)/P(r)"
+          ],
+          "display": [
+            {
+              "latex": "d̂_MAP = argmax_{d∈𝒜^N} P(d|r)",
+              "html": "<div class=\"verified-equation\" role=\"math\">d̂_MAP = argmax_{d∈𝒜^N} P(d|r)</div>"
+            },
+            {
+              "latex": "P(d|r)=P(r|d)P(d)/P(r)",
+              "html": "<div class=\"verified-equation\" role=\"math\">P(d|r)=P(r|d)P(d)/P(r)</div>"
+            }
+          ],
+          "reason": "Receiver ရထားတဲ့ r ကိုကြည့်ပြီး အဖြစ်နိုင်ဆုံး transmit sequence d ကို ရှာတာ MAP ပါ။ Prior P(d) နဲ့ received likelihood P(r|d) နှစ်မျိုးကို သုံးတယ်။",
+          "method": "Candidate sequence တစ်ခုချင်းစီရဲ့ posterior probability P(d|r) အကြီးဆုံးကိုရွေးပါ။ Bayes theorem ဖြင့် likelihood×prior / normalizer အဖြစ်ရေးနိုင်သည်။",
+          "finalAnswer": "d̂_MAP=argmax_d P(d|r).",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        },
+        {
+          "label": "b",
+          "title": "MAP equalizer strengths and weaknesses",
+          "question": "State one advantage and two drawbacks.",
+          "equations": [
+            "Advantage: uses prior probabilities → optimal sequence-MAP decision under the model",
+            "Drawback: exponential state count M^D as channel memory increases",
+            "Drawback: requires accurate symbol priors and channel/noise statistics"
+          ],
+          "display": [
+            {
+              "latex": "Advantage: uses prior probabilities → optimal sequence-MAP decision under the model",
+              "html": "<div class=\"verified-equation\" role=\"math\">Advantage: uses prior probabilities → optimal sequence-MAP decision under the model</div>"
+            },
+            {
+              "latex": "Drawback: exponential state count M^D as channel memory increases",
+              "html": "<div class=\"verified-equation\" role=\"math\">Drawback: exponential state count M^D as channel memory increases</div>"
+            },
+            {
+              "latex": "Drawback: requires accurate symbol priors and channel/noise statistics",
+              "html": "<div class=\"verified-equation\" role=\"math\">Drawback: requires accurate symbol priors and channel/noise statistics</div>"
+            }
+          ],
+          "reason": "Symbol probability မတူတဲ့အခါ prior information သုံးတာက အားသာချက်ဖြစ်တယ်။ ဒါပေမဲ့ channel memory တိုးရင် trellis ရဲ့ state အရေအတွက် တိုးတယ်။",
+          "method": "Known priors and noise/channel conditional distributions က posterior ကို compute လုပ်ဖို့ လိုသည်။ Long channel memory မှာ complexity နှင့် model estimation errors ကို ထောက်ပြပါ။",
+          "finalAnswer": "MAP exploits priors; trellis can be expensive and statistics must be known.",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        },
+        {
+          "label": "c",
+          "title": "Viterbi complexity",
+          "question": "For M-ary alphabet and channel memory D and N symbols, express state/transition complexity.",
+          "equations": [
+            "Number of trellis states = M^D",
+            "Branches per time step ≈ M^(D+1)",
+            "Operation count grows O(N M^(D+1))"
+          ],
+          "display": [
+            {
+              "latex": "Number of trellis states = M^D",
+              "html": "<div class=\"verified-equation\" role=\"math\">Number of trellis states = M^D</div>"
+            },
+            {
+              "latex": "Branches per time step ≈ M^(D+1)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Branches per time step ≈ M^(D+1)</div>"
+            },
+            {
+              "latex": "Operation count grows O(N M^(D+1))",
+              "html": "<div class=\"verified-equation\" role=\"math\">Operation count grows O(N M^(D+1))</div>"
+            }
+          ],
+          "reason": "Input symbol တစ်ခုချင်းစီတိုင်း old state memory D လုံး လိုတာကြောင့် M^D states ဖြစ်တယ်။ New symbol M မျိုးတွက်ရလို့ branches M^(D+1) ဖြစ်တယ်။",
+          "method": "Finite-state channel with D prior symbols ကို state ထဲထည့်ပါ။ Each state has M successors, so N time steps × M^D × M branch metrics. Memory use roughly O(M^D) for survivor metrics (with traceback memory additional).",
+          "finalAnswer": "State count exponential in D, cost linear in N.",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        },
+        {
+          "label": "d",
+          "title": "MAP–ML equivalence condition",
+          "question": "When do MAP and ML select the same sequence?",
+          "equations": [
+            "P(d)=constant for all candidate d",
+            "argmax_d P(d|r)=argmax_d P(r|d)"
+          ],
+          "display": [
+            {
+              "latex": "P(d)=constant for all candidate d",
+              "html": "<div class=\"verified-equation\" role=\"math\">P(d)=constant for all candidate d</div>"
+            },
+            {
+              "latex": "argmax_d P(d|r)=argmax_d P(r|d)",
+              "html": "<div class=\"verified-equation\" role=\"math\">argmax_d P(d|r)=argmax_d P(r|d)</div>"
+            }
+          ],
+          "reason": "Transmit sequence တွေ အားလုံး အရင်အခြေအနေတူညီတဲ့ probability ရှိရင် prior က မသက်ရောက်တော့ဘူး။",
+          "method": "Independent equiprobable symbols (or any equally probable allowed complete sequences) အောက်မှာ P(d) common constant ဖြစ်သည်။ Data constraints/prior asymmetry ရှိလျှင် equivalence အလိုအလျောက်မမှန်။",
+          "finalAnswer": "MAP and ML coincide for uniform sequence priors.",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        },
+        {
+          "label": "e",
+          "title": "Derive ML from Bayes rule",
+          "question": "Show posterior maximization reduces to likelihood maximization under uniform prior.",
+          "equations": [
+            "d̂_MAP=argmax_d [P(r|d)P(d)/P(r)]",
+            "P(r) independent of d; P(d)=constant",
+            "d̂_ML=argmax_d P(r|d)"
+          ],
+          "display": [
+            {
+              "latex": "d̂_MAP=argmax_d [P(r|d)P(d)/P(r)]",
+              "html": "<div class=\"verified-equation\" role=\"math\">d̂_MAP=argmax_d [P(r|d)P(d)/P(r)]</div>"
+            },
+            {
+              "latex": "P(r) independent of d; P(d)=constant",
+              "html": "<div class=\"verified-equation\" role=\"math\">P(r) independent of d; P(d)=constant</div>"
+            },
+            {
+              "latex": "d̂_ML=argmax_d P(r|d)",
+              "html": "<div class=\"verified-equation\" role=\"math\">d̂_ML=argmax_d P(r|d)</div>"
+            }
+          ],
+          "reason": "P(r) က candidate d အားလုံးအတွက် တူတယ်။ Uniform prior P(d) လည်းတူလို့ အကြီးဆုံး likelihood ကိုပဲရွေးနိုင်တယ်။",
+          "method": "Bayes numerator/denominator ကို MAP objective ထဲ အစားသွင်းပါ။ d-independent factors တွေကို argmax ထဲက ဖြုတ်ပါ။",
+          "finalAnswer": "d̂_ML=argmax_d P(r|d).",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        },
+        {
+          "label": "f",
+          "title": "AWGN sequence likelihood factorization",
+          "question": "For r_n=Σ_{k=0}^D h_k d_{n−k}+n_n and independent Gaussian n_n, form P(r|d).",
+          "equations": [
+            "μ_n(d)=∑_{k=0}^{D}h_k d_{n−k}",
+            "P(r|d)=∏_{n=0}^{N−1} [1/(√(2πσ²))] exp(−(r_n−μ_n(d))²/(2σ²))",
+            "Complex circular AWGN replaces real Gaussian with exp(−|r_n−μ_n|²/σ²)/(πσ²)"
+          ],
+          "display": [
+            {
+              "latex": "μ_n(d)=∑_{k=0}^{D}h_k d_{n−k}",
+              "html": "<div class=\"verified-equation\" role=\"math\">μ_n(d)=∑_{k=0}^{D}h_k d_{n−k}</div>"
+            },
+            {
+              "latex": "P(r|d)=∏_{n=0}^{N−1} [1/(√(2πσ²))] exp(−(r_n−μ_n(d))²/(2σ²))",
+              "html": "<div class=\"verified-equation\" role=\"math\">P(r|d)=∏_{n=0}^{N−1} [1/(√(2πσ²))] exp(−(r_n−μ_n(d))²/(2σ²))</div>"
+            },
+            {
+              "latex": "Complex circular AWGN replaces real Gaussian with exp(−|r_n−μ_n|²/σ²)/(πσ²)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Complex circular AWGN replaces real Gaussian with exp(−|r_n−μ_n|²/σ²)/(πσ²)</div>"
+            }
+          ],
+          "reason": "Noise samples independent ဆို likelihood တွေ product ပြန်ပေါင်းနိုင်တယ်။ Gaussian noise မှာ distance squared သေးတဲ့ sequence ကို likelihood ပိုမြင့်တယ်။",
+          "method": "Conditional received mean μ_n ကို FIR channel convolution ဖြင့် တွက်ပါ။ Noise Gaussian density at r_n−μ_n ကို multiply လုပ်ပါ။ Real/complex noise normalisation မတူနိုင်သော်လည်း argmax decision တူသည်။",
+          "finalAnswer": "Likelihood is product of AWGN densities for the sequence.",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        },
+        {
+          "label": "g",
+          "title": "Additive ML log metric",
+          "question": "Break likelihood into past,current,future terms around time m.",
+          "equations": [
+            "log P(r|d)=C−(1/(2σ²))∑_{n=0}^{N−1}|r_n−μ_n(d)|²",
+            "=C−(1/(2σ²))[Σ_{n<m}|r_n−μ_n|² + |r_m−μ_m|² + Σ_{n>m}|r_n−μ_n|²]",
+            "ML ⇔ minimize Σ_n |r_n−μ_n(d)|²"
+          ],
+          "display": [
+            {
+              "latex": "log P(r|d)=C−(1/(2σ²))∑_{n=0}^{N−1}|r_n−μ_n(d)|²",
+              "html": "<div class=\"verified-equation\" role=\"math\">log P(r|d)=C−(1/(2σ²))∑_{n=0}^{N−1}|r_n−μ_n(d)|²</div>"
+            },
+            {
+              "latex": "=C−(1/(2σ²))[Σ_{n<m}|r_n−μ_n|² + |r_m−μ_m|² + Σ_{n>m}|r_n−μ_n|²]",
+              "html": "<div class=\"verified-equation\" role=\"math\">=C−(1/(2σ²))[Σ_{n&lt;m}|r_n−μ_n|² + |r_m−μ_m|² + Σ_{n&gt;m}|r_n−μ_n|²]</div>"
+            },
+            {
+              "latex": "ML ⇔ minimize Σ_n |r_n−μ_n(d)|²",
+              "html": "<div class=\"verified-equation\" role=\"math\">ML ⇔ minimize Σ_n |r_n−μ_n(d)|²</div>"
+            }
+          ],
+          "reason": "Product probability ကို log ယူရင် sum ဖြစ်သွားတယ်။ Time m မှာ past metrics တွေကို စုပြီး နောက် incoming metric တစ်ခုဆက်ပေါင်းနိုင်လို့ Viterbi recursion ရတယ်။",
+          "method": "log product = sum logs; Gaussian exponent coefficient (negative) ကို ထည့်ပါ။ Past/current/future အဖြစ် sum split လုပ်ပါ။ Positive squared residual sum ကို minimize လုပ်ခြင်းနှင့်တူသည်။",
+          "finalAnswer": "Additive branch metric from squared prediction residual.",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        },
+        {
+          "label": "h",
+          "title": "Viterbi branch-metric increment",
+          "question": "Identify the metric that is added at each trellis transition.",
+          "equations": [
+            "γ_m(s_{m−1},d_m)=|r_m−∑_{k=0}^{D}h_k d_{m−k}|²",
+            "J_m(s)=min_{incoming branches}{J_{m−1}(s_previous)+γ_m}"
+          ],
+          "display": [
+            {
+              "latex": "γ_m(s_{m−1},d_m)=|r_m−∑_{k=0}^{D}h_k d_{m−k}|²",
+              "html": "<div class=\"verified-equation\" role=\"math\">γ_m(s_{m−1},d_m)=|r_m−∑_{k=0}^{D}h_k d_{m−k}|²</div>"
+            },
+            {
+              "latex": "J_m(s)=min_{incoming branches}{J_{m−1}(s_previous)+γ_m}",
+              "html": "<div class=\"verified-equation\" role=\"math\">J_m(s)=min_{incoming branches}{J_{m−1}(s_previous)+γ_m}</div>"
+            }
+          ],
+          "reason": "Transition တစ်ခုဖြတ်တိုင်း received r_m နဲ့ prediction ˆr_m ကြား square difference ကို increment ပေါင်းရတယ်။",
+          "method": "Current symbol and prior D symbols ကို trellis state/edge မှာဖတ်ပြီး channel prediction တွက်ပါ။ (r_m−prediction)² သည် branch metric။ Previous state metric နဲ့ add ပြီး new state အတွက် min ကိုထားပါ။",
+          "finalAnswer": "γ_m=|r_m−predicted channel output|².",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        },
+        {
+          "label": "i",
+          "title": "Two-state BPSK trellis transitions",
+          "question": "For h=[1,3/4], BPSK ±1, show complete one-step state transitions.",
+          "equations": [
+            "State s=d_{m−1}∈{−1,+1}; new state s'=d_m",
+            "−1→−1: μ=−1−0.75=−1.75; −1→+1: μ=+1−0.75=+0.25",
+            "+1→−1: μ=−1+0.75=−0.25; +1→+1: μ=+1+0.75=+1.75"
+          ],
+          "display": [
+            {
+              "latex": "State s=d_{m−1}∈{−1,+1}; new state s'=d_m",
+              "html": "<div class=\"verified-equation\" role=\"math\">State s=d_{m−1}∈{−1,+1}; new state s'=d_m</div>"
+            },
+            {
+              "latex": "−1→−1: μ=−1−0.75=−1.75; −1→+1: μ=+1−0.75=+0.25",
+              "html": "<div class=\"verified-equation\" role=\"math\">−1→−1: μ=−1−0.75=−1.75; −1→+1: μ=+1−0.75=+0.25</div>"
+            },
+            {
+              "latex": "+1→−1: μ=−1+0.75=−0.25; +1→+1: μ=+1+0.75=+1.75",
+              "html": "<div class=\"verified-equation\" role=\"math\">+1→−1: μ=−1+0.75=−0.25; +1→+1: μ=+1+0.75=+1.75</div>"
+            }
+          ],
+          "reason": "D=1 ဖြစ်လို့ prev symbol တစ်ခုက state ဖြစ်တယ်။ Current ±1 ရွေးပြီး next state ကို current symbol နဲ့ update လုပ်ရတယ်။",
+          "method": "For each old state s=±1, each new bit d=±1, μ=d+0.75s ကိုတွက်ပါ။ 4 edges ရှိပြီး +1 symbol edges နဲ့ -1 symbol edges ကို diagram မှာ color ခွဲနိုင်သည်။",
+          "finalAnswer": "2 states, 4 transitions per sample.",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        },
+        {
+          "label": "j",
+          "title": "Trellis for four received samples",
+          "question": "r=[1.24,−0.42,0.66,0.94], initial +1; give best state metrics after each received sample.",
+          "equations": [
+            "n=0: J(−1)=2.2201; J(+1)=0.2601",
+            "n=1: J(−1)=0.2890; J(+1)=2.6690",
+            "n=2: J(−1)=3.4971; J(+1)=0.4571",
+            "n=3: J(−1)=1.8732; J(+1)=1.1132"
+          ],
+          "display": [
+            {
+              "latex": "n=0: J(−1)=2.2201; J(+1)=0.2601",
+              "html": "<div class=\"verified-equation\" role=\"math\">n=0: J(−1)=2.2201; J(+1)=0.2601</div>"
+            },
+            {
+              "latex": "n=1: J(−1)=0.2890; J(+1)=2.6690",
+              "html": "<div class=\"verified-equation\" role=\"math\">n=1: J(−1)=0.2890; J(+1)=2.6690</div>"
+            },
+            {
+              "latex": "n=2: J(−1)=3.4971; J(+1)=0.4571",
+              "html": "<div class=\"verified-equation\" role=\"math\">n=2: J(−1)=3.4971; J(+1)=0.4571</div>"
+            },
+            {
+              "latex": "n=3: J(−1)=1.8732; J(+1)=1.1132",
+              "html": "<div class=\"verified-equation\" role=\"math\">n=3: J(−1)=1.8732; J(+1)=1.1132</div>"
+            }
+          ],
+          "reason": "State အလိုက် path metric အနည်းဆုံးကိုထားပြီး incoming path ကြီးတာကို discard လုပ်ရတယ်။ State တစ်ခုစီအတွက် minimum မရှိခဲ့ရင် next time မှာ မကောင်းတဲ့ path တွေများလာမယ်။",
+          "method": "Initialize J(+1)=0, J(−1)=∞ at time before first receive. For each n and each old state, compute γ=(r_n−(d+0.75s))², accumulate then choose minimum for each d. Numbers reflect independent Viterbi dynamic program.",
+          "finalAnswer": "Four sets of survivor-state metrics shown.",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        },
+        {
+          "label": "k",
+          "title": "Final ML decision and discarded branches",
+          "question": "Find the minimum-cost path after r=[1.24,−0.42,0.66,0.94] with initial +1.",
+          "equations": [
+            "Best path d=[+1,−1,+1,+1]",
+            "Predicted samples μ=[1.75,−0.25,0.25,1.75]",
+            "Squared errors=[0.2601,0.0289,0.1681,0.6561]",
+            "Total ML metric J=1.1132 < runner-up 1.8732"
+          ],
+          "display": [
+            {
+              "latex": "Best path d=[+1,−1,+1,+1]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Best path d=[+1,−1,+1,+1]</div>"
+            },
+            {
+              "latex": "Predicted samples μ=[1.75,−0.25,0.25,1.75]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Predicted samples μ=[1.75,−0.25,0.25,1.75]</div>"
+            },
+            {
+              "latex": "Squared errors=[0.2601,0.0289,0.1681,0.6561]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Squared errors=[0.2601,0.0289,0.1681,0.6561]</div>"
+            },
+            {
+              "latex": "Total ML metric J=1.1132 < runner-up 1.8732",
+              "html": "<div class=\"verified-equation\" role=\"math\">Total ML metric J=1.1132 &lt; runner-up 1.8732</div>"
+            }
+          ],
+          "reason": "Received values နဲ့ အနီးဆုံး prediction ရစေတဲ့ symbol sequence ရှာတာပါ။ Trellis survivor path ရဲ့ total squared error 1.1132 ဖြစ်တယ်။",
+          "method": "Initial state +1 သတ်မှတ်ပြီး winning transitions +1,−1,+1,+1 တွက်ပါ။ μ0=1+0.75(1)=1.75; μ1=−1+0.75(1)=−0.25; μ2=1+0.75(−1)=0.25; μ3=1+0.75(1)=1.75။ Squared residual sum 1.1132။ Alternative final −1 survivor 1.8732။",
+          "finalAnswer": "ML sequence [+1,−1,+1,+1], metric 1.1132.",
+          "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
         }
       ]
     }
