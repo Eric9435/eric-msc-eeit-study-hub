@@ -24,7 +24,18 @@ const READY=Boolean(CONFIG && CONFIG.apiKey && CONFIG.authDomain && CONFIG.proje
 const DOC_ID='eric-eeit';
 const SYNC_EVERY=4000, REMOTE_CHECK_EVERY=30000;
 let api=null,auth=null,db=null,user=null,phase=READY?'Ready to sign in':'Local mode';
-let syncing=false,lastChecked=0,lastSynced='',renderGuard=false,cloudError='';
+let syncing=false,lastChecked=0,lastSynced='',renderGuard=false,cloudError='',signInBusy=false;
+const CANCEL_CODES=new Set(['auth/user-cancelled','auth/popup-closed-by-user','auth/cancelled-popup-request','auth/redirect-cancelled-by-user']);
+const isCancelled=err=>CANCEL_CODES.has(String(err?.code||''));
+function authHelp(err){
+ const code=String(err?.code||'');
+ if(code==='auth/unauthorized-domain')return 'Google Sign-In is not authorized for this website. Add its hostname in Firebase Authentication → Settings → Authorized domains.';
+ if(code==='auth/operation-not-allowed')return 'Google Sign-In is disabled for this Firebase project. Enable the Google provider in Firebase Authentication → Sign-in method.';
+ if(code==='auth/network-request-failed')return 'Google Sign-In needs an internet connection. Your local study data is still saved.';
+ if(code==='auth/popup-blocked')return 'Your browser blocked the Google sign-in window. Allow popups or open the site in Chrome.';
+ return 'Google Sign-In could not finish. Your local study progress is safe. Please retry, or check your Firebase authentication settings.';
+}
+
 const $=s=>document.querySelector(s);
 function readLocal(){try{const obj=JSON.parse(localStorage.getItem(STORE)||'{}');return obj && typeof obj==='object' && !Array.isArray(obj)?obj:{};}catch{return {};}}
 function validMap(value){return value && typeof value==='object' && !Array.isArray(value)?value:{};}
@@ -55,9 +66,10 @@ function normalize(obj){return JSON.stringify(obj);}
 function notice(message){
  const old=$('.cloud-alert');if(old)old.remove();
  const box=document.createElement('div');box.className='cloud-alert';box.setAttribute('role','status');
- const text=document.createElement('span');text.textContent=message;
- const close=document.createElement('button');close.type='button';close.textContent='Close';close.addEventListener('click',()=>box.remove());
- box.append(text,close);document.body.append(box);
+ const messageText=document.createElement('span');messageText.textContent=message;
+ const close=document.createElement('button');close.type='button';close.textContent='Dismiss';close.setAttribute('aria-label','Dismiss notification');close.addEventListener('click',()=>box.remove());
+ box.append(messageText,close);document.body.append(box);
+ setTimeout(()=>{if(box.isConnected)box.remove();},8000);
 }
 function mount(){
  if(renderGuard)return;
@@ -87,7 +99,10 @@ function mount(){
    button.setAttribute('aria-label',signed?'Account menu, synchronize or sign out':READY?'Sign in with Google':'Set up Firebase authentication');
    status.textContent=phase;
    const pill=$('.topbar .local-pill');
-   if(pill){pill.textContent=signed?'Cloud + local backup':'Saved on this device';pill.title=signed?'Signed-in data syncs to your private Firestore document':'Your work is saved locally; sign in to enable cloud sync';}
+   if(pill){
+     pill.textContent=!signed?'Saved on this device':!navigator.onLine?'Saved offline · sync pending':cloudError?'Local saved · sync issue':syncing?'Syncing…':lastSynced?'Cloud + local backup':'Cloud connected';
+     pill.title=signed?(cloudError?'Your local data is safe, but cloud sync needs attention':lastSynced?'Latest progress is stored locally and in your private cloud document':'Google is connected; syncing your progress'):'Your work is saved locally; sign in to enable cloud sync';
+   }
    const h=$('.settings-card h3');
    if(h && /local-only storage|cloud/i.test(h.textContent||'')){
      h.textContent='Your storage and privacy';
@@ -119,14 +134,28 @@ async function onButtonClick(){
    setTimeout(()=>document.addEventListener('pointerdown',function close(e){if(!control.contains(e.target))menu.remove();document.removeEventListener('pointerdown',close);}),0);
    return;
  }
+ if(signInBusy)return;
+ signInBusy=true;
  try{
-   phase='Opening Google…';mount();
+   cloudError='';phase='Opening Google…';mount();
    const provider=new api.GoogleAuthProvider();
-   await api.signInWithPopup(auth,provider);
+   try{
+     await api.signInWithPopup(auth,provider);
+   }catch(err){
+     const code=String(err?.code||'');
+     if(code==='auth/popup-blocked'||code==='auth/operation-not-supported-in-this-environment'){
+       phase='Opening Google in this tab…';mount();
+       await api.signInWithRedirect(auth,provider);
+       return;
+     }
+     throw err;
+   }
  }catch(err){
-   cloudError=err.code||'Authentication error';phase='Sign-in failed';mount();
-   notice('Google Sign-In failed: '+(err.message||'Check your Firebase authorized domains.'));
- }
+   // Closing Google's account chooser is not an app error; local work remains intact.
+   if(isCancelled(err)||user){cloudError='';phase=user?'Cloud connected':'Local backup active';mount();return;}
+   cloudError=String(err?.code||'auth/error');phase='Sign-in needs attention';mount();
+   notice(authHelp(err));
+ }finally{signInBusy=false;}
 }
 async function sync(force=false){
  if(!user||!db||syncing||!navigator.onLine)return;
@@ -178,6 +207,11 @@ async function init(){
        await sync(true);
      }
    },err=>{cloudError=err.message;phase='Google auth error';mount();});
+   // Resolve the result if a blocked popup previously required same-tab Google login.
+   void api.getRedirectResult(auth).catch(err=>{
+     if(isCancelled(err)||user)return;
+     cloudError=String(err?.code||'auth/error');phase='Sign-in needs attention';mount();notice(authHelp(err));
+   });
    window.addEventListener('online',()=>sync(true));
    window.addEventListener('storage',event=>{if(event.key===STORE && user)void sync(true);});
    setInterval(()=>{if(user)void sync();},SYNC_EVERY);
