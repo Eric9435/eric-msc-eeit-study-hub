@@ -1,7 +1,7 @@
 {
-  "revision": "2026-11-06-original-practice-rederived-v1",
+  "revision": "2026-11-06-original-practice-rederived-v2",
   "kind": "independent-original-practice-step-by-step",
-  "description": "Detailed start-to-finish calculations for all 16 original 3-part practice sets, with original user-facing prompts, systematic equations, substitution and checking; not TUHH official solutions.",
+  "description": "63 original practice subquestions across five subjects now provide explicit Given → Formula → Substitution → Check sequences, without reproducing official copyrighted source files.",
   "overrides": [
     {
       "id": "original-p1",
@@ -2384,6 +2384,736 @@
           ],
           "finalAnswer": "|σ| = EαΔT = 160×10⁹ × 130×10⁻⁶ = 20.8 MPa. Heating while restrained produces compressive stress under this idealization.",
           "verification": "Independently structured original practice; validate against the stated inputs and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "practice-dc-bpsk",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "User's original workspace practice. Step-by-step method and numbers restructured independently; not an official tutor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Bit duration and symbol rate",
+          "question": "For BPSK at 100 kbit/s, determine the bit duration and symbol rate.",
+          "reason": "BPSK မှာ symbol တစ်ခုက bit တစ်ခုကိုပဲ ကိုယ်စားပြုပါတယ်။ ဒါကြောင့် bit rate နဲ့ symbol rate တူပါတယ်။ 100,000 bit/s ဆိုတာ 1 second အတွင်း bit 100,000 ခုသွားတာဖြစ်လို့ bit တစ်ခုကြာချိန်ကို ပြောင်းပြန်ယူရုံပါပဲ။",
+          "display": [
+            {
+              "latex": "Rs=Rb/log₂(M), M=2 ⇒ log₂(M)=1",
+              "html": "<div class=\"verified-equation\" role=\"math\">Rs=Rb/log₂(M), M=2 ⇒ log₂(M)=1</div>"
+            },
+            {
+              "latex": "Rs=100000 symbols/s; Tb=1/100000 s=10⁻⁵ s",
+              "html": "<div class=\"verified-equation\" role=\"math\">Rs=100000 symbols/s; Tb=1/100000 s=10⁻⁵ s</div>"
+            },
+            {
+              "latex": "Tb=10 μs. Check: Rs·Tb=1 symbol.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Tb=10 μs. Check: Rs·Tb=1 symbol.</div>"
+            }
+          ],
+          "equations": [
+            "Rs=Rb/log₂(M), M=2 ⇒ log₂(M)=1",
+            "Rs=100000 symbols/s; Tb=1/100000 s=10⁻⁵ s",
+            "Tb=10 μs. Check: Rs·Tb=1 symbol."
+          ],
+          "method": "\"Bit duration and symbol rate\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "BPSK, Rb=100 kbit/s, one bit per transmitted symbol"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Rs=Rb/log₂(M), M=2 ⇒ log₂(M)=1"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Rs=100000 symbols/s; Tb=1/100000 s=10⁻⁵ s"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "Tb=10 μs. Check: Rs·Tb=1 symbol."
+            }
+          ],
+          "finalAnswer": "T_b=1/R_b=10\\ \\mu\\mathrm{s}",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        },
+        {
+          "label": "b",
+          "title": "Raised-cosine occupied bandwidth",
+          "question": "Calculate the ideal BPSK passband null-to-null bandwidth using alpha=0.25.",
+          "reason": "Raised-cosine pulse shaping သုံးတဲ့အခါ RF passband null-to-null bandwidth = (1+roll-off) × symbol rate ဖြစ်ပါတယ်။ တစ်ဖက်တည်း baseband bandwidth ကို မေးရင် အဲ့ဒီအဖြေကို 2 နဲ့စားရပါတယ်။ ဤမေးခွန်းမှာ RF passband ကို မေးထားတာဖြစ်လို့ 125 kHz ဖြစ်ပါတယ်။",
+          "display": [
+            {
+              "latex": "One-sided baseband width Bbb=(1+α)Rs/2; RF null-to-null width BRF=(1+α)Rs",
+              "html": "<div class=\"verified-equation\" role=\"math\">One-sided baseband width Bbb=(1+α)Rs/2; RF null-to-null width BRF=(1+α)Rs</div>"
+            },
+            {
+              "latex": "Bbb=(1.25)(100000)/2=62.5 kHz; BRF=2Bbb=125 kHz",
+              "html": "<div class=\"verified-equation\" role=\"math\">Bbb=(1.25)(100000)/2=62.5 kHz; BRF=2Bbb=125 kHz</div>"
+            },
+            {
+              "latex": "RF bandwidth is 125 kHz; distinguish two-sided RF span from one-sided baseband.",
+              "html": "<div class=\"verified-equation\" role=\"math\">RF bandwidth is 125 kHz; distinguish two-sided RF span from one-sided baseband.</div>"
+            }
+          ],
+          "equations": [
+            "One-sided baseband width Bbb=(1+α)Rs/2; RF null-to-null width BRF=(1+α)Rs",
+            "Bbb=(1.25)(100000)/2=62.5 kHz; BRF=2Bbb=125 kHz",
+            "RF bandwidth is 125 kHz; distinguish two-sided RF span from one-sided baseband."
+          ],
+          "method": "\"Raised-cosine occupied bandwidth\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "BPSK Rs=100 ksymbols/s, raised-cosine roll-off α=0.25"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "One-sided baseband width Bbb=(1+α)Rs/2; RF null-to-null width BRF=(1+α)Rs"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Bbb=(1.25)(100000)/2=62.5 kHz; BRF=2Bbb=125 kHz"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "RF bandwidth is 125 kHz; distinguish two-sided RF span from one-sided baseband."
+            }
+          ],
+          "finalAnswer": "B_{\\mathrm{RF}}=1.25\\times100\\,000=125\\ \\mathrm{kHz}",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        },
+        {
+          "label": "c",
+          "title": "Ideal coherent BER",
+          "question": "Find the BER for coherent BPSK when E_b/N_0=6 dB.",
+          "reason": "dB က logarithmic scale ပါ။ Q-function ထဲထည့်မယ့် E_b/N_0 ကို အရင် linear ပြောင်းရပါတယ်။ BPSK ရဲ့ ideal AWGN BER = Q(sqrt(2Eb/N0)) = 0.5 erfc(sqrt(Eb/N0)) ဖြစ်ပါတယ်။ ဒါက coding, fading နဲ့ synchronization losses မပါတဲ့ theory အဖြေပါ။",
+          "display": [
+            {
+              "latex": "γb=10^(6/10); Pb=Q(√(2γb))=0.5·erfc(√γb)",
+              "html": "<div class=\"verified-equation\" role=\"math\">γb=10^(6/10); Pb=Q(√(2γb))=0.5·erfc(√γb)</div>"
+            },
+            {
+              "latex": "γb=3.981071706; √(2γb)=2.821728; Pb≈0.00238829",
+              "html": "<div class=\"verified-equation\" role=\"math\">γb=3.981071706; √(2γb)=2.821728; Pb≈0.00238829</div>"
+            },
+            {
+              "latex": "This applies without coding, fading or carrier/timing estimation penalty.",
+              "html": "<div class=\"verified-equation\" role=\"math\">This applies without coding, fading or carrier/timing estimation penalty.</div>"
+            }
+          ],
+          "equations": [
+            "γb=10^(6/10); Pb=Q(√(2γb))=0.5·erfc(√γb)",
+            "γb=3.981071706; √(2γb)=2.821728; Pb≈0.00238829",
+            "This applies without coding, fading or carrier/timing estimation penalty."
+          ],
+          "method": "\"Ideal coherent BER\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Ideal coherent BPSK in AWGN, Eb/N0=6 dB"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "γb=10^(6/10); Pb=Q(√(2γb))=0.5·erfc(√γb)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "γb=3.981071706; √(2γb)=2.821728; Pb≈0.00238829"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "This applies without coding, fading or carrier/timing estimation penalty."
+            }
+          ],
+          "finalAnswer": "P_b\\approx0.002388",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        }
+      ]
+    },
+    {
+      "id": "practice-eps-per-unit",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "User's original workspace practice. Step-by-step method and numbers restructured independently; not an official tutor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Base impedance and pu impedance",
+          "question": "Find Z_base and express the physical feeder impedance in per unit.",
+          "reason": "Per-unit ဆိုတာ actual တန်ဖိုးကို base တန်ဖိုးနဲ့စားထားတဲ့ normalized နည်းလမ်းပါ။ Three-phase system မှာ S_base ကို စုစုပေါင်း 3-phase apparent power၊ V_base ကို line-to-line voltage အဖြစ်သုံးတဲ့အခါ Z_base=V_LL²/S_3phase ဖြစ်ပါတယ်။ 110 kV ကို squared လုပ်ပြီး 100 MVA နဲ့စားရင် 121 Ω ရပါတယ်။",
+          "display": [
+            {
+              "latex": "Zbase=VLL²/S3φ; Zpu=Zfeeder/Zbase",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zbase=VLL²/S3φ; Zpu=Zfeeder/Zbase</div>"
+            },
+            {
+              "latex": "Zbase=(110×10³)²/(100×10⁶)=121 Ω; Zpu=(12.1+j24.2)/121",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zbase=(110×10³)²/(100×10⁶)=121 Ω; Zpu=(12.1+j24.2)/121</div>"
+            },
+            {
+              "latex": "Zpu=0.10+j0.20 pu. Dimensionless normalized impedance.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zpu=0.10+j0.20 pu. Dimensionless normalized impedance.</div>"
+            }
+          ],
+          "equations": [
+            "Zbase=VLL²/S3φ; Zpu=Zfeeder/Zbase",
+            "Zbase=(110×10³)²/(100×10⁶)=121 Ω; Zpu=(12.1+j24.2)/121",
+            "Zpu=0.10+j0.20 pu. Dimensionless normalized impedance."
+          ],
+          "method": "\"Base impedance and pu impedance\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Sbase=100 MVA, Vbase,LL=110 kV; Zfeeder=12.1+j24.2 Ω"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Zbase=VLL²/S3φ; Zpu=Zfeeder/Zbase"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Zbase=(110×10³)²/(100×10⁶)=121 Ω; Zpu=(12.1+j24.2)/121"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "Zpu=0.10+j0.20 pu. Dimensionless normalized impedance."
+            }
+          ],
+          "finalAnswer": "Z_{\\mathrm{pu}}=(12.1+j24.2)/121=0.1+j0.2",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        },
+        {
+          "label": "b",
+          "title": "Current base",
+          "question": "Determine three-phase line-current base.",
+          "reason": "Power = √3 × line voltage × line current ဖြစ်ပါတယ်။ 100 MVA က 3-phase total base ဖြစ်တာကြောင့် √3 နဲ့စားရပါတယ်။ ဤလိုမျိုး base ပြောင်းရင် kV နဲ့ MVA units ကို တစ်ပြိုင်တည်း SI units အဖြစ်ပြောင်းတာ အမှားလျော့ပါတယ်။",
+          "display": [
+            {
+              "latex": "Ibase=Sbase/(√3 Vbase,LL)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Ibase=Sbase/(√3 Vbase,LL)</div>"
+            },
+            {
+              "latex": "Ibase=(100×10⁶)/(√3×110×10³)=524.8639 A",
+              "html": "<div class=\"verified-equation\" role=\"math\">Ibase=(100×10⁶)/(√3×110×10³)=524.8639 A</div>"
+            },
+            {
+              "latex": "Units VA/V=A, and √3 is included exactly once.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Units VA/V=A, and √3 is included exactly once.</div>"
+            }
+          ],
+          "equations": [
+            "Ibase=Sbase/(√3 Vbase,LL)",
+            "Ibase=(100×10⁶)/(√3×110×10³)=524.8639 A",
+            "Units VA/V=A, and √3 is included exactly once."
+          ],
+          "method": "\"Current base\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Sbase=100 MVA, VLL=110 kV"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Ibase=Sbase/(√3 Vbase,LL)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Ibase=(100×10⁶)/(√3×110×10³)=524.8639 A"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "Units VA/V=A, and √3 is included exactly once."
+            }
+          ],
+          "finalAnswer": "I_{\\mathrm{base}}\\approx524.86\\ \\mathrm{A}",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        },
+        {
+          "label": "c",
+          "title": "Copper loss in per unit",
+          "question": "Estimate three-phase real copper loss at 0.8 pu current for R=0.1 pu.",
+          "reason": "အပူဆုံးရှုံးမှုက I²R ဖြစ်ပါတယ်။ Per-unit 3-phase base တစ်ခုတည်းကိုသုံးထားရင် P_loss,pu = I_pu² R_pu ဖြစ်ပြီး MW ပြန်လိုချင်ရင် S_base နဲ့မြှောက်ရပါတယ်။ 3 ကို ထပ်မမြှောက်ပါနဲ့ — three-phase base ထဲမှာ ပါပြီးသားပါ။",
+          "display": [
+            {
+              "latex": "3φ copper-loss pu: Ploss,pu=Ipu² Rpu",
+              "html": "<div class=\"verified-equation\" role=\"math\">3φ copper-loss pu: Ploss,pu=Ipu² Rpu</div>"
+            },
+            {
+              "latex": "Ploss,pu=(0.8)²(0.1)=0.064; Ploss=0.064×100 MW",
+              "html": "<div class=\"verified-equation\" role=\"math\">Ploss,pu=(0.8)²(0.1)=0.064; Ploss=0.064×100 MW</div>"
+            },
+            {
+              "latex": "Ploss=6.4 MW. No additional factor 3 with matched three-phase bases.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Ploss=6.4 MW. No additional factor 3 with matched three-phase bases.</div>"
+            }
+          ],
+          "equations": [
+            "3φ copper-loss pu: Ploss,pu=Ipu² Rpu",
+            "Ploss,pu=(0.8)²(0.1)=0.064; Ploss=0.064×100 MW",
+            "Ploss=6.4 MW. No additional factor 3 with matched three-phase bases."
+          ],
+          "method": "\"Copper loss in per unit\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Ipu=0.80; Rpu=0.10; Sbase=100 MVA"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "3φ copper-loss pu: Ploss,pu=Ipu² Rpu"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "Ploss,pu=(0.8)²(0.1)=0.064; Ploss=0.064×100 MW"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "Ploss=6.4 MW. No additional factor 3 with matched three-phase bases."
+            }
+          ],
+          "finalAnswer": "P_{\\mathrm{loss}}=0.8^2\\times0.1\\times100\\ \\mathrm{MW}=6.4\\ \\mathrm{MW}",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        }
+      ]
+    },
+    {
+      "id": "practice-control-state",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "User's original workspace practice. Step-by-step method and numbers restructured independently; not an official tutor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Find A, B, C and D",
+          "question": "Express the system with x1=y and x2=y˙ using x˙=Ax+Bu and y=Cx+Du.",
+          "reason": "x₁=y လို့သတ်မှတ်တော့ ẋ₁=ẏ=x₂ ပါ။ x₂=ẏ ဖြစ်လို့ ẋ₂=ÿ ကို မူရင်း equation ထဲက isolate လုပ်ရင် -2x₁-3x₂+u ရပါတယ်။ A မှာ state coefficient တွေ၊ B မှာ input u ရဲ့ coefficient တွေ၊ C မှာ output y ကို ရွေးတဲ့ coefficient တွေ၊ D မှာ input က output ဆီ တိုက်ရိုက်သွားတဲ့ coefficient ကို ထည့်ပါတယ်။",
+          "display": [
+            {
+              "latex": "Differentiate states and isolate y¨ from the ODE",
+              "html": "<div class=\"verified-equation\" role=\"math\">Differentiate states and isolate y¨ from the ODE</div>"
+            },
+            {
+              "latex": "ẋ1=x2; ẋ2=−2x1−3x2+u",
+              "html": "<div class=\"verified-equation\" role=\"math\">ẋ1=x2; ẋ2=−2x1−3x2+u</div>"
+            },
+            {
+              "latex": "A=[[0,1],[−2,−3]], B=[0,1]ᵀ, C=[1,0], D=0.",
+              "html": "<div class=\"verified-equation\" role=\"math\">A=[[0,1],[−2,−3]], B=[0,1]ᵀ, C=[1,0], D=0.</div>"
+            }
+          ],
+          "equations": [
+            "Differentiate states and isolate y¨ from the ODE",
+            "ẋ1=x2; ẋ2=−2x1−3x2+u",
+            "A=[[0,1],[−2,−3]], B=[0,1]ᵀ, C=[1,0], D=0."
+          ],
+          "method": "\"Find A, B, C and D\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "ODE y¨+3y˙+2y=u; state definitions x1=y, x2=y˙"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Differentiate states and isolate y¨ from the ODE"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "ẋ1=x2; ẋ2=−2x1−3x2+u"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "A=[[0,1],[−2,−3]], B=[0,1]ᵀ, C=[1,0], D=0."
+            }
+          ],
+          "finalAnswer": "C=\\begin{bmatrix}1&0\\end{bmatrix},\\ D=0",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        },
+        {
+          "label": "b",
+          "title": "Test controllability",
+          "question": "Find [B, AB], its determinant and the rank.",
+          "reason": "Input B ကို တစ်ကြိမ် A နဲ့မြှောက်ပြီး [B AB] စီရတာပါ။ 2×2 determinant သုညမဟုတ်ရင် column နှစ်ခု independent ဖြစ်လို့ rank=2၊ state နှစ်ခုလုံးကို control လုပ်နိုင်ပါတယ်။",
+          "display": [
+            {
+              "latex": "Compute AB then controllability matrix Cc=[B,AB]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Compute AB then controllability matrix Cc=[B,AB]</div>"
+            },
+            {
+              "latex": "AB=[1,−3]ᵀ; Cc=[[0,1],[1,−3]]; det(Cc)=−1",
+              "html": "<div class=\"verified-equation\" role=\"math\">AB=[1,−3]ᵀ; Cc=[[0,1],[1,−3]]; det(Cc)=−1</div>"
+            },
+            {
+              "latex": "rank(Cc)=2=n: the 2-state system is controllable.",
+              "html": "<div class=\"verified-equation\" role=\"math\">rank(Cc)=2=n: the 2-state system is controllable.</div>"
+            }
+          ],
+          "equations": [
+            "Compute AB then controllability matrix Cc=[B,AB]",
+            "AB=[1,−3]ᵀ; Cc=[[0,1],[1,−3]]; det(Cc)=−1",
+            "rank(Cc)=2=n: the 2-state system is controllable."
+          ],
+          "method": "\"Test controllability\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "A=[[0,1],[−2,−3]], B=[0,1]ᵀ; system order n=2"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Compute AB then controllability matrix Cc=[B,AB]"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "AB=[1,−3]ᵀ; Cc=[[0,1],[1,−3]]; det(Cc)=−1"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "rank(Cc)=2=n: the 2-state system is controllable."
+            }
+          ],
+          "finalAnswer": "\\det(\\mathcal C)=0(-3)-1(1)=-1\\neq0",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        },
+        {
+          "label": "c",
+          "title": "Poles and transfer function",
+          "question": "Find the poles and G(s)=Y(s)/U(s) for zero initial conditions.",
+          "reason": "Poles ဆိုတာ characteristic polynomial =0 ရဲ့ roots တွေပါ။ s²+3s+2=(s+1)(s+2) ဖြစ်လို့ -1 နဲ့ -2 ရပါတယ်။ Pole နှစ်ခုလုံး negative real part ဖြစ်လို့ continuous-time system က asymptotically stable ပါ။ Output y ကိုပဲယူထားတာဖြစ်လို့ transfer function numerator 1 ဖြစ်ပါတယ်။",
+          "display": [
+            {
+              "latex": "Pole locations are roots of s²+3s+2=0",
+              "html": "<div class=\"verified-equation\" role=\"math\">Pole locations are roots of s²+3s+2=0</div>"
+            },
+            {
+              "latex": "s²+3s+2=(s+1)(s+2), so p1=−1 and p2=−2",
+              "html": "<div class=\"verified-equation\" role=\"math\">s²+3s+2=(s+1)(s+2), so p1=−1 and p2=−2</div>"
+            },
+            {
+              "latex": "Both poles in left half-plane: asymptotic and exponential stability.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Both poles in left half-plane: asymptotic and exponential stability.</div>"
+            }
+          ],
+          "equations": [
+            "Pole locations are roots of s²+3s+2=0",
+            "s²+3s+2=(s+1)(s+2), so p1=−1 and p2=−2",
+            "Both poles in left half-plane: asymptotic and exponential stability."
+          ],
+          "method": "\"Poles and transfer function\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "System G(s)=1/(s²+3s+2), zero initial state"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Pole locations are roots of s²+3s+2=0"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "s²+3s+2=(s+1)(s+2), so p1=−1 and p2=−2"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "Both poles in left half-plane: asymptotic and exponential stability."
+            }
+          ],
+          "finalAnswer": "G(s)=\\dfrac{1}{s^2+3s+2}",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        }
+      ]
+    },
+    {
+      "id": "practice-mw-matching",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "User's original workspace practice. Step-by-step method and numbers restructured independently; not an official tutor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Reflection coefficient",
+          "question": "Determine the voltage reflection coefficient Γ at the load.",
+          "reason": "Characteristic impedance Z₀ နဲ့ load impedance ZL မတူတဲ့အခါ wave တချို့ ပြန်ထွက်ပါတယ်။ Γ=(ZL−Z₀)/(ZL+Z₀) ကိုသုံးရင် +1/3 ဖြစ်ပါတယ်။ Plus sign က load ကို line ထက် ပိုမြင့်တဲ့ resistance နဲ့ချိတ်ထားတာကို ပြပါတယ်။",
+          "display": [
+            {
+              "latex": "Load reflection coefficient ΓL=(ZL−Z0)/(ZL+Z0)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Load reflection coefficient ΓL=(ZL−Z0)/(ZL+Z0)</div>"
+            },
+            {
+              "latex": "ΓL=(100−50)/(100+50)=50/150=1/3",
+              "html": "<div class=\"verified-equation\" role=\"math\">ΓL=(100−50)/(100+50)=50/150=1/3</div>"
+            },
+            {
+              "latex": "Reflection amplitude |Γ|≈0.333333, sign is positive real.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Reflection amplitude |Γ|≈0.333333, sign is positive real.</div>"
+            }
+          ],
+          "equations": [
+            "Load reflection coefficient ΓL=(ZL−Z0)/(ZL+Z0)",
+            "ΓL=(100−50)/(100+50)=50/150=1/3",
+            "Reflection amplitude |Γ|≈0.333333, sign is positive real."
+          ],
+          "method": "\"Reflection coefficient\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Real load ZL=100 Ω, lossless line Z0=50 Ω"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Load reflection coefficient ΓL=(ZL−Z0)/(ZL+Z0)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "ΓL=(100−50)/(100+50)=50/150=1/3"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "Reflection amplitude |Γ|≈0.333333, sign is positive real."
+            }
+          ],
+          "finalAnswer": "\\Gamma_L=(100-50)/(100+50)=1/3",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        },
+        {
+          "label": "b",
+          "title": "VSWR and transferred power",
+          "question": "Calculate VSWR and the fraction of incident power delivered to the load.",
+          "reason": "Voltage standing-wave ratio က 1 နဲ့ 1 အထက်ပဲရှိပါတယ်။ Γ=0 ဆိုတာ perfect match၊ VSWR=1 ပါ။ Power reflection fraction = |Γ|² ဖြစ်လို့ transmitted/delivered fraction = 1−|Γ|² ကိုတွက်ရပါတယ်။ Line က lossless လို့ပေးထားတာ အရေးကြီးပါတယ်။",
+          "display": [
+            {
+              "latex": "VSWR=(1+|Γ|)/(1−|Γ|); Pdel/Pinc=1−|Γ|²",
+              "html": "<div class=\"verified-equation\" role=\"math\">VSWR=(1+|Γ|)/(1−|Γ|); Pdel/Pinc=1−|Γ|²</div>"
+            },
+            {
+              "latex": "VSWR=(4/3)/(2/3)=2; delivered power fraction=1−1/9=8/9",
+              "html": "<div class=\"verified-equation\" role=\"math\">VSWR=(4/3)/(2/3)=2; delivered power fraction=1−1/9=8/9</div>"
+            },
+            {
+              "latex": "VSWR=2; approximately 88.8889% incident power delivered, lossless line.",
+              "html": "<div class=\"verified-equation\" role=\"math\">VSWR=2; approximately 88.8889% incident power delivered, lossless line.</div>"
+            }
+          ],
+          "equations": [
+            "VSWR=(1+|Γ|)/(1−|Γ|); Pdel/Pinc=1−|Γ|²",
+            "VSWR=(4/3)/(2/3)=2; delivered power fraction=1−1/9=8/9",
+            "VSWR=2; approximately 88.8889% incident power delivered, lossless line."
+          ],
+          "method": "\"VSWR and transferred power\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Γ=1/3, passive matched-reference line"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "VSWR=(1+|Γ|)/(1−|Γ|); Pdel/Pinc=1−|Γ|²"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "VSWR=(4/3)/(2/3)=2; delivered power fraction=1−1/9=8/9"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "VSWR=2; approximately 88.8889% incident power delivered, lossless line."
+            }
+          ],
+          "finalAnswer": "P_\\mathrm{del}/P_\\mathrm{inc}=1-|\\Gamma|^2=8/9\\approx88.89\\%",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        },
+        {
+          "label": "c",
+          "title": "Return loss",
+          "question": "Calculate return loss in dB.",
+          "reason": "Return loss က mismatch ကြောင့် ပြန်လာတဲ့ wave ကို logarithmic scale နဲ့ဖော်ပြတာပါ။ RL=−20log₁₀|Γ| ဖြစ်ပြီး Γ=1/3 ဆိုရင် 9.54 dB ရပါတယ်။ ပိုကောင်းတဲ့ matching မှာ Γ သေးပြီး return loss ကြီးပါတယ်။",
+          "display": [
+            {
+              "latex": "Return loss RL=−20 log10|Γ|",
+              "html": "<div class=\"verified-equation\" role=\"math\">Return loss RL=−20 log10|Γ|</div>"
+            },
+            {
+              "latex": "RL=−20 log10(1/3)=20 log10(3)=9.542425 dB",
+              "html": "<div class=\"verified-equation\" role=\"math\">RL=−20 log10(1/3)=20 log10(3)=9.542425 dB</div>"
+            },
+            {
+              "latex": "Check: reflection power is 1/9 ≈11.11% of incident power.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check: reflection power is 1/9 ≈11.11% of incident power.</div>"
+            }
+          ],
+          "equations": [
+            "Return loss RL=−20 log10|Γ|",
+            "RL=−20 log10(1/3)=20 log10(3)=9.542425 dB",
+            "Check: reflection power is 1/9 ≈11.11% of incident power."
+          ],
+          "method": "\"Return loss\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Reflection coefficient magnitude |Γ|=1/3"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Return loss RL=−20 log10|Γ|"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "RL=−20 log10(1/3)=20 log10(3)=9.542425 dB"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "Check: reflection power is 1/9 ≈11.11% of incident power."
+            }
+          ],
+          "finalAnswer": "RL=-20\\log_{10}(1/3)\\approx9.54\\ \\mathrm{dB}",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        }
+      ]
+    },
+    {
+      "id": "practice-micro-cap",
+      "status": "worked",
+      "verificationState": "rederived-from-existing-original-practice",
+      "verificationNote": "User's original workspace practice. Step-by-step method and numbers restructured independently; not an official tutor solution.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Capacitance and gap change",
+          "question": "Find C with d=2 µm; then find C when d=1 µm.",
+          "reason": "Parallel plate capacitor က C=ε₀A/d ပါ။ Unit ပြောင်းရာမှာ 1 mm² = 10⁻⁶ m² ၊ 2 µm = 2×10⁻⁶ m ဖြစ်တာကို သတိထားပါ။ Gap ကို ထက်ဝက်လျှော့ရင် capacitance နှစ်ဆတိုးပါတယ်။ Ideal model ဖြစ်လို့ fringe field မထည့်ထားပါဘူး။",
+          "display": [
+            {
+              "latex": "C=ε0 A/d, ε0≈8.854×10⁻¹² F/m",
+              "html": "<div class=\"verified-equation\" role=\"math\">C=ε0 A/d, ε0≈8.854×10⁻¹² F/m</div>"
+            },
+            {
+              "latex": "C(2 μm)=8.854×10⁻¹² ×10⁻⁶/(2×10⁻⁶)=4.427 pF",
+              "html": "<div class=\"verified-equation\" role=\"math\">C(2 μm)=8.854×10⁻¹² ×10⁻⁶/(2×10⁻⁶)=4.427 pF</div>"
+            },
+            {
+              "latex": "When d halves to 1 μm, C doubles to 8.854 pF (no fringes).",
+              "html": "<div class=\"verified-equation\" role=\"math\">When d halves to 1 μm, C doubles to 8.854 pF (no fringes).</div>"
+            }
+          ],
+          "equations": [
+            "C=ε0 A/d, ε0≈8.854×10⁻¹² F/m",
+            "C(2 μm)=8.854×10⁻¹² ×10⁻⁶/(2×10⁻⁶)=4.427 pF",
+            "When d halves to 1 μm, C doubles to 8.854 pF (no fringes)."
+          ],
+          "method": "\"Capacitance and gap change\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Vacuum parallel plates, A=1 mm²=10⁻⁶ m²; gap d=2 μm"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "C=ε0 A/d, ε0≈8.854×10⁻¹² F/m"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "C(2 μm)=8.854×10⁻¹² ×10⁻⁶/(2×10⁻⁶)=4.427 pF"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "When d halves to 1 μm, C doubles to 8.854 pF (no fringes)."
+            }
+          ],
+          "finalAnswer": "C(1\\,\\mu m)=8.854\\ \\mathrm{pF}",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        },
+        {
+          "label": "b",
+          "title": "Small-signal gap sensitivity",
+          "question": "Compute dC/dd at d=2 µm and express in pF per µm.",
+          "reason": "Sensitivity ဆိုတာ gap ကို အနည်းငယ် ပြောင်းတဲ့အခါ capacitance ဘယ်လောက်ပြောင်းလဲမလဲ ဆိုတဲ့ slope ပါ။ C=ε₀A/d ကို differentiate လုပ်ရင် minus sign ထွက်ပါတယ်။ Gap ပိုကြီးရင် capacitance ပိုသေးတာကို ဖော်ပြတာပါ။ Slope က d=2 µm နေရာတစ်ခုအတွက် local value ဖြစ်ပါတယ်။",
+          "display": [
+            {
+              "latex": "Local gap sensitivity dC/dd=−ε0 A/d²",
+              "html": "<div class=\"verified-equation\" role=\"math\">Local gap sensitivity dC/dd=−ε0 A/d²</div>"
+            },
+            {
+              "latex": "dC/dd=−8.854×10⁻¹² ×10⁻⁶/(2×10⁻⁶)²=−2.2135×10⁻⁶ F/m",
+              "html": "<div class=\"verified-equation\" role=\"math\">dC/dd=−8.854×10⁻¹² ×10⁻⁶/(2×10⁻⁶)²=−2.2135×10⁻⁶ F/m</div>"
+            },
+            {
+              "latex": "Convert: −2.2135×10⁻⁶ F/m ×(10⁻⁶ m/μm)×(10¹² pF/F)=−2.2135 pF/μm.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Convert: −2.2135×10⁻⁶ F/m ×(10⁻⁶ m/μm)×(10¹² pF/F)=−2.2135 pF/μm.</div>"
+            }
+          ],
+          "equations": [
+            "Local gap sensitivity dC/dd=−ε0 A/d²",
+            "dC/dd=−8.854×10⁻¹² ×10⁻⁶/(2×10⁻⁶)²=−2.2135×10⁻⁶ F/m",
+            "Convert: −2.2135×10⁻⁶ F/m ×(10⁻⁶ m/μm)×(10¹² pF/F)=−2.2135 pF/μm."
+          ],
+          "method": "\"Small-signal gap sensitivity\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "ε0=8.854×10⁻¹² F/m, A=10⁻⁶ m², d=2 μm"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Local gap sensitivity dC/dd=−ε0 A/d²"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "dC/dd=−8.854×10⁻¹² ×10⁻⁶/(2×10⁻⁶)²=−2.2135×10⁻⁶ F/m"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "Convert: −2.2135×10⁻⁶ F/m ×(10⁻⁶ m/μm)×(10¹² pF/F)=−2.2135 pF/μm."
+            }
+          ],
+          "finalAnswer": "\\frac{dC}{dd}\\Big|_{d=2\\mu m}\\approx-2.214\\ \\mathrm{pF}/\\mu m",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
+        },
+        {
+          "label": "c",
+          "title": "Electrostatic force",
+          "question": "Estimate ideal attractive force at V=5 V and d=2 µm.",
+          "reason": "Constant voltage ထိန်းထားတဲ့ parallel plates တွေကြားမှာ electrostatic attraction ဖြစ်ပါတယ်။ Ideal force magnitude = ε₀ A V²/(2d²) ပါ။ Electrical model တစ်ခုတည်းကိုသုံးထားတာဖြစ်ပြီး spring stiffness, pull-in instability နဲ့ fringing effects မပါသေးပါ။",
+          "display": [
+            {
+              "latex": "Ideal constant-voltage attractive force F=ε0 A V²/(2d²)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Ideal constant-voltage attractive force F=ε0 A V²/(2d²)</div>"
+            },
+            {
+              "latex": "F=(8.854×10⁻¹²)(10⁻⁶)(5²)/[2(2×10⁻⁶)²]",
+              "html": "<div class=\"verified-equation\" role=\"math\">F=(8.854×10⁻¹²)(10⁻⁶)(5²)/[2(2×10⁻⁶)²]</div>"
+            },
+            {
+              "latex": "F=27.66875 μN; ignores fringing and electrostatic pull-in.",
+              "html": "<div class=\"verified-equation\" role=\"math\">F=27.66875 μN; ignores fringing and electrostatic pull-in.</div>"
+            }
+          ],
+          "equations": [
+            "Ideal constant-voltage attractive force F=ε0 A V²/(2d²)",
+            "F=(8.854×10⁻¹²)(10⁻⁶)(5²)/[2(2×10⁻⁶)²]",
+            "F=27.66875 μN; ignores fringing and electrostatic pull-in."
+          ],
+          "method": "\"Electrostatic force\" အတွက် ပေးထားတဲ့ Data / SI Units ကို အရင်စစ်ပါ။ Governing relation ကိုရွေးပြီး values အစားထိုး၊ intermediate result ထုတ်၊ နောက်ဆုံး unit နှင့် physical assumption ကို ပြန်စစ်ထားပါတယ်။",
+          "working": [
+            {
+              "label": "Known quantities / Given",
+              "value": "Fixed voltage V=5 V; A=10⁻⁶ m²; d=2 μm"
+            },
+            {
+              "label": "Governing relation / Formula",
+              "value": "Ideal constant-voltage attractive force F=ε0 A V²/(2d²)"
+            },
+            {
+              "label": "Substitution and algebra",
+              "value": "F=(8.854×10⁻¹²)(10⁻⁶)(5²)/[2(2×10⁻⁶)²]"
+            },
+            {
+              "label": "Independent result / dimensional check",
+              "value": "F=27.66875 μN; ignores fringing and electrostatic pull-in."
+            }
+          ],
+          "finalAnswer": "F\\approx27.67\\ \\mu\\mathrm N",
+          "verification": "Original study practice independently recalculated; assumptions explicitly stated."
         }
       ]
     }
