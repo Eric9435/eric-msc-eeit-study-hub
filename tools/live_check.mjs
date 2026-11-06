@@ -15,6 +15,7 @@ async function check(){
   assert.match(index,/Eric M\.Sc EEIT/i,'Study hub title missing');
   assert(index.includes('inline-solutions.css'),'Inline solution stylesheet missing');
   assert(index.includes('a4-paper.css'),'A4 paper stylesheet not loaded');
+  assert(index.includes('visuals.css'),'Visual stylesheet missing from live HTML');
   assert(!index.includes('enhancements.js'),'Retired popup script must not be loaded');
   assert(!index.includes('src="reason-ui.js"'),'Two conflicting reasoning scripts are loading');
   const content=JSON.parse((await get('/data/content.json')).bytes.toString('utf8'));
@@ -36,12 +37,16 @@ async function check(){
   assert(content.subjects.every(s=>content.exercises.some(e=>e.subject===s.id&&practiceIds.has(e.id))),'An engineering subject lacks reworked practice');
   const logo=(await get('/assets/eeit-study-hub-logo.webp')).bytes;
   assert(logo.length>2000 && logo.toString('ascii',0,4)==='RIFF' && logo.toString('ascii',8,12)==='WEBP','Invalid logo file');
-  for(const path of ['/styles.css','/brand-ui.css','/inline-solutions.css','/a4-paper.css','/app.js','/cloud.js','/sw.js','/manifest.webmanifest']){
+  for(const path of ['/styles.css','/brand-ui.css','/inline-solutions.css','/a4-paper.css','/visuals.css','/visuals.mjs','/app.js','/cloud.js','/sw.js','/manifest.webmanifest']){
     const {bytes}=await get(path);
     assert(bytes.length>100,'Empty web asset '+path);
   }
   const app=(await get('/app.js')).bytes.toString('utf8');
   assert(app.includes('COMPLETE WORKING · FROM START TO FINISH'),'Full paper derivation not deployed');
+  assert(app.includes("from './visuals.mjs'"),'Original SVG engine not imported into active app');
+  const visualAsset=await get('/visuals.mjs');
+  assert(/javascript|ecmascript/.test(visualAsset.response.headers.get('content-type')||''),'Visual module must be served with JavaScript MIME, got '+visualAsset.response.headers.get('content-type'));
+  assert(visualAsset.bytes.toString('utf8').includes('createVisualEngine'),'Wrong live visuals module asset');
   assert(app.includes('original-practice-reworked.json'),'Original calculations not loaded by client');
   assert(app.includes('paper-workline-label'),'Step-by-step working not rendered');
   assert(!app.includes('showPartExplanation('),'Obsolete popup still deployed');
