@@ -81,75 +81,93 @@ function renderSource(e) {
 }
 function renderFullSolution(e) {
   const parts = Array.isArray(e.parts) ? e.parts : [];
+  const subjectName = subject(e.subject)?.title || 'Engineering';
+  const courseRef = e.source || 'Personal study exercise';
+  const pageHead = `<header class="paper-document-head">
+    <div class="paper-topline"><span>ERIC M.Sc EEIT · ENGINEERING STUDY HUB</span><span>WORKED EXERCISE ${escape(e.number)}</span></div>
+    <p class="paper-subject">${escape(subjectName)} / ${escape(e.topic || 'Practice')}</p>
+    <h1>Exercise ${escape(e.number)} <span>${escape(e.title)}</span></h1>
+    <div class="paper-rule"></div>
+    <div class="paper-document-meta"><span>Source: ${escape(courseRef)}</span><span>${parts.length} subquestion${parts.length === 1 ? '' : 's'}</span></div>
+  </header>`;
   if (!parts.length) {
-    return `<div class="paper full-solution-page"><div class="solution-overview-head"><div class="mini-label">Overall solution · source required</div><h2>Exercise ${escape(e.number)} — ${escape(e.title)}</h2></div><div class="inline-caution"><strong>Not solved yet.</strong> This entry contains a course reference but no complete question and independently checked derivation in this library. No answer has been invented.</div><p>${escape(e.question || 'Consult the original privately held question sheet for the numerical givens and figures.')}</p><button class="btn" data-action="tab" data-id="source">View source reference</button></div>`;
+    return `<article class="paper full-solution-page a4-paper" aria-label="Exercise ${escape(e.number)} paper view">
+      ${pageHead}
+      <section class="paper-introduction"><h2>Original Problem / ပုစ္ဆာ</h2><p>${escape(e.question || 'Exact problem statement is not yet included in this public library.')}</p></section>
+      <section class="paper-derivation"><h2>Overall Solution — Complete Working</h2>
+      <p class="paper-pending">The source data for this exercise is incomplete. A start-to-finish derivation cannot be calculated reliably without its full question, numerical givens and diagrams. No solution has been fabricated.</p></section>
+      <div class="no-print paper-actions"><button class="btn" data-action="tab" data-id="source">View source reference</button></div>
+    </article>`;
   }
-  const partAnswer = p => String(p.finalAnswer || '').trim();
-  const hasWorking = p => Boolean((p.display && p.display.length) || (p.equations && p.equations.length) || p.solution);
-  const renderEquations = p => {
+  const available = p => Boolean((Array.isArray(p.display) && p.display.length) || (Array.isArray(p.equations) && p.equations.length) || p.solution);
+  const documented = p => Boolean(p.method && p.reason && (p.finalAnswer || p.solution) && available(p));
+  const renderMath = p => {
     if (Array.isArray(p.display) && p.display.length) {
-      return p.display.map(d => `<div class="inline-equation">${math(d.html || `<code class="raw-tex">${escape(d.latex || '')}</code>`)}</div>`).join('');
+      return p.display.map(d => `<div class="paper-equation">${math(d.html || `<code class="raw-tex">${escape(d.latex || '')}</code>`)}</div>`).join('');
     }
     if (Array.isArray(p.equations) && p.equations.length) {
-      return p.equations.map(line => `<div class="inline-equation"><code class="raw-tex">${escape(line)}</code></div>`).join('');
+      return p.equations.map(x => `<div class="paper-equation"><code class="raw-tex">${escape(x)}</code></div>`).join('');
     }
-    if (p.solution) return `<div class="inline-equation"><p class="solution-raw-text">${escape(p.solution)}</p></div>`;
-    return `<p class="inline-missing">No independently checked calculation has been added for this part.</p>`;
+    if (p.solution) return `<div class="paper-equation"><p class="paper-raw-solution">${escape(p.solution)}</p></div>`;
+    return `<p class="paper-pending">Calculation not yet independently documented for this part.</p>`;
   };
   const renderPart = (p, i) => {
     const key = e.id + ':' + p.label;
     const done = read('completed', key);
-    const master = read('mastered', key);
-    const book = read('bookmarks', key);
-    const final = partAnswer(p);
-    const isActive = activePart === p.label;
-    return `<article class="inline-part ${isActive ? 'is-active' : ''}" aria-labelledby="solution-part-${i}">
-      <header class="inline-part-head">
-        <span class="inline-part-index">${escape(String(p.label).toUpperCase())}</span>
-        <div><div class="mini-label">Subquestion ${escape(p.label)} · ${i + 1} of ${parts.length}</div><h3 id="solution-part-${i}">${escape(p.title || 'Worked subquestion')}</h3></div>
-        <span class="inline-status ${final && hasWorking(p) ? 'has-study-notes' : 'needs-review'}">${final && hasWorking(p) ? 'Study working available' : 'Needs full verification'}</span>
-      </header>
-      <div class="inline-part-body">
-        <div class="eeit-popup-tools no-print" aria-label="Explanations for subquestion ${escape(p.label)}">
-          <button type="button" class="btn eeit-info-button" data-action="explain" data-kind="why" data-part="${escape(p.label)}">Why? · ဘာကြောင့်</button>
-          <button type="button" class="btn eeit-info-button" data-action="explain" data-kind="method" data-part="${escape(p.label)}">Method · ဖြေရှင်းနည်း</button>
-          <button type="button" class="btn eeit-info-button" data-action="explain" data-kind="answer" data-part="${escape(p.label)}">Final answer · အဖြေ</button>
+    const mastered = read('mastered', key);
+    const bookmarked = read('bookmarks', key);
+    const final = String(p.finalAnswer || '').trim();
+    return `<section class="paper-part" aria-labelledby="paper-part-${i}">
+      <header class="paper-part-heading"><span>(${escape(p.label)})</span><h3 id="paper-part-${i}">${escape(p.title || 'Subquestion')}</h3></header>
+      <div class="paper-statement"><h4>Question / Given information</h4><p>${escape(p.question || 'Original source question wording is unavailable.')}</p></div>
+      ${hideSolution ? '<p class="paper-pending">Working hidden for self-practice. Use “Show complete solution” above to reveal it.</p>' : `
+        <div class="paper-method"><h4>Method / ဖြေရှင်းနည်း</h4>
+          ${p.method ? `<p class="myanmar-text">${escape(p.method)}</p>` : '<p class="paper-pending">A complete written method is not yet available for this subquestion.</p>'}
         </div>
-        <section class="inline-explain"><h4>Question / Given</h4><p>${escape(p.question || 'Exact source wording is not imported.')}</p></section>
-        ${hideSolution ? `<div class="inline-hidden">Calculations hidden for self-practice. Select “Show all calculations” above to reveal the complete workings.</div>` : `
-          <section class="inline-explain"><h4>Method — ဘယ်လိုတွက်မလဲ</h4>${p.method ? `<p class="myanmar-text">${escape(p.method)}</p>` : `<p class="inline-missing">A full independently checked written derivation has not been recorded for this subquestion. The equations below are study notes, not a validated complete solution.</p>`}</section>
-          <section class="inline-explain"><h4>Calculation / Equations</h4><div class="inline-equations">${renderEquations(p)}</div></section>
-          <section class="inline-explain"><h4>Why this method? — ဘာကြောင့်လဲ</h4>${p.reason ? `<p class="myanmar-text">${escape(p.reason)}</p>` : `<p class="inline-missing">An independently checked reason is not yet supplied.</p>`}</section>
-          <section class="inline-final"><h4>Final answer</h4>${final ? `<p>${escape(final)}</p>` : p.solution ? `<p class="inline-missing">Study result (not yet independently audited): ${escape(p.solution)}</p>` : `<p class="inline-missing">No separately checked final answer recorded.</p>`}</section>
-          <p class="inline-provenance">${escape(p.verification || e.verificationNote || e.verificationState || 'Study notes only · full independent audit pending')}</p>`}
-        <div class="solution-toolbar no-print">
-          <button class="btn ${done ? 'btn-soft' : 'btn-primary'}" data-action="complete" data-id="${escape(key)}">${icon('check')} ${done ? 'Reviewed ✓' : 'Mark reviewed'}</button>
-          <button class="btn ${master ? 'btn-soft' : ''}" data-action="master" data-id="${escape(key)}">${icon('check')} ${master ? 'Mastered ✓' : 'Mark mastered'}</button>
-          <button class="btn ${book ? 'btn-soft' : ''}" data-action="bookmark" data-id="${escape(key)}">${icon('bookmark')} ${book ? 'Saved' : 'Bookmark'}</button>
+        <div class="paper-calculation"><h4>Full derivation and calculation</h4>
+          ${renderMath(p)}
         </div>
-        <details class="inline-notes no-print"><summary>Personal study notes · auto-saved</summary><textarea data-action="notes" data-id="${escape(key)}" aria-label="Notes for part ${escape(p.label)}" placeholder="Write your derivation or exam reminders here...">${escape(read('notes', key) || '')}</textarea></details>
+        <div class="paper-reason"><h4>Reason / ဘာကြောင့် ဒီနည်းလမ်းသုံးလဲ</h4>
+          ${p.reason ? `<p class="myanmar-text">${escape(p.reason)}</p>` : '<p class="paper-pending">The mathematical rationale still needs review.</p>'}
+        </div>
+        <div class="paper-answer"><strong>Answer (${escape(p.label)})</strong>
+          <p>${final ? escape(final) : p.solution ? escape(p.solution) : 'No independently documented final answer yet.'}</p></div>
+        ${documented(p) ? '' : '<p class="paper-pending">This part contains incomplete study notes; it is not a verified complete calculation.</p>'}
+      `}
+      <div class="paper-part-tools no-print">
+        <button class="btn small ${done ? 'btn-soft' : ''}" data-action="complete" data-id="${escape(key)}">${done ? 'Reviewed ✓' : 'Mark reviewed'}</button>
+        <button class="btn small ${mastered ? 'btn-soft' : ''}" data-action="master" data-id="${escape(key)}">${mastered ? 'Mastered ✓' : 'Mark mastered'}</button>
+        <button class="btn small ${bookmarked ? 'btn-soft' : ''}" data-action="bookmark" data-id="${escape(key)}">${bookmarked ? 'Bookmarked ✓' : 'Bookmark'}</button>
+        <details class="paper-notes"><summary>My notes</summary><textarea data-action="notes" data-id="${escape(key)}" aria-label="Notes for ${escape(p.label)}" placeholder="My calculation, exam reminders...">${escape(read('notes',key) || '')}</textarea></details>
       </div>
-    </article>`;
+    </section>`;
   };
-  const allFullyDocumented = parts.every(p => p.method && p.reason && partAnswer(p) && hasWorking(p));
-  const summary = parts.map(p => `<div class="overall-row"><span>(${escape(p.label)})</span><div><strong>${escape(p.title || 'Subquestion')}</strong><p>${partAnswer(p) ? escape(partAnswer(p)) : 'Final answer not independently recorded — use the detailed notes above.'}</p></div></div>`).join('');
-  return `<div class="paper full-solution-page">
-    <div class="solution-overview-head">
-      <div class="mini-label">Complete exercise view · all subquestions on one page</div>
-      <h2>Exercise ${escape(e.number)} — ${escape(e.title)}</h2>
-      <p class="page-sub">Read the full solution from the first subquestion to the final answer. Calculations are shown inline, with optional Why / Method / Final Answer popups for every subquestion.</p>
-      <div class="inline-meta"><span>${parts.length} subquestions</span><span>${escape(e.topic || 'Engineering')}</span><span>${allFullyDocumented ? 'Written method and final answers available for each part' : 'Some derivations or final answers still require independent audit'}</span></div>
-      <div class="buttons no-print"><button class="btn small" data-action="solution-toggle">${icon(hideSolution ? 'eye' : 'eyeoff', 14)} ${hideSolution ? 'Show all calculations' : 'Hide all calculations'}</button><button class="btn small" data-action="tab" data-id="source">${icon('file', 14)} Source reference</button></div>
+  const completeCount = parts.filter(documented).length;
+  return `<article class="paper full-solution-page a4-paper" aria-label="Complete worked solution for exercise ${escape(e.number)}">
+    ${pageHead}
+    <div class="paper-controls no-print">
+      <button class="btn small" data-action="solution-toggle">${hideSolution ? 'Show complete solution' : 'Hide calculations for practice'}</button>
+      <button class="btn small" data-action="print">Print A4 solution</button>
     </div>
-    <div class="inline-solution-list">${parts.map(renderPart).join('')}</div>
-    ${hideSolution ? '' : `<section class="overall-summary" aria-labelledby="overall-answer-heading"><div class="mini-label">One-page recap</div><h3 id="overall-answer-heading">Overall Solution / Final Answer Summary</h3><p>All recorded final results, in question order. Use each derivation above to trace the assumptions and calculations.</p>${summary}</section>`}
-    <div class="inline-caution"><strong>Accuracy note:</strong> An existing written solution is not the same as a fully independently verified result. Missing official question wording, source diagrams, or numerical givens must be checked against the user's own course materials; incomplete entries are labelled rather than guessed.</div>
-  </div>`;
+    <section class="paper-introduction">
+      <h2>Problem / ပုစ္ဆာ</h2>
+      ${e.question ? `<p>${escape(e.question)}</p>` : '<p>The available problem information is given separately in each subquestion below. Consult the private original for diagrams and missing givens.</p>'}
+    </section>
+    <section class="paper-derivation" aria-labelledby="paper-overall-heading">
+      <div class="paper-section-title"><span>COMPLETE WORKING · FROM START TO FINISH</span><h2 id="paper-overall-heading">Overall Solution</h2>
+      <p>Full working for parts (a)–(${escape(parts[parts.length-1].label)}) in order — problem, method, equations, mathematical reasoning and final result. This is the working itself, not an answer summary.</p></div>
+      ${parts.map(renderPart).join('')}
+    </section>
+    <footer class="paper-document-footer">
+      <p><strong>Coverage:</strong> ${completeCount} of ${parts.length} subquestions have recorded method, calculations, rationale and answer. Recorded working does not guarantee an independent full-source mathematical audit.</p>
+      <p>Eric M.Sc EEIT Study Hub · Personal engineering study material</p>
+    </footer>
+  </article>`;
 }
 function viewExercise(){const e=currentExercise();if(!e)return '<div class="empty-state">Exercise not found.</div>';const s=subject(e.subject);const done=(e.parts||[]).filter(p=>read('completed',e.id+':'+p.label)).length;return `<div class="eyebrow"><a href="#library" class="overline-link">← Exercise library</a> / ${escape(s?.title||'')}</div><div class="buttons" style="justify-content:space-between;align-items:center;margin:13px 0 18px"><div><h1 class="page-title" style="margin-bottom:4px">Exercise ${escape(e.number)}</h1><p class="page-sub">${escape(e.title)}</p></div>${badge(e.parts?.length?'Guided working available':'Original questions only',e.parts?.length?'green':'amber')}</div>
-<div class="details-layout"><div class="workspace-main"><div class="toolbar no-print" style="margin-top:0"><button class="btn ${exerciseTab==='worked'?'btn-primary':''}" data-action="tab" data-id="worked">${icon('sigma',15)} Worked solution</button><button class="btn ${exerciseTab==='source'?'btn-primary':''}" data-action="tab" data-id="source">${icon('file',15)} Original questions</button><span class="spacer"></span><button class="btn" data-action="print">${icon('print',15)} Print</button></div>${exerciseTab==='source'?renderSource(e):renderFullSolution(e)}</div>
+<div class="details-layout ${exerciseTab==='worked'?'paper-reading-layout':''}"><div class="workspace-main"><div class="toolbar no-print" style="margin-top:0"><button class="btn ${exerciseTab==='worked'?'btn-primary':''}" data-action="tab" data-id="worked">${icon('sigma',15)} Worked solution</button><button class="btn ${exerciseTab==='source'?'btn-primary':''}" data-action="tab" data-id="source">${icon('file',15)} Original questions</button><span class="spacer"></span><button class="btn" data-action="print">${icon('print',15)} Print</button></div>${exerciseTab==='source'?renderSource(e):renderFullSolution(e)}</div>
 <aside class="workspace-side"><div class="side-panel"><h3>Exercise information</h3><div class="side-info"><span>Subject</span><strong>${escape(s?.short||'')}</strong></div><div class="side-info"><span>Chapter</span><strong>${escape(e.topic||'Custom')}</strong></div><div class="side-info"><span>Question pages</span><strong>${e.sourcePages?.length?e.sourcePages.join('–'):'Custom'}</strong></div><div class="side-info"><span>Guided parts</span><strong>${e.parts?.length||0}</strong></div><div class="side-info"><span>Reviewed</span><strong>${done}/${e.parts?.length||0}</strong></div><div class="mini-progress" style="margin-top:14px"><div style="width:${percent(done,e.parts?.length||0)}%"></div></div></div>
-<div class="side-panel"><h3>Study method</h3><p>Read the original question, solve on paper, reveal the mathematical derivation, then check the short Myanmar reason.</p><button class="btn small" data-action="tab" data-id="source">${icon('file',13)} Open source question</button></div>
+<div class="side-panel"><h3>Study method</h3><p>Read the whole worked derivation on the white paper, check every equation against the source, then mark reviewed.</p><button class="btn small" data-action="tab" data-id="source">${icon('file',13)} Open source question</button></div>
 ${e.source==='TUHH Digital Communications Tutorial Questions, WS 2026/27'?`<div class="side-panel"><h3>Source</h3><p>Official question sheet, WS 2026/27. The worked notes are independent study material, not official TUHH solutions; verify important calculations against the source.</p></div>`:''}</aside></div>`;}
 function formulaView(){const arr=base.formulas.filter(f=>(filterSubject==='all'||filterSubject===f.subject)&&(!formulaSearch||[f.name,f.use,f.latex].join(' ').toLowerCase().includes(formulaSearch.toLowerCase())));return `<div class="eyebrow">Formula reference</div><h1 class="page-title">Formula Bank</h1><p class="page-sub">Mathematical notation rendered with browser-native MathML. Every formula explains when it is useful.</p><div class="toolbar"><input data-action="formula-search" value="${escape(formulaSearch)}" placeholder="Search formulas or use cases"><select data-action="subject-filter">${[['all','All subjects'],...base.subjects.map(s=>[s.id,s.title])].map(([v,t])=>`<option value="${v}" ${filterSubject===v?'selected':''}>${escape(t)}</option>`).join('')}</select></div><div class="formula-grid">${arr.map(f=>`<div class="formula-card"><div class="mini-label">${escape(subject(f.subject)?.title||'General')}</div><h3>${escape(f.name)}</h3>${math(f.html)}<p><strong>Use when:</strong> ${escape(f.use)}</p><button class="btn small btn-quiet" data-action="copy" data-id="${escape(f.id)}">Copy LaTeX</button></div>`).join('')}</div>${arr.length?'':'<div class="empty-state">No matching formulas.</div>'}`;}
 function progressView(){const parts=allParts();const bookmarks=parts.filter(x=>read('bookmarks',x.key));return `<div class="eyebrow">Learning analytics</div><h1 class="page-title">My Progress</h1><p class="page-sub">Your checked exercises and personal progress, saved on this device and browser only.</p><div class="metrics"><div class="metric"><div class="metric-label">Reviewed parts</div><div class="metric-number">${completed()}</div><div class="metric-detail">of ${totalParts()} guided subquestions</div></div><div class="metric"><div class="metric-label">Mastered</div><div class="metric-number">${mastered()}</div><div class="metric-detail">You marked these confident</div></div><div class="metric"><div class="metric-label">Bookmarked</div><div class="metric-number">${bookmarks.length}</div><div class="metric-detail">Easy to revisit</div></div><div class="metric"><div class="metric-label">Completion rate</div><div class="metric-number">${percent(completed(),totalParts())}%</div><div class="metric-detail">Guided material currently loaded</div></div></div>
@@ -167,16 +185,6 @@ function settingsView(){return `<div class="eyebrow">Personalization & backup</d
 <div class="note-panel" style="margin-top:20px"><strong>Privacy:</strong> Study data stays in this browser. Clearing browser storage or using another device removes access to this local progress; export JSON backups regularly. Keep the original course question sheets private unless distribution is authorized.</div>`;}
 function newExerciseModal(){return `<div class="modal-backdrop" data-action="backdrop"><form id="custom-form" class="modal"><div class="modal-head"><h2>Add your own exercise</h2><button type="button" class="icon-button" data-action="close">${icon('close')}</button></div><div class="field"><label>Subject</label><select required name="subject">${base.subjects.map(s=>`<option value="${s.id}">${escape(s.title)}</option>`).join('')}</select></div><div class="field"><label>Exercise number</label><input required name="number" placeholder="e.g. 2.3 or P1"></div><div class="field"><label>Exercise title</label><input required name="title" placeholder="e.g. State-space controllability"></div><div class="field"><label>Original question / prompt</label><textarea required name="question" placeholder="Paste the question as text here…"></textarea></div><div class="field"><label>Your worked solution (plain text or LaTeX)</label><textarea name="solution" placeholder="Enter solution or LaTeX: \\frac{a}{b}"></textarea><div class="field-hint">Built-in formulas use offline MathML. Your own LaTeX is saved exactly as entered; unsupported custom expressions display as text.</div></div><div class="field"><label>Why this formula? (Myanmar or English)</label><textarea name="reason" placeholder="Write your short reason…"></textarea></div><div class="buttons" style="justify-content:flex-end"><button type="button" class="btn" data-action="close">Cancel</button><button type="submit" class="btn btn-primary">${icon('plus')} Create exercise</button></div></form></div>`;}
 function render(){const page=route==='dashboard'?dashboard():route==='library'?library():route==='formulas'?formulaView():route==='progress'?progressView():route==='settings'?settingsView():viewExercise();const app=$('#app');app.innerHTML=`<div class="app">${sidebar()}<div class="mobile-overlay ${sideOpen?'active':''}" data-action="mobile-close"></div><main class="main">${topbar()}<div class="content">${page}</div></main></div>${modal==='new'?newExerciseModal():''}`;document.documentElement.dataset.theme=study.theme;}
-function showPartExplanation(label,kind){
- const ex=currentExercise(),part=(ex?.parts||[]).find(p=>String(p.label)===String(label));
- if(!part)return;
- const heads={why:'Why this method? · ဘာကြောင့်လဲ',method:'How to solve · ဖြေရှင်းနည်း',answer:'Final answer · နောက်ဆုံးအဖြေ'};
- const body={why:part.reason||'Independent rationale is not yet verified.',method:part.method||'Independent method has not been fully verified.',answer:part.finalAnswer||part.solution||'Independently checked answer is not yet available.'};
- let dlg=document.getElementById('eeit-explanation-dialog');
- if(!dlg){dlg=document.createElement('dialog');dlg.id='eeit-explanation-dialog';dlg.className='eeit-explanation-dialog';document.body.append(dlg);dlg.addEventListener('click',evt=>{if(evt.target===dlg)dlg.close();});}
- dlg.innerHTML=`<div class="eeit-dialog-shell"><div class="eeit-dialog-header"><h2>${escape(heads[kind]||heads.why)}</h2><form method="dialog"><button type="submit" class="btn" aria-label="Close explanation">Close ×</button></form></div><p class="eeit-dialog-text myanmar-text">${escape(body[kind]||body.why)}</p><p class="eeit-dialog-provenance">${escape(part.verification||ex.verificationState||'Study note · separate audit pending')}</p></div>`;
- if(typeof dlg.showModal==='function')dlg.showModal();else dlg.setAttribute('open','');
-}
 function setRoute(){let h=decodeURIComponent(location.hash.replace(/^#/,''))||'dashboard';if(h.startsWith('exercise/')){route='exercise';const e=allExercises().find(x=>x.id===h.slice(9));if(e&&focusedId!==e.id){focusedId=e.id;activePart=e.parts?.[0]?.label||'';exerciseTab=e.parts?.length?'worked':'source';hideSolution=false;}}else{route=['dashboard','library','formulas','progress','settings'].includes(h)?h:'dashboard';}sideOpen=false;render();window.scrollTo({top:0});}
 function nextPart(){const e=currentExercise(),i=(e.parts||[]).findIndex(x=>x.label===activePart);if(i>=0&&i<e.parts.length-1){activePart=e.parts[i+1].label;hideSolution=false;render();window.scrollTo({top:0,behavior:'smooth'});}else notify('Last subquestion in this exercise.');}
 function downloadJSON(obj,name){const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),400);}
@@ -185,7 +193,7 @@ function addCustom(data){const id='custom-'+Date.now();const p={label:'a',title:
 document.addEventListener('submit',e=>{if(e.target.id==='custom-form'){e.preventDefault();const f=new FormData(e.target);const obj=Object.fromEntries(f.entries());if(!obj.title?.trim()||!obj.question?.trim())return;addCustom(obj);}});
 document.addEventListener('click',async e=>{
 const node=e.target.closest('[data-action]');if(!node)return;const a=node.dataset.action,id=node.dataset.id;if(['zoom'].includes(a)){node.classList.toggle('zoom');return;}if(a==='backdrop'&&e.target===node){modal='';render();return;}
-if(a==='explain'){showPartExplanation(node.dataset.part,node.dataset.kind);return;}if(a==='navigate'){modal='';navigate(id);return;}if(a==='subject'){filterSubject=id;filterState='all';keyword='';navigate('library');render();return;}if(a==='open'){showExercise(id);return;}if(a==='open-part'){showExercise(id);activePart=node.dataset.part;render();return;}if(a==='mobile-menu'){sideOpen=!sideOpen;render();return;}if(a==='mobile-close'){sideOpen=false;render();return;}
+if(a==='navigate'){modal='';navigate(id);return;}if(a==='subject'){filterSubject=id;filterState='all';keyword='';navigate('library');render();return;}if(a==='open'){showExercise(id);return;}if(a==='open-part'){showExercise(id);activePart=node.dataset.part;render();return;}if(a==='mobile-menu'){sideOpen=!sideOpen;render();return;}if(a==='mobile-close'){sideOpen=false;render();return;}
 if(a==='theme'){study.theme=study.theme==='dark'?'light':'dark';persist();render();return;}
 if(a==='part'){activePart=id;hideSolution=false;render();return;}if(a==='next-part'){nextPart();return;}if(a==='tab'){exerciseTab=id;render();return;}if(a==='solution-toggle'){hideSolution=!hideSolution;render();return;}
 if(a==='complete'||a==='master'||a==='bookmark'){const type=a==='complete'?'completed':a==='master'?'mastered':'bookmarks';stamp(type,id,!read(type,id));render();return;}
