@@ -37,7 +37,7 @@ async function check(){
   assert(app.includes('Overall Solution / Final Answer Summary'),'Inline overall solutions not deployed');
   const config=(await get('/cloud-config.js')).bytes.toString('utf8');
   assert.match(config,/window\.EEIT_FIREBASE_CONFIG\s*=\s*\{/,'Firebase web app configuration missing');
-  console.log('PASS live HTTP: website, HTML, 5 subjects, 82 exercises, at least 223 merged parts, 69 formulas, valid logo, JS/CSS assets, Firebase web configuration present.');
+  console.log('PASS live HTTP: website, HTML, 5 subjects, 82 exercises, at least 277 merged parts, 69 formulas, valid logo, JS/CSS assets, Firebase web configuration present.');
 }
 let error;
 for(let i=1;i<=12;i++){
