@@ -32,7 +32,7 @@ assert(!JSON.stringify(data).includes('sourceQuestionText'),'Original instructor
 assert(!JSON.stringify(data).includes('data:image/'),'Private image data leaked');
 assert(!JSON.stringify(ext).includes('data:image/'),'Private images in independent derivations');
 cp.execFileSync(process.execPath,[file('tools/build_public.cjs')],{cwd:root,stdio:'inherit'});
-for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','assets/favicon.svg'])
+for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','assets/favicon.svg'])
  assert(fs.existsSync(file('public/'+name)),'Missing public file '+name);
 assert(!fs.existsSync(file('public/assets/questions')),'Original course page images published');
 const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?walk(path.join(d,x.name)):[path.join(d,x.name)]);
@@ -41,7 +41,13 @@ for(const name of ['source/app.js','source/cloud.js'])new Function(fs.readFileSy
 const index=fs.readFileSync(file('source/index.html'),'utf8');
 assert(index.includes('inline-solutions.css'),'Inline solution stylesheet not loaded');
 assert(!index.includes('enhancements.js')&&!index.includes('reason-ui.js'),'Popup scripts must not be loaded');
-assert(fs.readFileSync(file('source/app.js'),'utf8').includes('Overall Solution / Final Answer Summary'),'Overall solutions UI missing');
+const fullSource=fs.readFileSync(file('source/app.js'),'utf8');
+assert(fullSource.includes('Overall Solution'),'Start-to-finish solution renderer missing');
+assert(fullSource.includes('paper-part')&&fullSource.includes('COMPLETE WORKING · FROM START TO FINISH'),'Full paper solution not present');
+assert(!fullSource.includes('showPartExplanation('),'Explanation popup should be removed');
+assert(!fullSource.includes('Overall Solution / Final Answer Summary'),'Old short answer recap is still present');
+assert(index.includes('a4-paper.css'),'A4 white-paper CSS not referenced');
+assert(fs.readFileSync(file('source/a4-paper.css'),'utf8').includes('size:A4'),'A4 printing stylesheet missing');
 for(const old of ['enhancements.js','enhancements.css','reason-ui.js','reason-ui.css'])
  assert(!fs.existsSync(file('public/'+old)),'Retired popup asset shipped: '+old);
 console.log('PASS: 5 subjects; 82 exercise entries; '+parts+' guided subquestions with labelled study derivations; '+data.formulas.length+' formulas; public build, syntax and source-rights safeguards.');
