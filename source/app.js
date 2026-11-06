@@ -98,6 +98,16 @@ function renderSource(e) {
     <div class="inline-caution"><strong>Original material is private.</strong> Instructor-owned exercise PDFs and page images are intentionally excluded from the public website. Use your legally obtained local tutorial/lecture file for the exact problem statement, givens and diagrams.</div>
     <div class="side-info"><span>Document</span><strong>${escape(source)}</strong></div>
     <div class="side-info"><span>Reference</span><strong>${escape(reference)}</strong></div>
+    <section class="source-archive" data-eeit-source-shelf data-course="${escape(e.subject)}" aria-label="Original course question and answer documents">
+      <h3>Private original questions &amp; sample solutions</h3>
+      <p>Keep the original instructor PDF on this device for reading beside your independently worked paper solutions. Documents stay in this browser; they are never published to GitHub, Render, or Firebase.</p>
+      <div class="source-archive-tools">
+        <label class="source-upload">Attach original question PDF <input type="file" accept=".pdf,application/pdf" data-eeit-import-source="question" aria-label="Attach original questions PDF"></label>
+        <label class="source-upload">Attach original solution PDF <input type="file" accept=".pdf,application/pdf" data-eeit-import-source="solution" aria-label="Attach original sample solutions PDF"></label>
+      </div>
+      <div class="source-archive-status" data-eeit-source-status aria-live="polite">Checking locally stored source documents…</div>
+      <div class="source-archive-reader" data-eeit-source-reader></div>
+    </section>
     <button class="btn btn-primary" data-action="tab" data-id="worked">Return to inline worked solution</button>
   </div>`;
 }
