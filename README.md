@@ -54,3 +54,7 @@ The build excludes any `source/assets/questions/` media and all PDF files. Do no
 ## QA
 
 Run `node tools/smoke_public.cjs`. Study data remains compatible with the previous `eric-eeit-exercise:v1` browser storage key. 
+
+## Visual identity
+
+The generated Eric M.Sc EEIT Study Hub logo is included in `source/assets/eeit-study-hub-logo.webp` (optimized for the web), alongside `source/brand-ui.css` for flat, responsive branding. The original logo design is represented in the website sidebar, mobile header and dashboard hero.
