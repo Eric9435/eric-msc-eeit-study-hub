@@ -6,10 +6,13 @@ fs.mkdirSync('artifacts',{recursive:true});
 async function check(){
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
  let desktop,phone;
- const pageErrors=[];
+ const pageErrors=[];const failedRequests=[];const consoleMessages=[];
  try{
    desktop=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
    desktop.on('pageerror',e=>pageErrors.push('desktop: '+e.message));
+   desktop.on('requestfailed',r=>failedRequests.push(r.url()+' '+r.failure()?.errorText));
+   desktop.on('console',m=>{if(m.type()==='error')consoleMessages.push(m.text());});
+   desktop.on('response',r=>{if(r.status()>=400)consoleMessages.push('HTTP '+r.status()+' '+r.url());});
    const r=await desktop.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
    assert.equal(r.status(),200);
    await desktop.waitForSelector('.subject-card',{timeout:35000});
@@ -80,6 +83,8 @@ async function check(){
  }catch(err){
    if(desktop)await desktop.screenshot({path:'artifacts/eeit-browser-failure.png',fullPage:true}).catch(()=>{});
    if(phone)await phone.screenshot({path:'artifacts/eeit-mobile-failure.png',fullPage:true}).catch(()=>{});
+   console.error('BROWSER-DIAGNOSTICS',JSON.stringify({pageErrors:pageErrors.slice(0,12),failedRequests:failedRequests.slice(0,12),consoleMessages:consoleMessages.slice(0,12),url:desktop?.url(),text:desktop?await desktop.locator('#app').innerText().then(x=>x.slice(0,700)).catch(()=>null):null}));
+   try{const response=await desktop.request.get(url+'/visuals.mjs',{timeout:10000});console.error('VISUALS-ASSET',response.status(),response.headers()['content-type'],(await response.text()).slice(0,70));}catch(e){console.error('VISUALS-ASSET-ERROR',e.message);}
    throw err;
  }finally{await browser.close()}
 }
