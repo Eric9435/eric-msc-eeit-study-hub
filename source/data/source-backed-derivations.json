@@ -1,6 +1,6 @@
 {
-  "revision": "2026-11-06-original-digital-source-working-v1",
-  "description": "Digital Communications tutorial 1.1 (21 parts) and 1.3 (10 parts), paraphrased source-aligned methods and final answers, MathML equations retained; full correctness audit still outstanding.",
+  "revision": "2026-11-06-original-source-working-v2",
+  "description": "Paraphrased source-referenced working for 31 Digital Communications subparts and independent matching-network derivation (3 parts), retaining MathML for legacy DC.",
   "overrides": [
     {
       "id": "dc-1.1",
@@ -898,6 +898,204 @@
           "method": "Bandpass PSD ၏ total area ကို integrate လုပ်ပါ။ Peak height N0/2 နှင့် each triangle base width B ဖြစ်ပြီး two lobes ကိုပေါင်းပါ။",
           "finalAnswer": "σN²=N0B/2=σBB² with the assumed normalization.",
           "verification": "Source-aligned independent study transcription; full symbolic/cross-source audit remains pending."
+        }
+      ]
+    },
+    {
+      "id": "official-mw-2-5",
+      "subject": "microwave",
+      "status": "worked",
+      "verificationState": "independent-original-source-conditional",
+      "verificationNote": "Independent exercise solution based on the uploaded Microwave Engineering Exercise 2 Task 5. Assumes a series capacitor at source-side of lossless microstrip; other matching topologies give other valid lengths/capacitances.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Matching network configuration",
+          "question": "Design a lossless 50 Ω line plus a series capacitor at its source end to match a load 75+j10 Ω at 5 GHz.",
+          "method": "Circuit မှာ capacitor ကို source ဘက်မှာ series ချိတ်ထားတယ်ဆိုတဲ့ topology ကို အတိအကျသတ်မှတ်ပါ။ Line အရှည်ကို Zin,line ရဲ့ real part 50Ω ဖြစ်စေပြီး reactance positive ဖြစ်အောင်ရွေးမယ်။ Capacitor ရဲ့ negative reactance နဲ့ cancel လုပ်မယ်။",
+          "reason": "Lossless line ရဲ့ complex load ကို line length နဲ့ transform လုပ်ပြီး series capacitor reactance နဲ့ cancel လုပ်ခြင်းဖြစ်ပါတယ်။ Frequency, dielectric constant နှင့် topology ကို မပြောင်းဘဲ စစ်ထားပါတယ်။",
+          "finalAnswer": "Series capacitor followed by a 50 Ω lossless line terminating in 75+j10 Ω; aim for net input 50+j0 Ω.",
+          "verification": "Original microwave Exercise 2 Task 5 rederived symbolically and numerically; series-capacitor source-end topology is explicitly stated.",
+          "working": [
+            {
+              "label": "Known / measured values",
+              "value": "Load ZL=75+j10 Ω; reference Z0=50 Ω; frequency f=5 GHz; εr,eff=2.3, μr=1."
+            },
+            {
+              "label": "Choose explicit topology",
+              "value": "50 Ω source → SERIES CAPACITOR C → lossless 50 Ω transmission line of length ℓ → load 75+j10 Ω."
+            },
+            {
+              "label": "Matching condition",
+              "value": "The line input must be Zin,line =50+jX Ω with X>0 so the series capacitor adds reactance −jX."
+            },
+            {
+              "label": "Electrical interpretation",
+              "value": "Series reactance cancellation: Zin,total=ZC+Zin,line=−jX+(50+jX)=50 Ω."
+            }
+          ],
+          "equations": [
+            "Load ZL=75+j10 Ω; reference Z0=50 Ω; frequency f=5 GHz; εr,eff=2.3, μr=1.",
+            "50 Ω source → SERIES CAPACITOR C → lossless 50 Ω transmission line of length ℓ → load 75+j10 Ω.",
+            "The line input must be Zin,line =50+jX Ω with X>0 so the series capacitor adds reactance −jX.",
+            "Series reactance cancellation: Zin,total=ZC+Zin,line=−jX+(50+jX)=50 Ω."
+          ],
+          "display": [
+            {
+              "latex": "Load ZL=75+j10 Ω; reference Z0=50 Ω; frequency f=5 GHz; εr,eff=2.3, μr=1.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Load ZL=75+j10 Ω; reference Z0=50 Ω; frequency f=5 GHz; εr,eff=2.3, μr=1.</div>"
+            },
+            {
+              "latex": "50 Ω source → SERIES CAPACITOR C → lossless 50 Ω transmission line of length ℓ → load 75+j10 Ω.",
+              "html": "<div class=\"verified-equation\" role=\"math\">50 Ω source → SERIES CAPACITOR C → lossless 50 Ω transmission line of length ℓ → load 75+j10 Ω.</div>"
+            },
+            {
+              "latex": "The line input must be Zin,line =50+jX Ω with X>0 so the series capacitor adds reactance −jX.",
+              "html": "<div class=\"verified-equation\" role=\"math\">The line input must be Zin,line =50+jX Ω with X&gt;0 so the series capacitor adds reactance −jX.</div>"
+            },
+            {
+              "latex": "Series reactance cancellation: Zin,total=ZC+Zin,line=−jX+(50+jX)=50 Ω.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Series reactance cancellation: Zin,total=ZC+Zin,line=−jX+(50+jX)=50 Ω.</div>"
+            }
+          ]
+        },
+        {
+          "label": "b",
+          "title": "Length of matching transmission line",
+          "question": "Find a physical line length that makes the normalized input impedance real part equal to 1 with positive imaginary reactance.",
+          "method": "Line ရဲ့ normalized input impedance formula ကို သုံးပါ။ Re(zin)=1 condition ဖြေရှင်းပြီး t=tanβℓ ကို root နှစ်ခုရမယ်။ Series capacitor အသုံးပြုမှာဖြစ်လို့ inductive input reactance ဖြစ်စေမယ့် root ကိုသာရွေးပြီး dielectric wavelength နဲ့ line length ပြန်တွက်ပါ။",
+          "reason": "Lossless line ရဲ့ complex load ကို line length နဲ့ transform လုပ်ပြီး series capacitor reactance နဲ့ cancel လုပ်ခြင်းဖြစ်ပါတယ်။ Frequency, dielectric constant နှင့် topology ကို မပြောင်းဘဲ စစ်ထားပါတယ်။",
+          "finalAnswer": "Series-C branch: ℓ≈16.464 mm (θ≈149.813°), Zin,line≈50+j21.9848 Ω.",
+          "verification": "Original microwave Exercise 2 Task 5 rederived symbolically and numerically; series-capacitor source-end topology is explicitly stated.",
+          "working": [
+            {
+              "label": "Normalize load",
+              "value": "zL=ZL/Z0=(75+j10)/50=1.5+j0.2."
+            },
+            {
+              "label": "Transmission line equation",
+              "value": "zin=(zL+j tanθ)/(1+j zL tanθ), θ=βℓ, β=2π/λg, λg=c/(f√εr,eff)."
+            },
+            {
+              "label": "Real-part matching equation",
+              "value": "Let t=tanθ. Re(zin)=1.5(1+t²)/[(1−0.2t)²+(1.5t)²]=1."
+            },
+            {
+              "label": "Solve quadratic",
+              "value": "1.5+1.5t²=1−0.4t+2.29t² ⇒ 0.79t²−0.4t−0.5=0."
+            },
+            {
+              "label": "Select series-C-compatible root",
+              "value": "t=−0.58170290875 gives zin=1+j0.439696865; the other root yields negative input reactance and would require series inductance."
+            },
+            {
+              "label": "Wavelength and line length",
+              "value": "θ=atan(t)+π=149.8133116°; λg=3×10⁸/(5×10⁹√2.3)≈39.56 mm; ℓ=(149.8133°/360°)λg≈16.464 mm."
+            },
+            {
+              "label": "Check",
+              "value": "At this length Zin,line=50+j21.9848 Ω; additional ℓ+n·λg/2 are electrically equivalent."
+            }
+          ],
+          "equations": [
+            "zL=ZL/Z0=(75+j10)/50=1.5+j0.2.",
+            "zin=(zL+j tanθ)/(1+j zL tanθ), θ=βℓ, β=2π/λg, λg=c/(f√εr,eff).",
+            "Let t=tanθ. Re(zin)=1.5(1+t²)/[(1−0.2t)²+(1.5t)²]=1.",
+            "1.5+1.5t²=1−0.4t+2.29t² ⇒ 0.79t²−0.4t−0.5=0.",
+            "t=−0.58170290875 gives zin=1+j0.439696865; the other root yields negative input reactance and would require series inductance.",
+            "θ=atan(t)+π=149.8133116°; λg=3×10⁸/(5×10⁹√2.3)≈39.56 mm; ℓ=(149.8133°/360°)λg≈16.464 mm.",
+            "At this length Zin,line=50+j21.9848 Ω; additional ℓ+n·λg/2 are electrically equivalent."
+          ],
+          "display": [
+            {
+              "latex": "zL=ZL/Z0=(75+j10)/50=1.5+j0.2.",
+              "html": "<div class=\"verified-equation\" role=\"math\">zL=ZL/Z0=(75+j10)/50=1.5+j0.2.</div>"
+            },
+            {
+              "latex": "zin=(zL+j tanθ)/(1+j zL tanθ), θ=βℓ, β=2π/λg, λg=c/(f√εr,eff).",
+              "html": "<div class=\"verified-equation\" role=\"math\">zin=(zL+j tanθ)/(1+j zL tanθ), θ=βℓ, β=2π/λg, λg=c/(f√εr,eff).</div>"
+            },
+            {
+              "latex": "Let t=tanθ. Re(zin)=1.5(1+t²)/[(1−0.2t)²+(1.5t)²]=1.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Let t=tanθ. Re(zin)=1.5(1+t²)/[(1−0.2t)²+(1.5t)²]=1.</div>"
+            },
+            {
+              "latex": "1.5+1.5t²=1−0.4t+2.29t² ⇒ 0.79t²−0.4t−0.5=0.",
+              "html": "<div class=\"verified-equation\" role=\"math\">1.5+1.5t²=1−0.4t+2.29t² ⇒ 0.79t²−0.4t−0.5=0.</div>"
+            },
+            {
+              "latex": "t=−0.58170290875 gives zin=1+j0.439696865; the other root yields negative input reactance and would require series inductance.",
+              "html": "<div class=\"verified-equation\" role=\"math\">t=−0.58170290875 gives zin=1+j0.439696865; the other root yields negative input reactance and would require series inductance.</div>"
+            },
+            {
+              "latex": "θ=atan(t)+π=149.8133116°; λg=3×10⁸/(5×10⁹√2.3)≈39.56 mm; ℓ=(149.8133°/360°)λg≈16.464 mm.",
+              "html": "<div class=\"verified-equation\" role=\"math\">θ=atan(t)+π=149.8133116°; λg=3×10⁸/(5×10⁹√2.3)≈39.56 mm; ℓ=(149.8133°/360°)λg≈16.464 mm.</div>"
+            },
+            {
+              "latex": "At this length Zin,line=50+j21.9848 Ω; additional ℓ+n·λg/2 are electrically equivalent.",
+              "html": "<div class=\"verified-equation\" role=\"math\">At this length Zin,line=50+j21.9848 Ω; additional ℓ+n·λg/2 are electrically equivalent.</div>"
+            }
+          ]
+        },
+        {
+          "label": "c",
+          "title": "Series matching capacitor",
+          "question": "Determine the lumped capacitance that cancels the line-input reactance at 5 GHz.",
+          "method": "Matching line input က positive inductive reactance ဖြစ်လို့ series capacitor နဲ့ cancel လုပ်ပါ။ XC=−1/(ωC) ကိုအသုံးပြုပြီး imaginary part zero condition ဖြေရှင်းပါ။ Net input impedance 50Ω ပြန်စစ်ပါ။",
+          "reason": "Lossless line ရဲ့ complex load ကို line length နဲ့ transform လုပ်ပြီး series capacitor reactance နဲ့ cancel လုပ်ခြင်းဖြစ်ပါတယ်။ Frequency, dielectric constant နှင့် topology ကို မပြောင်းဘဲ စစ်ထားပါတယ်။",
+          "finalAnswer": "Series matching capacitor C≈1.448 pF; ideal matched input ≈50 Ω (under the stated topology).",
+          "verification": "Original microwave Exercise 2 Task 5 rederived symbolically and numerically; series-capacitor source-end topology is explicitly stated.",
+          "working": [
+            {
+              "label": "From line-length result",
+              "value": "Zin,line=50+j21.984843 Ω at f=5×10⁹ Hz."
+            },
+            {
+              "label": "Series capacitor impedance",
+              "value": "ZC=1/(jωC)=−j/(2πf C)."
+            },
+            {
+              "label": "Set imaginary sum to zero",
+              "value": "Im(Zin,total)=21.984843−1/(2πf C)=0."
+            },
+            {
+              "label": "Solve capacitance",
+              "value": "C=1/[2π(5×10⁹)(21.984843)]=1.4478606×10⁻¹² F≈1.448 pF."
+            },
+            {
+              "label": "Independent input impedance check",
+              "value": "Zin,total=(50+j21.984843)−j21.984843≈50+j0 Ω; Γin=(Zin,total−50)/(Zin,total+50)≈0."
+            }
+          ],
+          "equations": [
+            "Zin,line=50+j21.984843 Ω at f=5×10⁹ Hz.",
+            "ZC=1/(jωC)=−j/(2πf C).",
+            "Im(Zin,total)=21.984843−1/(2πf C)=0.",
+            "C=1/[2π(5×10⁹)(21.984843)]=1.4478606×10⁻¹² F≈1.448 pF.",
+            "Zin,total=(50+j21.984843)−j21.984843≈50+j0 Ω; Γin=(Zin,total−50)/(Zin,total+50)≈0."
+          ],
+          "display": [
+            {
+              "latex": "Zin,line=50+j21.984843 Ω at f=5×10⁹ Hz.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zin,line=50+j21.984843 Ω at f=5×10⁹ Hz.</div>"
+            },
+            {
+              "latex": "ZC=1/(jωC)=−j/(2πf C).",
+              "html": "<div class=\"verified-equation\" role=\"math\">ZC=1/(jωC)=−j/(2πf C).</div>"
+            },
+            {
+              "latex": "Im(Zin,total)=21.984843−1/(2πf C)=0.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Im(Zin,total)=21.984843−1/(2πf C)=0.</div>"
+            },
+            {
+              "latex": "C=1/[2π(5×10⁹)(21.984843)]=1.4478606×10⁻¹² F≈1.448 pF.",
+              "html": "<div class=\"verified-equation\" role=\"math\">C=1/[2π(5×10⁹)(21.984843)]=1.4478606×10⁻¹² F≈1.448 pF.</div>"
+            },
+            {
+              "latex": "Zin,total=(50+j21.984843)−j21.984843≈50+j0 Ω; Γin=(Zin,total−50)/(Zin,total+50)≈0.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Zin,total=(50+j21.984843)−j21.984843≈50+j0 Ω; Γin=(Zin,total−50)/(Zin,total+50)≈0.</div>"
+            }
+          ]
         }
       ]
     }
