@@ -52,8 +52,8 @@
     document.body.append(dialog);
     return dialog;
   }
-  function show(kind) {
-    const found = resolvePart();
+  function show(kind, chosenPart, chosenExercise) {
+    const found = chosenPart ? { part: chosenPart, ex: chosenExercise } : resolvePart();
     const part = found.part;
     if (!part) return;
     const headings = {
@@ -79,28 +79,37 @@
     if (typeof el.showModal === 'function') el.showModal();
     else el.setAttribute('open', '');
   }
-  function button(kind, text) {
+  function button(kind, text, part, exercise) {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'btn eeit-info-button';
     b.dataset.eeitPopup = kind;
     b.textContent = text;
-    b.addEventListener('click', () => show(kind));
+    b.addEventListener('click', () => show(kind, part, exercise));
     return b;
   }
   function addExplanations() {
-    const reason = $('.workspace-main .reason');
-    if (!reason || $('.workspace-main .eeit-popup-tools')) return;
-    const found = resolvePart();
-    if (!found.part) return;
-    const tools = document.createElement('div');
-    tools.className = 'eeit-popup-tools no-print';
-    tools.append(
-      button('why', 'Why? · ဘာကြောင့်'),
-      button('method', 'Method · ဖြေရှင်းနည်း'),
-      button('answer', 'Final answer · အဖြေ')
-    );
-    reason.replaceWith(tools);
+    const root = $('.workspace-main');
+    const ex = resolveExercise();
+    if (!root || !ex || !Array.isArray(ex.parts)) return;
+    // Render a separate popup-button trio for every inline worked subquestion.
+    for (const article of root.querySelectorAll('.inline-part')) {
+      if (article.querySelector('.eeit-popup-tools')) continue;
+      const label = article.querySelector('.inline-part-index')?.textContent?.trim().toLowerCase();
+      const part = ex.parts.find(p => String(p.label).toLowerCase() === label);
+      if (!part) continue;
+      const bar = document.createElement('div');
+      bar.className = 'eeit-popup-tools no-print';
+      bar.setAttribute('aria-label', 'Explanations for subquestion ' + label);
+      bar.append(
+        button('why', 'Why? · ဘာကြောင့်', part, ex),
+        button('method', 'Method · ဖြေရှင်းနည်း', part, ex),
+        button('answer', 'Final answer · အဖြေ', part, ex)
+      );
+      const header = article.querySelector('.inline-part-head');
+      if (header) header.after(bar);
+      else article.prepend(bar);
+    }
   }
   function protectPrivateSources() {
     const pages = $('.workspace-main .source-pages');
