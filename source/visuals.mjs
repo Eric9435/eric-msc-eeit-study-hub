@@ -122,8 +122,8 @@ const createVisualEngine = (function createVisualEngine(){
   };
   const frame=(title,desc,body)=>`<svg class="eeit-viz-svg" viewBox="0 0 680 260" role="img" aria-label="${E(title)}" xmlns="http://www.w3.org/2000/svg"><title>${E(title)}</title><desc>${E(desc)}</desc><rect x="1" y="1" width="678" height="258" rx="12" fill="transparent"/>${body}</svg>`;
   const range=(kind)=>{
-    if(['rotation','dapsk','fsk','msk','transformer','fault','pendulum','eigen'].includes(kind))return {min:0,max:90,step:5,value:30,label:'Angle / phase illustration (°)'};
-    if(['noise','ber','rayleigh','ofdm','numerology','cp','transmission','smith','chain','noisechain','cap','spring','gauge','thermal','diffusion','cantilever','etch','dispatch'].includes(kind))return {min:10,max:90,step:5,value:40,label:'Explore scenario (%)'};
+    if(['rotation','transformer','pendulum'].includes(kind))return {min:0,max:90,step:5,value:30,label:kind==='rotation'?'Receiver phase offset (°)':kind==='transformer'?'Transformer tap phase (°)':'Pendulum angle (°)'};
+    if(['noise','ber','rayleigh','transmission','smith','cap','spring','thermal','diffusion','cantilever','etch'].includes(kind))return {min:10,max:90,step:5,value:40,label:({noise:'Noise PSD level (%)',ber:'Effective SNR scale (%)',rayleigh:'Rayleigh scale (%)',transmission:'Reflection strength (%)',smith:'Reflection point scenario (%)',cap:'Electrode gap scenario (%)',spring:'Acceleration scenario (%)',thermal:'Thermal strain scenario (%)',diffusion:'Diffusion duration scenario (%)',cantilever:'Applied load scenario (%)',etch:'Etch-time scenario (%)'})[kind]};
     return null;
   };
   function visualKindFor(ex){return map.get(ex?.id)||({digital:'baseband',power:'bus',control:'statespace',microwave:'twoport',micro:'spring'}[ex?.subject]||'baseband');}
@@ -135,11 +135,11 @@ const createVisualEngine = (function createVisualEngine(){
         for(const [x,y,tag] of [[255,53,'01'],[425,53,'00'],[255,203,'11'],[425,203,'10']])b+=dot(x,y,blue,9)+T(x+17,y-12,tag,13);
         b+=P('M425 53 L255 203 L255 53 L425 203',green,2)+T(340,247,'QPSK symbol transitions · example mapping',12,gray);return b;
       }
-      case 'noise':return plot(x=>Math.exp(-((x-3)**2)/(0.35+eff*1.1)),{minX:0,maxX:6,minY:0,maxY:1.3,labelX:'f',labelY:'PSD'})+T(455,52,'band-limited noise',14,ink);
+      case 'noise':return plot(x=>x>1.5&&x<4.5?0.2+eff:0,{minX:0,maxX:6,minY:0,maxY:1.3,labelX:'frequency f',labelY:'PSD'})+T(470,52,'band-limited white noise',14,ink);
       case 'rayleigh':{const s=.55+eff*1.5;return plot(x=>x/(s*s)*Math.exp(-x*x/(2*s*s)),{minX:0,maxX:5,minY:0,maxY:1.1,labelX:'r / σ₀',labelY:'f(r)'})+T(480,53,'f(r)=r/σ² · exp(−r²/2σ²)',13,ink);}
       case 'ber':{
         const erfc=x=>{const z=Math.abs(x),t=1/(1+.3275911*z),p=(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t;const erf=1-p*Math.exp(-z*z);return 1-(x<0?-erf:erf);};
-        let b=plot(x=>-Math.log10(Math.max(1e-8,.5*erfc(Math.sqrt(x/2+eff)))),{minX:0,maxX:16,minY:0,maxY:8,labelX:'Eᵦ/N₀ (dB) schematic',labelY:'−log₁₀ Pᵦ'})+T(440,48,'lower BER → higher on plot',13,ink);return b;
+        let b=plot(x=>-Math.log10(Math.max(1e-8,.5*erfc(Math.sqrt(Math.pow(10,x/10)*eff)))),{minX:0,maxX:16,minY:0,maxY:8,labelX:'nominal Eᵦ/N₀ (dB)',labelY:'−log₁₀ Pᵦ'})+T(441,48,'Q(√(2γᵦ)) · AWGN',14,ink);return b;
       }
       case 'rotation':{
         let b=L(90,132,590,132,gray)+L(340,18,340,239,gray)+g(340,132,90,'none',light,1);
@@ -213,7 +213,7 @@ const createVisualEngine = (function createVisualEngine(){
       }
       case 'transformer':{
         let b=L(70,150,205,150,ink)+g(223,150,26,'none',blue)+g(260,150,26,'none',blue)+L(286,150,568,150,ink)+T(330,125,'tap = |a|∠δ',18,ink)+T(154,129,'Uᵢ',15)+T(483,130,'Uⱼ',15);
-        b+=L(390,237,390,32,light)+L(295,150,515,150,light)+arrow(391,143,483,143,green)+arrow(391,143,463,103,orange)+T(462,92,`δ = ${k}°`,13,orange)+T(338,252,'Schematic only · transformer orientation is conventional',12,gray);return b;
+        b+=L(390,237,390,32,light)+L(295,150,515,150,light)+arrow(391,143,483,143,green)+arrow(391,143,391+92*Math.cos(a),143-92*Math.sin(a),orange)+T(469,92,`δ = ${k}°`,13,orange)+T(338,252,'Schematic only · transformer orientation is conventional',12,gray);return b;
       }
       case 'bus':{
         const nodes=[[136,75,'Slack'],[355,47,'PV'],[544,124,'PQ'],[385,207,'PQ'],[175,194,'PQ']];let b='';
@@ -340,15 +340,15 @@ const createVisualEngine = (function createVisualEngine(){
       }
       case 'spring':{
         let b=L(95,35,575,35,ink,4);
-        let z=45,pts=[[340,z]];for(let n=0;n<12;n++){pts.push([n%2?375:306,55+n*7]);}pts.push([340,144]);
-        b+=pathOf(pts,blue,3)+R(267,144,146,61,'#edf4fb',ink,4)+T(340,181,'mass m',18)+arrow(431,167,431,226,orange)+T(483,214,'a',15,orange)+T(340,246,'f₀ = (1/2π)√(k/m);  x = ma/k at low frequency',12,gray);return b;
+        let z=45,deflect=eff*17,pts=[[340,z]];for(let n=0;n<12;n++){pts.push([n%2?375:306,55+n*(7+deflect/11)]);}pts.push([340,144+deflect]);
+        b+=pathOf(pts,blue,3)+R(267,144+deflect,146,61,'#edf4fb',ink,4)+T(340,181+deflect,'mass m',18)+arrow(431,167+deflect,431,226,orange)+T(483,214,'a',15,orange)+T(340,246,'f₀ = (1/2π)√(k/m);  x = ma/k at low frequency',12,gray);return b;
       }
       case 'gauge':{
         let b=R(178,88,314,73,'#edf4fb')+P('M191 122 L230 122 L246 105 L261 139 L277 105 L292 139 L307 105 L322 139 L337 105 L353 139 L369 105 L386 122 L474 122',orange,2.3)+arrow(122,123,171,123,green)+arrow(496,123,554,123,green);
         return b+T(339,46,'ΔR/R = GF · ε',20,ink)+T(341,231,'Strain stretches/shortens the resistor track',14,gray);
       }
       case 'thermal':{
-        let b=R(95,112,425,30,'#edf4fb',blue,0)+L(95,108,95,165,gray)+L(520,108,520,165,gray)+R(95,163,500,28,'#eaf7ef',green,0);
+        let b=R(95,112,425,30,'#edf4fb',blue,0)+L(95,108,95,165,gray)+L(520,108,520,165,gray)+R(95,163,425+eff*79,28,'#eaf7ef',green,0);
         return b+T(341,42,'ΔL = α L₀ ΔT',22,ink)+T(354,91,'L₀',14,blue)+T(354,222,'L₀ + ΔL (illustrative expansion)',14,green);
       }
       case 'diffusion':{
@@ -356,7 +356,7 @@ const createVisualEngine = (function createVisualEngine(){
       }
       case 'cantilever':{
         let b=R(95,72,35,163,'#dce7f0',ink,0);
-        const bend=.00000035+(eff*.0000003),pts=[];for(let i=0;i<=100;i++){const x=130+i*4.8,y=115+90*(i/100)**2;pts.push([x,y]);}
+        const pts=[];for(let i=0;i<=100;i++){const x=130+i*4.8,y=115+(40+eff*92)*(i/100)**2;pts.push([x,y]);}
         b+=pathOf(pts,blue,6)+arrow(612,170,612,219,orange)+T(621,203,'F',15,orange)+T(339,51,'δ_tip = F L³ / (3 E I)',19,ink)+T(348,247,'Cantilever under an end load (shape illustrative)',13,gray);return b;
       }
       default:return R(200,65,280,130,'#edf4fb')+T(340,145,'Engineering concept schematic',17);
@@ -369,7 +369,7 @@ const createVisualEngine = (function createVisualEngine(){
     const visual=frame(title,description,drawing(kind,actual));
     const isSourceOnly=!Array.isArray(ex?.parts)||ex.parts.length===0;
     return `<section class="eeit-viz-panel" data-visual-exercise="${E(ex?.id||'')}" data-visual-kind="${E(kind)}" aria-labelledby="eeit-viz-title">
-      <div class="eeit-viz-header"><div><div class="eeit-viz-kicker">Engineering visual lab · ${E(ex?.subject||'course')}</div><h3 id="eeit-viz-title">${E(title)}</h3><p>${E(description)}</p></div><span class="eeit-viz-tag">Original SVG</span></div>
+      <div class="eeit-viz-header"><div><div class="eeit-viz-kicker">Engineering visual lab · ${E(ex?.subject||'course')}</div><h3 id="eeit-viz-title">${E(title)}</h3><p>${E(description)}</p></div><div class="eeit-viz-actions"><span class="eeit-viz-tag">Original SVG</span><button type="button" class="btn small eeit-viz-download" data-action="visual-export" data-id="${E(ex?.id||'')}" aria-label="Save this engineering diagram as SVG">Save SVG</button></div></div>
       <div class="eeit-viz-graphic">${visual}</div>
       ${slider?`<label class="eeit-viz-control"><span>${E(slider.label)}</span><strong class="eeit-viz-value">${actual}${kind==='rotation'||kind==='pendulum'||kind==='transformer'?'°':'%'}</strong><input type="range" data-action="visual-slider" data-id="${E(ex?.id||'')}" min="${slider.min}" max="${slider.max}" step="${slider.step}" value="${actual}" aria-label="${E(slider.label)}"></label>`:''}
       <p class="eeit-viz-note">${isSourceOnly?'Reference-only exercise: exact source question/derivation is not yet verified. This is a generic teaching diagram.':'Instructional schematic / illustrative parameter explorer — not an official question figure, a measured graph, or independent proof of the calculation.'}</p>
