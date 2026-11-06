@@ -42,7 +42,7 @@ async function check(){
   const projectArchive=JSON.parse((await get('/data/project-practice.json')).bytes.toString('utf8'));
   assert.equal(projectArchive.exercises.length,23,'23 recovered project practices missing');
   assert(projectArchive.exercises.every(x=>x.contentProvenance==='chatgpt-project-practice' && x.parts.every(p=>p.working?.length>=4)),'Project practice metadata/steps invalid');
-  assert(app.includes('project-practice.json'),'Project practice not loaded in deployed app');
+
   const pdfCatalog=JSON.parse((await get('/data/pdf-catalog.json')).bytes.toString('utf8'));
   assert(pdfCatalog.entries.length>=90,'Five-subject PDF catalog is not deployed');
   assert(['digital','power','control','microwave','micro'].every(subject=>pdfCatalog.entries.some(item=>item.subject===subject)),'PDF library must cover all five subjects');
@@ -69,6 +69,7 @@ async function check(){
     assert(bytes.length>100,'Empty web asset '+path);
   }
   const app=(await get('/app.js')).bytes.toString('utf8');
+  assert(app.includes('project-practice.json'),'Project practice not loaded in deployed app');
   assert(app.includes('COMPLETE WORKING · FROM START TO FINISH'),'Full paper derivation not deployed');
   assert(app.includes("from './visuals.mjs'"),'Original SVG engine not imported into active app');
   const visualAsset=await get('/visuals.mjs');
