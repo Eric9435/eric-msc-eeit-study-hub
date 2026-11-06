@@ -68,3 +68,13 @@ Every worked part offers dedicated accessible popups for the Myanmar method reas
 `node tools/live_check.mjs` performs HTTP checks against the deployed Render site: HTML, CSS/JavaScript assets, 82-entry content JSON, actual image headers and Firebase client configuration presence (never logs the config values). `.github/workflows/eeit-live-check.yml` runs this check when `main` changes. The app's original course PDFs and privately provided question scans remain excluded from deployment.
 
 We intentionally load only `enhancements.js` for the three explanation dialogs. The older `reason-ui.js` remains in the repository for historical reference, but is no longer loaded; running both scripts could overwrite each other's exercise rationale controls.
+
+## Independent exercise expansion — 6 November 2026
+
+The additive `source/data/verified-expansion.json` supplies **9 reviewed exercise overrides** (41 fully written subparts) covering all five subjects. The app merges these by exercise ID with the original content at runtime; the existing exercise IDs, personal progress, references, and optional Firebase/cloud wiring remain unchanged. The PWA caches this data for offline sessions.
+
+Verified expansion coverage: Digital Communications OFDM 4.1 (a–j); Electrical Power Systems II symbolic PST, per-unit, three-bus Y-bus, and Newton–Raphson Jacobian worked examples; Control Systems I.2 state-space and system tuples; Microwave Engineering 1.2 full link budget (a–c) and 1.3 coax fields (a–g); Microsystem Engineering new independent mass–spring practice (a–c). Numerical examples introduced for teaching are clearly labelled illustrative and are not claimed to be professor originals.
+
+**Important:** Existing source-only exercises and legacy unreviewed subparts are deliberately not relabelled solved. For the reviewed additions, each subpart contains independent calculation expressions, why, solving method, and final-answer popup content. Several original tutorial questions require private figures or additional source information; they have not been invented.
+
+Run `node tools/smoke_public.cjs` for consistency checks, build and security/copyright safeguards.
