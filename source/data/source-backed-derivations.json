@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-original-source-working-v2",
+  "revision": "2026-11-06-microwave-four-source-backed-calculations",
   "description": "Paraphrased source-referenced working for 31 Digital Communications subparts and independent matching-network derivation (3 parts), retaining MathML for legacy DC.",
   "overrides": [
     {
@@ -1096,6 +1096,475 @@
               "html": "<div class=\"verified-equation\" role=\"math\">Zin,total=(50+j21.984843)−j21.984843≈50+j0 Ω; Γin=(Zin,total−50)/(Zin,total+50)≈0.</div>"
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "official-mw-3-3",
+      "subject": "microwave",
+      "status": "worked",
+      "verificationState": "independent-original-source-derivation",
+      "verificationNote": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Substitute wave source at port 3",
+          "question": "Given b_Q=√(10 mW), r_Q=0.3, S_I=[[0.01,0.1],[0.9,0.01]], find b_Q3 and r_Q3 without a flow graph.",
+          "method": "Port-2 incident wave ကို source-reflection feedback နဲ့ဖြေပါ။ b3=s21 a2+s22 a3 ထဲ a2=(bQ+rQ s12 a3)/(1−rQ s11) substitute လုပ်ပါ။",
+          "reason": "Input reflection ကြောင့် repeatedly reflected waves ပါလာသဖြင့် denominator 1−r_Q s11 သုံးရတယ်။ a3 coefficient က equivalent reflection ဖြစ်တယ်။",
+          "working": [
+            {
+              "label": "Given",
+              "value": "b_Q=√(0.010 W), r_Q=0.3, s11=s22=0.01, s12=0.1, s21=0.9."
+            },
+            {
+              "label": "Source and feedback relation",
+              "value": "a₂=(b_Q+r_Q s₁₂a₃)/(1−r_Q s₁₁)."
+            },
+            {
+              "label": "Substitute equivalent source",
+              "value": "b_Q3 = s₂₁ b_Q/(1−r_Q s₁₁) = (0.9/0.997)√(0.01 W) = 0.0902708 √W."
+            },
+            {
+              "label": "Equivalent reflection",
+              "value": "r_Q3 = s₂₂ + s₂₁s₁₂r_Q/(1−r_Qs₁₁) = 0.01 + 0.027/0.997 = 0.0370812."
+            },
+            {
+              "label": "Physical check",
+              "value": "|b_Q3|²=8.1488 mW, with b measured as square-root power; r_Q3 remains below unity."
+            }
+          ],
+          "equations": [
+            "a₂=(b_Q+r_Q s₁₂a₃)/(1−r_Q s₁₁).",
+            "b_Q3 = s₂₁ b_Q/(1−r_Q s₁₁) = (0.9/0.997)√(0.01 W) = 0.0902708 √W.",
+            "r_Q3 = s₂₂ + s₂₁s₁₂r_Q/(1−r_Qs₁₁) = 0.01 + 0.027/0.997 = 0.0370812."
+          ],
+          "finalAnswer": "b_Q3≈0.0902708 √W; r_Q3≈0.0370812.",
+          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention."
+        },
+        {
+          "label": "b",
+          "title": "Equivalent source at port 5",
+          "question": "Cascade with S_A=[[0.01,0.01],[100,0.01]]. Calculate b_Q5 and r_Q5.",
+          "method": "ပထမ two-port equivalent source ကို amplifier input ပေါ်သို့ cascade ဆက်ပြီး s54 gain နှင့် port reflection denominator သုံးပါ။",
+          "reason": "s54=100 သည် power wave amplitude gain ဖြစ်ပြီး 20log amplitude =40 dB; reflected input wave အတွက် 1−r_Q3 s44 correction လိုသည်။",
+          "working": [
+            {
+              "label": "Given",
+              "value": "b_Q3=0.0902708124 √W, r_Q3=0.0370812437, s₄₄=0.01, s₄₅=0.01, s₅₄=100, s₅₅=0.01."
+            },
+            {
+              "label": "Substitute amplitude",
+              "value": "b_Q5 = s₅₄ b_Q3/(1−r_Q3 s₄₄) = 100×0.0902708124/(1−0.0003708124) = 9.03043 √W."
+            },
+            {
+              "label": "Equivalent reflection",
+              "value": "r_Q5 = s₅₅+s₅₄s₄₅r_Q3/(1−r_Q3s₄₄) = 0.0470950."
+            },
+            {
+              "label": "Check",
+              "value": "Power-wave amplitude is √W; |b_Q5|² is in watts. High output results from prescribed ideal amplitude gain 100."
+            }
+          ],
+          "equations": [
+            "b_Q5 = s₅₄ b_Q3/(1−r_Q3 s₄₄) = 100×0.0902708124/(1−0.0003708124) = 9.03043 √W.",
+            "r_Q5 = s₅₅+s₅₄s₄₅r_Q3/(1−r_Q3s₄₄) = 0.0470950."
+          ],
+          "finalAnswer": "b_Q5≈9.03043 √W; r_Q5≈0.0470950.",
+          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention."
+        },
+        {
+          "label": "c",
+          "title": "Cascaded two-port S-parameters",
+          "question": "Calculate the equivalent S between ports 2 and 5 (intermediate ports connected).",
+          "method": "Connected ports 3 နှင့် 4 တွင် multiple reflection sum ကို geometric series နဲ့ဖော်ပါ။ D=1−s33 s44 denominator ကို အသုံးပြုပါ။",
+          "reason": "Forward signal က input amplifier အကြိမ်ကြိမ် round trip ဖြစ်ပြီး D ကို divide လုပ်ရတယ်။ Reverse transmission မှာ s23 s45 အလားတူဖြစ်တယ်။",
+          "working": [
+            {
+              "label": "Internal reflection denominator",
+              "value": "D=1−s33 s44=1−(0.01)(0.01)=0.9999."
+            },
+            {
+              "label": "Input-side reflection",
+              "value": "S̄₂₂= s22 +s23 s32 s44 /D =0.01 +(0.1)(0.9)(0.01)/0.9999 =0.01090009."
+            },
+            {
+              "label": "Output-side reflection",
+              "value": "S̄₅₅= s55 +s54 s45 s33 /D =0.01 +(100)(0.01)(0.01)/0.9999=0.0200010."
+            },
+            {
+              "label": "Forward scattering",
+              "value": "S̄₅₂=s54 s32 /D=(100)(0.9)/0.9999=90.0090."
+            },
+            {
+              "label": "Reverse scattering",
+              "value": "S̄₂₅=s23 s45 /D=(0.1)(0.01)/0.9999=0.00100010."
+            },
+            {
+              "label": "Equivalent matrix",
+              "value": "S̄_[2,5]=[[0.0109001,0.0010001],[90.0090,0.0200010]]."
+            }
+          ],
+          "equations": [
+            "D=1−s33 s44=1−(0.01)(0.01)=0.9999.",
+            "S̄₂₂= s22 +s23 s32 s44 /D =0.01 +(0.1)(0.9)(0.01)/0.9999 =0.01090009.",
+            "S̄₅₅= s55 +s54 s45 s33 /D =0.01 +(100)(0.01)(0.01)/0.9999=0.0200010.",
+            "S̄_[2,5]=[[0.0109001,0.0010001],[90.0090,0.0200010]]."
+          ],
+          "finalAnswer": "S̄_[2,5]≈[[0.0109001,0.0010001],[90.0090,0.0200010]].",
+          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention."
+        },
+        {
+          "label": "d",
+          "title": "Active power absorbed by the load",
+          "question": "Use r_L=0.1 and the equivalent port-5 source to find P_L.",
+          "method": "Available b_Q5 wave power မှ load mismatch factor (1−|r_L|²)/|1−r_Q5 r_L|² သို့ ပြောင်းပါ။ Power-wave normalization မှ 1/2 factor မပျောက်စေရပါ။",
+          "reason": "Load မှ absorb လုပ်သော power က forward wave power နဲ့ mismatch correction တို့အပေါ် မူတည်သည်။",
+          "working": [
+            {
+              "label": "Power-wave relation",
+              "value": "P_L=(|b_Q5|²/2)×(1−|r_L|²)/|1−r_Q5 r_L|²."
+            },
+            {
+              "label": "Numerical substitution",
+              "value": "P_L=(9.03042984²/2)×(1−0.1²)/(1−0.0470950×0.1)²=40.7495 W."
+            },
+            {
+              "label": "Decibel check",
+              "value": "P_L,dBm=10 log₁₀(40.7495/0.001) =46.1012 dBm."
+            }
+          ],
+          "equations": [
+            "P_L=(|b_Q5|²/2)×(1−|r_L|²)/|1−r_Q5 r_L|²."
+          ],
+          "finalAnswer": "P_L≈40.7495 W≈46.10 dBm.",
+          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention."
+        },
+        {
+          "label": "e",
+          "title": "Operating attenuation",
+          "question": "Compute a_B=10log10(P_available,source/P_load).",
+          "method": "Source available power ကို power-wave bQ, source reflection 0.3 တို့မှ ပြန်တွက်ပါ။ Load power ကို part d မှယူပါ။",
+          "reason": "Amplifier က net gain များစေသဖြင့် attenuation negative ဖြစ်ပြီး dB gain +38.70 dB နဲ့ညီတယ်။",
+          "working": [
+            {
+              "label": "Available source power",
+              "value": "P_Q=(|b_Q|²/2)/(1−|r_Q|²) =0.01/(2×0.91)=0.00549451 W."
+            },
+            {
+              "label": "Operating attenuation",
+              "value": "a_B=10 log₁₀(P_Q/P_L) =10 log₁₀(0.00549451/40.7495)=−38.7019 dB."
+            },
+            {
+              "label": "Check from dBm",
+              "value": "P_Q≈7.399 dBm; P_L≈46.101 dBm; a_B≈7.399−46.101=−38.702 dB."
+            }
+          ],
+          "equations": [
+            "P_Q=(|b_Q|²/2)/(1−|r_Q|²) =0.01/(2×0.91)=0.00549451 W."
+          ],
+          "finalAnswer": "a_B≈−38.70 dB; equivalent operating gain≈+38.70 dB.",
+          "verification": "Recalculated from Microwave Engineering Exercise 3 Task 3, original question p.9, reference solution pp.25–27; normalized power-wave convention."
+        }
+      ]
+    },
+    {
+      "id": "official-mw-3-4",
+      "subject": "microwave",
+      "status": "worked",
+      "verificationState": "independent-original-source-derivation",
+      "verificationNote": "Independently reduced using the original Exercise 3 Task 4 S-matrix and port convention (question p.9, solution pp.28–29).",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Equivalent scattering matrix",
+          "question": "Terminate port 3 of the three-port cyclic network with reflection r_x. Derive the two-port S-matrix for ports 1 and 2.",
+          "method": "Port 3 feedback b3↔a3 relation မှ a3=r_x b3 ကို substitute လုပ်ပြီး 1/(1−ρr_x) multiplier ထုတ်ပါ။",
+          "reason": "Repeated reflection ကို closed-loop geometric series နဲ့ပေါင်းတာဖြစ်လို့ denominator D=1−ρr_x ရတယ်။ Port ordering ကို original diagram အတိုင်း ကိုင်ထားရတယ်။",
+          "working": [
+            {
+              "label": "Given",
+              "value": "S_z=[[ρ,τ,σ],[σ,ρ,τ],[τ,σ,ρ]], with the original source's port-exchange orientation."
+            },
+            {
+              "label": "Feedback denominator",
+              "value": "D=1−ρ r_x."
+            },
+            {
+              "label": "Equivalent S-parameters",
+              "value": "S̄11=S̄22=ρ+τσ r_x/D."
+            },
+            {
+              "label": "Reverse transmission",
+              "value": "S̄12=σ+τ²r_x/D."
+            },
+            {
+              "label": "Forward transmission",
+              "value": "S̄21=τ+σ²r_x/D."
+            },
+            {
+              "label": "Equivalent scattering matrix",
+              "value": "S̄=[[ρ+τσ r_x/D, σ+τ²r_x/D],[τ+σ²r_x/D, ρ+τσ r_x/D]]."
+            }
+          ],
+          "equations": [
+            "S̄=[[ρ+τσ r_x/D, σ+τ²r_x/D],[τ+σ²r_x/D, ρ+τσ r_x/D]]."
+          ],
+          "finalAnswer": "S̄ with denominator D=1−ρr_x as displayed; conditional on 1−ρr_x≠0.",
+          "verification": "Independently reduced using the original Exercise 3 Task 4 S-matrix and port convention (question p.9, solution pp.28–29)."
+        },
+        {
+          "label": "b",
+          "title": "Matched and movable short-circuit loads",
+          "question": "Evaluate for r_x=0 and r_x=−e^(−j2βℓ).",
+          "method": "Matched termination မှ reflection 0 ရသဖြင့် feedback terms အကုန် 0 ဖြစ်သည်။ Short circuit slider တွင် phase round-trip 2βℓ ရှိသဖြင့် r_x=−e^{-j2βℓ} ထည့်ပါ။",
+          "reason": "Line position ℓ က equivalent input return loss, isolation နှင့် transfer magnitude ကို ပြောင်းစေတယ်။",
+          "working": [
+            {
+              "label": "Matched case",
+              "value": "r_x=0 ⇒ S̄=[[ρ,σ],[τ,ρ]]."
+            },
+            {
+              "label": "Short slider reflection",
+              "value": "r_x=−exp(−j2βℓ); D=1+ρexp(−j2βℓ)."
+            },
+            {
+              "label": "Shorted diagonal",
+              "value": "S̄11=S̄22=ρ−(τσ exp(−j2βℓ))/D."
+            },
+            {
+              "label": "Shorted off-diagonal",
+              "value": "S̄12=σ−τ² exp(−j2βℓ)/D; S̄21=τ−σ² exp(−j2βℓ)/D."
+            },
+            {
+              "label": "Physical interpretation",
+              "value": "Changing ℓ controls reflection and coupling phase; singular D needs separate physical interpretation."
+            }
+          ],
+          "equations": [
+            "r_x=−exp(−j2βℓ); D=1+ρexp(−j2βℓ)."
+          ],
+          "finalAnswer": "Matched: S̄=[[ρ,σ],[τ,ρ]]. Short: replace r_x by −e^(−j2βℓ) in the matrix from (a).",
+          "verification": "Independently reduced using the original Exercise 3 Task 4 S-matrix and port convention (question p.9, solution pp.28–29)."
+        }
+      ]
+    },
+    {
+      "id": "official-mw-5-2",
+      "subject": "microwave",
+      "status": "worked",
+      "verificationState": "independent-original-source-derivation",
+      "verificationNote": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Complete four-port amplifier-bridge S-matrix",
+          "question": "Cascaded ideal 3-dB couplers and amplifier networks S_A1, S_A2; derive the 4-port matrix at external ports (1,2,11,12).",
+          "method": "Input/output 3 dB coupler scattering weights κ,τ ကို amplifier forward / reverse / reflection coefficients နဲ့ multiply စုပေါင်းပါ။ Reference plane convention: κτ=j/2, κ²=−1/2, τ²=+1/2.",
+          "reason": "Amplifier နှစ်ခုရဲ့ symmetric/antisymmetric combination ဖြစ်တာကြောင့် sum term နဲ့ difference term matrix ထဲရတယ်။",
+          "working": [
+            {
+              "label": "Given",
+              "value": "S_Ai=[[ρin,i,σi],[Ai,ρout,i]]; coupler τ=−1/√2, κ=−j/√2."
+            },
+            {
+              "label": "Coupler identities",
+              "value": "τ²=+1/2; κ²=−1/2; κτ=j/2."
+            },
+            {
+              "label": "Input reflection block",
+              "value": "(1/2)[[ρin,1−ρin,2, j(ρin,1+ρin,2)],[j(ρin,1+ρin,2),ρin,2−ρin,1]]."
+            },
+            {
+              "label": "Reverse transmission block",
+              "value": "(1/2)[[σ1−σ2,j(σ1+σ2)],[j(σ1+σ2),σ2−σ1]]."
+            },
+            {
+              "label": "Forward transmission block",
+              "value": "(1/2)[[A1−A2,j(A1+A2)],[j(A1+A2),A2−A1]]."
+            },
+            {
+              "label": "Output reflection block",
+              "value": "(1/2)[[ρout,1−ρout,2,j(ρout,1+ρout,2)],[j(ρout,1+ρout,2),ρout,2−ρout,1]]."
+            }
+          ],
+          "equations": [
+            "(1/2)[[ρin,1−ρin,2, j(ρin,1+ρin,2)],[j(ρin,1+ρin,2),ρin,2−ρin,1]].",
+            "(1/2)[[ρout,1−ρout,2,j(ρout,1+ρout,2)],[j(ρout,1+ρout,2),ρout,2−ρout,1]]."
+          ],
+          "finalAnswer": "Four-port S=(1/2)×the four 2×2 blocks as displayed; external port order (1,2,11,12).",
+          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention."
+        },
+        {
+          "label": "b",
+          "title": "Identical amplifier simplification",
+          "question": "Set S_A1=S_A2=[[ρin,σ],[A,ρout]].",
+          "method": "Difference terms zero, sum terms 2× coefficient ဖြစ်သည်။ Balanced bridge သည် signal ကို isolated ports သို့ပို့နိုင်သည်။",
+          "reason": "Identical amplifier condition ကြောင့် reflection difference cancellation ဖြစ်ပြီး left-to-right gain jA ဖြစ်တယ်။",
+          "working": [
+            {
+              "label": "Equal branches",
+              "value": "ρin,1=ρin,2=ρin; ρout,1=ρout,2=ρout; σ1=σ2=σ; A1=A2=A."
+            },
+            {
+              "label": "Equivalent matrix",
+              "value": "S_eq=[[0,jρin,0,jσ],[jρin,0,jσ,0],[0,jA,0,jρout],[jA,0,jρout,0]]."
+            },
+            {
+              "label": "Matched isolated-port interpretation",
+              "value": "The main external two-port (ports 1 and 12) has no input/output reflection for identical amplifiers."
+            }
+          ],
+          "equations": [
+            "S_eq=[[0,jρin,0,jσ],[jρin,0,jσ,0],[0,jA,0,jρout],[jA,0,jρout,0]]."
+          ],
+          "finalAnswer": "S_eq identical bridge shown above.",
+          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention."
+        },
+        {
+          "label": "c",
+          "title": "Reduced two-port with terminated isolated ports",
+          "question": "Terminate ports 2 and 11 in matched loads and keep ports 1 and 12.",
+          "method": "Matched terminations a₂=a₁₁=0 ဖြစ်သဖြင့် original 4-port matrix ထဲ row/column 2,3 ဖယ်ပြီး indices (1,4) ကိုသာယူပါ။",
+          "reason": "Matched port မှ re-reflection မရှိသဖြင့် Schur correction term လိုမလာ; simply 2-port submatrix ယူနိုင်သည်။",
+          "working": [
+            {
+              "label": "Port terminations",
+              "value": "a₂=a₁₁=0; keep external port indices (1,12)."
+            },
+            {
+              "label": "General reduced matrix",
+              "value": "S_reduced=(1/2)[[ρin,1−ρin,2,j(σ1+σ2)],[j(A1+A2),ρout,2−ρout,1]]."
+            },
+            {
+              "label": "Identical amplifier result",
+              "value": "S_reduced=[[0,jσ],[jA,0]]."
+            }
+          ],
+          "equations": [
+            "S_reduced=(1/2)[[ρin,1−ρin,2,j(σ1+σ2)],[j(A1+A2),ρout,2−ρout,1]].",
+            "S_reduced=[[0,jσ],[jA,0]]."
+          ],
+          "finalAnswer": "Identical balanced bridge: S_reduced=[[0,jσ],[jA,0]].",
+          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention."
+        },
+        {
+          "label": "d",
+          "title": "Failure of amplifier 2",
+          "question": "For identical matched amplifiers, set A₂=0 and find amplitude and power reduction.",
+          "method": "Healthy bridge တွင် S21=j(A1+A2)/2=jA ဖြစ်တယ်။ Amplifier 2 fail ဖြစ်ရင် S21=jA/2 ဖြစ်သွားသည်။",
+          "reason": "Voltage-wave amplitude half ဖြစ်သွားရင် power quarter ဖြစ်သွားတယ်။ 20log10(1/2)=−6.02 dB amplitude gain change နဲ့ညီတယ်။",
+          "working": [
+            {
+              "label": "Healthy forward amplitude",
+              "value": "S21,healthy=j(A+A)/2=jA."
+            },
+            {
+              "label": "Failed branch amplitude",
+              "value": "S21,failed=j(A+0)/2=jA/2."
+            },
+            {
+              "label": "Amplitude ratio",
+              "value": "|S21,failed/S21,healthy|=1/2."
+            },
+            {
+              "label": "Power ratio",
+              "value": "P_failed/P_healthy=(1/2)²=1/4=0.25."
+            },
+            {
+              "label": "dB change",
+              "value": "10log₁₀(1/4)=−6.0206 dB."
+            }
+          ],
+          "equations": [
+            "P_failed/P_healthy=(1/2)²=1/4=0.25."
+          ],
+          "finalAnswer": "Forward amplitude falls to 50%; available output power falls to 25% (−6.02 dB).",
+          "verification": "Independent algebra from Microwave Engineering Exercise 5 Task 2, original p.12 and reference pp.37–39; phase reference planes follow the provided coupler convention."
+        }
+      ]
+    },
+    {
+      "id": "official-mw-5-3",
+      "subject": "microwave",
+      "status": "worked",
+      "verificationState": "independent-original-source-derivation",
+      "verificationNote": "Independent network cascade from Microwave Engineering Exercise 5 Task 3 (question p.13, solution pp.39–41); phase reference planes stated explicitly.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Middle coupler plus shorted lines",
+          "question": "Derive the equivalent 2-port scattering matrix between ports 5 and 6.",
+          "method": "Short-circuit termination ရဲ့ reflection r=−e^(−j2βℓ) ကို ideal 3dB coupler side ports နှစ်ခုမှာပြန်ထည့်ပြီး S_eff=S_ab (rI) S_ba ကို matrix multiply လုပ်ပါ။",
+          "reason": "Matched lossless coupler အတွက် middle-coupler direct reflection block သုညဖြစ်သည်။ Round trip phase တစ်ခါသာရသည်။",
+          "working": [
+            {
+              "label": "Given",
+              "value": "Ideal coupler cross-block C=(1/√2)[[1,j],[j,1]], r_short=−e^(−j2βℓ)."
+            },
+            {
+              "label": "Matrix multiplication",
+              "value": "S_eff=C(r_short I)C=(r_short/2)[[1,j],[j,1]]²."
+            },
+            {
+              "label": "Square the coupling matrix",
+              "value": "[[1,j],[j,1]]²=[[0,2j],[2j,0]]."
+            },
+            {
+              "label": "Result",
+              "value": "S_eff=[[0,−j e^(−j2βℓ)],[−j e^(−j2βℓ),0]]."
+            },
+            {
+              "label": "Reference plane convention",
+              "value": "If −j is absorbed into a reference plane, write Φ=e^(−j2βℓ) and S_eff=[[0,Φ],[Φ,0]]."
+            }
+          ],
+          "equations": [
+            "S_eff=C(r_short I)C=(r_short/2)[[1,j],[j,1]]².",
+            "[[1,j],[j,1]]²=[[0,2j],[2j,0]].",
+            "S_eff=[[0,−j e^(−j2βℓ)],[−j e^(−j2βℓ),0]]."
+          ],
+          "finalAnswer": "S_eff off-diagonal transfer =−j e^(−j2βℓ), zero reflections; equivalent Φ convention is also shown.",
+          "verification": "Independent network cascade from Microwave Engineering Exercise 5 Task 3 (question p.13, solution pp.39–41); phase reference planes stated explicitly."
+        },
+        {
+          "label": "b",
+          "title": "Complete adjustable four-port S-matrix",
+          "question": "Use two outer couplers and S_eff from (a). Determine external 4-port S for (1,2,13,14) and special slider lengths.",
+          "method": "Outer couplers transmission paths ကို sum လုပ်ပါ။ Φ=e^(−j2βℓ) convention နဲ့ နှစ်လမ်း path က 1−Φ နှင့် j(1+Φ) အဖြစ် interference ရမယ်။",
+          "reason": "Power coupling ကို slider ℓ ကောင်းကောင်းရွှေ့ခြင်းနဲ့ ပြောင်းလဲနိုင်ပြီး |Φ|=1 အတွက် total energy ကို lossless network တစ်ခုလို ထိန်းထားတယ်။",
+          "working": [
+            {
+              "label": "Define phase",
+              "value": "Φ=e^(−j2βℓ), |Φ|=1 for lossless lines."
+            },
+            {
+              "label": "Resulting scattering matrix",
+              "value": "S_ext=(1/2)[[0,0,1−Φ,j(1+Φ)],[0,0,j(1+Φ),Φ−1],[1−Φ,j(1+Φ),0,0],[j(1+Φ),Φ−1,0,0]]."
+            },
+            {
+              "label": "Matched and isolated conditions",
+              "value": "S11=S22=S13,13=S14,14=0; S12=S21=S13,14=S14,13=0."
+            },
+            {
+              "label": "Case Φ=1",
+              "value": "βℓ=nπ ⇒ S13,1=0, S14,1=j (all power to port 14 in this phase convention)."
+            },
+            {
+              "label": "Case Φ=−1",
+              "value": "βℓ=π/2+nπ ⇒ S13,1=1, S14,1=0 (all power to port 13)."
+            },
+            {
+              "label": "Conservation check",
+              "value": "|S13,1|²+|S14,1|²=(|1−Φ|²+|1+Φ|²)/4=1."
+            }
+          ],
+          "equations": [
+            "Φ=e^(−j2βℓ), |Φ|=1 for lossless lines.",
+            "S_ext=(1/2)[[0,0,1−Φ,j(1+Φ)],[0,0,j(1+Φ),Φ−1],[1−Φ,j(1+Φ),0,0],[j(1+Φ),Φ−1,0,0]]."
+          ],
+          "finalAnswer": "S_ext shown above; slider switches output between port 14 at Φ=1 and port 13 at Φ=−1.",
+          "verification": "Independent network cascade from Microwave Engineering Exercise 5 Task 3 (question p.13, solution pp.39–41); phase reference planes stated explicitly."
         }
       ]
     }
