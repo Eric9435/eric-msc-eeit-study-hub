@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-independent-derivations-4",
+  "revision": "2026-11-06-independent-derivations-5",
   "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
   "overrides": [
     {
@@ -2429,6 +2429,248 @@
           "method": "Initial state +1 သတ်မှတ်ပြီး winning transitions +1,−1,+1,+1 တွက်ပါ။ μ0=1+0.75(1)=1.75; μ1=−1+0.75(1)=−0.25; μ2=1+0.75(−1)=0.25; μ3=1+0.75(1)=1.75။ Squared residual sum 1.1132။ Alternative final −1 survivor 1.8732။",
           "finalAnswer": "ML sequence [+1,−1,+1,+1], metric 1.1132.",
           "verification": "Independent analytical/BPSK-trellis derivation; source 2026/27 Exercise 3.2, D=1, h=[1,0.75]"
+        }
+      ]
+    },
+    {
+      "id": "dc-3.3",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Full 3.3 parts a–h. Initial state 0 means previous BPSK symbols are −1,−1, as enumerated in exercise state table.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Three-tap symbol-spaced FIR channel",
+          "question": "Draw/describe FIR h=[1,−0.6,0.3] and write difference equation.",
+          "equations": [
+            "h(z)=1−0.6z⁻¹+0.3z⁻²",
+            "r_m=d_m−0.6d_{m−1}+0.3d_{m−2}+n_m",
+            "FIR: current gain 1 + one delay gain −0.6 + two delays gain +0.3"
+          ],
+          "display": [
+            {
+              "latex": "h(z)=1−0.6z⁻¹+0.3z⁻²",
+              "html": "<div class=\"verified-equation\" role=\"math\">h(z)=1−0.6z⁻¹+0.3z⁻²</div>"
+            },
+            {
+              "latex": "r_m=d_m−0.6d_{m−1}+0.3d_{m−2}+n_m",
+              "html": "<div class=\"verified-equation\" role=\"math\">r_m=d_m−0.6d_{m−1}+0.3d_{m−2}+n_m</div>"
+            },
+            {
+              "latex": "FIR: current gain 1 + one delay gain −0.6 + two delays gain +0.3",
+              "html": "<div class=\"verified-equation\" role=\"math\">FIR: current gain 1 + one delay gain −0.6 + two delays gain +0.3</div>"
+            }
+          ],
+          "reason": "Current symbol တစ်ခုတည်း receiver မရဘူး။ Previous 1, previous 2 symbol တွေပါ ရောဝင်နေလို ISI ဖြစ်တယ်။",
+          "method": "Tapped delay line မှာ d_m→gain1, z⁻¹→gain−0.6, z⁻²→gain0.3 အဖြစ် sum node သို့ပို့ပါ။ Noise n_m ကို output မှာ add လုပ်ပါ။",
+          "finalAnswer": "r_m=d_m−0.6d_{m−1}+0.3d_{m−2}+n_m.",
+          "verification": "Independently calculated from exact 3.3 h=[1,−0.6,0.3], r=[0.89,−0.42,−0.16], state 0=(−1,−1)"
+        },
+        {
+          "label": "b",
+          "title": "MAP sequence criterion",
+          "question": "Write MAP criterion for d and received r.",
+          "equations": [
+            "d̂_MAP=argmax_{d∈{−1,+1}^N}P(d|r)",
+            "P(d|r)∝P(r|d)P(d)"
+          ],
+          "display": [
+            {
+              "latex": "d̂_MAP=argmax_{d∈{−1,+1}^N}P(d|r)",
+              "html": "<div class=\"verified-equation\" role=\"math\">d̂_MAP=argmax_{d∈{−1,+1}^N}P(d|r)</div>"
+            },
+            {
+              "latex": "P(d|r)∝P(r|d)P(d)",
+              "html": "<div class=\"verified-equation\" role=\"math\">P(d|r)∝P(r|d)P(d)</div>"
+            }
+          ],
+          "reason": "Prior probability နဲ့ likelihood နှစ်ခုကြည့်ပြီး candidate BPSK sequence အားလုံးထဲ အဖြစ်နိုင်ဆုံးကိုရှာတယ်။",
+          "method": "Conditional probability ကို Bayes theorem နဲ့ရေးပြီး argmax over sequences ကို လုပ်ပါ။",
+          "finalAnswer": "d̂_MAP=argmax_d P(d|r).",
+          "verification": "Independently calculated from exact 3.3 h=[1,−0.6,0.3], r=[0.89,−0.42,−0.16], state 0=(−1,−1)"
+        },
+        {
+          "label": "c",
+          "title": "Prove ML/MAP equivalence for given BPSK model",
+          "question": "Given independent equally likely BPSK symbols, prove uniform sequence probability.",
+          "equations": [
+            "P(d)=∏_{m=0}^{N−1}P(d_m)=(1/2)^N",
+            "P(d|r)=P(r|d)(1/2)^N/P(r)",
+            "argmax_d P(d|r)=argmax_d P(r|d)"
+          ],
+          "display": [
+            {
+              "latex": "P(d)=∏_{m=0}^{N−1}P(d_m)=(1/2)^N",
+              "html": "<div class=\"verified-equation\" role=\"math\">P(d)=∏_{m=0}^{N−1}P(d_m)=(1/2)^N</div>"
+            },
+            {
+              "latex": "P(d|r)=P(r|d)(1/2)^N/P(r)",
+              "html": "<div class=\"verified-equation\" role=\"math\">P(d|r)=P(r|d)(1/2)^N/P(r)</div>"
+            },
+            {
+              "latex": "argmax_d P(d|r)=argmax_d P(r|d)",
+              "html": "<div class=\"verified-equation\" role=\"math\">argmax_d P(d|r)=argmax_d P(r|d)</div>"
+            }
+          ],
+          "reason": "BPSK +1/-1 each 0.5 ဖြစ်ပြီး statistically independent ဆို sequence တိုင်း (1/2)^N probability တူတယ်။",
+          "method": "Candidate sequence length N အတွက် product prior တွက်ပါ။ Bayes denominator/Prior constant ဖြုတ်ပြီး received likelihood ကိုပဲ maximize လုပ်ပါ။",
+          "finalAnswer": "MAP criterion reduces exactly to ML under the stated priors.",
+          "verification": "Independently calculated from exact 3.3 h=[1,−0.6,0.3], r=[0.89,−0.42,−0.16], state 0=(−1,−1)"
+        },
+        {
+          "label": "d",
+          "title": "Frequency-selective versus flat channel",
+          "question": "Explain why equalization is necessary for h=[1,−0.6,0.3].",
+          "equations": [
+            "H(e^{jω})=1−0.6e^{−jω}+0.3e^{−2jω}",
+            "H(0)=1−0.6+0.3=0.7",
+            "H(π)=1+0.6+0.3=1.9"
+          ],
+          "display": [
+            {
+              "latex": "H(e^{jω})=1−0.6e^{−jω}+0.3e^{−2jω}",
+              "html": "<div class=\"verified-equation\" role=\"math\">H(e^{jω})=1−0.6e^{−jω}+0.3e^{−2jω}</div>"
+            },
+            {
+              "latex": "H(0)=1−0.6+0.3=0.7",
+              "html": "<div class=\"verified-equation\" role=\"math\">H(0)=1−0.6+0.3=0.7</div>"
+            },
+            {
+              "latex": "H(π)=1+0.6+0.3=1.9",
+              "html": "<div class=\"verified-equation\" role=\"math\">H(π)=1+0.6+0.3=1.9</div>"
+            }
+          ],
+          "reason": "Frequency response gain 0Hz မှာ0.7၊ Nyquist angular frequency π မှာ1.9 ဖြစ်လို့ channel gain frequency အလိုက် မတူဘူး။",
+          "method": "Evaluate discrete-time frequency response at ω=0, π. Values significantly differ; nonzero h1,h2 introduce ISI. This is frequency selective, so receiver equalizer needs to undo memory effects.",
+          "finalAnswer": "Frequency-selective channel, equalization required.",
+          "verification": "Independently calculated from exact 3.3 h=[1,−0.6,0.3], r=[0.89,−0.42,−0.16], state 0=(−1,−1)"
+        },
+        {
+          "label": "e",
+          "title": "Linear FIR versus ML Viterbi",
+          "question": "Describe core differences and their design criteria.",
+          "equations": [
+            "Linear: d̂_m≈Σ_k e_k r_{m−k} then symbol slicing",
+            "ZF: min ||He−target||²; MMSE: min E|d_m−eᵀr|²",
+            "MLSE: d̂=argmin_{d-sequences}Σ_m |r_m−∑_ℓh_ℓd_{m−ℓ}|²"
+          ],
+          "display": [
+            {
+              "latex": "Linear: d̂_m≈Σ_k e_k r_{m−k} then symbol slicing",
+              "html": "<div class=\"verified-equation\" role=\"math\">Linear: d̂_m≈Σ_k e_k r_{m−k} then symbol slicing</div>"
+            },
+            {
+              "latex": "ZF: min ||He−target||²; MMSE: min E|d_m−eᵀr|²",
+              "html": "<div class=\"verified-equation\" role=\"math\">ZF: min ||He−target||²; MMSE: min E|d_m−eᵀr|²</div>"
+            },
+            {
+              "latex": "MLSE: d̂=argmin_{d-sequences}Σ_m |r_m−∑_ℓh_ℓd_{m−ℓ}|²",
+              "html": "<div class=\"verified-equation\" role=\"math\">MLSE: d̂=argmin_{d-sequences}Σ_m |r_m−∑_ℓh_ℓd_{m−ℓ}|²</div>"
+            }
+          ],
+          "reason": "Linear equalizer က filter tap တွေနဲ့ signal ပြန်ပြုပြင်တယ်။ Viterbi က whole sequence အဖြစ်နိုင်ဆုံးကို state transition တွေကနေရွေးတယ်။",
+          "method": "Channel+equalizer filtering ကိုနည်းစနစ် ZF/MMSE နှင့် optimize လုပ်သည်။ Viterbi branch metric တွေကို dynamic programming နဲ့ accumulate; model known ဖြစ်ရင် ML sequence optimal ဖြစ်တယ်၊ state complexity M^D တိုးမယ်။",
+          "finalAnswer": "Linear filtering versus finite-state ML sequence search.",
+          "verification": "Independently calculated from exact 3.3 h=[1,−0.6,0.3], r=[0.89,−0.42,−0.16], state 0=(−1,−1)"
+        },
+        {
+          "label": "f",
+          "title": "Count trellis states",
+          "question": "For BPSK alphabet M=2 and memory D=2, count states.",
+          "equations": [
+            "states=M^D=2²=4",
+            "state 0=(−1,−1); 1=(−1,+1); 2=(+1,−1); 3=(+1,+1)"
+          ],
+          "display": [
+            {
+              "latex": "states=M^D=2²=4",
+              "html": "<div class=\"verified-equation\" role=\"math\">states=M^D=2²=4</div>"
+            },
+            {
+              "latex": "state 0=(−1,−1); 1=(−1,+1); 2=(+1,−1); 3=(+1,+1)",
+              "html": "<div class=\"verified-equation\" role=\"math\">state 0=(−1,−1); 1=(−1,+1); 2=(+1,−1); 3=(+1,+1)</div>"
+            }
+          ],
+          "reason": "Receiver state တစ်ခုမှာ နောက်ဆုံး BPSK symbol နှစ်ခုကို သိရမယ်။ Symbol 2 မျိုး၊ positions 2 ခုဖြစ်လို့ 2×2=4 states ရတယ်။",
+          "method": "State=(d_{m−1},d_{m−2}) ကို define လုပ်ပြီး possible pair 4 ခု enumerate လုပ်ပါ။ Source figure numbering အတိုင်း states 0–3 assign လုပ်ထားသည်။",
+          "finalAnswer": "Four states: 0,1,2,3.",
+          "verification": "Independently calculated from exact 3.3 h=[1,−0.6,0.3], r=[0.89,−0.42,−0.16], state 0=(−1,−1)"
+        },
+        {
+          "label": "g",
+          "title": "State transitions and channel output labels",
+          "question": "For every previous state, show BPSK ±1 transitions and predicted noiseless output.",
+          "equations": [
+            "Old (−1,−1): d=−1 → new (−1,−1), μ=−0.7; d=+1 → new (+1,−1), μ=+1.3",
+            "Old (−1,+1): d=−1 → new (−1,−1), μ=−0.1; d=+1 → new (+1,−1), μ=+1.9",
+            "Old (+1,−1): d=−1 → new (−1,+1), μ=−1.9; d=+1 → new (+1,+1), μ=+0.1",
+            "Old (+1,+1): d=−1 → new (−1,+1), μ=−1.3; d=+1 → new (+1,+1), μ=+0.7"
+          ],
+          "display": [
+            {
+              "latex": "Old (−1,−1): d=−1 → new (−1,−1), μ=−0.7; d=+1 → new (+1,−1), μ=+1.3",
+              "html": "<div class=\"verified-equation\" role=\"math\">Old (−1,−1): d=−1 → new (−1,−1), μ=−0.7; d=+1 → new (+1,−1), μ=+1.3</div>"
+            },
+            {
+              "latex": "Old (−1,+1): d=−1 → new (−1,−1), μ=−0.1; d=+1 → new (+1,−1), μ=+1.9",
+              "html": "<div class=\"verified-equation\" role=\"math\">Old (−1,+1): d=−1 → new (−1,−1), μ=−0.1; d=+1 → new (+1,−1), μ=+1.9</div>"
+            },
+            {
+              "latex": "Old (+1,−1): d=−1 → new (−1,+1), μ=−1.9; d=+1 → new (+1,+1), μ=+0.1",
+              "html": "<div class=\"verified-equation\" role=\"math\">Old (+1,−1): d=−1 → new (−1,+1), μ=−1.9; d=+1 → new (+1,+1), μ=+0.1</div>"
+            },
+            {
+              "latex": "Old (+1,+1): d=−1 → new (−1,+1), μ=−1.3; d=+1 → new (+1,+1), μ=+0.7",
+              "html": "<div class=\"verified-equation\" role=\"math\">Old (+1,+1): d=−1 → new (−1,+1), μ=−1.3; d=+1 → new (+1,+1), μ=+0.7</div>"
+            }
+          ],
+          "reason": "Old state မှာ previous2 symbols တည်ပြီး current d=±1 ရွေးလိုက်တာနဲ့ next state နဲ့ predicted received amplitude ကို တစ်ခါတည်းတွက်လို့ရတယ်။",
+          "method": "Formula μ=d−0.6 d_prev1+0.3 d_prev2; new state=(d,d_prev1)။ Each old state နှစ်ခွဲ 8 edges ရတယ်။ Red for −1, blue for +1 လို့ diagram မှာ သတ်မှတ်နိုင်သည်။",
+          "finalAnswer": "8 transitions across 4 states; labels are listed.",
+          "verification": "Independently calculated from exact 3.3 h=[1,−0.6,0.3], r=[0.89,−0.42,−0.16], state 0=(−1,−1)"
+        },
+        {
+          "label": "h",
+          "title": "Full 3-sample Viterbi ML traceback",
+          "question": "Given r=[0.89,−0.42,−0.16], initial state 0=(−1,−1), compute branch/state metrics and ML sequence.",
+          "equations": [
+            "n=0: state 0 metric 2.5281, state 2 metric 0.1681",
+            "n=1 survivor metrics: state0 2.6065; state1 2.3585; state2 5.4865; state3 0.4385",
+            "n=2 final survivor metrics: state0 2.3621; state1 1.7381; state2 4.7381; state3 1.1781",
+            "Winning d=[+1,+1,+1], μ=[1.3,0.1,0.7]",
+            "Squared residuals=[(0.89−1.3)²,(−0.42−0.1)²,(−0.16−0.7)²]=[0.1681,0.2704,0.7396]",
+            "Total metric 1.1781"
+          ],
+          "display": [
+            {
+              "latex": "n=0: state 0 metric 2.5281, state 2 metric 0.1681",
+              "html": "<div class=\"verified-equation\" role=\"math\">n=0: state 0 metric 2.5281, state 2 metric 0.1681</div>"
+            },
+            {
+              "latex": "n=1 survivor metrics: state0 2.6065; state1 2.3585; state2 5.4865; state3 0.4385",
+              "html": "<div class=\"verified-equation\" role=\"math\">n=1 survivor metrics: state0 2.6065; state1 2.3585; state2 5.4865; state3 0.4385</div>"
+            },
+            {
+              "latex": "n=2 final survivor metrics: state0 2.3621; state1 1.7381; state2 4.7381; state3 1.1781",
+              "html": "<div class=\"verified-equation\" role=\"math\">n=2 final survivor metrics: state0 2.3621; state1 1.7381; state2 4.7381; state3 1.1781</div>"
+            },
+            {
+              "latex": "Winning d=[+1,+1,+1], μ=[1.3,0.1,0.7]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Winning d=[+1,+1,+1], μ=[1.3,0.1,0.7]</div>"
+            },
+            {
+              "latex": "Squared residuals=[(0.89−1.3)²,(−0.42−0.1)²,(−0.16−0.7)²]=[0.1681,0.2704,0.7396]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Squared residuals=[(0.89−1.3)²,(−0.42−0.1)²,(−0.16−0.7)²]=[0.1681,0.2704,0.7396]</div>"
+            },
+            {
+              "latex": "Total metric 1.1781",
+              "html": "<div class=\"verified-equation\" role=\"math\">Total metric 1.1781</div>"
+            }
+          ],
+          "reason": "အရင် state 0 = (-1,-1) ကနေ +1,+1,+1 path ကို လိုက်ရင် received prediction [1.3,0.1,0.7] ရတယ်။ Square errors ပေါင်း 1.1781 ဖြစ်ပြီး final surviving path တွေထဲ အနည်းဆုံးပါ။",
+          "method": "At n0 compute both outgoing metrics. n1 compute all reachable states, n2 every new-state predecessor and discard larger metric. At final choose state3 with 1.1781, traceback (+1,+1,+1). Other final state best 1.7381,2.3621,4.7381။ Initial state indexing original table follow.",
+          "finalAnswer": "Decoded sequence [+1,+1,+1]; ML metric 1.1781.",
+          "verification": "Independently calculated from exact 3.3 h=[1,−0.6,0.3], r=[0.89,−0.42,−0.16], state 0=(−1,−1)"
         }
       ]
     }
