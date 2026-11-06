@@ -59,6 +59,168 @@
       ]
     },
     {
+      "id": "project-mems-02",
+      "subject": "micro",
+      "number": "02",
+      "title": "MEMS scaling laws: cube surface and volume",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "MEMS scaling laws: cube surface and volume",
+          "question": "An independent practice cube decreases from 1 mm to 100 µm side. Calculate its surface area, volume and surface-to-volume ratios at both sizes.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Surface/volume ratio သည် 1/L အတိုင်း တိုးသောကြောင့် microscale မှာ surface effects ပိုအရေးပါသည်။ ဤနံပါတ်သည် Project Practice 1 နှင့် scaling concept တူသည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "L1=1 mm=1×10⁻³ m; L2=100 µm=1×10⁻⁴ m."
+            },
+            {
+              "label": "Governing equation",
+              "value": "A=6L²; V=L³; A/V=6/L."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "A1=6×10⁻⁶ m², V1=10⁻⁹ m³, A1/V1=6000 m⁻¹. A2=6×10⁻⁸ m², V2=10⁻¹² m³, A2/V2=60000 m⁻¹."
+            },
+            {
+              "label": "Independent verification",
+              "value": "Length ratio 0.1 gives area factor 0.01, volume factor 0.001, A/V factor 10."
+            }
+          ],
+          "equations": [
+            "A=6L²; V=L³; A/V=6/L.",
+            "A1=6×10⁻⁶ m², V1=10⁻⁹ m³, A1/V1=6000 m⁻¹. A2=6×10⁻⁸ m², V2=10⁻¹² m³, A2/V2=60000 m⁻¹."
+          ],
+          "display": [
+            {
+              "latex": "A=6L²; V=L³; A/V=6/L."
+            },
+            {
+              "latex": "A1=6×10⁻⁶ m², V1=10⁻⁹ m³, A1/V1=6000 m⁻¹. A2=6×10⁻⁸ m², V2=10⁻¹² m³, A2/V2=60000 m⁻¹."
+            }
+          ],
+          "finalAnswer": "A/V increases by 10×: 6,000→60,000 m⁻¹.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-03",
+      "subject": "micro",
+      "number": "03",
+      "title": "MEMS mass–spring resonance",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "MEMS mass–spring resonance",
+          "question": "For undamped mass m=2 µg and spring stiffness k=20 N/m, calculate angular natural frequency and resonant frequency.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Undamped harmonic oscillator m ẍ+kx=0 ၏ eigenfrequency ကို frequency unit သို့ပြောင်းခြင်းဖြစ်သည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "m=2 µg=2×10⁻⁹ kg; k=20 N/m."
+            },
+            {
+              "label": "Governing equation",
+              "value": "ω₀=√(k/m); f₀=ω₀/(2π)."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "ω₀=√(20/(2×10⁻⁹))=100,000 rad/s; f₀=100,000/(2π)=15,915.494 Hz."
+            },
+            {
+              "label": "Independent verification",
+              "value": "(rad/s)/(2π) gives Hz; √(20/2e−9)=1e5."
+            }
+          ],
+          "equations": [
+            "ω₀=√(k/m); f₀=ω₀/(2π).",
+            "ω₀=√(20/(2×10⁻⁹))=100,000 rad/s; f₀=100,000/(2π)=15,915.494 Hz."
+          ],
+          "display": [
+            {
+              "latex": "ω₀=√(k/m); f₀=ω₀/(2π)."
+            },
+            {
+              "latex": "ω₀=√(20/(2×10⁻⁹))=100,000 rad/s; f₀=100,000/(2π)=15,915.494 Hz."
+            }
+          ],
+          "finalAnswer": "ω₀=100,000 rad/s; f₀≈15.9155 kHz.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-04",
+      "subject": "micro",
+      "number": "04",
+      "title": "Piezoresistor gauge factor",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Piezoresistor gauge factor",
+          "question": "A silicon piezoresistor has R0=1000 Ω, gauge factor GF=50, applied strain ε=500 με. Calculate resistance change and new resistance.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Gauge factor သည် fractional resistance change ကို mechanical strain ဖြင့် normalize လုပ်ထားသော sensitivity ဖြစ်သည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "R0=1000 Ω; GF=50; ε=500×10⁻⁶=0.0005."
+            },
+            {
+              "label": "Governing equation",
+              "value": "GF=(ΔR/R0)/ε; ΔR=GF ε R0; R=R0+ΔR."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "ΔR=50×0.0005×1000=25 Ω; R=1000+25=1025 Ω."
+            },
+            {
+              "label": "Independent verification",
+              "value": "ΔR/R0=0.025=GF×ε=50×0.0005."
+            }
+          ],
+          "equations": [
+            "GF=(ΔR/R0)/ε; ΔR=GF ε R0; R=R0+ΔR.",
+            "ΔR=50×0.0005×1000=25 Ω; R=1000+25=1025 Ω."
+          ],
+          "display": [
+            {
+              "latex": "GF=(ΔR/R0)/ε; ΔR=GF ε R0; R=R0+ΔR."
+            },
+            {
+              "latex": "ΔR=50×0.0005×1000=25 Ω; R=1000+25=1025 Ω."
+            }
+          ],
+          "finalAnswer": "ΔR=25 Ω; R=1025 Ω (+2.5%).",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
       "id": "project-mems-05",
       "subject": "micro",
       "number": "05",
@@ -109,6 +271,60 @@
           ],
           "finalAnswer": "ΔL=0.26 μm; L_final=2.00026 mm.",
           "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-06",
+      "subject": "micro",
+      "number": "06",
+      "title": "Diffusion length in silicon",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Diffusion length in silicon",
+          "question": "For diffusion coefficient D=1×10⁻¹² m²/s and diffusion duration t=100 s, compute one-dimensional RMS diffusion distance.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Diffusion random-walk process ၏ mean-squared displacement 2Dt ဖြစ်၍ square root ကို distance အဖြစ်ယူသည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "D=1×10⁻¹² m²/s; t=100 s."
+            },
+            {
+              "label": "Governing equation",
+              "value": "σ=√(2Dt)."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "σ=√(2×10⁻¹²×100)=√(2×10⁻¹⁰)=1.41421×10⁻⁵ m=14.1421 µm."
+            },
+            {
+              "label": "Independent verification",
+              "value": "Under 1D Gaussian diffusion, variance σ²=2Dt=2×10⁻¹⁰ m²."
+            }
+          ],
+          "equations": [
+            "σ=√(2Dt).",
+            "σ=√(2×10⁻¹²×100)=√(2×10⁻¹⁰)=1.41421×10⁻⁵ m=14.1421 µm."
+          ],
+          "display": [
+            {
+              "latex": "σ=√(2Dt)."
+            },
+            {
+              "latex": "σ=√(2×10⁻¹²×100)=√(2×10⁻¹⁰)=1.41421×10⁻⁵ m=14.1421 µm."
+            }
+          ],
+          "finalAnswer": "RMS diffusion distance σ≈14.14 µm.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
         }
       ]
     },
@@ -217,6 +433,60 @@
           ],
           "finalAnswer": "C≈0.4427 pF; F≈0.8854 μN; x≈177.1 nm.",
           "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-09",
+      "subject": "micro",
+      "number": "09",
+      "title": "Silicon cantilever stiffness and bending",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Silicon cantilever stiffness and bending",
+          "question": "Independent practice cantilever L=200 µm, w=20 µm, t=2 µm, E=160 GPa and tip load F=1 µN. Find I,k,deflection,max stress.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Cantilever အတွက် bending stiffness EI ကိုသုံး၍ Hooke law နဲ့ displacement စစ်တယ်။ အခြားနံပါတ်တွေနဲ့ အချက်အလက် တူခြင်းကို ဖုံးမထားဘူး။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "L=200×10⁻⁶ m; w=20×10⁻⁶ m; t=2×10⁻⁶ m; E=160×10⁹ Pa; F=1×10⁻⁶ N."
+            },
+            {
+              "label": "Governing equation",
+              "value": "I=wt³/12; k=3EI/L³; δ=F/k; σmax=6FL/(wt²)."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "I=1.33333×10⁻²³ m⁴; k=0.8 N/m; δ=1.25×10⁻⁶ m; σmax=1.5×10⁷ Pa."
+            },
+            {
+              "label": "Independent verification",
+              "value": "kδ=(0.8)(1.25e−6)=1.0e−6 N; same givens were revisited as Practices 11 and 30."
+            }
+          ],
+          "equations": [
+            "I=wt³/12; k=3EI/L³; δ=F/k; σmax=6FL/(wt²).",
+            "I=1.33333×10⁻²³ m⁴; k=0.8 N/m; δ=1.25×10⁻⁶ m; σmax=1.5×10⁷ Pa."
+          ],
+          "display": [
+            {
+              "latex": "I=wt³/12; k=3EI/L³; δ=F/k; σmax=6FL/(wt²)."
+            },
+            {
+              "latex": "I=1.33333×10⁻²³ m⁴; k=0.8 N/m; δ=1.25×10⁻⁶ m; σmax=1.5×10⁷ Pa."
+            }
+          ],
+          "finalAnswer": "I≈1.333×10⁻²³ m⁴; k≈0.80 N/m; δ≈1.25 µm; σmax≈15 MPa.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
         }
       ]
     },
@@ -491,492 +761,6 @@
       ]
     },
     {
-      "id": "project-mems-25",
-      "subject": "micro",
-      "number": "25",
-      "title": "Cantilever resonant frequency with effective mass",
-      "topic": "Project calculations · independent MEMS practice",
-      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
-      "status": "worked",
-      "originalPractice": true,
-      "contentProvenance": "chatgpt-project-practice",
-      "verificationState": "independently-recalculated-practice",
-      "verificationNote": "This is a self-created numerical practice problem recovered from previous conversations. Original professor question/solution not verified; numbers have been recalculated where possible.",
-      "parts": [
-        {
-          "label": "a",
-          "title": "Cantilever resonant frequency with effective mass",
-          "question": "Silicon cantilever L=200 μm, w=20 μm, t=2 μm, E=169 GPa, density 2330 kg/m³, tip force 1 μN. Estimate f1 and static deflection using m_eff≈0.2427m.",
-          "method": "Given နှင့် required quantity ကိုခွဲပြီး governing physics equation ကိုရွေးပါ။ SI units သို့ပြောင်း၊ formula substitute လုပ်ပြီး units/dimensions နှင့် result ကို independent check လုပ်ထားသည်။",
-          "reason": "Dynamic fundamental mode ကို mass effective factor 0.2427 နဲ့ single-degree-of-freedom model ခန့်မှန်းထားသည်။",
-          "working": [
-            {
-              "label": "Given / SI values",
-              "value": "L=200 μm, w=20 μm, t=2 μm, E=169 GPa, ρ=2330 kg/m³, F=1 μN."
-            },
-            {
-              "label": "Governing equation",
-              "value": "I=wt³/12; k=3EI/L³; m=ρLwt; m_eff≈0.2427m; f₁≈√(k/m_eff)/(2π); δ=F/k."
-            },
-            {
-              "label": "Substitution and calculation",
-              "value": "I=1.3333×10⁻²³ m⁴; k=0.845 N/m; m=1.864×10⁻¹¹ kg; meff=4.52393×10⁻¹² kg; f₁≈68.785 kHz; δ≈1.1834 μm."
-            },
-            {
-              "label": "Independent numerical / physical check",
-              "value": "Frequency estimate uses first-mode effective mass, not whole mass directly; f≈68.8 kHz."
-            }
-          ],
-          "equations": [
-            "I=wt³/12; k=3EI/L³; m=ρLwt; m_eff≈0.2427m; f₁≈√(k/m_eff)/(2π); δ=F/k.",
-            "I=1.3333×10⁻²³ m⁴; k=0.845 N/m; m=1.864×10⁻¹¹ kg; meff=4.52393×10⁻¹² kg; f₁≈68.785 kHz; δ≈1.1834 μm."
-          ],
-          "display": [
-            {
-              "latex": "I=wt³/12; k=3EI/L³; m=ρLwt; m_eff≈0.2427m; f₁≈√(k/m_eff)/(2π); δ=F/k."
-            },
-            {
-              "latex": "I=1.3333×10⁻²³ m⁴; k=0.845 N/m; m=1.864×10⁻¹¹ kg; meff=4.52393×10⁻¹² kg; f₁≈68.785 kHz; δ≈1.1834 μm."
-            }
-          ],
-          "finalAnswer": "f₁≈68.8 kHz and tip deflection≈1.18 μm (effective-mass approximation).",
-          "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
-        }
-      ]
-    },
-    {
-      "id": "project-mems-26",
-      "subject": "micro",
-      "number": "26",
-      "title": "Comb-drive actuator and frequency check",
-      "topic": "Project calculations · independent MEMS practice",
-      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
-      "status": "worked",
-      "originalPractice": true,
-      "contentProvenance": "chatgpt-project-practice",
-      "verificationState": "independently-recalculated-practice",
-      "verificationNote": "This is a self-created numerical practice problem recovered from previous conversations. Original professor question/solution not verified; numbers have been recalculated where possible.",
-      "parts": [
-        {
-          "label": "a",
-          "title": "Comb-drive actuator and frequency check",
-          "question": "For N=100 pairs, t=10 μm, gap g=2 μm, V=30 V, spring k=0.5 N/m, initial overlap 50 μm and mass 2×10⁻⁹ kg, find force, displacement, C, resonance.",
-          "method": "Given နှင့် required quantity ကိုခွဲပြီး governing physics equation ကိုရွေးပါ။ SI units သို့ပြောင်း၊ formula substitute လုပ်ပြီး units/dimensions နှင့် result ကို independent check လုပ်ထားသည်။",
-          "reason": "Comb-drive electrostatic force F ကို overlap တစ်လျှောက် gap constant ဟုယူပြီး static spring-force balance သုံးထားတယ်။",
-          "working": [
-            {
-              "label": "Given / SI values",
-              "value": "N=100, t=10 μm, g=2 μm, V=30 V, k=0.5 N/m, overlap=50 μm, m=2×10⁻⁹ kg."
-            },
-            {
-              "label": "Governing equation",
-              "value": "F=Nε₀tV²/g; x=F/k; C=2Nε₀tℓ/g; f_n=√(k/m)/(2π)."
-            },
-            {
-              "label": "Substitution and calculation",
-              "value": "F=3.98438 μN; x=7.96877 μm; C₀=0.442709 pF; C(x)=0.513266 pF; ΔC=0.070557 pF; f_n=2516.46 Hz."
-            },
-            {
-              "label": "Independent numerical / physical check",
-              "value": "Overlap grows from 50 to 57.9688 μm; linear C versus overlap holds before finger end stop."
-            }
-          ],
-          "equations": [
-            "F=Nε₀tV²/g; x=F/k; C=2Nε₀tℓ/g; f_n=√(k/m)/(2π).",
-            "F=3.98438 μN; x=7.96877 μm; C₀=0.442709 pF; C(x)=0.513266 pF; ΔC=0.070557 pF; f_n=2516.46 Hz."
-          ],
-          "display": [
-            {
-              "latex": "F=Nε₀tV²/g; x=F/k; C=2Nε₀tℓ/g; f_n=√(k/m)/(2π)."
-            },
-            {
-              "latex": "F=3.98438 μN; x=7.96877 μm; C₀=0.442709 pF; C(x)=0.513266 pF; ΔC=0.070557 pF; f_n=2516.46 Hz."
-            }
-          ],
-          "finalAnswer": "F≈3.984 μN; x≈7.969 μm; C₀≈0.4427 pF; C₁≈0.5133 pF; fₙ≈2.516 kHz.",
-          "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
-        }
-      ]
-    },
-    {
-      "id": "project-mems-29",
-      "subject": "micro",
-      "number": "29",
-      "title": "MEMS fabrication yield and operating reliability",
-      "topic": "Project calculations · independent MEMS practice",
-      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
-      "status": "worked",
-      "originalPractice": true,
-      "contentProvenance": "chatgpt-project-practice",
-      "verificationState": "independently-recalculated-practice",
-      "verificationNote": "This is a self-created numerical practice problem recovered from previous conversations. Original professor question/solution not verified; numbers have been recalculated where possible.",
-      "parts": [
-        {
-          "label": "a",
-          "title": "MEMS fabrication yield and operating reliability",
-          "question": "Die area 2mm×2mm, defect density D=0.8/cm², N=2000 fabricated chips, constant failure rate λ=2×10⁻⁶ h⁻¹ and operating time t=1000 h. Calculate expected production yield and surviving devices.",
-          "method": "Given နှင့် required quantity ကိုခွဲပြီး governing physics equation ကိုရွေးပါ။ SI units သို့ပြောင်း၊ formula substitute လုပ်ပြီး units/dimensions နှင့် result ကို independent check လုပ်ထားသည်။",
-          "reason": "Poisson defect yield နှင့် exponential life reliability ကို physical meaning မတူသဖြင့် သီးခြားတွက်ပြီး independent assumption ဖြင့်ပေါင်းတယ်။",
-          "working": [
-            {
-              "label": "Given / SI values",
-              "value": "A=0.04 cm²; D=0.8 cm⁻²; N=2000; λ=2×10⁻⁶ h⁻¹; t=1000 h."
-            },
-            {
-              "label": "Governing equation",
-              "value": "Y=e^(−DA); functional=N×Y; R(t)=e^(−λt); survivors=N×Y×R."
-            },
-            {
-              "label": "Substitution and calculation",
-              "value": "Y=e^(−0.032)=0.9685066; expected good=1937.0; R=e^(−0.002)=0.998002; expected survivors=1933.14."
-            },
-            {
-              "label": "Independent numerical / physical check",
-              "value": "Yield and reliability are different processes and multiply only under independence assumptions."
-            }
-          ],
-          "equations": [
-            "Y=e^(−DA); functional=N×Y; R(t)=e^(−λt); survivors=N×Y×R.",
-            "Y=e^(−0.032)=0.9685066; expected good=1937.0; R=e^(−0.002)=0.998002; expected survivors=1933.14."
-          ],
-          "display": [
-            {
-              "latex": "Y=e^(−DA); functional=N×Y; R(t)=e^(−λt); survivors=N×Y×R."
-            },
-            {
-              "latex": "Y=e^(−0.032)=0.9685066; expected good=1937.0; R=e^(−0.002)=0.998002; expected survivors=1933.14."
-            }
-          ],
-          "finalAnswer": "Yield≈96.85%; expected functional≈1,937; reliability≈99.80%; expected surviving≈1,933.",
-          "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
-        }
-      ]
-    },
-    {
-      "id": "project-mems-30",
-      "subject": "micro",
-      "number": "30",
-      "title": "Cantilever stiffness and stress recap",
-      "topic": "Project calculations · independent MEMS practice",
-      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
-      "status": "worked",
-      "originalPractice": true,
-      "contentProvenance": "chatgpt-project-practice",
-      "verificationState": "independently-recalculated-practice",
-      "verificationNote": "This is a self-created numerical practice problem recovered from previous conversations. Original professor question/solution not verified; numbers have been recalculated where possible.",
-      "parts": [
-        {
-          "label": "a",
-          "title": "Cantilever stiffness and stress recap",
-          "question": "Silicon cantilever L=200 μm, w=20 μm, t=2 μm, E=160 GPa, force F=1 μN. Find I, stiffness, deflection and stress.",
-          "method": "Given နှင့် required quantity ကိုခွဲပြီး governing physics equation ကိုရွေးပါ။ SI units သို့ပြောင်း၊ formula substitute လုပ်ပြီး units/dimensions နှင့် result ကို independent check လုပ်ထားသည်။",
-          "reason": "I ∝ t³ ဖြစ်လို့ thickness uncertainty က stiffness နှင့် displacement နှစ်ခုစလုံးအပေါ် အလွန်အမင်းသက်ရောက်တယ်။",
-          "working": [
-            {
-              "label": "Given / SI values",
-              "value": "L=200 μm, w=20 μm, t=2 μm, E=160 GPa, F=1 μN."
-            },
-            {
-              "label": "Governing equation",
-              "value": "I=wt³/12; k=3EI/L³; δ=FL³/(3EI); σmax=6FL/(wt²)."
-            },
-            {
-              "label": "Substitution and calculation",
-              "value": "I=1.3333×10⁻²³ m⁴; k=0.800 N/m; δ=1.25 μm; σmax=15.0 MPa."
-            },
-            {
-              "label": "Independent numerical / physical check",
-              "value": "This repeats the same numerical beam values as Project Practice 11; retained as a separate prior numbered exercise."
-            }
-          ],
-          "equations": [
-            "I=wt³/12; k=3EI/L³; δ=FL³/(3EI); σmax=6FL/(wt²).",
-            "I=1.3333×10⁻²³ m⁴; k=0.800 N/m; δ=1.25 μm; σmax=15.0 MPa."
-          ],
-          "display": [
-            {
-              "latex": "I=wt³/12; k=3EI/L³; δ=FL³/(3EI); σmax=6FL/(wt²)."
-            },
-            {
-              "latex": "I=1.3333×10⁻²³ m⁴; k=0.800 N/m; δ=1.25 μm; σmax=15.0 MPa."
-            }
-          ],
-          "finalAnswer": "I≈1.333×10⁻²³ m⁴; k≈0.80 N/m; δ≈1.25 μm; σmax≈15 MPa.",
-          "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
-        }
-      ]
-    },
-    {
-      "id": "project-mems-02",
-      "subject": "micro",
-      "number": "02",
-      "title": "MEMS scaling laws: cube surface and volume",
-      "topic": "Project calculations · independent MEMS practice",
-      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
-      "status": "worked",
-      "originalPractice": true,
-      "contentProvenance": "chatgpt-project-practice",
-      "verificationState": "independently-recalculated-practice",
-      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
-      "parts": [
-        {
-          "label": "a",
-          "title": "MEMS scaling laws: cube surface and volume",
-          "question": "An independent practice cube decreases from 1 mm to 100 µm side. Calculate its surface area, volume and surface-to-volume ratios at both sizes.",
-          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
-          "reason": "Surface/volume ratio သည် 1/L အတိုင်း တိုးသောကြောင့် microscale မှာ surface effects ပိုအရေးပါသည်။ ဤနံပါတ်သည် Project Practice 1 နှင့် scaling concept တူသည်။",
-          "working": [
-            {
-              "label": "Given / SI values",
-              "value": "L1=1 mm=1×10⁻³ m; L2=100 µm=1×10⁻⁴ m."
-            },
-            {
-              "label": "Governing equation",
-              "value": "A=6L²; V=L³; A/V=6/L."
-            },
-            {
-              "label": "Substitution and numerical calculation",
-              "value": "A1=6×10⁻⁶ m², V1=10⁻⁹ m³, A1/V1=6000 m⁻¹. A2=6×10⁻⁸ m², V2=10⁻¹² m³, A2/V2=60000 m⁻¹."
-            },
-            {
-              "label": "Independent verification",
-              "value": "Length ratio 0.1 gives area factor 0.01, volume factor 0.001, A/V factor 10."
-            }
-          ],
-          "equations": [
-            "A=6L²; V=L³; A/V=6/L.",
-            "A1=6×10⁻⁶ m², V1=10⁻⁹ m³, A1/V1=6000 m⁻¹. A2=6×10⁻⁸ m², V2=10⁻¹² m³, A2/V2=60000 m⁻¹."
-          ],
-          "display": [
-            {
-              "latex": "A=6L²; V=L³; A/V=6/L."
-            },
-            {
-              "latex": "A1=6×10⁻⁶ m², V1=10⁻⁹ m³, A1/V1=6000 m⁻¹. A2=6×10⁻⁸ m², V2=10⁻¹² m³, A2/V2=60000 m⁻¹."
-            }
-          ],
-          "finalAnswer": "A/V increases by 10×: 6,000→60,000 m⁻¹.",
-          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
-        }
-      ]
-    },
-    {
-      "id": "project-mems-03",
-      "subject": "micro",
-      "number": "03",
-      "title": "MEMS mass–spring resonance",
-      "topic": "Project calculations · independent MEMS practice",
-      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
-      "status": "worked",
-      "originalPractice": true,
-      "contentProvenance": "chatgpt-project-practice",
-      "verificationState": "independently-recalculated-practice",
-      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
-      "parts": [
-        {
-          "label": "a",
-          "title": "MEMS mass–spring resonance",
-          "question": "For undamped mass m=2 µg and spring stiffness k=20 N/m, calculate angular natural frequency and resonant frequency.",
-          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
-          "reason": "Undamped harmonic oscillator m ẍ+kx=0 ၏ eigenfrequency ကို frequency unit သို့ပြောင်းခြင်းဖြစ်သည်။",
-          "working": [
-            {
-              "label": "Given / SI values",
-              "value": "m=2 µg=2×10⁻⁹ kg; k=20 N/m."
-            },
-            {
-              "label": "Governing equation",
-              "value": "ω₀=√(k/m); f₀=ω₀/(2π)."
-            },
-            {
-              "label": "Substitution and numerical calculation",
-              "value": "ω₀=√(20/(2×10⁻⁹))=100,000 rad/s; f₀=100,000/(2π)=15,915.494 Hz."
-            },
-            {
-              "label": "Independent verification",
-              "value": "(rad/s)/(2π) gives Hz; √(20/2e−9)=1e5."
-            }
-          ],
-          "equations": [
-            "ω₀=√(k/m); f₀=ω₀/(2π).",
-            "ω₀=√(20/(2×10⁻⁹))=100,000 rad/s; f₀=100,000/(2π)=15,915.494 Hz."
-          ],
-          "display": [
-            {
-              "latex": "ω₀=√(k/m); f₀=ω₀/(2π)."
-            },
-            {
-              "latex": "ω₀=√(20/(2×10⁻⁹))=100,000 rad/s; f₀=100,000/(2π)=15,915.494 Hz."
-            }
-          ],
-          "finalAnswer": "ω₀=100,000 rad/s; f₀≈15.9155 kHz.",
-          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
-        }
-      ]
-    },
-    {
-      "id": "project-mems-04",
-      "subject": "micro",
-      "number": "04",
-      "title": "Piezoresistor gauge factor",
-      "topic": "Project calculations · independent MEMS practice",
-      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
-      "status": "worked",
-      "originalPractice": true,
-      "contentProvenance": "chatgpt-project-practice",
-      "verificationState": "independently-recalculated-practice",
-      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
-      "parts": [
-        {
-          "label": "a",
-          "title": "Piezoresistor gauge factor",
-          "question": "A silicon piezoresistor has R0=1000 Ω, gauge factor GF=50, applied strain ε=500 με. Calculate resistance change and new resistance.",
-          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
-          "reason": "Gauge factor သည် fractional resistance change ကို mechanical strain ဖြင့် normalize လုပ်ထားသော sensitivity ဖြစ်သည်။",
-          "working": [
-            {
-              "label": "Given / SI values",
-              "value": "R0=1000 Ω; GF=50; ε=500×10⁻⁶=0.0005."
-            },
-            {
-              "label": "Governing equation",
-              "value": "GF=(ΔR/R0)/ε; ΔR=GF ε R0; R=R0+ΔR."
-            },
-            {
-              "label": "Substitution and numerical calculation",
-              "value": "ΔR=50×0.0005×1000=25 Ω; R=1000+25=1025 Ω."
-            },
-            {
-              "label": "Independent verification",
-              "value": "ΔR/R0=0.025=GF×ε=50×0.0005."
-            }
-          ],
-          "equations": [
-            "GF=(ΔR/R0)/ε; ΔR=GF ε R0; R=R0+ΔR.",
-            "ΔR=50×0.0005×1000=25 Ω; R=1000+25=1025 Ω."
-          ],
-          "display": [
-            {
-              "latex": "GF=(ΔR/R0)/ε; ΔR=GF ε R0; R=R0+ΔR."
-            },
-            {
-              "latex": "ΔR=50×0.0005×1000=25 Ω; R=1000+25=1025 Ω."
-            }
-          ],
-          "finalAnswer": "ΔR=25 Ω; R=1025 Ω (+2.5%).",
-          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
-        }
-      ]
-    },
-    {
-      "id": "project-mems-06",
-      "subject": "micro",
-      "number": "06",
-      "title": "Diffusion length in silicon",
-      "topic": "Project calculations · independent MEMS practice",
-      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
-      "status": "worked",
-      "originalPractice": true,
-      "contentProvenance": "chatgpt-project-practice",
-      "verificationState": "independently-recalculated-practice",
-      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
-      "parts": [
-        {
-          "label": "a",
-          "title": "Diffusion length in silicon",
-          "question": "For diffusion coefficient D=1×10⁻¹² m²/s and diffusion duration t=100 s, compute one-dimensional RMS diffusion distance.",
-          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
-          "reason": "Diffusion random-walk process ၏ mean-squared displacement 2Dt ဖြစ်၍ square root ကို distance အဖြစ်ယူသည်။",
-          "working": [
-            {
-              "label": "Given / SI values",
-              "value": "D=1×10⁻¹² m²/s; t=100 s."
-            },
-            {
-              "label": "Governing equation",
-              "value": "σ=√(2Dt)."
-            },
-            {
-              "label": "Substitution and numerical calculation",
-              "value": "σ=√(2×10⁻¹²×100)=√(2×10⁻¹⁰)=1.41421×10⁻⁵ m=14.1421 µm."
-            },
-            {
-              "label": "Independent verification",
-              "value": "Under 1D Gaussian diffusion, variance σ²=2Dt=2×10⁻¹⁰ m²."
-            }
-          ],
-          "equations": [
-            "σ=√(2Dt).",
-            "σ=√(2×10⁻¹²×100)=√(2×10⁻¹⁰)=1.41421×10⁻⁵ m=14.1421 µm."
-          ],
-          "display": [
-            {
-              "latex": "σ=√(2Dt)."
-            },
-            {
-              "latex": "σ=√(2×10⁻¹²×100)=√(2×10⁻¹⁰)=1.41421×10⁻⁵ m=14.1421 µm."
-            }
-          ],
-          "finalAnswer": "RMS diffusion distance σ≈14.14 µm.",
-          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
-        }
-      ]
-    },
-    {
-      "id": "project-mems-09",
-      "subject": "micro",
-      "number": "09",
-      "title": "Silicon cantilever stiffness and bending",
-      "topic": "Project calculations · independent MEMS practice",
-      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
-      "status": "worked",
-      "originalPractice": true,
-      "contentProvenance": "chatgpt-project-practice",
-      "verificationState": "independently-recalculated-practice",
-      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
-      "parts": [
-        {
-          "label": "a",
-          "title": "Silicon cantilever stiffness and bending",
-          "question": "Independent practice cantilever L=200 µm, w=20 µm, t=2 µm, E=160 GPa and tip load F=1 µN. Find I,k,deflection,max stress.",
-          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
-          "reason": "Cantilever အတွက် bending stiffness EI ကိုသုံး၍ Hooke law နဲ့ displacement စစ်တယ်။ အခြားနံပါတ်တွေနဲ့ အချက်အလက် တူခြင်းကို ဖုံးမထားဘူး။",
-          "working": [
-            {
-              "label": "Given / SI values",
-              "value": "L=200×10⁻⁶ m; w=20×10⁻⁶ m; t=2×10⁻⁶ m; E=160×10⁹ Pa; F=1×10⁻⁶ N."
-            },
-            {
-              "label": "Governing equation",
-              "value": "I=wt³/12; k=3EI/L³; δ=F/k; σmax=6FL/(wt²)."
-            },
-            {
-              "label": "Substitution and numerical calculation",
-              "value": "I=1.33333×10⁻²³ m⁴; k=0.8 N/m; δ=1.25×10⁻⁶ m; σmax=1.5×10⁷ Pa."
-            },
-            {
-              "label": "Independent verification",
-              "value": "kδ=(0.8)(1.25e−6)=1.0e−6 N; same givens were revisited as Practices 11 and 30."
-            }
-          ],
-          "equations": [
-            "I=wt³/12; k=3EI/L³; δ=F/k; σmax=6FL/(wt²).",
-            "I=1.33333×10⁻²³ m⁴; k=0.8 N/m; δ=1.25×10⁻⁶ m; σmax=1.5×10⁷ Pa."
-          ],
-          "display": [
-            {
-              "latex": "I=wt³/12; k=3EI/L³; δ=F/k; σmax=6FL/(wt²)."
-            },
-            {
-              "latex": "I=1.33333×10⁻²³ m⁴; k=0.8 N/m; δ=1.25×10⁻⁶ m; σmax=1.5×10⁷ Pa."
-            }
-          ],
-          "finalAnswer": "I≈1.333×10⁻²³ m⁴; k≈0.80 N/m; δ≈1.25 µm; σmax≈15 MPa.",
-          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
-        }
-      ]
-    },
-    {
       "id": "project-mems-15",
       "subject": "micro",
       "number": "15",
@@ -1193,6 +977,114 @@
       ]
     },
     {
+      "id": "project-mems-25",
+      "subject": "micro",
+      "number": "25",
+      "title": "Cantilever resonant frequency with effective mass",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "This is a self-created numerical practice problem recovered from previous conversations. Original professor question/solution not verified; numbers have been recalculated where possible.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Cantilever resonant frequency with effective mass",
+          "question": "Silicon cantilever L=200 μm, w=20 μm, t=2 μm, E=169 GPa, density 2330 kg/m³, tip force 1 μN. Estimate f1 and static deflection using m_eff≈0.2427m.",
+          "method": "Given နှင့် required quantity ကိုခွဲပြီး governing physics equation ကိုရွေးပါ။ SI units သို့ပြောင်း၊ formula substitute လုပ်ပြီး units/dimensions နှင့် result ကို independent check လုပ်ထားသည်။",
+          "reason": "Dynamic fundamental mode ကို mass effective factor 0.2427 နဲ့ single-degree-of-freedom model ခန့်မှန်းထားသည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "L=200 μm, w=20 μm, t=2 μm, E=169 GPa, ρ=2330 kg/m³, F=1 μN."
+            },
+            {
+              "label": "Governing equation",
+              "value": "I=wt³/12; k=3EI/L³; m=ρLwt; m_eff≈0.2427m; f₁≈√(k/m_eff)/(2π); δ=F/k."
+            },
+            {
+              "label": "Substitution and calculation",
+              "value": "I=1.3333×10⁻²³ m⁴; k=0.845 N/m; m=1.864×10⁻¹¹ kg; meff=4.52393×10⁻¹² kg; f₁≈68.785 kHz; δ≈1.1834 μm."
+            },
+            {
+              "label": "Independent numerical / physical check",
+              "value": "Frequency estimate uses first-mode effective mass, not whole mass directly; f≈68.8 kHz."
+            }
+          ],
+          "equations": [
+            "I=wt³/12; k=3EI/L³; m=ρLwt; m_eff≈0.2427m; f₁≈√(k/m_eff)/(2π); δ=F/k.",
+            "I=1.3333×10⁻²³ m⁴; k=0.845 N/m; m=1.864×10⁻¹¹ kg; meff=4.52393×10⁻¹² kg; f₁≈68.785 kHz; δ≈1.1834 μm."
+          ],
+          "display": [
+            {
+              "latex": "I=wt³/12; k=3EI/L³; m=ρLwt; m_eff≈0.2427m; f₁≈√(k/m_eff)/(2π); δ=F/k."
+            },
+            {
+              "latex": "I=1.3333×10⁻²³ m⁴; k=0.845 N/m; m=1.864×10⁻¹¹ kg; meff=4.52393×10⁻¹² kg; f₁≈68.785 kHz; δ≈1.1834 μm."
+            }
+          ],
+          "finalAnswer": "f₁≈68.8 kHz and tip deflection≈1.18 μm (effective-mass approximation).",
+          "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-26",
+      "subject": "micro",
+      "number": "26",
+      "title": "Comb-drive actuator and frequency check",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "This is a self-created numerical practice problem recovered from previous conversations. Original professor question/solution not verified; numbers have been recalculated where possible.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Comb-drive actuator and frequency check",
+          "question": "For N=100 pairs, t=10 μm, gap g=2 μm, V=30 V, spring k=0.5 N/m, initial overlap 50 μm and mass 2×10⁻⁹ kg, find force, displacement, C, resonance.",
+          "method": "Given နှင့် required quantity ကိုခွဲပြီး governing physics equation ကိုရွေးပါ။ SI units သို့ပြောင်း၊ formula substitute လုပ်ပြီး units/dimensions နှင့် result ကို independent check လုပ်ထားသည်။",
+          "reason": "Comb-drive electrostatic force F ကို overlap တစ်လျှောက် gap constant ဟုယူပြီး static spring-force balance သုံးထားတယ်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "N=100, t=10 μm, g=2 μm, V=30 V, k=0.5 N/m, overlap=50 μm, m=2×10⁻⁹ kg."
+            },
+            {
+              "label": "Governing equation",
+              "value": "F=Nε₀tV²/g; x=F/k; C=2Nε₀tℓ/g; f_n=√(k/m)/(2π)."
+            },
+            {
+              "label": "Substitution and calculation",
+              "value": "F=3.98438 μN; x=7.96877 μm; C₀=0.442709 pF; C(x)=0.513266 pF; ΔC=0.070557 pF; f_n=2516.46 Hz."
+            },
+            {
+              "label": "Independent numerical / physical check",
+              "value": "Overlap grows from 50 to 57.9688 μm; linear C versus overlap holds before finger end stop."
+            }
+          ],
+          "equations": [
+            "F=Nε₀tV²/g; x=F/k; C=2Nε₀tℓ/g; f_n=√(k/m)/(2π).",
+            "F=3.98438 μN; x=7.96877 μm; C₀=0.442709 pF; C(x)=0.513266 pF; ΔC=0.070557 pF; f_n=2516.46 Hz."
+          ],
+          "display": [
+            {
+              "latex": "F=Nε₀tV²/g; x=F/k; C=2Nε₀tℓ/g; f_n=√(k/m)/(2π)."
+            },
+            {
+              "latex": "F=3.98438 μN; x=7.96877 μm; C₀=0.442709 pF; C(x)=0.513266 pF; ΔC=0.070557 pF; f_n=2516.46 Hz."
+            }
+          ],
+          "finalAnswer": "F≈3.984 μN; x≈7.969 μm; C₀≈0.4427 pF; C₁≈0.5133 pF; fₙ≈2.516 kHz.",
+          "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
+        }
+      ]
+    },
+    {
       "id": "project-mems-27",
       "subject": "micro",
       "number": "27",
@@ -1243,6 +1135,114 @@
           ],
           "finalAnswer": "C0≈44.27 fF; Fe(0)≈1.1068 µN; stable x≈0.12607 µm; equilibrium F≈1.2607 µN; V_PI≈16.36 V.",
           "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-29",
+      "subject": "micro",
+      "number": "29",
+      "title": "MEMS fabrication yield and operating reliability",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "This is a self-created numerical practice problem recovered from previous conversations. Original professor question/solution not verified; numbers have been recalculated where possible.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "MEMS fabrication yield and operating reliability",
+          "question": "Die area 2mm×2mm, defect density D=0.8/cm², N=2000 fabricated chips, constant failure rate λ=2×10⁻⁶ h⁻¹ and operating time t=1000 h. Calculate expected production yield and surviving devices.",
+          "method": "Given နှင့် required quantity ကိုခွဲပြီး governing physics equation ကိုရွေးပါ။ SI units သို့ပြောင်း၊ formula substitute လုပ်ပြီး units/dimensions နှင့် result ကို independent check လုပ်ထားသည်။",
+          "reason": "Poisson defect yield နှင့် exponential life reliability ကို physical meaning မတူသဖြင့် သီးခြားတွက်ပြီး independent assumption ဖြင့်ပေါင်းတယ်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "A=0.04 cm²; D=0.8 cm⁻²; N=2000; λ=2×10⁻⁶ h⁻¹; t=1000 h."
+            },
+            {
+              "label": "Governing equation",
+              "value": "Y=e^(−DA); functional=N×Y; R(t)=e^(−λt); survivors=N×Y×R."
+            },
+            {
+              "label": "Substitution and calculation",
+              "value": "Y=e^(−0.032)=0.9685066; expected good=1937.0; R=e^(−0.002)=0.998002; expected survivors=1933.14."
+            },
+            {
+              "label": "Independent numerical / physical check",
+              "value": "Yield and reliability are different processes and multiply only under independence assumptions."
+            }
+          ],
+          "equations": [
+            "Y=e^(−DA); functional=N×Y; R(t)=e^(−λt); survivors=N×Y×R.",
+            "Y=e^(−0.032)=0.9685066; expected good=1937.0; R=e^(−0.002)=0.998002; expected survivors=1933.14."
+          ],
+          "display": [
+            {
+              "latex": "Y=e^(−DA); functional=N×Y; R(t)=e^(−λt); survivors=N×Y×R."
+            },
+            {
+              "latex": "Y=e^(−0.032)=0.9685066; expected good=1937.0; R=e^(−0.002)=0.998002; expected survivors=1933.14."
+            }
+          ],
+          "finalAnswer": "Yield≈96.85%; expected functional≈1,937; reliability≈99.80%; expected surviving≈1,933.",
+          "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-30",
+      "subject": "micro",
+      "number": "30",
+      "title": "Cantilever stiffness and stress recap",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "This is a self-created numerical practice problem recovered from previous conversations. Original professor question/solution not verified; numbers have been recalculated where possible.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Cantilever stiffness and stress recap",
+          "question": "Silicon cantilever L=200 μm, w=20 μm, t=2 μm, E=160 GPa, force F=1 μN. Find I, stiffness, deflection and stress.",
+          "method": "Given နှင့် required quantity ကိုခွဲပြီး governing physics equation ကိုရွေးပါ။ SI units သို့ပြောင်း၊ formula substitute လုပ်ပြီး units/dimensions နှင့် result ကို independent check လုပ်ထားသည်။",
+          "reason": "I ∝ t³ ဖြစ်လို့ thickness uncertainty က stiffness နှင့် displacement နှစ်ခုစလုံးအပေါ် အလွန်အမင်းသက်ရောက်တယ်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "L=200 μm, w=20 μm, t=2 μm, E=160 GPa, F=1 μN."
+            },
+            {
+              "label": "Governing equation",
+              "value": "I=wt³/12; k=3EI/L³; δ=FL³/(3EI); σmax=6FL/(wt²)."
+            },
+            {
+              "label": "Substitution and calculation",
+              "value": "I=1.3333×10⁻²³ m⁴; k=0.800 N/m; δ=1.25 μm; σmax=15.0 MPa."
+            },
+            {
+              "label": "Independent numerical / physical check",
+              "value": "This repeats the same numerical beam values as Project Practice 11; retained as a separate prior numbered exercise."
+            }
+          ],
+          "equations": [
+            "I=wt³/12; k=3EI/L³; δ=FL³/(3EI); σmax=6FL/(wt²).",
+            "I=1.3333×10⁻²³ m⁴; k=0.800 N/m; δ=1.25 μm; σmax=15.0 MPa."
+          ],
+          "display": [
+            {
+              "latex": "I=wt³/12; k=3EI/L³; δ=FL³/(3EI); σmax=6FL/(wt²)."
+            },
+            {
+              "latex": "I=1.3333×10⁻²³ m⁴; k=0.800 N/m; δ=1.25 μm; σmax=15.0 MPa."
+            }
+          ],
+          "finalAnswer": "I≈1.333×10⁻²³ m⁴; k≈0.80 N/m; δ≈1.25 μm; σmax≈15 MPa.",
+          "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
         }
       ]
     }
