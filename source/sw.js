@@ -1,5 +1,5 @@
 /* Network-first versioned PWA: online changes must never be masked by stale exercise JS. */
-const CACHE='eeit-private-drive-pdfs-v16';
+const CACHE='eeit-verified-exercise-pdfs-v16';
 const CORE=[
  './','./index.html','./styles.css','./app.js','./visuals.mjs',
  './cloud.css','./brand-ui.css','./inline-solutions.css','./a4-paper.css','./source-library.css','./source-library.mjs',
