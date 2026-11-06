@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-independent-derivations-7",
+  "revision": "2026-11-06-independent-derivations-8",
   "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
   "overrides": [
     {
@@ -3058,6 +3058,403 @@
           "method": "Fig.2.7 QPSK states diagonal phases ±45°,±135°။ Receiver rotation −22.5° ကို subtract လုပ်ပါ။ Each resulting phase still inside same 90° quadrant region. Threshold decision boundaries are I=0 and Q=0.",
           "finalAnswer": "No noiseless symbol errors at |φ₀|=22.5° (<45° margin).",
           "verification": "Independently derived using original quadrature mixer signs inspected in Fig.2.6 and constellation Fig.2.7"
+        }
+      ]
+    },
+    {
+      "id": "dc-2.6",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Complete original JANUS Exercise 2.6 (a–m) with all RF-to-acoustic bandwidth, frequency deviation, CPM phase equations and specified path. Assumes 26 contiguous 160Hz slots over specified 4160Hz proposed band.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Bits per BFSK symbol",
+          "question": "How many bits are encoded by two-frequency BFSK?",
+          "equations": [
+            "M=2 frequency symbols",
+            "Bits/symbol=log₂ M=log₂2=1"
+          ],
+          "display": [
+            {
+              "latex": "M=2 frequency symbols",
+              "html": "<div class=\"verified-equation\" role=\"math\">M=2 frequency symbols</div>"
+            },
+            {
+              "latex": "Bits/symbol=log₂ M=log₂2=1",
+              "html": "<div class=\"verified-equation\" role=\"math\">Bits/symbol=log₂ M=log₂2=1</div>"
+            }
+          ],
+          "reason": "Frequency နှစ်ခုက သင်္ကေတ 0 နဲ့ 1 ကို သီးခြားကိုယ်စားပြုတာကြောင့် symbol တစ်ခုမှာ bit တစ်လုံးပဲရတယ်။",
+          "method": "Two distinct tones encode two distinct possible symbols; number of binary bits is log2 of constellation size.",
+          "finalAnswer": "1 bit per BFSK symbol.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "b",
+          "title": "Frequency-slot bandwidth",
+          "question": "From 9440–13600 Hz divided into 13 channels each containing two equal slots, find 2Δf.",
+          "equations": [
+            "B_total=13600−9440=4160 Hz",
+            "N_slots=13×2=26",
+            "2Δf=B_total/26=4160/26=160 Hz",
+            "Δf=80 Hz"
+          ],
+          "display": [
+            {
+              "latex": "B_total=13600−9440=4160 Hz",
+              "html": "<div class=\"verified-equation\" role=\"math\">B_total=13600−9440=4160 Hz</div>"
+            },
+            {
+              "latex": "N_slots=13×2=26",
+              "html": "<div class=\"verified-equation\" role=\"math\">N_slots=13×2=26</div>"
+            },
+            {
+              "latex": "2Δf=B_total/26=4160/26=160 Hz",
+              "html": "<div class=\"verified-equation\" role=\"math\">2Δf=B_total/26=4160/26=160 Hz</div>"
+            },
+            {
+              "latex": "Δf=80 Hz",
+              "html": "<div class=\"verified-equation\" role=\"math\">Δf=80 Hz</div>"
+            }
+          ],
+          "reason": "Frequency band အကျယ် 4160 Hz ကို channel 13 ခု × tone slots 2 ခု = 26 နဲ့ စားရတယ်။",
+          "method": "Each channel has two BFSK tone slots. For the proposed contiguous partition, total width 26×(2Δf). Therefore 2Δf=4160/26=160Hz. Δf=80Hz.",
+          "finalAnswer": "One slot is 160Hz wide (Δf=80Hz).",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "c",
+          "title": "Ideal raw data rate",
+          "question": "Using Ts=1/(2Δf), compute symbol and bit rate.",
+          "equations": [
+            "T_S=1/(160 Hz)=0.00625 s=6.25 ms",
+            "R_s=1/T_S=160 symbols/s",
+            "R_b=1 bit/symbol ×160 symbols/s=160 bit/s"
+          ],
+          "display": [
+            {
+              "latex": "T_S=1/(160 Hz)=0.00625 s=6.25 ms",
+              "html": "<div class=\"verified-equation\" role=\"math\">T_S=1/(160 Hz)=0.00625 s=6.25 ms</div>"
+            },
+            {
+              "latex": "R_s=1/T_S=160 symbols/s",
+              "html": "<div class=\"verified-equation\" role=\"math\">R_s=1/T_S=160 symbols/s</div>"
+            },
+            {
+              "latex": "R_b=1 bit/symbol ×160 symbols/s=160 bit/s",
+              "html": "<div class=\"verified-equation\" role=\"math\">R_b=1 bit/symbol ×160 symbols/s=160 bit/s</div>"
+            }
+          ],
+          "reason": "BFSK symbol တစ်ခုမှာ 1 bit ပါတယ်။ Symbol duration 6.25 ms ဆိုရင် တစ်စက္ကန့် 160 symbols ပို့နိုင်တယ်။",
+          "method": "Band partition gives 2Δf=160Hz. Ts=1/(2Δf). Raw throughput = (log2 2)/Ts. Channel coding, sync and hopping protocol overheads are excluded.",
+          "finalAnswer": "Ideal uncoded data rate 160 bit/s.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "d",
+          "title": "Frequency-hopping pros and cons",
+          "question": "Give two advantages and disadvantages of channel hopping.",
+          "equations": [
+            "Advantage 1: avoid persistent narrowband interference through frequency diversity",
+            "Advantage 2: spread interference impact and improve robustness to some frequency fades",
+            "Drawback 1: requires tight transmitter/receiver hop synchronization",
+            "Drawback 2: greater oscillator/channel-switching complexity and guard/tuning overhead"
+          ],
+          "display": [
+            {
+              "latex": "Advantage 1: avoid persistent narrowband interference through frequency diversity",
+              "html": "<div class=\"verified-equation\" role=\"math\">Advantage 1: avoid persistent narrowband interference through frequency diversity</div>"
+            },
+            {
+              "latex": "Advantage 2: spread interference impact and improve robustness to some frequency fades",
+              "html": "<div class=\"verified-equation\" role=\"math\">Advantage 2: spread interference impact and improve robustness to some frequency fades</div>"
+            },
+            {
+              "latex": "Drawback 1: requires tight transmitter/receiver hop synchronization",
+              "html": "<div class=\"verified-equation\" role=\"math\">Drawback 1: requires tight transmitter/receiver hop synchronization</div>"
+            },
+            {
+              "latex": "Drawback 2: greater oscillator/channel-switching complexity and guard/tuning overhead",
+              "html": "<div class=\"verified-equation\" role=\"math\">Drawback 2: greater oscillator/channel-switching complexity and guard/tuning overhead</div>"
+            }
+          ],
+          "reason": "Interference ကြောင့် frequency တစ်နေရာတည်း အမြဲမကောင်းနိုင်ဘူး။ Hop လုပ်ထားရင် အခြား frequency သို့ ပြောင်းနိုင်ပေမဲ့ နှစ်ဖက် channel hopping schedule synchronize ဖြစ်ရမယ်။",
+          "method": "Compare a fixed-frequency link against frequency hopping. Benefits relate to interference/fading; costs are synchronization and radio/acoustic transducer tuning overhead. Performance depends on actual channel coherence/frequency occupancy.",
+          "finalAnswer": "FH improves frequency diversity but requires synchronization and hopping hardware.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "e",
+          "title": "Rectangular frequency pulse sketch",
+          "question": "For g_t(t)=1/Ts rect((t−Ts/2)/Ts), specify plot shape and axes.",
+          "equations": [
+            "g_t(t)=0 for t<0",
+            "g_t(t)=1/T_S=160 s⁻¹ for 0≤t<T_S",
+            "g_t(t)=0 for t≥T_S",
+            "Pulse edges at t=0 and 6.25 ms; area ∫g_t dt=1"
+          ],
+          "display": [
+            {
+              "latex": "g_t(t)=0 for t<0",
+              "html": "<div class=\"verified-equation\" role=\"math\">g_t(t)=0 for t&gt;0</div>"
+            },
+            {
+              "latex": "g_t(t)=1/T_S=160 s⁻¹ for 0≤t<T_S",
+              "html": "<div class=\"verified-equation\" role=\"math\">g_t(t)=1/T_S=160 s⁻¹ for 0≤t&gt;T_S</div>"
+            },
+            {
+              "latex": "g_t(t)=0 for t≥T_S",
+              "html": "<div class=\"verified-equation\" role=\"math\">g_t(t)=0 for t≥T_S</div>"
+            },
+            {
+              "latex": "Pulse edges at t=0 and 6.25 ms; area ∫g_t dt=1",
+              "html": "<div class=\"verified-equation\" role=\"math\">Pulse edges at t=0 and 6.25 ms; area ∫g_t dt=1</div>"
+            }
+          ],
+          "reason": "Rect pulse က 0..Ts interval ထဲမှာ amplitude 1/Ts တူတူထားတဲ့ box ဖြစ်တယ်။ Area=1 ဖြစ်လို့ integration phase pulse endpoint 1 ဖြစ်မယ်။",
+          "method": "Horizontal axis t in ms; vertical axis g_t in s⁻¹. Draw height160 between 0 and 6.25ms, zero outside. Boundary half-values under rect endpoint convention do not affect integral.",
+          "finalAnswer": "160 s⁻¹ rectangular pulse over [0,6.25 ms], with unit area.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "f",
+          "title": "Integrate frequency pulse to phase pulse",
+          "question": "Derive q_t(t)=∫_{−∞}^t g_t(τ)dτ.",
+          "equations": [
+            "q_t(t)=0, t≤0",
+            "q_t(t)=t/T_S, 0<t<T_S",
+            "q_t(t)=1, t≥T_S"
+          ],
+          "display": [
+            {
+              "latex": "q_t(t)=0, t≤0",
+              "html": "<div class=\"verified-equation\" role=\"math\">q_t(t)=0, t≤0</div>"
+            },
+            {
+              "latex": "q_t(t)=t/T_S, 0<t<T_S",
+              "html": "<div class=\"verified-equation\" role=\"math\">q_t(t)=t/T_S, 0&gt;t&gt;T_S</div>"
+            },
+            {
+              "latex": "q_t(t)=1, t≥T_S",
+              "html": "<div class=\"verified-equation\" role=\"math\">q_t(t)=1, t≥T_S</div>"
+            }
+          ],
+          "reason": "Rectangular frequency ကို integrate လုပ်ရင် phase pulse က straight rising ramp ဖြစ်တယ်။ Frequency pulse area1 ကို phase pulse endpoint1 သတ်မှတ်ထားတယ်။",
+          "method": "For t<0 integral=0. For t within [0,Ts], integrate 1/Ts from 0 to t giving t/Ts. For t>Ts total area=Ts/Ts=1.",
+          "finalAnswer": "Phase pulse: zero, linear 0→1, then constant one.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "g",
+          "title": "Phase pulse graph",
+          "question": "Specify marks required to sketch q_t(t).",
+          "equations": [
+            "(t,q)=(0,0)",
+            "(T_S/2,q)=(3.125 ms,0.5)",
+            "(T_S,q)=(6.25 ms,1)",
+            "q=0 before 0; q=1 after T_S"
+          ],
+          "display": [
+            {
+              "latex": "(t,q)=(0,0)",
+              "html": "<div class=\"verified-equation\" role=\"math\">(t,q)=(0,0)</div>"
+            },
+            {
+              "latex": "(T_S/2,q)=(3.125 ms,0.5)",
+              "html": "<div class=\"verified-equation\" role=\"math\">(T_S/2,q)=(3.125 ms,0.5)</div>"
+            },
+            {
+              "latex": "(T_S,q)=(6.25 ms,1)",
+              "html": "<div class=\"verified-equation\" role=\"math\">(T_S,q)=(6.25 ms,1)</div>"
+            },
+            {
+              "latex": "q=0 before 0; q=1 after T_S",
+              "html": "<div class=\"verified-equation\" role=\"math\">q=0 before 0; q=1 after T_S</div>"
+            }
+          ],
+          "reason": "q(t) ရဲ့ gradient က 1/Ts ဖြစ်တယ်။ 0 ကနေ6.25ms အထိ တဖြည်းဖြည်း1 ဖြစ်ပြီးနောက် constant ပါ။",
+          "method": "Time horizontal, q vertical. Plot points (0,0),(3.125ms,0.5),(6.25ms,1); connect with straight line; extend left flat at0/right flat at1.",
+          "finalAnswer": "Linear ramp from 0 to 1 over Ts.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "h",
+          "title": "Four-symbol CPM phase tree",
+          "question": "Sketch all possible CPM phase branches for first 4 symbols with initial φ₀=0 and symbolic modulation index h.",
+          "equations": [
+            "φ(t)=πhΣ_n d_n q_t(t−nT_S), d_n∈{−1,+1}",
+            "For kT_S≤t<(k+1)T_S: φ(t)=πh[Σ_{n<k}d_n+d_k(t−kT_S)/T_S]",
+            "Each interval adds one branch increment ±πh at its end",
+            "After k=1,2,3,4 steps, boundary phase values are πh times possible parity-matched sums: ±1; −2,0,+2; −3,−1,+1,+3; −4,−2,0,+2,+4"
+          ],
+          "display": [
+            {
+              "latex": "φ(t)=πhΣ_n d_n q_t(t−nT_S), d_n∈{−1,+1}",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ(t)=πhΣ_n d_n q_t(t−nT_S), d_n∈{−1,+1}</div>"
+            },
+            {
+              "latex": "For kT_S≤t<(k+1)T_S: φ(t)=πh[Σ_{n<k}d_n+d_k(t−kT_S)/T_S]",
+              "html": "<div class=\"verified-equation\" role=\"math\">For kT_S≤t&gt;(k+1)T_S: φ(t)=πh[Σ_{n&gt;k}d_n+d_k(t−kT_S)/T_S]</div>"
+            },
+            {
+              "latex": "Each interval adds one branch increment ±πh at its end",
+              "html": "<div class=\"verified-equation\" role=\"math\">Each interval adds one branch increment ±πh at its end</div>"
+            },
+            {
+              "latex": "After k=1,2,3,4 steps, boundary phase values are πh times possible parity-matched sums: ±1; −2,0,+2; −3,−1,+1,+3; −4,−2,0,+2,+4",
+              "html": "<div class=\"verified-equation\" role=\"math\">After k=1,2,3,4 steps, boundary phase values are πh times possible parity-matched sums: ±1; −2,0,+2; −3,−1,+1,+3; −4,−2,0,+2,+4</div>"
+            }
+          ],
+          "reason": "Frequency symbol +1/-1 ပြောင်းတဲ့အခါ phase slope က ±πh/Ts ဖြစ်ပြီး phase value ကို reset မလုပ်ဘူး။ Boundary တစ်ခါရောက်တိုင်း previous phase ကနေ ±πh တိုးလျော့တယ်။",
+          "method": "Start φ(0)=0. Time 0..Ts draw two lines to ±πh. From each previous node two more line segments with slope ±πh/Ts. Repeat 4 symbol durations. Phase continuous at boundaries.",
+          "finalAnswer": "CPM phase tree has 2^4=16 symbol paths (some phase endpoints coincide).",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "i",
+          "title": "Mark the requested JANUS phase path",
+          "question": "d=[−1,−1,+1,−1]; compute boundary phases.",
+          "equations": [
+            "Cumulative symbol sums after 0,1,2,3,4 steps: [0,−1,−2,−1,−2]",
+            "φ(0)=0; φ(T_S)=−πh; φ(2T_S)=−2πh",
+            "φ(3T_S)=−πh; φ(4T_S)=−2πh",
+            "Slopes by interval: [−πh/T_S,−πh/T_S,+πh/T_S,−πh/T_S]"
+          ],
+          "display": [
+            {
+              "latex": "Cumulative symbol sums after 0,1,2,3,4 steps: [0,−1,−2,−1,−2]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Cumulative symbol sums after 0,1,2,3,4 steps: [0,−1,−2,−1,−2]</div>"
+            },
+            {
+              "latex": "φ(0)=0; φ(T_S)=−πh; φ(2T_S)=−2πh",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ(0)=0; φ(T_S)=−πh; φ(2T_S)=−2πh</div>"
+            },
+            {
+              "latex": "φ(3T_S)=−πh; φ(4T_S)=−2πh",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ(3T_S)=−πh; φ(4T_S)=−2πh</div>"
+            },
+            {
+              "latex": "Slopes by interval: [−πh/T_S,−πh/T_S,+πh/T_S,−πh/T_S]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Slopes by interval: [−πh/T_S,−πh/T_S,+πh/T_S,−πh/T_S]</div>"
+            }
+          ],
+          "reason": "Path ကို sequence အတိုင်း −1/−1/+1/−1 branch ရွေးလိုက်ရင် phase အရင်ကျ၊ ထပ်ကျ၊ ပြန်တက်၊ ပြန်ကျ ဖြစ်တယ်။",
+          "method": "Running sum initially0။ After −1→−1, another −1→−2, +1→−1, −1→−2. Multiply each by πh. Connect end phases linearly, no discontinuity.",
+          "finalAnswer": "0 → −πh → −2πh → −πh → −2πh.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "j",
+          "title": "Meaning of CPM modulation index h",
+          "question": "Interpret h as normalized tone separation and phase increment.",
+          "equations": [
+            "h=2Δf T_S = (tone separation)×T_S",
+            "Instantaneous frequencies f_c±Δf",
+            "Single-symbol phase change relative carrier Δφ=±πh"
+          ],
+          "display": [
+            {
+              "latex": "h=2Δf T_S = (tone separation)×T_S",
+              "html": "<div class=\"verified-equation\" role=\"math\">h=2Δf T_S = (tone separation)×T_S</div>"
+            },
+            {
+              "latex": "Instantaneous frequencies f_c±Δf",
+              "html": "<div class=\"verified-equation\" role=\"math\">Instantaneous frequencies f_c±Δf</div>"
+            },
+            {
+              "latex": "Single-symbol phase change relative carrier Δφ=±πh",
+              "html": "<div class=\"verified-equation\" role=\"math\">Single-symbol phase change relative carrier Δφ=±πh</div>"
+            }
+          ],
+          "reason": "h က frequency separation ကို symbol duration နဲ့ မျှချထားတဲ့ dimensionless ကိန်းဖြစ်တယ်။ h ကြီးရင် symbol interval တစ်ခုအတွင်း phase ပိုလှည့်မယ်။",
+          "method": "Tone separation=2Δf. Frequency deviation one tone ±Δf. Phase integral over one symbol =2π(±Δf)Ts=±π h.",
+          "finalAnswer": "h is frequency separation × symbol duration.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "k",
+          "title": "JANUS modulation index",
+          "question": "Compute h for this proposed JANUS BFSK.",
+          "equations": [
+            "Δf=80 Hz; T_S=1/160 s",
+            "h=2ΔfT_S=2×80×(1/160)=1",
+            "Phase shift/symbol ±πh=±π"
+          ],
+          "display": [
+            {
+              "latex": "Δf=80 Hz; T_S=1/160 s",
+              "html": "<div class=\"verified-equation\" role=\"math\">Δf=80 Hz; T_S=1/160 s</div>"
+            },
+            {
+              "latex": "h=2ΔfT_S=2×80×(1/160)=1",
+              "html": "<div class=\"verified-equation\" role=\"math\">h=2ΔfT_S=2×80×(1/160)=1</div>"
+            },
+            {
+              "latex": "Phase shift/symbol ±πh=±π",
+              "html": "<div class=\"verified-equation\" role=\"math\">Phase shift/symbol ±πh=±π</div>"
+            }
+          ],
+          "reason": "နံပါတ်က 2Δf=160Hz နဲ့ Ts=1/160s အပြန်အလှန်ဖြစ်လို့ h=1 ရတယ်။",
+          "method": "The modulation index for rectangular full-response binary CPM uses tone separation × symbol time. Substitution 160×0.00625=1.",
+          "finalAnswer": "h=1 for the specified proposed JANUS system.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "l",
+          "title": "Why continuous-phase FSK?",
+          "question": "Explain CPM and why it is used with FSK.",
+          "equations": [
+            "φ(t) continuous at symbol boundaries",
+            "s(t)=A cos(2πf_ct+φ(t))",
+            "Frequency changes between symbols, but phase does not reset"
+          ],
+          "display": [
+            {
+              "latex": "φ(t) continuous at symbol boundaries",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ(t) continuous at symbol boundaries</div>"
+            },
+            {
+              "latex": "s(t)=A cos(2πf_ct+φ(t))",
+              "html": "<div class=\"verified-equation\" role=\"math\">s(t)=A cos(2πf_ct+φ(t))</div>"
+            },
+            {
+              "latex": "Frequency changes between symbols, but phase does not reset",
+              "html": "<div class=\"verified-equation\" role=\"math\">Frequency changes between symbols, but phase does not reset</div>"
+            }
+          ],
+          "reason": "Phase ကို sudden jump လုပ်ရင် spectrum sidelobes နဲ့ out-of-band emissions တိုးနိုင်တယ်။ Phase ဆက်တိုက်ထားရင် envelope constant ဖြစ်ပြီး power amplifier အတွက်လည်း အဆင်ပြေတယ်။",
+          "method": "FSK symbols specify instantaneous frequency; integrate frequency over time to generate phase continuously. Pulse shaping and frequency continuity conditions govern spectral sidelobes. Constant-amplitude angle modulation can use efficient amplification.",
+          "finalAnswer": "CPM avoids phase discontinuities and supports constant envelope.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        },
+        {
+          "label": "m",
+          "title": "A practical continuous-phase transmitter",
+          "question": "Describe CPM without explicit phase tracking.",
+          "equations": [
+            "d_n→choose frequency f_c±Δf→frequency-controllable oscillator→transducer",
+            "φ(t)=φ(0)+2π∫₀ᵗ f_inst(τ)dτ",
+            "Do not reset oscillator phase between hops/symbols"
+          ],
+          "display": [
+            {
+              "latex": "d_n→choose frequency f_c±Δf→frequency-controllable oscillator→transducer",
+              "html": "<div class=\"verified-equation\" role=\"math\">d_n→choose frequency f_c±Δf→frequency-controllable oscillator→transducer</div>"
+            },
+            {
+              "latex": "φ(t)=φ(0)+2π∫₀ᵗ f_inst(τ)dτ",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ(t)=φ(0)+2π∫₀ᵗ f_inst(τ)dτ</div>"
+            },
+            {
+              "latex": "Do not reset oscillator phase between hops/symbols",
+              "html": "<div class=\"verified-equation\" role=\"math\">Do not reset oscillator phase between hops/symbols</div>"
+            }
+          ],
+          "reason": "Oscillator ကို bit ပေါ်မူတည်ပြီး frequency ပြောင်းစေကာ လက်ရှိ oscillator phase ကို အဆက်မပြတ်ထားရင် phase counter တစ်ခုကို manual track မလုပ်ပဲ CPM ရတယ်။",
+          "method": "Use VCO/NCO with continuous phase accumulator. Update frequency control at symbol boundaries but leave phase integrator accumulating. In frequency-hopped JANUS, hop changes also preserve oscillator phase if supported. Digital DDS/NCO naturally accumulates phase modulo 2π.",
+          "finalAnswer": "Continuous-phase FSK via phase-accumulating oscillator without phase resets.",
+          "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
         }
       ]
     }
