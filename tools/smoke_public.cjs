@@ -9,7 +9,7 @@ assert.equal(data.subjects.length,5,'Five subjects expected');
 assert.equal(data.exercises.length,82,'Expected 82 merged exercise entries');
 assert(data.formulas.length>=69,'Expected full merged formula library');
 const ext=JSON.parse(fs.readFileSync(file('source/data/verified-expansion.json'),'utf8'));
-assert(Array.isArray(ext.overrides)&&ext.overrides.length>=9,'Missing independent derivations');
+assert(Array.isArray(ext.overrides)&&ext.overrides.length>=12,'Missing independent derivations');
 for(const over of ext.overrides){
  const target=data.exercises.find(e=>e.id===over.id);
  assert(target,'Unmatched override '+over.id);
@@ -21,7 +21,7 @@ const overrideMap=new Map(ext.overrides.map(x=>[x.id,x]));
 const merged=data.exercises.map(e=>overrideMap.has(e.id)?{...e,...overrideMap.get(e.id)}:e);
 const parts=merged.reduce((n,e)=>n+e.parts.length,0);
 assert(merged.filter(e=>e.parts.length===0).length<30,'Verified expansion did not reduce source-only count');
-assert(parts>=139,'Original exercises were lost');
+assert.equal(parts,193,'Expected 193 guided subquestions after validated expansion');
 assert.equal(new Set(data.exercises.map(e=>e.id)).size,82,'Duplicate exercise IDs');
 for(const e of data.exercises){
  assert(data.subjects.some(s=>s.id===e.subject),'Unknown subject in '+e.id);
