@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-independent-derivations-1",
+  "revision": "2026-11-06-independent-derivations-2",
   "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
   "overrides": [
     {
@@ -1229,6 +1229,569 @@
           "method": "Frequency scales with √k; static displacement scales with 1/k. k double ဖြစ်တဲ့အခါ f×√2၊ x÷2 ဖြစ်သည်။",
           "finalAnswer": "f_new≈22.508 kHz; 1g displacement ≈0.4905 nm.",
           "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        }
+      ]
+    },
+    {
+      "id": "dc-4.2",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "All six 5G numerology subtasks re-derived using source-specific (N+1) bandwidth convention; c=3×10⁸m/s.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "LTE bandwidth with 256 subcarriers",
+          "question": "Using Nₛ=256 and Δf=15 kHz, compute occupied span according to question convention.",
+          "equations": [
+            "Δf_LTE=15 kHz; Nₛ=256",
+            "B_LTE=(Nₛ+1)Δf=257×15 kHz",
+            "B_LTE=3,855 kHz=3.855 MHz"
+          ],
+          "display": [
+            {
+              "latex": "Δf_LTE=15 kHz; Nₛ=256",
+              "html": "<div class=\"verified-equation\" role=\"math\">Δf_LTE=15 kHz; Nₛ=256</div>"
+            },
+            {
+              "latex": "B_LTE=(Nₛ+1)Δf=257×15 kHz",
+              "html": "<div class=\"verified-equation\" role=\"math\">B_LTE=(Nₛ+1)Δf=257×15 kHz</div>"
+            },
+            {
+              "latex": "B_LTE=3,855 kHz=3.855 MHz",
+              "html": "<div class=\"verified-equation\" role=\"math\">B_LTE=3,855 kHz=3.855 MHz</div>"
+            }
+          ],
+          "reason": "ဒီ Tutorial ရဲ့ bandwidth convention က (Nₛ+1)Δf ပါ။ NₛΔf=3.84 MHz ဆိုတာ center-tone span convention အခြားတစ်မျိုးဖြစ်လို့ မရောသင့်ဘူး။",
+          "method": "Given 256 subcarrier indices and the source convention (Nₛ+1) frequency slots, 257×15 kHz ကို မြှောက်ပြီး MHz ပြောင်းပါ။ Real practical occupied bandwidth သည် subcarrier allocation/guard band အလိုက်ကွာနိုင်သည်။",
+          "finalAnswer": "B_LTE=3.855 MHz with source convention.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "b",
+          "title": "Useful symbol and guard duration",
+          "question": "Find the LTE useful symbol duration and 7% guard interval.",
+          "equations": [
+            "T_S=1/Δf=1/(15×10³)=66.6666667 μs",
+            "T_G≈0.07 T_S=4.66666667 μs",
+            "T_total=T_S+T_G≈71.3333333 μs"
+          ],
+          "display": [
+            {
+              "latex": "T_S=1/Δf=1/(15×10³)=66.6666667 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">T_S=1/Δf=1/(15×10³)=66.6666667 μs</div>"
+            },
+            {
+              "latex": "T_G≈0.07 T_S=4.66666667 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">T_G≈0.07 T_S=4.66666667 μs</div>"
+            },
+            {
+              "latex": "T_total=T_S+T_G≈71.3333333 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">T_total=T_S+T_G≈71.3333333 μs</div>"
+            }
+          ],
+          "reason": "OFDM မှာ Δf=1/T_S အပြန်အလှန်ဖြစ်တယ်။ CP 7% ဆိုတဲ့အချက်က 0.07 နဲ့မြှောက်ရုံပါပဲ။",
+          "method": "15 kHz ကို Hz သို့ပြောင်းပြီး reciprocal ယူပါ။ 1/(15,000 s⁻¹)=6.6667e−5 s=66.667μs. Guard interval=0.07×useful duration. Round at final answer only.",
+          "finalAnswer": "T_S≈66.67 μs, T_G≈4.67 μs.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "c",
+          "title": "Maximum Doppler shifts",
+          "question": "Compute f_D,max for 35.3 m/s at 850 MHz and 5 m/s at 24 GHz.",
+          "equations": [
+            "f_D,max≈(v/c) f_c; c≈3×10⁸ m/s",
+            "Scenario 1: f_D1=35.3×850×10⁶/(3×10⁸)≈100.01667 Hz",
+            "Scenario 2: f_D2=5×24×10⁹/(3×10⁸)=400 Hz"
+          ],
+          "display": [
+            {
+              "latex": "f_D,max≈(v/c) f_c; c≈3×10⁸ m/s",
+              "html": "<div class=\"verified-equation\" role=\"math\">f_D,max≈(v/c) f_c; c≈3×10⁸ m/s</div>"
+            },
+            {
+              "latex": "Scenario 1: f_D1=35.3×850×10⁶/(3×10⁸)≈100.01667 Hz",
+              "html": "<div class=\"verified-equation\" role=\"math\">Scenario 1: f_D1=35.3×850×10⁶/(3×10⁸)≈100.01667 Hz</div>"
+            },
+            {
+              "latex": "Scenario 2: f_D2=5×24×10⁹/(3×10⁸)=400 Hz",
+              "html": "<div class=\"verified-equation\" role=\"math\">Scenario 2: f_D2=5×24×10⁹/(3×10⁸)=400 Hz</div>"
+            }
+          ],
+          "reason": "Wave source/receiver အချင်းချင်းရွေ့တဲ့ speed v ကို c နဲ့စားပြီး carrier frequency နဲ့မြှောက်ရင် Doppler frequency ရတယ်။",
+          "method": "fc, v နှစ်စုံကို တစ်ခုချင်းစီ SI units ထည့်ပါ။ Exact relative speed angle မပေးထားလို့ maximum radial speed case ကိုယူထားသည်။ fD1 ~100Hz, fD2=400Hz ဖြစ်သည်။",
+          "finalAnswer": "f_D1≈100.02 Hz; f_D2=400 Hz.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "d",
+          "title": "Check LTE symbol-duration design rule",
+          "question": "Use 5τ_max≤T_S≤0.03T_C and T_C≈0.432/f_D.",
+          "equations": [
+            "Scenario 1: 5τ=60 μs; T_C≈4.31928 ms; 0.03T_C≈129.578 μs",
+            "Check 1: 60≤66.667≤129.578 μs → valid",
+            "Scenario 2: 5τ=4 μs; T_C=1.08 ms; 0.03T_C=32.4 μs",
+            "Check 2: 4≤66.667≤32.4 μs → invalid"
+          ],
+          "display": [
+            {
+              "latex": "Scenario 1: 5τ=60 μs; T_C≈4.31928 ms; 0.03T_C≈129.578 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">Scenario 1: 5τ=60 μs; T_C≈4.31928 ms; 0.03T_C≈129.578 μs</div>"
+            },
+            {
+              "latex": "Check 1: 60≤66.667≤129.578 μs → valid",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check 1: 60≤66.667≤129.578 μs → valid</div>"
+            },
+            {
+              "latex": "Scenario 2: 5τ=4 μs; T_C=1.08 ms; 0.03T_C=32.4 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">Scenario 2: 5τ=4 μs; T_C=1.08 ms; 0.03T_C=32.4 μs</div>"
+            },
+            {
+              "latex": "Check 2: 4≤66.667≤32.4 μs → invalid",
+              "html": "<div class=\"verified-equation\" role=\"math\">Check 2: 4≤66.667≤32.4 μs → invalid</div>"
+            }
+          ],
+          "reason": "Scenario 1 မှာ channel delay အတွက် symbol ရှည်ပြီး Doppler coherence အတွက် အလွန်မရှည်ဘူး။ Scenario 2 မှာ coherence upper bound 32.4 μs ကို 66.67 μs က ကျော်နေတယ်။",
+          "method": "Delay lower bound ကို 5×τmax ဖြင့်တွက်၊ Doppler upper bound ကို 0.03×(0.432/fD) ဖြင့်တွက်ပါ။ အသုံးပြုထားတဲ့ 66.667μs ကို interval ထဲထည့်နှိုင်းယှဉ်ပါ။",
+          "finalAnswer": "LTE μ=0 passes Scenario 1 but fails Scenario 2.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "e",
+          "title": "Five 5G numerologies",
+          "question": "For μ=0…4 list Δf_μ, T_S,μ and T_G,μ=0.07T_S,μ.",
+          "equations": [
+            "Δf_μ=15·2^μ kHz; T_S,μ=1/Δf_μ",
+            "μ=0: 15 kHz, 66.667 μs, 4.667 μs",
+            "μ=1: 30 kHz, 33.333 μs, 2.333 μs",
+            "μ=2: 60 kHz, 16.667 μs, 1.167 μs",
+            "μ=3: 120 kHz, 8.333 μs, 0.583 μs",
+            "μ=4: 240 kHz, 4.167 μs, 0.292 μs"
+          ],
+          "display": [
+            {
+              "latex": "Δf_μ=15·2^μ kHz; T_S,μ=1/Δf_μ",
+              "html": "<div class=\"verified-equation\" role=\"math\">Δf_μ=15·2^μ kHz; T_S,μ=1/Δf_μ</div>"
+            },
+            {
+              "latex": "μ=0: 15 kHz, 66.667 μs, 4.667 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">μ=0: 15 kHz, 66.667 μs, 4.667 μs</div>"
+            },
+            {
+              "latex": "μ=1: 30 kHz, 33.333 μs, 2.333 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">μ=1: 30 kHz, 33.333 μs, 2.333 μs</div>"
+            },
+            {
+              "latex": "μ=2: 60 kHz, 16.667 μs, 1.167 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">μ=2: 60 kHz, 16.667 μs, 1.167 μs</div>"
+            },
+            {
+              "latex": "μ=3: 120 kHz, 8.333 μs, 0.583 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">μ=3: 120 kHz, 8.333 μs, 0.583 μs</div>"
+            },
+            {
+              "latex": "μ=4: 240 kHz, 4.167 μs, 0.292 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">μ=4: 240 kHz, 4.167 μs, 0.292 μs</div>"
+            }
+          ],
+          "reason": "Numerology μ တစ်ဆင့်တိုးတိုင်း Δf ×2၊ symbol duration ÷2 ဖြစ်တယ်။ 7% CP အချိန်လည်း ÷2 ဖြစ်တယ်။",
+          "method": "μ∈{0,1,2,3,4} အတွက် 15kHz×2^μ ကိုတွက်ပါ။ Ts reciprocal ယူပြီး 0.07×Ts အဖြစ် guard တွက်ပါ။ All figures approximate and correspond to the exercise idealized 7% rule.",
+          "finalAnswer": "Five idealized spacings and durations as listed.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "f",
+          "title": "Minimum-bandwidth valid numerology",
+          "question": "Choose the smallest μ meeting both delay and coherence constraints in each scenario.",
+          "equations": [
+            "Scenario 1 allowed T range: 60…129.578 μs → μ=0 only",
+            "Scenario 2 allowed T range: 4…32.4 μs → μ=2,3,4 valid; μ=1 fails",
+            "B(μ)=(257)(15·2^μ) kHz",
+            "Scenario 1: μ=0, B=3.855 MHz; Scenario 2: μ=2, B=15.42 MHz"
+          ],
+          "display": [
+            {
+              "latex": "Scenario 1 allowed T range: 60…129.578 μs → μ=0 only",
+              "html": "<div class=\"verified-equation\" role=\"math\">Scenario 1 allowed T range: 60…129.578 μs → μ=0 only</div>"
+            },
+            {
+              "latex": "Scenario 2 allowed T range: 4…32.4 μs → μ=2,3,4 valid; μ=1 fails",
+              "html": "<div class=\"verified-equation\" role=\"math\">Scenario 2 allowed T range: 4…32.4 μs → μ=2,3,4 valid; μ=1 fails</div>"
+            },
+            {
+              "latex": "B(μ)=(257)(15·2^μ) kHz",
+              "html": "<div class=\"verified-equation\" role=\"math\">B(μ)=(257)(15·2^μ) kHz</div>"
+            },
+            {
+              "latex": "Scenario 1: μ=0, B=3.855 MHz; Scenario 2: μ=2, B=15.42 MHz",
+              "html": "<div class=\"verified-equation\" role=\"math\">Scenario 1: μ=0, B=3.855 MHz; Scenario 2: μ=2, B=15.42 MHz</div>"
+            }
+          ],
+          "reason": "Smaller μ ဖြစ်ရင် spacing နည်းပြီး bandwidth နည်းတယ်။ Scenario 2 မှာ μ=1 ရဲ့ 33.333 μs က upper limit 32.4 μs ထက်နည်းနည်းကြီးလို့ မရဘူး။",
+          "method": "μ=0…4 တစ်ခုချင်းစီရဲ့ Ts ကို အပေါ်က interval နှစ်ခုထဲ ထည့်စစ်ပါ။ Valid values အနက် အငယ်ဆုံး μ ကိုရွေးပါ။ Bandwidth သည် Δf နဲ့တိုက်ရိုက် proportional ဖြစ်သည်။",
+          "finalAnswer": "Outdoor Scenario 1: μ=0 (3.855 MHz). Factory Scenario 2: μ=2 (15.42 MHz).",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        }
+      ]
+    },
+    {
+      "id": "dc-4.3",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Re-derived 4.3 (a–e), including exact 4^73 rather than 4^47 for the exercise's OFDM sample grid.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Single-carrier symbol rate",
+          "question": "For ideal zero-rolloff B=10 MHz, find maximum symbol rate and symbol interval.",
+          "equations": [
+            "R_s=1/T=10 MHz=10,000,000 baud",
+            "T=1/B=1/(10×10⁶)=100 ns"
+          ],
+          "display": [
+            {
+              "latex": "R_s=1/T=10 MHz=10,000,000 baud",
+              "html": "<div class=\"verified-equation\" role=\"math\">R_s=1/T=10 MHz=10,000,000 baud</div>"
+            },
+            {
+              "latex": "T=1/B=1/(10×10⁶)=100 ns",
+              "html": "<div class=\"verified-equation\" role=\"math\">T=1/B=1/(10×10⁶)=100 ns</div>"
+            }
+          ],
+          "reason": "Zero excess bandwidth ဆိုရင် ideal Nyquist symbol rate 10 million symbols/s အထိ ယူနိုင်တယ်။ Baud က symbols per second ဖြစ်တယ်၊ bit rate နဲ့ မတူနိုင်ဘူး။",
+          "method": "B=10e6 Hz ကို single-carrier ideal Nyquist no-excess-bandwidth assumption နှင့် Rs=B ထဲ ထည့်ပါ။ Ts=1/Rs=100ns။",
+          "finalAnswer": "10 MBaud, symbol period 100 ns.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "b",
+          "title": "Frequency-selective channel",
+          "question": "With rms delay spread 785 ns compare channel time dispersion to ideal symbol period.",
+          "equations": [
+            "T_single=100 ns",
+            "τ_rms/T_single=785 ns/100 ns=7.85",
+            "B_coh≈1/τ_rms≈1.274 MHz ≪ 10 MHz"
+          ],
+          "display": [
+            {
+              "latex": "T_single=100 ns",
+              "html": "<div class=\"verified-equation\" role=\"math\">T_single=100 ns</div>"
+            },
+            {
+              "latex": "τ_rms/T_single=785 ns/100 ns=7.85",
+              "html": "<div class=\"verified-equation\" role=\"math\">τ_rms/T_single=785 ns/100 ns=7.85</div>"
+            },
+            {
+              "latex": "B_coh≈1/τ_rms≈1.274 MHz ≪ 10 MHz",
+              "html": "<div class=\"verified-equation\" role=\"math\">B_coh≈1/τ_rms≈1.274 MHz ≪ 10 MHz</div>"
+            }
+          ],
+          "reason": "Multipath spread 785ns က symbol interval100ns ထက် 7.85 ဆကြီးတယ်။ တစ်ခုချင်း symbol တွေကြား ISI အများကြီးရှိနိုင်တယ်။",
+          "method": "Delay spread to symbol period ratio ကိုတွက်ပါ။ Conventional flat-fading condition B≪1/τrms မပြည့်မီဘဲ 10MHz>1.274MHz ဖြစ်နေ၍ frequency-selective ဖြစ်သည်။ Coherence-bandwidth definition မှာ numerical prefactor convention ကွာနိုင်သော်လည်း conclusion မပြောင်းပါ။",
+          "finalAnswer": "Frequency-selective fading, not frequency-flat.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "c",
+          "title": "Discrete-time OFDM transmit/receive flow",
+          "question": "Sketch the equivalent baseband chain for common modulation across 1024 subcarriers.",
+          "equations": [
+            "Input bits → QPSK/QAM map → S/P → IFFT₁₀₂₄ → add CP",
+            "→ channel h[k] + AWGN → remove CP → FFT₁₀₂₄ → one-tap EQ",
+            "→ decision → P/S → output bits"
+          ],
+          "display": [
+            {
+              "latex": "Input bits → QPSK/QAM map → S/P → IFFT₁₀₂₄ → add CP",
+              "html": "<div class=\"verified-equation\" role=\"math\">Input bits → QPSK/QAM map → S/P → IFFT₁₀₂₄ → add CP</div>"
+            },
+            {
+              "latex": "→ channel h[k] + AWGN → remove CP → FFT₁₀₂₄ → one-tap EQ",
+              "html": "<div class=\"verified-equation\" role=\"math\">→ channel h[k] + AWGN → remove CP → FFT₁₀₂₄ → one-tap EQ</div>"
+            },
+            {
+              "latex": "→ decision → P/S → output bits",
+              "html": "<div class=\"verified-equation\" role=\"math\">→ decision → P/S → output bits</div>"
+            }
+          ],
+          "reason": "IFFT က symbols တွေကို orthogonal time-domain block ပြောင်းပို့တယ်။ CP ကို remove လုပ်ပြီး FFT ပြန်တင်ရင် subcarrier-wise detection လုပ်နိုင်တယ်။",
+          "method": "Same constellation mapper ကို all 1024 data-bearing subcarriers အတွက် သုံးကြောင်း သတ်မှတ်ပါ။ Guard interval, synchronization, channel equalizer ပါဝင်ရမယ်။ Actual LTE includes pilots/nulls and coding, schematic is simplified.",
+          "finalAnswer": "Correct baseband OFDM processing chain shown.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "d",
+          "title": "Viterbi equalizer state explosion",
+          "question": "Use Δf=15 kHz,N=1024, 4.7 μs multipath memory,QPSK M=4.",
+          "equations": [
+            "T_useful=1/15 kHz=66.6666667 μs",
+            "ΔT=T_useful/1024≈65.1041667 ns",
+            "D=ceil(4.7 μs/65.1041667 ns)=ceil(72.192)=73",
+            "States=M^D=4^73≈8.920298×10⁴³"
+          ],
+          "display": [
+            {
+              "latex": "T_useful=1/15 kHz=66.6666667 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">T_useful=1/15 kHz=66.6666667 μs</div>"
+            },
+            {
+              "latex": "ΔT=T_useful/1024≈65.1041667 ns",
+              "html": "<div class=\"verified-equation\" role=\"math\">ΔT=T_useful/1024≈65.1041667 ns</div>"
+            },
+            {
+              "latex": "D=ceil(4.7 μs/65.1041667 ns)=ceil(72.192)=73",
+              "html": "<div class=\"verified-equation\" role=\"math\">D=ceil(4.7 μs/65.1041667 ns)=ceil(72.192)=73</div>"
+            },
+            {
+              "latex": "States=M^D=4^73≈8.920298×10⁴³",
+              "html": "<div class=\"verified-equation\" role=\"math\">States=M^D=4^73≈8.920298×10⁴³</div>"
+            }
+          ],
+          "reason": "Sample spacing 65ns လောက်ပဲရှိတဲ့အတွက် channel delay4.7µs သည် 73 samples memory ဖြစ်သွားတယ်။ QPSK symbol 4 မျိုးဆို Viterbi state count 4^73 အရမ်းကြီးတယ်။",
+          "method": "Useful symbol duration=1/Δf။ Sample spacing=Tu/N၊ channel memory D=ceil(maxdelay/sampletime)။ M-ary Viterbi complexity states=M^D။ Initial D rounding မှာ exact sample time 65.104ns ကိုသုံးပါ။",
+          "finalAnswer": "73-symbol memory and approximately 8.92×10^43 Viterbi states.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "e",
+          "title": "Benefits and limitations of OFDM",
+          "question": "Explain channel multipath protection, why LTE uses OFDM, and one drawback.",
+          "equations": [
+            "T_useful≈66.67 μs ≫ τ_rms=0.785 μs",
+            "CP≈4.7 μs; when ≥ true max excess delay, circular convolution holds",
+            "Y_k=H_k X_k+W_k; equalize by one complex coefficient per tone"
+          ],
+          "display": [
+            {
+              "latex": "T_useful≈66.67 μs ≫ τ_rms=0.785 μs",
+              "html": "<div class=\"verified-equation\" role=\"math\">T_useful≈66.67 μs ≫ τ_rms=0.785 μs</div>"
+            },
+            {
+              "latex": "CP≈4.7 μs; when ≥ true max excess delay, circular convolution holds",
+              "html": "<div class=\"verified-equation\" role=\"math\">CP≈4.7 μs; when ≥ true max excess delay, circular convolution holds</div>"
+            },
+            {
+              "latex": "Y_k=H_k X_k+W_k; equalize by one complex coefficient per tone",
+              "html": "<div class=\"verified-equation\" role=\"math\">Y_k=H_k X_k+W_k; equalize by one complex coefficient per tone</div>"
+            }
+          ],
+          "reason": "Time-domain Viterbi အတွက် states အလွန်များတဲ့နေရာမှာ OFDM က tone တစ်ခုချင်း complex multiplication/division နဲ့ အလုပ်လုပ်လို့ တွက်ချက်မှု သက်သာတယ်။",
+          "method": "Frequency-selective wideband channel ကို 1024 narrow subchannels ခွဲပါ။ CP≥maximum excess delay ဆိုတဲ့ condition ကို ပြည့်မီမှ ISI/ICI အကာအကွယ်အားကောင်းတယ်။ RMS delay spread 785ns တစ်ခုတည်းနဲ့ max delay ကို သက်သေမပြနိုင်။ Disadvantages: high peak-to-average power ratio (PAPR), CP overhead and CFO sensitivity.",
+          "finalAnswer": "OFDM greatly simplifies equalization; costs PAPR, guard overhead, and frequency-offset sensitivity.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        }
+      ]
+    },
+    {
+      "id": "dc-5.1",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Seven CDMA subtasks independently re-derived; r periodic normalization and ideal autocorrelation explicitly stated.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Periodic code correlations",
+          "question": "Define discrete periodic autocorrelation and cross-correlation of spreading codes length L.",
+          "equations": [
+            "R_cc[κ]=∑_{n=0}^{L−1} c[n] c*[ (n+κ) mod L ]",
+            "R_cu,cv[κ]=∑_{n=0}^{L−1} c_u[n] c_v*[ (n+κ) mod L ]",
+            "Normalized values r[κ]=R[κ]/L (optional convention)"
+          ],
+          "display": [
+            {
+              "latex": "R_cc[κ]=∑_{n=0}^{L−1} c[n] c*[ (n+κ) mod L ]",
+              "html": "<div class=\"verified-equation\" role=\"math\">R_cc[κ]=∑_{n=0}^{L−1} c[n] c*[ (n+κ) mod L ]</div>"
+            },
+            {
+              "latex": "R_cu,cv[κ]=∑_{n=0}^{L−1} c_u[n] c_v*[ (n+κ) mod L ]",
+              "html": "<div class=\"verified-equation\" role=\"math\">R_cu,cv[κ]=∑_{n=0}^{L−1} c_u[n] c_v*[ (n+κ) mod L ]</div>"
+            },
+            {
+              "latex": "Normalized values r[κ]=R[κ]/L (optional convention)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Normalized values r[κ]=R[κ]/L (optional convention)</div>"
+            }
+          ],
+          "reason": "Autocorrelation က ကိုယ့် code ကို shift လုပ်ပြီး multiply-sum လုပ်တာ၊ crosscorrelation က code နှစ်ခုကြား interference ကိုတိုင်းတာတာပါ။",
+          "method": "Shift κ ကို 0…L−1 တစ်ခုချင်းစီယူပြီး second code ကို modulo L index နဲ့ circular shift လုပ်ပါ။ 1/L normalization လုပ်ထား/မလုပ်ထားကို အမြဲရေးပါ။",
+          "finalAnswer": "Periodic correlation formulas above.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "b",
+          "title": "Seven-chip periodic autocorrelation",
+          "question": "For c=[1,−1,−1,1,1,1,−1], compute R_cc for κ=0…6.",
+          "equations": [
+            "R[0]=1²+(-1)²+(-1)²+1²+1²+1²+(-1)²=7",
+            "R[1]=1·(-1)+(−1)·(−1)+(−1)·1+1·1+1·1+1·(−1)+(−1)·1=−1",
+            "R[0…6]=[7,−1,−1,−1,−1,−1,−1]",
+            "Normalized r=[1,−1/7,−1/7,−1/7,−1/7,−1/7,−1/7]"
+          ],
+          "display": [
+            {
+              "latex": "R[0]=1²+(-1)²+(-1)²+1²+1²+1²+(-1)²=7",
+              "html": "<div class=\"verified-equation\" role=\"math\">R[0]=1²+(-1)²+(-1)²+1²+1²+1²+(-1)²=7</div>"
+            },
+            {
+              "latex": "R[1]=1·(-1)+(−1)·(−1)+(−1)·1+1·1+1·1+1·(−1)+(−1)·1=−1",
+              "html": "<div class=\"verified-equation\" role=\"math\">R[1]=1·(-1)+(−1)·(−1)+(−1)·1+1·1+1·1+1·(−1)+(−1)·1=−1</div>"
+            },
+            {
+              "latex": "R[0…6]=[7,−1,−1,−1,−1,−1,−1]",
+              "html": "<div class=\"verified-equation\" role=\"math\">R[0…6]=[7,−1,−1,−1,−1,−1,−1]</div>"
+            },
+            {
+              "latex": "Normalized r=[1,−1/7,−1/7,−1/7,−1/7,−1/7,−1/7]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Normalized r=[1,−1/7,−1/7,−1/7,−1/7,−1/7,−1/7]</div>"
+            }
+          ],
+          "reason": "Perfect-like periodic autocorrelation ဖြစ်လို့ zero-shift မှာ 7၊ shift တခြား ၆ ခုမှာ −1 အတူတူရတယ်။ Channel synchronization အတွက် အရေးကြီးတယ်။",
+          "method": "Periodic wrap-around index (n+κ) mod 7 နဲ့ dot product ကို κ=0…6 တွက်ပါ။ Two independently calculated shifts k=0,1 ပြပြီး remaining shifts ကို same cyclic rule ဖြင့် verify လုပ်ထားသည်။",
+          "finalAnswer": "Unnormalized periodic autocorrelation = [7,−1,−1,−1,−1,−1,−1].",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "c",
+          "title": "Multiple-user baseband transmission chain",
+          "question": "Describe a U-user CDMA transmitter and receiver with independent h^(u)(t) and AWGN.",
+          "equations": [
+            "User u: d_m^(u) × code c^(u)[n] → chip pulse → h^(u)(t)",
+            "r(t)=∑_{u=1}^{U} (s_u*h_u)(t)+n(t)",
+            "RX: matched filter/sample → code correlator → symbol decision"
+          ],
+          "display": [
+            {
+              "latex": "User u: d_m^(u) × code c^(u)[n] → chip pulse → h^(u)(t)",
+              "html": "<div class=\"verified-equation\" role=\"math\">User u: d_m^(u) × code c^(u)[n] → chip pulse → h^(u)(t)</div>"
+            },
+            {
+              "latex": "r(t)=∑_{u=1}^{U} (s_u*h_u)(t)+n(t)",
+              "html": "<div class=\"verified-equation\" role=\"math\">r(t)=∑_{u=1}^{U} (s_u*h_u)(t)+n(t)</div>"
+            },
+            {
+              "latex": "RX: matched filter/sample → code correlator → symbol decision",
+              "html": "<div class=\"verified-equation\" role=\"math\">RX: matched filter/sample → code correlator → symbol decision</div>"
+            }
+          ],
+          "reason": "CDMA မှာ user တစ်ယောက်ချင်း code မတူရင် same frequency/time သုံးနိုင်တယ်။ Receiver က သက်ဆိုင်ရာ code နဲ့ correlate လုပ်ပြီး user ကိုခွဲယူတယ်။",
+          "method": "Each user data symbol ကို spreading code chips ဖြင့် multiply လုပ်ပါ။ Pulse-shaped chip stream ကို individual physical channel ဖြတ်ပါ။ Receiving antenna ပေါ်မှာ user signals အားလုံးပေါင်းပြီး AWGN ပါလာမယ်။ Matched-filter, sampler, code correlator ဖြင့် target user ရယူပါ။",
+          "finalAnswer": "A summed multiuser channel followed by user-specific despreading.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "d",
+          "title": "Spreading two BPSK symbols",
+          "question": "For d=[+1,−1], c=[1,−1,−1,1,1,1,−1], list all 14 chips.",
+          "equations": [
+            "d₀c=[1,−1,−1,1,1,1,−1]",
+            "d₁c=[−1,1,1,−1,−1,−1,1]",
+            "Transmitted chips=[1,−1,−1,1,1,1,−1,−1,1,1,−1,−1,−1,1]"
+          ],
+          "display": [
+            {
+              "latex": "d₀c=[1,−1,−1,1,1,1,−1]",
+              "html": "<div class=\"verified-equation\" role=\"math\">d₀c=[1,−1,−1,1,1,1,−1]</div>"
+            },
+            {
+              "latex": "d₁c=[−1,1,1,−1,−1,−1,1]",
+              "html": "<div class=\"verified-equation\" role=\"math\">d₁c=[−1,1,1,−1,−1,−1,1]</div>"
+            },
+            {
+              "latex": "Transmitted chips=[1,−1,−1,1,1,1,−1,−1,1,1,−1,−1,−1,1]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Transmitted chips=[1,−1,−1,1,1,1,−1,−1,1,1,−1,−1,−1,1]</div>"
+            }
+          ],
+          "reason": "Data +1 ဆို code အတိုင်း၊ data −1 ဆို code sign အကုန်ပြောင်းပို့ရတယ်။ Chip 7×2=14 လုံးဖြစ်တယ်။",
+          "method": "1st symbol 1×c က code unchanged။ 2nd symbol −1×c က sign-inverted code။ Time order နဲ့ concatenate လုပ်ပါ။ All 14 chips independently generated and checked.",
+          "finalAnswer": "14-chip spread sequence displayed.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "e",
+          "title": "Flat-fading received samples",
+          "question": "For flat h^(u)[0] and delayed chips zero, derive user-u and total received streams.",
+          "equations": [
+            "s_u[n]=∑_m d_m^(u)c_u[n−mL]",
+            "r_u[n]=h₀^(u) s_u[n]",
+            "r[n]=∑_u h₀^(u) s_u[n]+w[n]"
+          ],
+          "display": [
+            {
+              "latex": "s_u[n]=∑_m d_m^(u)c_u[n−mL]",
+              "html": "<div class=\"verified-equation\" role=\"math\">s_u[n]=∑_m d_m^(u)c_u[n−mL]</div>"
+            },
+            {
+              "latex": "r_u[n]=h₀^(u) s_u[n]",
+              "html": "<div class=\"verified-equation\" role=\"math\">r_u[n]=h₀^(u) s_u[n]</div>"
+            },
+            {
+              "latex": "r[n]=∑_u h₀^(u) s_u[n]+w[n]",
+              "html": "<div class=\"verified-equation\" role=\"math\">r[n]=∑_u h₀^(u) s_u[n]+w[n]</div>"
+            }
+          ],
+          "reason": "Frequency-flat ဆိုရင် delay tap တစ်ခုသာရှိလို့ convolution sum မလိုဘဲ h0 တစ်ခုနဲ့ multiply ပဲလုပ်ရတယ်။",
+          "method": "Discrete channel convolution r_u[n]=Σ_{ℓ=0}^{D}h_ℓ^(u)s_u[n−ℓ] ကိုယူပါ။ h_ℓ=0 for ℓ≥1 ဆိုရင် r_u[n]=h0^u s_u[n]။ All active users signals + AWGN ကို receiver တွင် sum လုပ်ပါ။",
+          "finalAnswer": "Each user has scalar flat fading gain h₀^(u); receiver observes their sum plus noise.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "f",
+          "title": "Correlation receiver output",
+          "question": "Assuming user spreading sequences orthogonal and channel flat, derive despread d̃_m^(u).",
+          "equations": [
+            "d̃_m^(u)=(1/L)∑_{n=0}^{L−1}r[mL+n]c_u*[n]",
+            "=h₀^(u)d_m^(u)+(1/L)∑_n w[mL+n]c_u*[n]",
+            "Cross-user terms vanish when ∑c_v c_u*=0 for v≠u"
+          ],
+          "display": [
+            {
+              "latex": "d̃_m^(u)=(1/L)∑_{n=0}^{L−1}r[mL+n]c_u*[n]",
+              "html": "<div class=\"verified-equation\" role=\"math\">d̃_m^(u)=(1/L)∑_{n=0}^{L−1}r[mL+n]c_u*[n]</div>"
+            },
+            {
+              "latex": "=h₀^(u)d_m^(u)+(1/L)∑_n w[mL+n]c_u*[n]",
+              "html": "<div class=\"verified-equation\" role=\"math\">=h₀^(u)d_m^(u)+(1/L)∑_n w[mL+n]c_u*[n]</div>"
+            },
+            {
+              "latex": "Cross-user terms vanish when ∑c_v c_u*=0 for v≠u",
+              "html": "<div class=\"verified-equation\" role=\"math\">Cross-user terms vanish when ∑c_v c_u*=0 for v≠u</div>"
+            }
+          ],
+          "reason": "User code ကိုပြန်မြှောက်ပြီး chips အားလုံးပေါင်းရင် ကိုယ့် symbol က L ဆရပြီး အခြား user orthogonal ဆို 0 ဖြစ်သွားတယ်။ 1/L နဲ့ normalize လုပ်ရတယ်။",
+          "method": "r into despreader equation ထည့်ပါ။ Desired user's inner product c_u with itself is L for ±1 chips။ Other users' inner products vanish by orthogonality assumption။ Noise correlation term remains။",
+          "finalAnswer": "Desired symbol scaled by channel h₀; MAI ideally zero.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
+        },
+        {
+          "label": "g",
+          "title": "RAKE finger with ideal code autocorrelation",
+          "question": "Assume single user and L-tap delay channel. Derive f-th matched chip-delayed correlator.",
+          "equations": [
+            "r[n]=∑_{ℓ=0}^{D}h_ℓ s[n−ℓ]+w[n]",
+            "z_f[m]=(1/L)∑_{n=0}^{L−1}r[mL+n+f]c*[n]",
+            "Ideal code autocorr → z_f[m]≈h_f d_m+n_f[m]",
+            "Max-ratio combiner: z[m]=∑_f h_f* z_f[m]"
+          ],
+          "display": [
+            {
+              "latex": "r[n]=∑_{ℓ=0}^{D}h_ℓ s[n−ℓ]+w[n]",
+              "html": "<div class=\"verified-equation\" role=\"math\">r[n]=∑_{ℓ=0}^{D}h_ℓ s[n−ℓ]+w[n]</div>"
+            },
+            {
+              "latex": "z_f[m]=(1/L)∑_{n=0}^{L−1}r[mL+n+f]c*[n]",
+              "html": "<div class=\"verified-equation\" role=\"math\">z_f[m]=(1/L)∑_{n=0}^{L−1}r[mL+n+f]c*[n]</div>"
+            },
+            {
+              "latex": "Ideal code autocorr → z_f[m]≈h_f d_m+n_f[m]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Ideal code autocorr → z_f[m]≈h_f d_m+n_f[m]</div>"
+            },
+            {
+              "latex": "Max-ratio combiner: z[m]=∑_f h_f* z_f[m]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Max-ratio combiner: z[m]=∑_f h_f* z_f[m]</div>"
+            }
+          ],
+          "reason": "Rake receiver က multipath tap တစ်ခုချင်းကို သီးသန့် correlate လုပ်ပြီး phase ပြန်ညှိပေါင်းတယ်။ Ideal code autocorrelation assumption မှာ interference လျော့ပြီး path energy တွေပေါင်းနိုင်တယ်။",
+          "method": "Finger f delay ကို channel h_f အတွက် align လုပ်ပါ။ Correlate with spreading code; nonmatching delays cancel by ideal autocorrelation။ Finger output ≈ h_f d_m + noise။ Conjugate h_f ဖြင့် weighted MRC sum လုပ်ပါ။ Practical nonideal sidelobes ကို approximation သာဖြစ်ကြောင်း သတိထားပါ။",
+          "finalAnswer": "RAKE finger f ≈ h_f d_m + noise; combined sum ∑_f h_f* z_f.",
+          "verification": "Independently re-derived from exact 2026/27 tutorial question; arithmetic and definitions cross-checked"
         }
       ]
     }
