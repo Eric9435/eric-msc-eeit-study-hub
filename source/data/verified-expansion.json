@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-independent-derivations-8",
+  "revision": "2026-11-06-independent-derivations-9",
   "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
   "overrides": [
     {
@@ -3455,6 +3455,286 @@
           "method": "Use VCO/NCO with continuous phase accumulator. Update frequency control at symbol boundaries but leave phase integrator accumulating. In frequency-hopped JANUS, hop changes also preserve oscillator phase if supported. Digital DDS/NCO naturally accumulates phase modulo 2π.",
           "finalAnswer": "Continuous-phase FSK via phase-accumulating oscillator without phase resets.",
           "verification": "Independently re-derived from exact exercise's 9440–13600Hz, 13 pairs, frequency pulse and symbol timing"
+        }
+      ]
+    },
+    {
+      "id": "dc-2.7",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "All nine original 2.7 subtasks. Assumes standard OQPSK I/Q alternating symbols every 2Ts and Q delayed by Ts; equivalent to MSK after differential precoding.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Equivalent baseband OQPSK",
+          "question": "Write the signal formed from alternating ±1 symbols and I/Q cosine pulses.",
+          "equations": [
+            "g(t)=cos(πt/(2T_S)) if |t|≤T_S else 0",
+            "s_I(t)=Σ_k d_{2k}g(t−2kT_S)",
+            "s_Q(t)=Σ_k d_{2k+1}g(t−(2k+1)T_S)",
+            "s_BB(t)=s_I(t)+j s_Q(t)"
+          ],
+          "display": [
+            {
+              "latex": "g(t)=cos(πt/(2T_S)) if |t|≤T_S else 0",
+              "html": "<div class=\"verified-equation\" role=\"math\">g(t)=cos(πt/(2T_S)) if |t|≤T_S else 0</div>"
+            },
+            {
+              "latex": "s_I(t)=Σ_k d_{2k}g(t−2kT_S)",
+              "html": "<div class=\"verified-equation\" role=\"math\">s_I(t)=Σ_k d_{2k}g(t−2kT_S)</div>"
+            },
+            {
+              "latex": "s_Q(t)=Σ_k d_{2k+1}g(t−(2k+1)T_S)",
+              "html": "<div class=\"verified-equation\" role=\"math\">s_Q(t)=Σ_k d_{2k+1}g(t−(2k+1)T_S)</div>"
+            },
+            {
+              "latex": "s_BB(t)=s_I(t)+j s_Q(t)",
+              "html": "<div class=\"verified-equation\" role=\"math\">s_BB(t)=s_I(t)+j s_Q(t)</div>"
+            }
+          ],
+          "reason": "I branch even symbols, Q branch odd symbols ကို Ts offset နဲ့ပို့တာကြောင့် simultaneous I/Q bit flips မရှိဘူး။",
+          "method": "Each I/Q branch has pulses spaced 2Ts; Q relative to I delayed Ts. Sum pulse contributions in complex equivalent baseband.",
+          "finalAnswer": "sBB=sI+j sQ with offset symbol timings.",
+          "verification": "Independent derivation of original OQPSK/MSK with pulse q, h=1/2 and exact given 10-symbol sequence"
+        },
+        {
+          "label": "b",
+          "title": "Prove constant envelope",
+          "question": "Show |sBB(t)| is constant for the half-cosine pulse.",
+          "equations": [
+            "At overlap u∈[0,T_S], |s_I|=cos(πu/(2T_S))",
+            "|s_Q|=sin(πu/(2T_S))",
+            "|s_BB|²=s_I²+s_Q²=cos²θ+sin²θ=1"
+          ],
+          "display": [
+            {
+              "latex": "At overlap u∈[0,T_S], |s_I|=cos(πu/(2T_S))",
+              "html": "<div class=\"verified-equation\" role=\"math\">At overlap u∈[0,T_S], |s_I|=cos(πu/(2T_S))</div>"
+            },
+            {
+              "latex": "|s_Q|=sin(πu/(2T_S))",
+              "html": "<div class=\"verified-equation\" role=\"math\">|s_Q|=sin(πu/(2T_S))</div>"
+            },
+            {
+              "latex": "|s_BB|²=s_I²+s_Q²=cos²θ+sin²θ=1",
+              "html": "<div class=\"verified-equation\" role=\"math\">|s_BB|²=s_I²+s_Q²=cos²θ+sin²θ=1</div>"
+            }
+          ],
+          "reason": "Shifted cosine pair က cos/sin ဖြစ်ပြီး ±1 data sign square ယူလိုက်ရင် 1 ဖြစ်တယ်။",
+          "method": "During each overlap only one nonzero pulse per branch; use cos(θ−π/2)=sinθ, then Pythagorean identity.",
+          "finalAnswer": "Constant |sBB|=1.",
+          "verification": "Independent derivation of original OQPSK/MSK with pulse q, h=1/2 and exact given 10-symbol sequence"
+        },
+        {
+          "label": "c",
+          "title": "MSK phase-pulse sketch",
+          "question": "Sketch given piecewise phase pulse.",
+          "equations": [
+            "q(t)=0 for t<0",
+            "q(t)=t/T_S for 0≤t≤T_S",
+            "q(t)=1 for t>T_S",
+            "Mark (0,0),(T_S/2,1/2),(T_S,1)"
+          ],
+          "display": [
+            {
+              "latex": "q(t)=0 for t<0",
+              "html": "<div class=\"verified-equation\" role=\"math\">q(t)=0 for t&lt;0</div>"
+            },
+            {
+              "latex": "q(t)=t/T_S for 0≤t≤T_S",
+              "html": "<div class=\"verified-equation\" role=\"math\">q(t)=t/T_S for 0≤t≤T_S</div>"
+            },
+            {
+              "latex": "q(t)=1 for t>T_S",
+              "html": "<div class=\"verified-equation\" role=\"math\">q(t)=1 for t&gt;T_S</div>"
+            },
+            {
+              "latex": "Mark (0,0),(T_S/2,1/2),(T_S,1)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Mark (0,0),(T_S/2,1/2),(T_S,1)</div>"
+            }
+          ],
+          "reason": "Symbol တစ်ခုအတွင်း phase contribution က 0 ကနေ1 linear တိုးတယ်။",
+          "method": "Plot q against t, rise linearly over Ts then remain constant.",
+          "finalAnswer": "Piecewise 0 / linear ramp / 1.",
+          "verification": "Independent derivation of original OQPSK/MSK with pulse q, h=1/2 and exact given 10-symbol sequence"
+        },
+        {
+          "label": "d",
+          "title": "MSK frequency pulse",
+          "question": "Differentiate q(t) to get g(t).",
+          "equations": [
+            "g(t)=dq(t)/dt",
+            "g(t)=1/T_S for 0<t<T_S; 0 otherwise",
+            "∫g(t)dt=1"
+          ],
+          "display": [
+            {
+              "latex": "g(t)=dq(t)/dt",
+              "html": "<div class=\"verified-equation\" role=\"math\">g(t)=dq(t)/dt</div>"
+            },
+            {
+              "latex": "g(t)=1/T_S for 0<t<T_S; 0 otherwise",
+              "html": "<div class=\"verified-equation\" role=\"math\">g(t)=1/T_S for 0&lt;t&lt;T_S; 0 otherwise</div>"
+            },
+            {
+              "latex": "∫g(t)dt=1",
+              "html": "<div class=\"verified-equation\" role=\"math\">∫g(t)dt=1</div>"
+            }
+          ],
+          "reason": "Linear phase ramp ရဲ့ derivative က rectangular pulse ဖြစ်တယ်။",
+          "method": "Differentiate each piece; q continuous at endpoints, hence no delta impulses.",
+          "finalAnswer": "Full-response rectangular g(t).",
+          "verification": "Independent derivation of original OQPSK/MSK with pulse q, h=1/2 and exact given 10-symbol sequence"
+        },
+        {
+          "label": "e",
+          "title": "MSK general phase",
+          "question": "Find φ(t) on kTs≤t<(k+1)Ts.",
+          "equations": [
+            "φ(t)=πh Σ_n d_n q(t−nT_S)",
+            "φ_k(t)=πh[Σ_{n<k}d_n + d_k(t−kT_S)/T_S]",
+            "For h=1/2: dφ/dt=d_kπ/(2T_S)"
+          ],
+          "display": [
+            {
+              "latex": "φ(t)=πh Σ_n d_n q(t−nT_S)",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ(t)=πh Σ_n d_n q(t−nT_S)</div>"
+            },
+            {
+              "latex": "φ_k(t)=πh[Σ_{n<k}d_n + d_k(t−kT_S)/T_S]",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ_k(t)=πh[Σ_{n&lt;k}d_n + d_k(t−kT_S)/T_S]</div>"
+            },
+            {
+              "latex": "For h=1/2: dφ/dt=d_kπ/(2T_S)",
+              "html": "<div class=\"verified-equation\" role=\"math\">For h=1/2: dφ/dt=d_kπ/(2T_S)</div>"
+            }
+          ],
+          "reason": "Past symbols က phase increments စုပြီး current symbol က linear slope ±π/(2Ts) ပေးတယ်။",
+          "method": "Separate old n<k, present n=k, future n>k pulse contributions. Use q=1, linear,0 respectively.",
+          "finalAnswer": "φ_k(t) given by cumulative past symbols plus current linear portion.",
+          "verification": "Independent derivation of original OQPSK/MSK with pulse q, h=1/2 and exact given 10-symbol sequence"
+        },
+        {
+          "label": "f",
+          "title": "Ten-symbol phase tree",
+          "question": "Evaluate boundaries for +1,−1,+1,+1,−1,+1,−1,−1,−1,+1.",
+          "equations": [
+            "d=[+1,−1,+1,+1,−1,+1,−1,−1,−1,+1]",
+            "Cumulative S=[0,1,0,1,2,1,2,1,0,−1,0]",
+            "φ(kT_S)=(π/2)S_k",
+            "Boundary phases=[0,π/2,0,π/2,π,π/2,π,π/2,0,−π/2,0]"
+          ],
+          "display": [
+            {
+              "latex": "d=[+1,−1,+1,+1,−1,+1,−1,−1,−1,+1]",
+              "html": "<div class=\"verified-equation\" role=\"math\">d=[+1,−1,+1,+1,−1,+1,−1,−1,−1,+1]</div>"
+            },
+            {
+              "latex": "Cumulative S=[0,1,0,1,2,1,2,1,0,−1,0]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Cumulative S=[0,1,0,1,2,1,2,1,0,−1,0]</div>"
+            },
+            {
+              "latex": "φ(kT_S)=(π/2)S_k",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ(kT_S)=(π/2)S_k</div>"
+            },
+            {
+              "latex": "Boundary phases=[0,π/2,0,π/2,π,π/2,π,π/2,0,−π/2,0]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Boundary phases=[0,π/2,0,π/2,π,π/2,π,π/2,0,−π/2,0]</div>"
+            }
+          ],
+          "reason": "Symbol တစ်ခုစီမှာ ±π/2 ထည့်/နှုတ်တာဖြစ်လို့ cumulative sum အတိုင်း graph ကိုဆွဲရတယ်။",
+          "method": "Start 0, add d_k and multiply by πh=π/2. Join consecutive phase values using straight slopes.",
+          "finalAnswer": "Phase returns to 0 after 10 symbols.",
+          "verification": "Independent derivation of original OQPSK/MSK with pulse q, h=1/2 and exact given 10-symbol sequence"
+        },
+        {
+          "label": "g",
+          "title": "MSK complex baseband",
+          "question": "Derive real and quadrature components.",
+          "equations": [
+            "s_BB(t)=exp(jφ(t))",
+            "s_I(t)=cosφ(t); s_Q(t)=sinφ(t)",
+            "|s_BB(t)|²=cos²φ+sin²φ=1"
+          ],
+          "display": [
+            {
+              "latex": "s_BB(t)=exp(jφ(t))",
+              "html": "<div class=\"verified-equation\" role=\"math\">s_BB(t)=exp(jφ(t))</div>"
+            },
+            {
+              "latex": "s_I(t)=cosφ(t); s_Q(t)=sinφ(t)",
+              "html": "<div class=\"verified-equation\" role=\"math\">s_I(t)=cosφ(t); s_Q(t)=sinφ(t)</div>"
+            },
+            {
+              "latex": "|s_BB(t)|²=cos²φ+sin²φ=1",
+              "html": "<div class=\"verified-equation\" role=\"math\">|s_BB(t)|²=cos²φ+sin²φ=1</div>"
+            }
+          ],
+          "reason": "MSK constant amplitude ကို complex exponential နဲ့ရေးလို့ I/Q က cos/sin ဖြစ်တယ်။",
+          "method": "Use Euler identity e^(jφ)=cosφ+j sinφ; A≠1 would scale components by A.",
+          "finalAnswer": "I=cosφ and Q=sinφ.",
+          "verification": "Independent derivation of original OQPSK/MSK with pulse q, h=1/2 and exact given 10-symbol sequence"
+        },
+        {
+          "label": "h",
+          "title": "Plot I/Q through all 10 symbols",
+          "question": "Calculate I and Q boundary values from phase in part f.",
+          "equations": [
+            "I(kT_S)=[1,0,1,0,−1,0,−1,0,1,0,1]",
+            "Q(kT_S)=[0,1,0,1,0,1,0,1,0,−1,0]",
+            "For kTs≤t<(k+1)Ts plot cosφ_k(t),sinφ_k(t)"
+          ],
+          "display": [
+            {
+              "latex": "I(kT_S)=[1,0,1,0,−1,0,−1,0,1,0,1]",
+              "html": "<div class=\"verified-equation\" role=\"math\">I(kT_S)=[1,0,1,0,−1,0,−1,0,1,0,1]</div>"
+            },
+            {
+              "latex": "Q(kT_S)=[0,1,0,1,0,1,0,1,0,−1,0]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Q(kT_S)=[0,1,0,1,0,1,0,1,0,−1,0]</div>"
+            },
+            {
+              "latex": "For kTs≤t<(k+1)Ts plot cosφ_k(t),sinφ_k(t)",
+              "html": "<div class=\"verified-equation\" role=\"math\">For kTs≤t&lt;(k+1)Ts plot cosφ_k(t),sinφ_k(t)</div>"
+            }
+          ],
+          "reason": "Phase ကဆက်တိုက်ပြောင်းတဲ့အတွက် I/Q graph လည်း smooth ဖြစ်ပြီး boundaries မှာ jump မရှိဘူး။",
+          "method": "Use phase boundary list and cos/sin values; interpolate per-interval using phase formula, not straight lines between amplitude samples.",
+          "finalAnswer": "I,Q values listed; waveform continuous.",
+          "verification": "Independent derivation of original OQPSK/MSK with pulse q, h=1/2 and exact given 10-symbol sequence"
+        },
+        {
+          "label": "i",
+          "title": "MSK and half-sinusoidal OQPSK equivalence",
+          "question": "Explain why half-sinusoidal pulse shaping matches MSK after precoding.",
+          "equations": [
+            "MSK h=1/2 → Δφ per symbol=±π/2",
+            "OQPSK overlapping pulses give ±cosθ+j(±sinθ)",
+            "Each has |sBB|=1 and quarter-cycle phase arcs",
+            "With differential precoding/rotation, the waveforms coincide"
+          ],
+          "display": [
+            {
+              "latex": "MSK h=1/2 → Δφ per symbol=±π/2",
+              "html": "<div class=\"verified-equation\" role=\"math\">MSK h=1/2 → Δφ per symbol=±π/2</div>"
+            },
+            {
+              "latex": "OQPSK overlapping pulses give ±cosθ+j(±sinθ)",
+              "html": "<div class=\"verified-equation\" role=\"math\">OQPSK overlapping pulses give ±cosθ+j(±sinθ)</div>"
+            },
+            {
+              "latex": "Each has |sBB|=1 and quarter-cycle phase arcs",
+              "html": "<div class=\"verified-equation\" role=\"math\">Each has |sBB|=1 and quarter-cycle phase arcs</div>"
+            },
+            {
+              "latex": "With differential precoding/rotation, the waveforms coincide",
+              "html": "<div class=\"verified-equation\" role=\"math\">With differential precoding/rotation, the waveforms coincide</div>"
+            }
+          ],
+          "reason": "OQPSK cosine-sine pair က complex plane ပေါ် quarter-circle ရွေ့တာ၊ MSK က ±π/2 continuous phase ရွေ့တာဖြစ်လို့ precoding နဲ့ phase reference တူအောင်လုပ်နိုင်တယ်။",
+          "method": "Write overlap as exp(jθ) up to sign/quadrant rotations. Differential precoding maps data transitions to MSK phase increments; a fixed phase rotation aligns conventions.",
+          "finalAnswer": "Equivalent after correct differential precoding and phase rotation.",
+          "verification": "Independent derivation of original OQPSK/MSK with pulse q, h=1/2 and exact given 10-symbol sequence"
         }
       ]
     }
