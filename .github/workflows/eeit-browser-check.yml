@@ -15,7 +15,7 @@ jobs:
       - name: Install browser test tools
         run: |
           npm install --no-save playwright@1.56.1
-          npx playwright install --with-deps chromium
+          npx playwright install chromium
       - name: Check desktop and mobile interactions
         run: node tools/browser_check.cjs
         env:
