@@ -90,3 +90,14 @@ Across the original 82 study-exercise entries, **69** now have guided worked par
 ## A4 continuous white-paper edition (6 November 2026)
 
 Exercise worked pages are now centered white A4 documents on gray workspaces, including dark-theme sessions. The **Overall Solution** heading contains every available subquestion in order with its source question, method, displayed derivation, Myanmar reasoning, and final result. It is not a short recap. No popup explanation buttons appear. Missing derivations and official givens are explicitly flagged. Printing uses A4 pagination across long worked solutions; mobile uses a full-width white reading canvas. Changes are in `source/app.js`, `source/a4-paper.css`, and the PWA cache. Progress, bookmarks, notes and cloud account paths are unchanged.
+
+## Exam preparation and source provenance — 6 November 2026
+
+The website currently contains five subjects, 82 exercise entries and 69 formula references. The four-layer exercise bank uses `source/data/content.json`, `verified-expansion.json`, `original-practice-reworked.json`, and `source-backed-derivations.json`. The current merged release contains 280 documented subquestions, but 12 source-only entries still have no complete worked solutions. The presence of a method and final answer **does not certify correctness** or completeness of the official examination syllabus.
+
+- Original user/workspace practice: 21 exercise sets, 63 subquestions reformatted and re-derived as Given → Governing Formula → Substitution → Independent Check.
+- Source-referenced reconstructions: 21 Digital Communications 1.1 parts, 10 Digital Communications 1.3 parts, and 3 Microwave 2.5 matching-network subparts under an explicit series-capacitor assumption (34 subparts).
+- Independent practice is not mislabeled as official TUHH problem sheets. Original instructor solutions are used only as private references and are not reproduced as public PDF or scans.
+- Private Original Documents viewer: use the Source tab to attach your own legally obtained course question and sample-solution PDF per subject. Original PDFs are stored in this browser's IndexedDB only. No PDF file is uploaded to Render, GitHub or Firebase. This storage is separate from synced Google-account study progress.
+- Exam preparation audit on Dashboard distinguishes documented working from source-only entries and explicitly says that exam readiness has not been certified. Review numerical values and unit conventions against official materials before examinations.
+- Numerical regression test: `node tools/engineering_regression.cjs`. Structural/build test: `node tools/smoke_public.cjs`. Live HTTP test: `node tools/live_check.mjs`.
