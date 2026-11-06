@@ -316,8 +316,12 @@ async function start(){
   }
   for(const item of sourceDerived.overrides){
    const reference=original.exercises.find(e=>e.id===item.id);
-   if(!reference||!Array.isArray(item.parts)||item.parts.length!==reference.parts.length)throw Error('Original source-backed working does not match source parts: '+item.id);
-   if(!item.parts.every((p,i)=>p.label===reference.parts[i].label))throw Error('Original source-backed working changed subpart IDs: '+item.id);
+   if(!reference||!Array.isArray(item.parts)||!item.parts.length)throw Error('Original source-backed working references missing exercise or parts: '+item.id);
+   const labels=item.parts.map(p=>String(p?.label||''));
+   if(labels.some(label=>!label)||new Set(labels).size!==labels.length)throw Error('Original source-backed working has duplicate or empty labels: '+item.id);
+   if(reference.parts.length){
+    if(item.parts.length!==reference.parts.length || !item.parts.every((p,i)=>p.label===reference.parts[i].label))throw Error('Original source-backed working changed existing subpart identifiers: '+item.id);
+   }
   }
   original.exercises=original.exercises.map(e=>{
     const item=originals.get(e.id)||sourceMap.get(e.id)||verified.get(e.id);
