@@ -112,3 +112,9 @@ The website currently contains five subjects, 82 exercise entries and 69 formula
 - Browser-local PDFs do not synchronize across devices and can disappear when browser/site data are cleared. A storage backup of the PDF files themselves is not included in the JSON study-progress export.
 - Source solution entries and your independently calculated A4 paper solutions are separately labelled. The 280 guided subquestions remain distinct from raw official PDF sample solutions. A complete mathematical audit of all official problems has not been certified.
 
+
+### One ZIP archive import (2026-11-06)
+
+The **PDF Document Library** now accepts a single `.zip` containing subject folders/PDF files (in addition to selecting multiple PDFs). For each ZIP member, it uses its full normalized source path first, and a unique filename fallback. It reads and validates ZIP directory records, extracts supported stored/deflated PDFs in the browser, checks the `%PDF-` header, and writes matched files to the user's device-local IndexedDB. It skips non-matching/ambiguous names and enforces per-file and total extraction caps. It does **not** upload PDFs to the repository, Render, or Firebase. No file from ChatGPT Library has been silently copied or attached: the connector permits text/metadata access but not raw-byte materialization for the selected Project files. A browser-selected ZIP/PDF is still necessary to import original bytes.
+
+Run `node tools/zip_import_check.cjs` for synthetic archive regression tests; no course material is included in the test fixture.
