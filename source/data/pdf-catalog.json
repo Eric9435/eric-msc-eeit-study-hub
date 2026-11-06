@@ -1,6 +1,6 @@
 {
-  "version": "2026-11-06.1",
-  "description": "Metadata only: catalog of named Library PDFs and archived 81-source inventory. PDF bytes cannot be copied automatically from ChatGPT Library; each document is attached privately in the user browser to view it.",
+  "version": "2026-11-06.2",
+  "description": "Metadata only: catalog of named Library PDFs and archived 81-source inventory. PDF bytes cannot be copied automatically from ChatGPT Library; each document is attached privately in the user browser to view it. Specific exercise-to-page suggestions are included for curated compiled PDF documents where their navigator pages have been confirmed.",
   "statusMeaning": {
     "recordType": "Library filename verified in user-associated Files vs. filename only from archived source audit",
     "attachment": "not attached until the user selects the PDF file in their own browser"
@@ -23,7 +23,81 @@
       "kind": "questions-solutions",
       "provenance": "Named ChatGPT Library PDF",
       "note": "18 indexed entries; includes original question and official sample-solution pages. Two titles only in source, not invented.",
-      "recordType": "library-file-identified"
+      "recordType": "library-file-identified",
+      "exercisePages": {
+        "dc-1.1": {
+          "question": 3,
+          "solution": 5
+        },
+        "source-dc-1-2": {
+          "question": 15,
+          "solution": 16
+        },
+        "dc-1.3": {
+          "question": 17,
+          "solution": 19
+        },
+        "source-dc-1-4": {
+          "question": 27,
+          "solution": 28
+        },
+        "dc-2.1": {
+          "question": 29,
+          "solution": 32
+        },
+        "dc-2.2": {
+          "question": 41,
+          "solution": 44
+        },
+        "dc-2.3": {
+          "question": 61,
+          "solution": 64
+        },
+        "source-dc-2-4": {
+          "question": 69,
+          "solution": 70
+        },
+        "dc-2.5": {
+          "question": 71,
+          "solution": 74
+        },
+        "dc-2.6": {
+          "question": 78,
+          "solution": 81
+        },
+        "dc-2.7": {
+          "question": 86,
+          "solution": 88
+        },
+        "dc-3.1": {
+          "question": 94,
+          "solution": 96
+        },
+        "dc-3.2": {
+          "question": 102,
+          "solution": 104
+        },
+        "dc-3.3": {
+          "question": 110,
+          "solution": 113
+        },
+        "dc-4.1": {
+          "question": 119,
+          "solution": 121
+        },
+        "dc-4.2": {
+          "question": 128,
+          "solution": 130
+        },
+        "dc-4.3": {
+          "question": 132,
+          "solution": 134
+        },
+        "dc-5.1": {
+          "question": 137,
+          "solution": 140
+        }
+      }
     },
     {
       "id": "lib002",
@@ -83,7 +157,45 @@
       "kind": "lecture-example",
       "provenance": "Named ChatGPT Library PDF",
       "note": "Lecture worked-example extraction; NOT a dedicated official 2026/27 exercise sheet.",
-      "recordType": "library-file-identified"
+      "recordType": "library-file-identified",
+      "exercisePages": {
+        "source-eps-ex-04": {
+          "question": 3,
+          "solution": null
+        },
+        "source-eps-ex-05": {
+          "question": 5,
+          "solution": null
+        },
+        "source-eps-ex-06": {
+          "question": 10,
+          "solution": null
+        },
+        "source-eps-ex-07": {
+          "question": 17,
+          "solution": null
+        },
+        "source-eps-ex-08": {
+          "question": 22,
+          "solution": null
+        },
+        "source-eps-ex-09": {
+          "question": 24,
+          "solution": null
+        },
+        "source-eps-ex-10": {
+          "question": 30,
+          "solution": null
+        },
+        "source-eps-ex-11": {
+          "question": 34,
+          "solution": null
+        },
+        "source-eps-ex-12": {
+          "question": 40,
+          "solution": null
+        }
+      }
     },
     {
       "id": "lib007",
@@ -95,7 +207,33 @@
       "kind": "questions-solutions",
       "provenance": "Named ChatGPT Library PDF",
       "note": "TUHH control exercises I.1–I.6 and official sample solutions.",
-      "recordType": "library-file-identified"
+      "recordType": "library-file-identified",
+      "exercisePages": {
+        "official-cstd-I1": {
+          "question": 2,
+          "solution": 4
+        },
+        "official-cstd-I2": {
+          "question": 2,
+          "solution": 5
+        },
+        "official-cstd-I3": {
+          "question": 3,
+          "solution": 6
+        },
+        "official-cstd-I4": {
+          "question": 7,
+          "solution": 9
+        },
+        "official-cstd-I5": {
+          "question": 7,
+          "solution": 10
+        },
+        "official-cstd-I6": {
+          "question": 8,
+          "solution": 11
+        }
+      }
     },
     {
       "id": "lib008",
@@ -131,7 +269,41 @@
       "kind": "question",
       "provenance": "Named ChatGPT Library PDF",
       "note": "Microwave exercise questions 1–5.",
-      "recordType": "library-file-identified"
+      "recordType": "library-file-identified",
+      "exercisePages": {
+        "official-mw-1-1": {
+          "question": 1,
+          "solution": null
+        },
+        "official-mw-1-2": {
+          "question": 3,
+          "solution": null
+        },
+        "official-mw-1-3": {
+          "question": 4,
+          "solution": null
+        },
+        "official-mw-2-1": {
+          "question": 5,
+          "solution": null
+        },
+        "official-mw-2-2": {
+          "question": 5,
+          "solution": null
+        },
+        "official-mw-2-3": {
+          "question": 6,
+          "solution": null
+        },
+        "official-mw-2-4": {
+          "question": 7,
+          "solution": null
+        },
+        "official-mw-2-5": {
+          "question": 7,
+          "solution": null
+        }
+      }
     },
     {
       "id": "lib011",
@@ -143,7 +315,41 @@
       "kind": "solution",
       "provenance": "Named ChatGPT Library PDF",
       "note": "Worked microwave exercise answers; source PDF may also contain additional later exercise text in its table of contents.",
-      "recordType": "library-file-identified"
+      "recordType": "library-file-identified",
+      "exercisePages": {
+        "official-mw-1-1": {
+          "question": 3,
+          "solution": null
+        },
+        "official-mw-1-2": {
+          "question": 5,
+          "solution": null
+        },
+        "official-mw-1-3": {
+          "question": 6,
+          "solution": null
+        },
+        "official-mw-2-1": {
+          "question": 9,
+          "solution": null
+        },
+        "official-mw-2-2": {
+          "question": 9,
+          "solution": null
+        },
+        "official-mw-2-3": {
+          "question": 10,
+          "solution": null
+        },
+        "official-mw-2-4": {
+          "question": 12,
+          "solution": null
+        },
+        "official-mw-2-5": {
+          "question": 18,
+          "solution": null
+        }
+      }
     },
     {
       "id": "lib012",
