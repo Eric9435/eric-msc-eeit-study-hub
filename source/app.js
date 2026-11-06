@@ -272,13 +272,14 @@ document.addEventListener('keydown',event=>{
 });
 async function start(){
  try{
-  const [r,extra,practice]=await Promise.all([fetch('data/content.json'),fetch('data/verified-expansion.json'),fetch('data/original-practice-reworked.json')]);
-  if(!r.ok||!extra.ok||!practice.ok)throw Error('Unable to load all study exercise data');
-  const [original,extension,reworked]=await Promise.all([r.json(),extra.json(),practice.json()]);
-  if(!Array.isArray(original.exercises)||!Array.isArray(extension.overrides)||!Array.isArray(reworked.overrides))throw Error('Invalid exercise data');
+  const [r,extra,practice,sourceWork]=await Promise.all([fetch('data/content.json'),fetch('data/verified-expansion.json'),fetch('data/original-practice-reworked.json'),fetch('data/source-backed-derivations.json')]);
+  if(!r.ok||!extra.ok||!practice.ok||!sourceWork.ok)throw Error('Unable to load all study exercise data');
+  const [original,extension,reworked,sourceDerived]=await Promise.all([r.json(),extra.json(),practice.json(),sourceWork.json()]);
+  if(!Array.isArray(original.exercises)||!Array.isArray(extension.overrides)||!Array.isArray(reworked.overrides)||!Array.isArray(sourceDerived.overrides))throw Error('Invalid exercise data');
   const verified=new Map(extension.overrides.map(e=>[e.id,e]));
   const originals=new Map(reworked.overrides.map(e=>[e.id,e]));
-  if(verified.size!==extension.overrides.length||originals.size!==reworked.overrides.length)throw Error('Duplicate override IDs');
+  const sourceMap=new Map(sourceDerived.overrides.map(e=>[e.id,e]));
+  if(verified.size!==extension.overrides.length||originals.size!==reworked.overrides.length||sourceMap.size!==sourceDerived.overrides.length)throw Error('Duplicate override IDs');
   // Independently authored tutorial expansions intentionally turn heading-only sets into worked sets.
   // Their subpart count may differ from the initial source index, but IDs and labels must be unique.
   for(const item of extension.overrides){
@@ -293,8 +294,13 @@ async function start(){
    if(!reference||!Array.isArray(item.parts)||item.parts.length!==reference.parts.length)throw Error('Original practice override does not match source parts: '+item.id);
    if(!item.parts.every((p,i)=>p.label===reference.parts[i].label))throw Error('Original practice override changed original subpart identifiers: '+item.id);
   }
+  for(const item of sourceDerived.overrides){
+   const reference=original.exercises.find(e=>e.id===item.id);
+   if(!reference||!Array.isArray(item.parts)||item.parts.length!==reference.parts.length)throw Error('Original source-backed working does not match source parts: '+item.id);
+   if(!item.parts.every((p,i)=>p.label===reference.parts[i].label))throw Error('Original source-backed working changed subpart IDs: '+item.id);
+  }
   original.exercises=original.exercises.map(e=>{
-    const item=originals.get(e.id)||verified.get(e.id);
+    const item=originals.get(e.id)||sourceMap.get(e.id)||verified.get(e.id);
     return item?{...e,...item,parts:item.parts}:e;
   });
   base=original;setRoute();
