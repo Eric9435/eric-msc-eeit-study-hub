@@ -22,6 +22,16 @@ assert(docCatalog.entries.reduce((n,e)=>n+Object.keys(e.exercisePages||{}).lengt
 
 const originalDriveDocs=docCatalog.entries.filter(d=>d.drive_id);
 assert.equal(originalDriveDocs.length,123,'Expected 123 private Drive PDF references');
+const exactExerciseIds=new Set(originalDriveDocs.flatMap(d=>Object.keys(d.exercisePages||{})));
+const relatedExerciseIds=new Set(originalDriveDocs.flatMap(d=>d.relatedExerciseIds||[]));
+assert.equal(exactExerciseIds.size,42,'Verified original exercise PDF mappings must cover 42 sets');
+assert.equal(relatedExerciseIds.size,22,'Lecture references should explicitly cover 22 sets');
+assert.equal(docCatalog.examCoverage?.sourceOnlyWithoutSolution,12,'Source-only exercises must remain flagged');
+assert.equal(docCatalog.examCoverage?.exerciseEntries,82,'Study library should match current exercise entries');
+assert(docCatalog.entries.some(d=>d.path==='Digital_Communications/Tutorial_Material/tutorials_dc.pdf' && d.exercisePages?.['dc-1.1']?.question===3),'Digital Communications exact question page missing');
+assert(docCatalog.entries.some(d=>d.path==='Microwave_Engineering/Exercise/Exercise/Exercise_sol.pdf' && d.exercisePages?.['official-mw-5-3']?.solution===39),'Microwave official solution page missing');
+assert(docCatalog.entries.some(d=>d.filename==='Exercise1_Sol_Introduction_Sheet_1.pdf' && d.exercisePages?.['official-cstd-I3']?.solution===3),'Control Systems original solution page missing');
+
 assert.equal(new Set(originalDriveDocs.map(d=>d.drive_id)).size,123,'Private Drive file links must be unique');
 assert(originalDriveDocs.every(d=>/^[A-Za-z0-9_-]{10,160}$/.test(d.drive_id)),'Invalid Drive file id');
 assert(originalDriveDocs.every(d=>d.drive_visibility==='private-owner-only'),'One Drive PDF lacks private owner-only access label');
@@ -121,6 +131,10 @@ assert(pdfModule.includes('findZipCatalogMatch'),'ZIP source path matching missi
 assert(pdfModule.includes('dataset.documentPage'),'PDF deep-page viewer links missing');
 
 assert(pdfModule.includes('dataset.documentDrive'),'Drive PDF control is not rendered');
+assert(pdfModule.includes('document-match-exact'),'Exact-source match banner missing');
+assert(pdfModule.includes('document-match-related'),'Lecture-only reference label missing');
+assert(pdfModule.includes('pdf-coverage-audit'),'Exam source coverage dashboard missing');
+assert(fullSource.includes('data-source-only'),'Source-only warning missing from exercise Source tab');
 assert(pdfModule.includes('drive.google.com/file/d/'),'Private Google Drive preview is not connected');
 assert(pdfModule.includes('Owner-restricted Google Drive'),'Drive account permissions not explained');
 assert(fullSource.includes('All 123 PDF files are stored'),'Private PDF completion text missing');
