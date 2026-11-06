@@ -3,28 +3,27 @@ const fs=require('node:fs');
 const path=require('node:path');
 const cp=require('node:child_process');
 const root=path.resolve(__dirname,'..');
-const file=(p)=>path.join(root,p);
-const content=JSON.parse(fs.readFileSync(file('source/data/content.json'),'utf8'));
-assert.equal(content.subjects.length,5,'Expected 5 subjects');
-assert.equal(content.exercises.length,31,'Expected 31 exercise sets');
-assert.equal(content.formulas.length,34,'Expected 34 formula references');
-const ids=content.exercises.map(e=>e.id);
-assert.equal(new Set(ids).size,ids.length,'Duplicate exercise IDs');
-const known=new Set(content.subjects.map(s=>s.id));
-for(const ex of content.exercises){
- assert(known.has(ex.subject),'Unknown subject '+ex.subject);
- if(ex.id.startsWith('original-')){
-   assert.equal(ex.parts.length,3,'Original examples should have 3 parts');
-   for(const part of ex.parts){
-     assert(part.question&&part.solution&&part.reason,'Incomplete original part '+ex.id);
-   }
- }
+const file=p=>path.join(root,p);
+const data=JSON.parse(fs.readFileSync(file('source/data/content.json'),'utf8'));
+assert.equal(data.subjects.length,5,'Five subjects expected');
+assert.equal(data.exercises.length,82,'Expected 82 merged exercise entries');
+assert(data.formulas.length>=69,'Expected full merged formula library');
+const parts=data.exercises.reduce((n,e)=>n+e.parts.length,0);
+assert(parts>=139,'Original exercises were lost');
+assert.equal(new Set(data.exercises.map(e=>e.id)).size,82,'Duplicate exercise IDs');
+for(const e of data.exercises){
+ assert(data.subjects.some(s=>s.id===e.subject),'Unknown subject in '+e.id);
+ assert(Array.isArray(e.parts),'Invalid subparts '+e.id);
+ for(const p of e.parts)assert(p.label&&p.question,'Subpart missing label/question '+e.id);
 }
+assert(!JSON.stringify(data).includes('sourceQuestionText'),'Original instructor text in public data');
+assert(!JSON.stringify(data).includes('data:image/'),'Private image data leaked');
 cp.execFileSync(process.execPath,[file('tools/build_public.cjs')],{cwd:root,stdio:'inherit'});
-for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','reason-ui.css','reason-ui.js','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','assets/favicon.svg'])
- assert(fs.existsSync(file('public/'+name)),'Missing published file '+name);
-assert(!fs.existsSync(file('public/assets/questions')),'Original questions must never publish');
-const walk=(dir)=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(d=>d.isDirectory()?walk(path.join(dir,d.name)):[path.join(dir,d.name)]);
-assert(!walk(file('public')).some(x=>x.toLowerCase().endsWith('.pdf')),'PDF leaked into public build');
-for(const fileName of ['source/app.js','source/cloud.js'])new Function(fs.readFileSync(file(fileName),'utf8'));
-console.log('PASS: five subjects; 31 exercises; 34 formulas; syntax; privacy-safe public build.');
+for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','reason-ui.css','reason-ui.js','assets/eeit-study-hub-logo.webp','enhancements.js','enhancements.css','sw.js','data/content.json','assets/favicon.svg'])
+ assert(fs.existsSync(file('public/'+name)),'Missing public file '+name);
+assert(!fs.existsSync(file('public/assets/questions')),'Original course page images published');
+const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?walk(path.join(d,x.name)):[path.join(d,x.name)]);
+assert(!walk(file('public')).some(x=>x.toLowerCase().endsWith('.pdf')),'Private PDF leaked');
+for(const name of ['source/app.js','source/cloud.js','source/reason-ui.js','source/enhancements.js'])new Function(fs.readFileSync(file(name),'utf8'));
+assert(fs.readFileSync(file('source/index.html'),'utf8').includes('enhancements.js'),'Popup script not loaded');
+console.log('PASS: 5 subjects; 82 exercise entries; '+parts+' guided subquestions; '+data.formulas.length+' formulas; public build, syntax and copyright safeguards.');

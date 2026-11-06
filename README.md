@@ -14,7 +14,7 @@ A five-subject, responsive, installable study workspace for M.Sc Electrical Engi
 | Microwave Engineering | 4 new original practice sets × 3 worked parts |
 | Microsystem Engineering | 4 new original practice sets × 3 worked parts |
 
-**Total:** 31 exercise sets and 34 formula references. New non-Digital problems are original learning examples, **not official tutorial exercises or professor-provided solutions**. The Digital library includes source-only entries whose independent solutions are not yet present.
+**Integrated content release:** 82 exercise entries, 139 guided subquestions and 69 formula references. The 16 original practice sets and all five-subject branding have been preserved. 30 course-referenced entries are still source-only; some other worked sets have only partial subpart coverage. Newer calculations were derived independently, but legacy solutions have not all been comprehensively reaudited. This is not a claim that every official tutorial is fully solved.
 
 ## Core capabilities
 
@@ -62,3 +62,7 @@ The generated Eric M.Sc EEIT Study Hub logo is included in `source/assets/eeit-s
 ### Reasoning popups
 
 Each worked exercise contains a keyboard-accessible **Why this method?** button. It opens a responsive modal displaying the independent Myanmar reasoning for that specific exercise part. Escape, close button and tapping outside dismiss it; focus returns to the original button. No third-party library required.
+
+## Why / Method / Final Answer dialogs (v1.3)
+
+Every worked part offers dedicated accessible popups for the Myanmar method reason, calculation method and final answer. Content source notes distinguish original practice, independent study derivations and source-only entries. Original course PDFs and instructor-owned question scans remain excluded from the public build. Existing logo, Firebase integration and local storage keys are unchanged.
