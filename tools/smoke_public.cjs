@@ -147,7 +147,8 @@ assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('pdf-catalog.json')
 assert(fullSource.includes('data-eeit-source-shelf'),'Original PDF attachment panel missing from source tab');
 const privateModule=fs.readFileSync(file('source/source-library.mjs'),'utf8');
 assert(privateModule.includes('indexedDB')&&privateModule.includes('STORE=')&&privateModule.includes('application/pdf'),'Private source module must store PDFs locally with type restrictions');
-assert(!privateModule.includes('fetch('),'Private source documents must never upload via network fetch');
+const sourceFetchTargets=[...privateModule.matchAll(/\bfetch\s*\(\s*([^,)]+)/g)].map(match=>match[1].trim());
+assert.deepEqual(sourceFetchTargets,["'./data/pdf-catalog.json'"],'Only public catalog metadata may be fetched. Private PDFs must stay in IndexedDB and never be fetched or uploaded.');
 assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('source-library.mjs'),'Private PDF viewer shell not cached offline');
 assert(index.includes('visuals.css'),'Visual stylesheet not loaded');
 assert(fs.readFileSync(file('source/app.js'),'utf8').includes("from './visuals.mjs'"),'Visual module is not imported');
