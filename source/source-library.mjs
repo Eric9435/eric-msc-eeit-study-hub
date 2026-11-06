@@ -85,6 +85,16 @@ function renderLibrary(host,doc,all){
  const type=element('select');type.dataset.documentKind='yes';type.setAttribute('aria-label','Filter PDF by type');
  for(const [id,name] of [['all','All document types'],...kinds.map(x=>[x,kindTitles[x]||x])]){const opt=element('option','',name);opt.value=id;type.append(opt)}type.value=previousKind;filters.append(type);
  host.append(filters);
+ const bulk=element('div','document-bulk-bar');
+ const bulkIntro=element('div','document-bulk-intro');
+ bulkIntro.append(element('strong','','Add several PDFs at once'));
+ bulkIntro.append(element('span','','Exact filenames are matched automatically to individual catalog records. Unrecognized or ambiguous filenames are skipped.'));
+ bulk.append(bulkIntro);
+ const bulkLabel=element('label','document-attach','Choose PDF files');
+ const bulkInput=element('input');bulkInput.type='file';bulkInput.accept='.pdf,application/pdf';bulkInput.multiple=true;bulkInput.dataset.documentBulk='yes';
+ bulkInput.setAttribute('aria-label','Attach multiple PDFs by matching filenames');
+ bulkLabel.append(bulkInput);bulk.append(bulkLabel);
+ host.append(bulk);
  const grid=element('div','document-list-grid');grid.dataset.documentEntries='yes';host.append(grid);
  const notice=element('p','document-library-notice','Catalog metadata is not a downloadable PDF. To read the actual source file here, attach your own copy. Course PDFs remain in your local browser storage unless you remove them or clear browser data.');host.append(notice);
  const update=()=>{const q=search.value.trim().toLowerCase(),subject=sub.value,kind=type.value;grid.replaceChildren();
@@ -138,7 +148,33 @@ async function readRecord(host,record){if(!record||!record.blob)return;
  container.append(element('p','document-reader-note','On Android, the browser may open the original PDF in a separate tab if inline PDF rendering is not supported.'));
  container.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-document.addEventListener('change',async event=>{const input=event.target.closest?.('[data-document-attach]');if(!input)return;
+document.addEventListener('change',async event=>{
+ const multi=event.target.closest?.('[data-document-bulk]');
+ if(multi){
+  const host=getHost(multi),files=Array.from(multi.files||[]);multi.value='';
+  if(!host||!files.length)return;
+  const norm=n=>String(n).normalize('NFKC').toLowerCase().replace(/[^a-z0-9]+/g,'');
+  try{
+   const all=await catalog(),byName=new Map();
+   for(const item of all.entries){const name=norm(item.filename);if(!byName.has(name))byName.set(name,[]);byName.get(name).push(item)}
+   let added=0,skipped=0,failed=0;
+   for(const file of files){
+    const matches=byName.get(norm(file.name))||[];
+    if(matches.length!==1){skipped++;continue}
+    if(file.size>MAX_PDF_BYTES||!file.name.toLowerCase().endsWith('.pdf')){failed++;continue}
+    try{
+     if((await file.slice(0,5).text())!=='%PDF-'){failed++;continue}
+     const entry=matches[0];
+     await putDoc({key:docKey(entry.id),id:entry.id,subject:entry.subject,filename:file.name,blob:file,size:file.size,savedAt:Date.now()});
+     added++;
+    }catch{failed++}
+   }
+   await refreshHost(host);
+   setHostStatus(host,added+' PDF files attached locally. '+skipped+' filenames not uniquely matched; '+failed+' files rejected.',failed>0);
+  }catch(error){setHostStatus(host,'Unable to attach PDF collection: '+error.message,true)}
+  return;
+ }
+ const input=event.target.closest?.('[data-document-attach]');if(!input)return;
  const host=getHost(input),file=input.files?.[0],id=input.dataset.documentAttach;input.value='';if(!host||!file||!id)return;
  try{
   const doc=await catalog(),entry=findEntry(id,doc);if(!entry)throw Error('Unknown document record');
