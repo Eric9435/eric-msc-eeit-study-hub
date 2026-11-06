@@ -26,7 +26,7 @@ const exactExerciseIds=new Set(originalDriveDocs.flatMap(d=>Object.keys(d.exerci
 const relatedExerciseIds=new Set(originalDriveDocs.flatMap(d=>d.relatedExerciseIds||[]));
 assert.equal(exactExerciseIds.size,42,'Verified original exercise PDF mappings must cover 42 sets');
 assert.equal(relatedExerciseIds.size,22,'Lecture references should explicitly cover 22 sets');
-assert.equal(docCatalog.examCoverage?.sourceOnlyWithoutSolution,12,'Source-only exercises must remain flagged');
+assert.equal(docCatalog.examCoverage?.sourceOnlyWithoutSolution,8,'Eight genuinely source-only exercises must remain flagged');
 assert.equal(docCatalog.examCoverage?.exerciseEntries,82,'Study library should match current exercise entries');
 assert(docCatalog.entries.some(d=>d.path==='Digital_Communications/Tutorial_Material/tutorials_dc.pdf' && d.exercisePages?.['dc-1.1']?.question===3),'Digital Communications exact question page missing');
 assert(docCatalog.entries.some(d=>d.path==='Microwave_Engineering/Exercise/Exercise/Exercise_sol.pdf' && d.exercisePages?.['official-mw-5-3']?.solution===39),'Microwave official solution page missing');
@@ -78,6 +78,19 @@ for(const override of sourced.overrides){
 const sourceMap=new Map(sourced.overrides.map(e=>[e.id,e]));
 const originalMap=new Map(originals.overrides.map(e=>[e.id,e]));
 const allMerged=merged.map(e=>{const over=originalMap.get(e.id)||sourceMap.get(e.id);return over?{...e,...over}:e;});
+const projectArchive=JSON.parse(fs.readFileSync(file('source/data/project-practice.json'),'utf8'));
+assert.equal(projectArchive.exercises.length,23,'Expected 23 recovered and recalculated numbered project MEMS practices');
+assert.equal(new Set(projectArchive.exercises.map(e=>e.number)).size,23,'Duplicate project practice number');
+assert(projectArchive.exercises.every(e=>e.contentProvenance==='chatgpt-project-practice' && e.originalPractice===true && e.parts.every(p=>p.question&&p.method&&p.reason&&p.finalAnswer&&p.working?.length>=4)),'Project practice incorrectly labeled or missing worked steps');
+assert(projectArchive.exercises.every(e=>!data.exercises.some(old=>old.id===e.id)),'Project and source exercise IDs must be disjoint');
+const displayed=[...allMerged,...projectArchive.exercises];
+assert.equal(displayed.length,105,'Expected 105 runtime exercise sets after recovered project integration');
+assert.equal(displayed.reduce((n,e)=>n+e.parts.length,0),316,'Expected 316 documented subquestions');
+assert.equal(displayed.filter(e=>!e.parts.length).length,8,'Incomplete question-only sets incorrectly labeled solved');
+const fourSourceIds=['official-mw-3-3','official-mw-3-4','official-mw-5-2','official-mw-5-3'];
+for(const id of fourSourceIds)assert(sourceMap.get(id)?.parts?.length && sourceMap.get(id).parts.every(p=>p.working?.length>=4),'Missing original-source Microwave calculation '+id);
+const driveC0=2*50*8.8541878128e-12*(10e-6)*(100e-6)/(2e-6);
+assert(Math.abs(driveC0/1e-12-0.44270939064)<0.001,'MEMS comb capacitance must be 0.4427 pF, not 4.427 pF');
 const bySubject=new Map(data.subjects.map(s=>[s.id,allMerged.filter(e=>e.subject===s.id)]));
 assert([...bySubject.values()].every(es=>es.some(e=>originalMap.has(e.id))),'Original worked practice missing in one of the five subjects');
 
@@ -95,7 +108,7 @@ assert(!JSON.stringify(ext).includes('data:image/'),'Private images in independe
 assert(!JSON.stringify(originals).includes('data:image/'),'Private images leaked into original practice data');
 assert(!JSON.stringify(sourced).includes('data:image/'),'Private images leaked into source-backed reconstruction');
 cp.execFileSync(process.execPath,[file('tools/build_public.cjs')],{cwd:root,stdio:'inherit'});
-for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','source-library.css','source-library.mjs','visuals.css','visuals.mjs','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','data/pdf-catalog.json','data/original-practice-reworked.json','data/source-backed-derivations.json','assets/favicon.svg'])
+for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','source-library.css','source-library.mjs','visuals.css','visuals.mjs','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','data/pdf-catalog.json','data/original-practice-reworked.json','data/source-backed-derivations.json','data/project-practice.json','assets/favicon.svg'])
  assert(fs.existsSync(file('public/'+name)),'Missing public file '+name);
 assert(!fs.existsSync(file('public/assets/questions')),'Original course page images published');
 const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?walk(path.join(d,x.name)):[path.join(d,x.name)]);
