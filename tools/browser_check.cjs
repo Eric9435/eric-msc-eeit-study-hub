@@ -31,7 +31,7 @@ async function check(){
    assert.equal(await desktop.locator('.inline-part').count(),10,'Digital OFDM 4.1 must have all 10 verified subparts');
    await desktop.locator('.inline-part').first().locator('.eeit-popup-tools .eeit-info-button').first().waitFor({timeout:15000});
    assert.equal(await desktop.locator('.inline-part').first().locator('.eeit-popup-tools .eeit-info-button').count(),3,'Every part must have Why/Method/Answer buttons');
-   await desktop.locator('.eeit-popup-tools .eeit-info-button').first().click();
+   await desktop.locator('.inline-part').first().locator('.eeit-info-button').first().click();
    const dialog=desktop.locator('.eeit-explanation-dialog');
    assert(await dialog.isVisible(),'Why popup did not open');
    await desktop.keyboard.press('Escape');
