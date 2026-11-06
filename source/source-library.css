@@ -89,3 +89,12 @@
 .document-zip-attach{background:#203d59;border-color:#203d59}
 .document-zip-attach:hover{background:#152d45}
 @media(max-width:670px){.document-bulk-bar{align-items:stretch;padding:13px}.document-bulk-bar .document-attach{flex:1 1 140px}}
+
+/* Private Google Drive-backed original PDF reader */
+.document-cloud-read{background:#183d63;border-color:#183d63;color:#fff;font-size:11px;white-space:normal;max-width:100%}
+.document-cloud-read:hover{background:#102f4d;border-color:#102f4d}
+.document-entry-actions .document-local-attach{display:inline-flex;align-items:center;justify-content:center;position:relative;cursor:pointer;min-height:38px}
+.document-entry-actions .document-local-attach input{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap}
+.document-entry-actions .document-local-attach:focus-within{outline:2px solid var(--brand-hi);outline-offset:2px}
+.source-archive .document-cloud-read{background:#173b5b;color:#fff}
+@media(max-width:650px){.document-entry-actions .document-cloud-read{flex-basis:100%}}
