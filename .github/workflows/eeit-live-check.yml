@@ -14,6 +14,8 @@ jobs:
           node-version: '24'
       - name: Validate all exercise data and build the inline-solution site
         run: node tools/smoke_public.cjs
+      - name: Recompute numerical results across all five EEIT subjects
+        run: node tools/engineering_regression.cjs
       - name: Verify live Render website and Firebase client setup
         run: node tools/live_check.mjs
         env:
