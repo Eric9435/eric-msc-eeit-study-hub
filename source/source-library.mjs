@@ -96,15 +96,35 @@ function renderLibrary(host,doc,all){
  host.replaceChildren();
  const heading=element('div','document-library-header');
  heading.append(element('h2','','Course PDF library'));
- heading.append(element('p','','Access your original exercise sheets, official sample solutions, past exams, lecture PDFs and study handbooks from your private Google Drive. Owner access is required.'));
+ heading.append(element('p','','Browse private course material: exercise sheets, sample solutions, previous exams, lecture slides, labs and independent study notes. PDF count is not the same as exam coverage.'));
  host.append(heading);
  const count=element('div','document-counts');
  const attached=doc.entries.filter(x=>records.has(docKey(x.id))).length,driveCount=doc.entries.filter(x=>x.drive_id).length;
- count.append(element('strong','',driveCount+' original PDFs in private Google Drive'));
+ count.append(element('strong','',driveCount+' course-related PDFs in private Google Drive'));
  count.append(element('span','',doc.entries.length+' catalog entries'));
  count.append(element('span','',attached+' locally saved'));
  count.append(element('span','','Sign in to the private Drive owner account to read source PDFs.'));
  host.append(count);
+ if(doc.examCoverage){
+  const audit=doc.examCoverage;
+  const overview=element('section','pdf-coverage-audit');
+  overview.append(element('h3','','Exercise-to-original PDF coverage'));
+  const stats=element('div','pdf-coverage-figures');
+  for(const [number,label] of [
+   [audit.fullyLinkedOriginal+' / '+audit.exerciseEntries,'Exact original Question + Solution links'],
+   [String(audit.lectureReferenceOnly),'Topic-related lecture references only'],
+   [String(audit.standaloneOrUnlinked),'Independent practice or no direct source'],
+   [String(audit.sourceOnlyWithoutSolution),'Exercise sets without full worked solutions']
+  ]){
+   const item=element('div','pdf-coverage-item');
+   item.append(element('strong','',number));
+   item.append(element('span','',label));
+   stats.append(item);
+  }
+  overview.append(stats);
+  overview.append(element('p','pdf-coverage-explainer','All 123 uploaded PDFs include lectures, laboratories, past exams and handbooks. They are not 123 unique exercise sheets. Exact links are verified against uploaded PDF problem headings; lecture references are labelled separately. The full syllabus and mathematical answers have NOT been certified complete.'));
+  host.append(overview);
+ }
  const filters=element('div','document-filters');
  const search=element('input');search.type='search';search.placeholder='Search filename, chapter or type';search.value=previousSearch;search.dataset.documentSearch='yes';search.setAttribute('aria-label','Search PDF catalog');filters.append(search);
  const sub=element('select');sub.dataset.documentCourse='yes';sub.setAttribute('aria-label','Filter PDF by subject');
