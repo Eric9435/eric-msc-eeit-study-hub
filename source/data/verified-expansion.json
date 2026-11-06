@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-independent-derivations-9",
+  "revision": "2026-11-06-independent-derivations-10",
   "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
   "overrides": [
     {
@@ -3735,6 +3735,164 @@
           "method": "Write overlap as exp(jθ) up to sign/quadrant rotations. Differential precoding maps data transitions to MSK phase increments; a fixed phase rotation aligns conventions.",
           "finalAnswer": "Equivalent after correct differential precoding and phase rotation.",
           "verification": "Independent derivation of original OQPSK/MSK with pulse q, h=1/2 and exact given 10-symbol sequence"
+        }
+      ]
+    },
+    {
+      "id": "dc-2.5",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Full original 2.5 (a–e). Constellation has rings radius1 and a; differential symbol radii 1,a,1/a depending previous radius, and phase Gray coding.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Complete 16-DAPSK amplitude mapping",
+          "question": "Fill amplitude factor table by previous ring |d_{n−1}|=1 or a and amplitude bit 0/1.",
+          "equations": [
+            "Prev |d|=1, bit0 → |u|=1; bit1 → |u|=a",
+            "Prev |d|=a, bit0 → |u|=1; bit1 → |u|=1/a",
+            "New radius |d_n|=|d_{n−1}|·|u_n|"
+          ],
+          "display": [
+            {
+              "latex": "Prev |d|=1, bit0 → |u|=1; bit1 → |u|=a",
+              "html": "<div class=\"verified-equation\" role=\"math\">Prev |d|=1, bit0 → |u|=1; bit1 → |u|=a</div>"
+            },
+            {
+              "latex": "Prev |d|=a, bit0 → |u|=1; bit1 → |u|=1/a",
+              "html": "<div class=\"verified-equation\" role=\"math\">Prev |d|=a, bit0 → |u|=1; bit1 → |u|=1/a</div>"
+            },
+            {
+              "latex": "New radius |d_n|=|d_{n−1}|·|u_n|",
+              "html": "<div class=\"verified-equation\" role=\"math\">New radius |d_n|=|d_{n−1}|·|u_n|</div>"
+            }
+          ],
+          "reason": "Amplitude bit 0 ဆို လက်ရှိ ring မှာပဲနေရတယ်။ Bit1 ဆို 1↔a ring ပြောင်းရတယ်။ a ကနေ 1 ပြန်ဖို့ 1/a factor လိုတယ်။",
+          "method": "For bit0: preserve radius ⇒ multiplier1. For bit1: toggle between inner radius1 and outer radius a. From1 to a multiply a; from a to1 multiply 1/a.",
+          "finalAnswer": "Amplitude factor table [[1,a],[1,1/a]].",
+          "verification": "Independently derived 16-DAPSK sequence from original Tables 2.1–2.2 and input bits"
+        },
+        {
+          "label": "b",
+          "title": "Check Gray phase mapping",
+          "question": "Given phase-bit order 000,001,011,010,110,111,101,100, determine if Gray-coded.",
+          "equations": [
+            "Adjacent labels: 000→001→011→010→110→111→101→100→000",
+            "Each adjacent pair differs by exactly one bit (including wraparound 100→000)"
+          ],
+          "display": [
+            {
+              "latex": "Adjacent labels: 000→001→011→010→110→111→101→100→000",
+              "html": "<div class=\"verified-equation\" role=\"math\">Adjacent labels: 000→001→011→010→110→111→101→100→000</div>"
+            },
+            {
+              "latex": "Each adjacent pair differs by exactly one bit (including wraparound 100→000)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Each adjacent pair differs by exactly one bit (including wraparound 100→000)</div>"
+            }
+          ],
+          "reason": "အနီးစပ်ဆုံး phase point နှစ်ခုက bit တစ်ခုတည်းကွာတာကြောင့် channel small phase error ဖြစ်လျှင် BER လျော့တတ်တယ်။",
+          "method": "Check successive 3-bit strings at 45° angular increments and circular last-to-first; each pair has Hamming distance1.",
+          "finalAnswer": "Yes, phase bits use cyclic Gray mapping.",
+          "verification": "Independently derived 16-DAPSK sequence from original Tables 2.1–2.2 and input bits"
+        },
+        {
+          "label": "c",
+          "title": "Plot differential symbol constellation",
+          "question": "Given ring factor table, list differential symbol radius and phase.",
+          "equations": [
+            "Possible |u_n|={1,a,1/a} depending on previous ring and bit",
+            "Possible ∠u_n={0,π/4,π/2,3π/4,π,5π/4,3π/2,7π/4}",
+            "u_n=ρ_n exp(jθ_n); ρ_n∈{1,a,1/a}"
+          ],
+          "display": [
+            {
+              "latex": "Possible |u_n|={1,a,1/a} depending on previous ring and bit",
+              "html": "<div class=\"verified-equation\" role=\"math\">Possible |u_n|={1,a,1/a} depending on previous ring and bit</div>"
+            },
+            {
+              "latex": "Possible ∠u_n={0,π/4,π/2,3π/4,π,5π/4,3π/2,7π/4}",
+              "html": "<div class=\"verified-equation\" role=\"math\">Possible ∠u_n={0,π/4,π/2,3π/4,π,5π/4,3π/2,7π/4}</div>"
+            },
+            {
+              "latex": "u_n=ρ_n exp(jθ_n); ρ_n∈{1,a,1/a}",
+              "html": "<div class=\"verified-equation\" role=\"math\">u_n=ρ_n exp(jθ_n); ρ_n∈{1,a,1/a}</div>"
+            }
+          ],
+          "reason": "Differential symbol u က final constellation d နဲ့မတူဘူး။ u ရဲ့ magnitude က ring-change ratio ဖြစ်လို့ 1/a ring လည်းပါမယ်။",
+          "method": "Draw polar plane circles at radius 1/a,1,a and 8 angular rays at multiples of 45°. Not all radii arise for a fixed previous ring; mark conditional transitions.",
+          "finalAnswer": "24 candidate differential points across 3 radii and 8 angles.",
+          "verification": "Independently derived 16-DAPSK sequence from original Tables 2.1–2.2 and input bits"
+        },
+        {
+          "label": "d",
+          "title": "Solve differential encoding bit sequence",
+          "question": "For b=[1,1,0,1, 0,1,1,0, 1,1,0,0] and d_{−1}=1, find d0,d1,d2.",
+          "equations": [
+            "Group0=1101: amplitude1→ρ=a; phase101→3π/2; u₀=a e^(j3π/2)=−ja; d₀=−ja",
+            "Group1=0110: amplitude0→ρ=1; phase110→π; u₁=e^(jπ)=−1; d₁=(−ja)(−1)=+ja",
+            "Group2=1100: amplitude1 while |d₁|=a →ρ=1/a; phase100→7π/4",
+            "u₂=(1/a)e^(j7π/4); d₂=(ja)(1/a)e^(j7π/4)=e^(jπ/4)",
+            "Output symbols: [−ja,+ja,(1+j)/√2]"
+          ],
+          "display": [
+            {
+              "latex": "Group0=1101: amplitude1→ρ=a; phase101→3π/2; u₀=a e^(j3π/2)=−ja; d₀=−ja",
+              "html": "<div class=\"verified-equation\" role=\"math\">Group0=1101: amplitude1→ρ=a; phase101→3π/2; u₀=a e^(j3π/2)=−ja; d₀=−ja</div>"
+            },
+            {
+              "latex": "Group1=0110: amplitude0→ρ=1; phase110→π; u₁=e^(jπ)=−1; d₁=(−ja)(−1)=+ja",
+              "html": "<div class=\"verified-equation\" role=\"math\">Group1=0110: amplitude0→ρ=1; phase110→π; u₁=e^(jπ)=−1; d₁=(−ja)(−1)=+ja</div>"
+            },
+            {
+              "latex": "Group2=1100: amplitude1 while |d₁|=a →ρ=1/a; phase100→7π/4",
+              "html": "<div class=\"verified-equation\" role=\"math\">Group2=1100: amplitude1 while |d₁|=a →ρ=1/a; phase100→7π/4</div>"
+            },
+            {
+              "latex": "u₂=(1/a)e^(j7π/4); d₂=(ja)(1/a)e^(j7π/4)=e^(jπ/4)",
+              "html": "<div class=\"verified-equation\" role=\"math\">u₂=(1/a)e^(j7π/4); d₂=(ja)(1/a)e^(j7π/4)=e^(jπ/4)</div>"
+            },
+            {
+              "latex": "Output symbols: [−ja,+ja,(1+j)/√2]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Output symbols: [−ja,+ja,(1+j)/√2]</div>"
+            }
+          ],
+          "reason": "Bit 4 လုံးစီ 3 groups ခွဲပါ။ Phase bits 101 ကို 270°၊ 110 ကို180°၊ 100 ကို315° map လုပ်ရတယ်။ d previous နဲ့ u ကိုမြှောက်မယ်။",
+          "method": "Initialize d-1=1. For each group, choose ρ from table depending on current previous |d|, choose θ from Gray phase mapping, compute u=ρe^{jθ}, then d=dprev u. Check final d2 radius1, phase45°.",
+          "finalAnswer": "d=[−ja,+ja,e^{jπ/4}].",
+          "verification": "Independently derived 16-DAPSK sequence from original Tables 2.1–2.2 and input bits"
+        },
+        {
+          "label": "e",
+          "title": "Noncoherent differential receiver",
+          "question": "Outline receiver decisions from consecutive noisy samples y_n,y_{n−1}.",
+          "equations": [
+            "z_n=y_n/y_{n−1} (if y_{n−1}≠0) ≈ u_n",
+            "Alternative phase statistic: y_n y*_{n−1}; ∠z_n≈Δθ_n",
+            "Magnitude ratio ρ̂≈|y_n|/|y_{n−1}|; bit0 if unchanged ring, bit1 if toggled",
+            "Quantize ∠z_n to nearest kπ/4; inverse Gray map to 3 phase bits"
+          ],
+          "display": [
+            {
+              "latex": "z_n=y_n/y_{n−1} (if y_{n−1}≠0) ≈ u_n",
+              "html": "<div class=\"verified-equation\" role=\"math\">z_n=y_n/y_{n−1} (if y_{n−1}≠0) ≈ u_n</div>"
+            },
+            {
+              "latex": "Alternative phase statistic: y_n y*_{n−1}; ∠z_n≈Δθ_n",
+              "html": "<div class=\"verified-equation\" role=\"math\">Alternative phase statistic: y_n y*_{n−1}; ∠z_n≈Δθ_n</div>"
+            },
+            {
+              "latex": "Magnitude ratio ρ̂≈|y_n|/|y_{n−1}|; bit0 if unchanged ring, bit1 if toggled",
+              "html": "<div class=\"verified-equation\" role=\"math\">Magnitude ratio ρ̂≈|y_n|/|y_{n−1}|; bit0 if unchanged ring, bit1 if toggled</div>"
+            },
+            {
+              "latex": "Quantize ∠z_n to nearest kπ/4; inverse Gray map to 3 phase bits",
+              "html": "<div class=\"verified-equation\" role=\"math\">Quantize ∠z_n to nearest kπ/4; inverse Gray map to 3 phase bits</div>"
+            }
+          ],
+          "reason": "Receiver မှာ absolute carrier phase သိစရာမလိုဘဲ တစ်ကြိမ်က sample နဲ့ အခု sample တို့ရဲ့ phase difference/ring change ကိုတွက်လို့ရတယ်။",
+          "method": "Assume channel approximately constant over neighboring symbols. Estimate differential phase via arg(y_n y*_{n−1}); decide amplitude ring (relative ratio or joint ML using both radii). Then decode amplitude bit and inverse Gray phase mapping. Practical noise-aware ML may outperform raw ratio.",
+          "finalAnswer": "Differential amplitude/phase detection needs adjacent received samples, not absolute phase reference.",
+          "verification": "Independently derived 16-DAPSK sequence from original Tables 2.1–2.2 and input bits"
         }
       ]
     }
