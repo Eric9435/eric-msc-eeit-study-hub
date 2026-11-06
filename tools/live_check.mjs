@@ -41,10 +41,18 @@ async function check(){
   assert(sourceDerived.overrides.every(e=>e.parts.every(p=>p.method&&p.finalAnswer&&p.display?.length)),'Source-aligned tutorial method/formula missing');
   const pdfCatalog=JSON.parse((await get('/data/pdf-catalog.json')).bytes.toString('utf8'));
   assert(pdfCatalog.entries.length>=90,'Five-subject PDF catalog is not deployed');
-  assert.equal(new Set(pdfCatalog.entries.map(item=>item.subject)).size,5,'PDF library must cover all five subjects');
+  assert(['digital','power','control','microwave','micro'].every(subject=>pdfCatalog.entries.some(item=>item.subject===subject)),'PDF library must cover all five subjects');
   assert(pdfCatalog.entries.filter(item=>item.recordType==='library-file-identified').length>=10,'Named Library PDF files missing');
 
   assert(pdfCatalog.entries.reduce((n,item)=>n+Object.keys(item.exercisePages||{}).length,0)>=40,'Original source page links are missing');
+
+  const linked=pdfCatalog.entries.filter(item=>item.drive_id);
+  assert.equal(linked.length,123,'Missing original PDFs in private Google Drive catalog');
+  assert.equal(new Set(linked.map(item=>item.drive_id)).size,123,'Duplicated original Drive IDs');
+  const expectedCounts={digital:56,power:17,control:17,microwave:25,micro:6,shared:2};
+  for(const [subject,n] of Object.entries(expectedCounts))
+    assert.equal(linked.filter(item=>item.subject===subject).length,n,'Private original subject incomplete: '+subject);
+
 
   const logo=(await get('/assets/eeit-study-hub-logo.webp')).bytes;
   assert(logo.length>2000 && logo.toString('ascii',0,4)==='RIFF' && logo.toString('ascii',8,12)==='WEBP','Invalid logo file');
@@ -67,6 +75,7 @@ async function check(){
   assert(app.includes('data-eeit-document-library'),'Document catalogue route missing');
   const privateReader=(await get('/source-library.mjs')).bytes.toString('utf8');
   assert(privateReader.includes('data-document-zip')&&privateReader.includes('zipDirectory'),'ZIP importer missing from deployed source viewer');
+  assert(privateReader.includes('dataset.documentDrive')&&privateReader.includes('drive.google.com/file/d/'),'Private Drive PDF viewer missing from live site');
   assert(app.includes('paper-workline-label'),'Step-by-step working not rendered');
   assert(!app.includes('showPartExplanation('),'Obsolete popup still deployed');
   const config=(await get('/cloud-config.js')).bytes.toString('utf8');
