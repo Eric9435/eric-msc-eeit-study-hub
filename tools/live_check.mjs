@@ -54,6 +54,8 @@ async function check(){
   assert(app.includes('original-practice-reworked.json'),'Original calculations not loaded by client');
   assert(app.includes('source-backed-derivations.json'),'Original tutorial answer data not loaded by client');
   assert(app.includes('not yet certified'),'Exam readiness must be presented honestly');
+  assert(app.includes('data-eeit-source-shelf'),'Private original PDF shelf missing');
+  assert(index.includes('source-library.mjs'),'Private source viewer shell not loaded');
   assert(app.includes('paper-workline-label'),'Step-by-step working not rendered');
   assert(!app.includes('showPartExplanation('),'Obsolete popup still deployed');
   const config=(await get('/cloud-config.js')).bytes.toString('utf8');
