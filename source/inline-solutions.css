@@ -1,0 +1,48 @@
+/* Eric EEIT: full-page engineering solutions, no explanation modals. Flat/mobile-first. */
+.full-solution-page{padding:clamp(18px,3.3vw,34px);overflow:hidden}
+.solution-overview-head{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:20px}
+.solution-overview-head h2{margin:8px 0 11px;color:var(--ink);font-size:clamp(1.3rem,2.5vw,1.8rem);line-height:1.35;overflow-wrap:anywhere}
+.solution-overview-head .page-sub{line-height:1.75;margin:0 0 17px}
+.inline-meta{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 19px}
+.inline-meta span{background:var(--surface-alt);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:11px;line-height:1.5;font-weight:700}
+.inline-solution-list{display:flex;flex-direction:column;gap:20px}
+.inline-part{border:1px solid var(--line);border-radius:15px;background:var(--surface);overflow:hidden;break-inside:avoid}
+.inline-part.is-active{border-color:var(--brand-hi)}
+.inline-part-head{display:flex;align-items:center;gap:14px;padding:19px 20px;border-bottom:1px solid var(--line);background:var(--surface-alt)}
+.inline-part-head h3{color:var(--ink);font-size:clamp(15px,2vw,18px);line-height:1.45;margin:4px 0 0}
+.inline-part-index{background:var(--brand);color:white;border-radius:9px;flex:0 0 37px;min-height:37px;display:grid;place-items:center;font-size:16px;font-weight:850}
+.inline-status{font-size:10px;font-weight:700;line-height:1.5;padding:5px 9px;border-radius:7px;margin-left:auto;flex:0 0 auto}
+.inline-status.has-study-notes{background:var(--success-bg);color:var(--success)}
+.inline-status.needs-review{background:var(--warn-bg);color:var(--warn)}
+.inline-part-body{padding:clamp(15px,3vw,24px)}
+.inline-explain{padding:0 0 18px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+.inline-explain:last-of-type{border-bottom:0}
+.inline-explain h4,.inline-final h4{color:var(--ink);font-size:13px;font-weight:800;margin:0 0 10px}
+.inline-explain>p{margin:0;line-height:1.9;overflow-wrap:anywhere}
+.inline-explain .myanmar-text{white-space:pre-line;font-family:Inter,"Noto Sans Myanmar","Myanmar Text",Padauk,system-ui,sans-serif;font-size:14px;line-height:2}
+.inline-equations{display:grid;gap:10px}
+.inline-equation{background:var(--surface-alt);border:1px solid var(--line);border-radius:11px;padding:12px 14px;max-width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.inline-equation .math-line{margin:0;min-width:max-content;width:fit-content;max-width:none;background:transparent;border:0;box-shadow:none;padding:2px 0;color:var(--ink)}
+.inline-equation math{font-size:clamp(15px,2vw,18px);color:var(--ink)}
+.inline-equation .verified-equation{font:500 14px/1.85 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.inline-equation .raw-tex{display:block;white-space:pre-wrap;overflow-wrap:anywhere;font:500 13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace}
+.solution-raw-text{margin:0;white-space:pre-wrap;line-height:1.8}
+.inline-final{border:1px solid var(--line);border-left:4px solid var(--brand-hi);border-radius:10px;background:var(--brand-soft);padding:15px 17px;margin:4px 0 12px}
+.inline-final p{margin:0;line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere;font-weight:650}
+.inline-missing{font-size:13px;color:var(--muted);line-height:1.85;font-weight:450!important}
+.inline-provenance{font-size:11px;color:var(--muted);line-height:1.6;border-top:1px dashed var(--line);padding-top:12px;margin:16px 0}
+.inline-notes{border:1px solid var(--line);border-radius:10px;margin-top:16px;background:var(--surface-alt)}
+.inline-notes summary{cursor:pointer;padding:13px 15px;font-size:12px;font-weight:700;color:var(--ink)}
+.inline-notes textarea{margin:0 12px 12px;width:calc(100% - 24px);min-height:110px;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:var(--surface);padding:12px;font-size:13px;line-height:1.7;resize:vertical}
+.inline-hidden,.inline-caution{padding:15px 17px;border:1px solid var(--line);border-radius:10px;background:var(--surface-alt);font-size:13px;line-height:1.8}
+.inline-caution{margin-top:22px;color:var(--muted)}
+.inline-caution strong{color:var(--ink)}
+.overall-summary{margin-top:27px;padding:22px;background:var(--surface-alt);border:1px solid var(--line);border-radius:15px}
+.overall-summary h3{font-size:clamp(17px,2.5vw,21px);line-height:1.4;color:var(--ink);margin:6px 0 9px}
+.overall-summary>p{font-size:13px;line-height:1.8;color:var(--muted);margin:0 0 16px}
+.overall-row{display:flex;gap:14px;align-items:flex-start;border-top:1px solid var(--line);padding:13px 0}
+.overall-row>span{font-weight:850;min-width:22px;color:var(--brand)}
+.overall-row strong{font-size:13px;color:var(--ink)}
+.overall-row p{font-size:13px;line-height:1.75;margin:5px 0 0;overflow-wrap:anywhere;white-space:pre-wrap}
+@media(max-width:700px){.inline-part-head{flex-wrap:wrap;padding:14px;gap:10px}.inline-status{margin-left:47px}.inline-part-body{padding:14px}.overall-summary{padding:16px}.inline-meta{gap:6px}.inline-solution-list{gap:14px}.full-solution-page .solution-toolbar{gap:6px;flex-wrap:wrap}.full-solution-page .solution-toolbar .btn{flex:1 1 125px;justify-content:center}}
+@media print{.full-solution-page{padding:0;border:0}.inline-part{break-inside:auto;margin:12px 0;border-color:#a7b4be}.inline-part-head{background:white}.inline-equation,.overall-summary{background:white}.inline-notes,.full-solution-page .no-print{display:none!important}.inline-caution{font-size:10px}.inline-solution-list{gap:8px}}
