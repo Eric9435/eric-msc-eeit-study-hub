@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-independent-derivations-10",
+  "revision": "2026-11-06-independent-derivations-11",
   "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
   "overrides": [
     {
@@ -3893,6 +3893,469 @@
           "method": "Assume channel approximately constant over neighboring symbols. Estimate differential phase via arg(y_n y*_{n−1}); decide amplitude ring (relative ratio or joint ML using both radii). Then decode amplitude bit and inverse Gray phase mapping. Practical noise-aware ML may outperform raw ratio.",
           "finalAnswer": "Differential amplitude/phase detection needs adjacent received samples, not absolute phase reference.",
           "verification": "Independently derived 16-DAPSK sequence from original Tables 2.1–2.2 and input bits"
+        }
+      ]
+    },
+    {
+      "id": "dc-2.1",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "All original parts (a–o). Original 4-ASK values ±1/2,±3/2 and QPSK ±1/√2 verified against source illustrations. OQPSK here delays Q by Ts/2 (QPSK complex-symbol interval Ts), distinct from binary CPM exercise 2.7 convention.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Identify modulation 4-ASK",
+          "question": "Figure has four constellation points on the real axis. Identify scheme.",
+          "equations": [
+            "M=4 real levels; log₂4=2 bits/symbol",
+            "dI∈{−3/2,−1/2,+1/2,+3/2}; dQ=0"
+          ],
+          "display": [
+            {
+              "latex": "M=4 real levels; log₂4=2 bits/symbol",
+              "html": "<div class=\"verified-equation\" role=\"math\">M=4 real levels; log₂4=2 bits/symbol</div>"
+            },
+            {
+              "latex": "dI∈{−3/2,−1/2,+1/2,+3/2}; dQ=0",
+              "html": "<div class=\"verified-equation\" role=\"math\">dI∈{−3/2,−1/2,+1/2,+3/2}; dQ=0</div>"
+            }
+          ],
+          "reason": "Constellation point 4 ခုလုံး I axis ပေါ်မှာပဲရှိလို့ 4-level amplitude shift keying ဖြစ်တယ်။",
+          "method": "Check real-only and four equally spaced levels; no quadrature component.",
+          "finalAnswer": "4-ASK (4-PAM).",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "b",
+          "title": "Map 00111001 to 4-ASK I/Q",
+          "question": "Given bits 00 11 10 01 map from Fig.2.2 and express rectangular pulses.",
+          "equations": [
+            "Bits=[00,11,10,01]",
+            "dI=[+0.5,−1.5,−0.5,+1.5]; dQ=[0,0,0,0]",
+            "s_BB,I(t)=Σ_{n=0}^{3}dI,n rect((t−nTs−Ts/2)/Ts)",
+            "s_BB,Q(t)=0"
+          ],
+          "display": [
+            {
+              "latex": "Bits=[00,11,10,01]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Bits=[00,11,10,01]</div>"
+            },
+            {
+              "latex": "dI=[+0.5,−1.5,−0.5,+1.5]; dQ=[0,0,0,0]",
+              "html": "<div class=\"verified-equation\" role=\"math\">dI=[+0.5,−1.5,−0.5,+1.5]; dQ=[0,0,0,0]</div>"
+            },
+            {
+              "latex": "s_BB,I(t)=Σ_{n=0}^{3}dI,n rect((t−nTs−Ts/2)/Ts)",
+              "html": "<div class=\"verified-equation\" role=\"math\">s_BB,I(t)=Σ_{n=0}^{3}dI,n rect((t−nTs−Ts/2)/Ts)</div>"
+            },
+            {
+              "latex": "s_BB,Q(t)=0",
+              "html": "<div class=\"verified-equation\" role=\"math\">s_BB,Q(t)=0</div>"
+            }
+          ],
+          "reason": "Bit 2 လုံးကို symbol 1 ခုအဖြစ် map လုပ်တယ်။ Negative/positive amplitude values အစဉ်ကို figure ထဲက label အတိုင်းယူရတယ်။",
+          "method": "Read the exact mapping: 11→−3/2,10→−1/2,00→+1/2,01→+3/2. Rectangular pulses occupy [nTs,(n+1)Ts).",
+          "finalAnswer": "4-ASK I levels [0.5,−1.5,−0.5,1.5], Q=0.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "c",
+          "title": "Plot 4-ASK baseband sequence",
+          "question": "Give interval-by-interval waveform heights.",
+          "equations": [
+            "0≤t<Ts: I=+0.5, Q=0",
+            "Ts≤t<2Ts: I=−1.5, Q=0",
+            "2Ts≤t<3Ts: I=−0.5, Q=0",
+            "3Ts≤t<4Ts: I=+1.5, Q=0"
+          ],
+          "display": [
+            {
+              "latex": "0≤t<Ts: I=+0.5, Q=0",
+              "html": "<div class=\"verified-equation\" role=\"math\">0≤t&lt;Ts: I=+0.5, Q=0</div>"
+            },
+            {
+              "latex": "Ts≤t<2Ts: I=−1.5, Q=0",
+              "html": "<div class=\"verified-equation\" role=\"math\">Ts≤t&lt;2Ts: I=−1.5, Q=0</div>"
+            },
+            {
+              "latex": "2Ts≤t<3Ts: I=−0.5, Q=0",
+              "html": "<div class=\"verified-equation\" role=\"math\">2Ts≤t&lt;3Ts: I=−0.5, Q=0</div>"
+            },
+            {
+              "latex": "3Ts≤t<4Ts: I=+1.5, Q=0",
+              "html": "<div class=\"verified-equation\" role=\"math\">3Ts≤t&lt;4Ts: I=+1.5, Q=0</div>"
+            }
+          ],
+          "reason": "Rect pulse ဖြစ်လို့ interval တစ်ခုစီမှာ height တစ်ခုတည်းရှိတဲ့ step function ဖြစ်တယ်။",
+          "method": "Horizontal axis t/Ts with ticks 0,1,2,3,4. Vertical I levels ±0.5,±1.5; Q flat zero. Draw jumps at integer symbol boundaries.",
+          "finalAnswer": "I waveform levels and flat Q as listed.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "d",
+          "title": "4-ASK passband signal",
+          "question": "Convert sBB into passband with fc=3/Ts.",
+          "equations": [
+            "s(t)=√2[sI(t)cos(2πf_ct)−sQ(t)sin(2πf_ct)]",
+            "sQ(t)=0 ⇒ s(t)=√2 sI(t)cos(6πt/Ts)",
+            "Segment peak amplitudes √2×[0.5,−1.5,−0.5,+1.5]"
+          ],
+          "display": [
+            {
+              "latex": "s(t)=√2[sI(t)cos(2πf_ct)−sQ(t)sin(2πf_ct)]",
+              "html": "<div class=\"verified-equation\" role=\"math\">s(t)=√2[sI(t)cos(2πf_ct)−sQ(t)sin(2πf_ct)]</div>"
+            },
+            {
+              "latex": "sQ(t)=0 ⇒ s(t)=√2 sI(t)cos(6πt/Ts)",
+              "html": "<div class=\"verified-equation\" role=\"math\">sQ(t)=0 ⇒ s(t)=√2 sI(t)cos(6πt/Ts)</div>"
+            },
+            {
+              "latex": "Segment peak amplitudes √2×[0.5,−1.5,−0.5,+1.5]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Segment peak amplitudes √2×[0.5,−1.5,−0.5,+1.5]</div>"
+            }
+          ],
+          "reason": "I only ဖြစ်လို့ cosine carrier ရဲ့ amplitude ကို symbol က မြှောက်ပေးတာပါ။ Negative symbol ဆို carrier phase 180° ပြောင်းတယ်။",
+          "method": "Substitute fc=3/Ts into cos carrier. Since dQ=0, Q mixer contribution vanishes. Carrier completes three cycles in each Ts.",
+          "finalAnswer": "s(t)=√2 sI(t) cos(6πt/Ts).",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "e",
+          "title": "Sketch 4-ASK passband waveform",
+          "question": "Describe carrier cycles and envelope in each symbol.",
+          "equations": [
+            "f_c T_S=3 cycles/symbol",
+            "|Envelope peaks|=[0.7071,2.1213,0.7071,2.1213]",
+            "Negative dI reverses the carrier polarity"
+          ],
+          "display": [
+            {
+              "latex": "f_c T_S=3 cycles/symbol",
+              "html": "<div class=\"verified-equation\" role=\"math\">f_c T_S=3 cycles/symbol</div>"
+            },
+            {
+              "latex": "|Envelope peaks|=[0.7071,2.1213,0.7071,2.1213]",
+              "html": "<div class=\"verified-equation\" role=\"math\">|Envelope peaks|=[0.7071,2.1213,0.7071,2.1213]</div>"
+            },
+            {
+              "latex": "Negative dI reverses the carrier polarity",
+              "html": "<div class=\"verified-equation\" role=\"math\">Negative dI reverses the carrier polarity</div>"
+            }
+          ],
+          "reason": "Carrier frequency3/Ts ဆို symbol တစ်ခုချင်းမှာ သုံးပတ်လည် cosine ရှိတယ်။ Amplitude အမြင့်က dI ×√2 ဖြစ်တယ်။",
+          "method": "Draw 12 cycles over 0..4Ts. First amplitude +√2/2, second −3√2/2, third −√2/2, fourth +3√2/2. Mark axes and symbol boundaries.",
+          "finalAnswer": "12 total carrier cycles with piecewise changing signed amplitudes.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "f",
+          "title": "QPSK equivalent baseband I/Q values",
+          "question": "Using Fig.2.3 and same bit sequence find I/Q symbols.",
+          "equations": [
+            "QPSK levels ±1/√2 for both I and Q",
+            "Bits=[00,11,10,01]",
+            "dI=[+1,−1,−1,+1]/√2",
+            "dQ=[+1,−1,+1,−1]/√2",
+            "sI(t)=ΣdI,n g(t−nTs); sQ(t)=ΣdQ,n g(t−nTs)"
+          ],
+          "display": [
+            {
+              "latex": "QPSK levels ±1/√2 for both I and Q",
+              "html": "<div class=\"verified-equation\" role=\"math\">QPSK levels ±1/√2 for both I and Q</div>"
+            },
+            {
+              "latex": "Bits=[00,11,10,01]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Bits=[00,11,10,01]</div>"
+            },
+            {
+              "latex": "dI=[+1,−1,−1,+1]/√2",
+              "html": "<div class=\"verified-equation\" role=\"math\">dI=[+1,−1,−1,+1]/√2</div>"
+            },
+            {
+              "latex": "dQ=[+1,−1,+1,−1]/√2",
+              "html": "<div class=\"verified-equation\" role=\"math\">dQ=[+1,−1,+1,−1]/√2</div>"
+            },
+            {
+              "latex": "sI(t)=ΣdI,n g(t−nTs); sQ(t)=ΣdQ,n g(t−nTs)",
+              "html": "<div class=\"verified-equation\" role=\"math\">sI(t)=ΣdI,n g(t−nTs); sQ(t)=ΣdQ,n g(t−nTs)</div>"
+            }
+          ],
+          "reason": "QPSK point 4 ခုက circle radius1 ပေါ် quadrants 4 ခုမှာရှိတယ်။ Each coordinate ±1/√2 ဖြစ်မှ E_symbol=1 ရတယ်။",
+          "method": "Original Fig.2.3 labels 00=NE,11=SW,10=NW,01=SE. Map signs accordingly and insert rectangular transmit filters.",
+          "finalAnswer": "QPSK I=[+−−+]/√2, Q=[+−+−]/√2.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "g",
+          "title": "Plot QPSK I/Q waveforms",
+          "question": "Specify rectangular levels across four symbols.",
+          "equations": [
+            "I: [+0.7071,−0.7071,−0.7071,+0.7071] by interval",
+            "Q: [+0.7071,−0.7071,+0.7071,−0.7071] by interval",
+            "I,Q pulse boundaries at 0,Ts,2Ts,3Ts,4Ts"
+          ],
+          "display": [
+            {
+              "latex": "I: [+0.7071,−0.7071,−0.7071,+0.7071] by interval",
+              "html": "<div class=\"verified-equation\" role=\"math\">I: [+0.7071,−0.7071,−0.7071,+0.7071] by interval</div>"
+            },
+            {
+              "latex": "Q: [+0.7071,−0.7071,+0.7071,−0.7071] by interval",
+              "html": "<div class=\"verified-equation\" role=\"math\">Q: [+0.7071,−0.7071,+0.7071,−0.7071] by interval</div>"
+            },
+            {
+              "latex": "I,Q pulse boundaries at 0,Ts,2Ts,3Ts,4Ts",
+              "html": "<div class=\"verified-equation\" role=\"math\">I,Q pulse boundaries at 0,Ts,2Ts,3Ts,4Ts</div>"
+            }
+          ],
+          "reason": "I/Q coordinate နှစ်ခုစလုံး အချိန် interval တူတူမှာပြောင်းတာက ordinary QPSK ဖြစ်တယ်။",
+          "method": "Draw two step functions on common time axis. At t=Ts both signs change, at 2Ts only Q changes, at3Ts both change.",
+          "finalAnswer": "Four QPSK I/Q step levels as listed.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "h",
+          "title": "QPSK constellation transitions",
+          "question": "Mark states and transition angles for 00→11→10→01.",
+          "equations": [
+            "00→(+,+) phase +π/4",
+            "11→(−,−) phase −3π/4",
+            "10→(−,+) phase +3π/4",
+            "01→(+,−) phase −π/4",
+            "Transitions: 00→11 diametric; 11→10 one-axis; 10→01 diametric"
+          ],
+          "display": [
+            {
+              "latex": "00→(+,+) phase +π/4",
+              "html": "<div class=\"verified-equation\" role=\"math\">00→(+,+) phase +π/4</div>"
+            },
+            {
+              "latex": "11→(−,−) phase −3π/4",
+              "html": "<div class=\"verified-equation\" role=\"math\">11→(−,−) phase −3π/4</div>"
+            },
+            {
+              "latex": "10→(−,+) phase +3π/4",
+              "html": "<div class=\"verified-equation\" role=\"math\">10→(−,+) phase +3π/4</div>"
+            },
+            {
+              "latex": "01→(+,−) phase −π/4",
+              "html": "<div class=\"verified-equation\" role=\"math\">01→(+,−) phase −π/4</div>"
+            },
+            {
+              "latex": "Transitions: 00→11 diametric; 11→10 one-axis; 10→01 diametric",
+              "html": "<div class=\"verified-equation\" role=\"math\">Transitions: 00→11 diametric; 11→10 one-axis; 10→01 diametric</div>"
+            }
+          ],
+          "reason": "QPSK phase180° jump ဖြစ်ရင် trajectory က origin နားဖြတ်နိုင်လို့ envelope dip ဖြစ်နိုင်တယ်။",
+          "method": "Plot the points in order NE→SW→NW→SE on IQ plane; draw straight decision-transition paths for rectangular-switch interpretation.",
+          "finalAnswer": "Two 180° constellation transitions occur.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "i",
+          "title": "QPSK passband signal formula",
+          "question": "Find s(t) using normalized QPSK symbols.",
+          "equations": [
+            "s(t)=√2[sI cos(2πfct)−sQ sin(2πfct)]",
+            "For d_n=(a_n+j b_n)/√2, a_n,b_n∈{±1}",
+            "Within symbol n: s(t)=a_n cos(6πt/Ts)−b_n sin(6πt/Ts)",
+            "=√2 cos(6πt/Ts+arg(d_n))"
+          ],
+          "display": [
+            {
+              "latex": "s(t)=√2[sI cos(2πfct)−sQ sin(2πfct)]",
+              "html": "<div class=\"verified-equation\" role=\"math\">s(t)=√2[sI cos(2πfct)−sQ sin(2πfct)]</div>"
+            },
+            {
+              "latex": "For d_n=(a_n+j b_n)/√2, a_n,b_n∈{±1}",
+              "html": "<div class=\"verified-equation\" role=\"math\">For d_n=(a_n+j b_n)/√2, a_n,b_n∈{±1}</div>"
+            },
+            {
+              "latex": "Within symbol n: s(t)=a_n cos(6πt/Ts)−b_n sin(6πt/Ts)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Within symbol n: s(t)=a_n cos(6πt/Ts)−b_n sin(6πt/Ts)</div>"
+            },
+            {
+              "latex": "=√2 cos(6πt/Ts+arg(d_n))",
+              "html": "<div class=\"verified-equation\" role=\"math\">=√2 cos(6πt/Ts+arg(d_n))</div>"
+            }
+          ],
+          "reason": "I/Q sign pair ရွေးလိုက်တာနဲ့ cosine + sine combined wave ကို phase-shifted cosine တစ်ခုအဖြစ်ပြောင်းနိုင်တယ်။",
+          "method": "Euler relation: √2Re{d_ne^{jωct}}=√2 cos(ωct+arg d_n). Phase sequence +π/4,−3π/4,+3π/4,−π/4။",
+          "finalAnswer": "QPSK passband has amplitude √2 and phase from d_n.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "j",
+          "title": "Sketch QPSK passband",
+          "question": "Specify carrier and phase per symbol.",
+          "equations": [
+            "n0 phase +π/4; n1 −3π/4; n2 +3π/4; n3 −π/4",
+            "Each interval has 3 cosine cycles with peak √2",
+            "Draw phase changes at t=Ts,2Ts,3Ts"
+          ],
+          "display": [
+            {
+              "latex": "n0 phase +π/4; n1 −3π/4; n2 +3π/4; n3 −π/4",
+              "html": "<div class=\"verified-equation\" role=\"math\">n0 phase +π/4; n1 −3π/4; n2 +3π/4; n3 −π/4</div>"
+            },
+            {
+              "latex": "Each interval has 3 cosine cycles with peak √2",
+              "html": "<div class=\"verified-equation\" role=\"math\">Each interval has 3 cosine cycles with peak √2</div>"
+            },
+            {
+              "latex": "Draw phase changes at t=Ts,2Ts,3Ts",
+              "html": "<div class=\"verified-equation\" role=\"math\">Draw phase changes at t=Ts,2Ts,3Ts</div>"
+            }
+          ],
+          "reason": "QPSK မှာ amplitude constant per symbol ဖြစ်ပေမဲ့ phase jump ကြောင့် waveform boundary continuity မကောင်းနိုင်ဘူး။",
+          "method": "Draw 3 carrier cycles in each interval with listed offsets and constant ±√2 envelope. Highlight phase jumps at 1,2,3Ts.",
+          "finalAnswer": "Four segments with explicit phase offsets.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "k",
+          "title": "How to implement Offset-QPSK",
+          "question": "What changes to transmitter and receiver are required for OQPSK?",
+          "equations": [
+            "Transmit Q path delayed by T_S/2 relative to I",
+            "Receive I path delay by T_S/2 to align de-mapped symbol decisions",
+            "I and Q never change sign simultaneously"
+          ],
+          "display": [
+            {
+              "latex": "Transmit Q path delayed by T_S/2 relative to I",
+              "html": "<div class=\"verified-equation\" role=\"math\">Transmit Q path delayed by T_S/2 relative to I</div>"
+            },
+            {
+              "latex": "Receive I path delay by T_S/2 to align de-mapped symbol decisions",
+              "html": "<div class=\"verified-equation\" role=\"math\">Receive I path delay by T_S/2 to align de-mapped symbol decisions</div>"
+            },
+            {
+              "latex": "I and Q never change sign simultaneously",
+              "html": "<div class=\"verified-equation\" role=\"math\">I and Q never change sign simultaneously</div>"
+            }
+          ],
+          "reason": "Ordinary QPSK မှာ both coordinates တစ်ပြိုင်နက်ပြောင်းနိုင်တယ်။ Q delay half-symbol ထည့်တာက simultaneous jumps ပျောက်စေတယ်။",
+          "method": "After mapping to dI,n,dQ,n, place Ts/2 delay in Q pulse-shaping/mixer branch; compensate with equivalent delay in receiver I branch before joint decisions.",
+          "finalAnswer": "Delay Q transmit by Ts/2 and I receive by Ts/2.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "l",
+          "title": "OQPSK time-domain components",
+          "question": "Express I/Q pulse sequences for same bit sequence.",
+          "equations": [
+            "sI,OQPSK(t)=Σ_n dI,n g(t−nTs) unchanged",
+            "sQ,OQPSK(t)=Σ_n dQ,n g(t−nTs−Ts/2)",
+            "dI=[+−−+]/√2; dQ=[+−+−]/√2"
+          ],
+          "display": [
+            {
+              "latex": "sI,OQPSK(t)=Σ_n dI,n g(t−nTs) unchanged",
+              "html": "<div class=\"verified-equation\" role=\"math\">sI,OQPSK(t)=Σ_n dI,n g(t−nTs) unchanged</div>"
+            },
+            {
+              "latex": "sQ,OQPSK(t)=Σ_n dQ,n g(t−nTs−Ts/2)",
+              "html": "<div class=\"verified-equation\" role=\"math\">sQ,OQPSK(t)=Σ_n dQ,n g(t−nTs−Ts/2)</div>"
+            },
+            {
+              "latex": "dI=[+−−+]/√2; dQ=[+−+−]/√2",
+              "html": "<div class=\"verified-equation\" role=\"math\">dI=[+−−+]/√2; dQ=[+−+−]/√2</div>"
+            }
+          ],
+          "reason": "Q stream သာ Ts/2 နောက်ကျသွားပြီး values တွေက QPSK အတိုင်းတူတယ်။",
+          "method": "Take f's components, leave I untouched, shift every Q rectangular pulse right by Ts/2. The Q waveform begins at t=Ts/2.",
+          "finalAnswer": "Q delayed half-symbol, I unchanged.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "m",
+          "title": "Plot OQPSK I and delayed Q",
+          "question": "List all relevant transition instants.",
+          "equations": [
+            "I transitions: t=0,Ts,2Ts,3Ts,4Ts",
+            "Q transitions: t=Ts/2,3Ts/2,5Ts/2,7Ts/2,9Ts/2",
+            "I: [+,−,−,+]/√2; Q delayed: [+,−,+,−]/√2"
+          ],
+          "display": [
+            {
+              "latex": "I transitions: t=0,Ts,2Ts,3Ts,4Ts",
+              "html": "<div class=\"verified-equation\" role=\"math\">I transitions: t=0,Ts,2Ts,3Ts,4Ts</div>"
+            },
+            {
+              "latex": "Q transitions: t=Ts/2,3Ts/2,5Ts/2,7Ts/2,9Ts/2",
+              "html": "<div class=\"verified-equation\" role=\"math\">Q transitions: t=Ts/2,3Ts/2,5Ts/2,7Ts/2,9Ts/2</div>"
+            },
+            {
+              "latex": "I: [+,−,−,+]/√2; Q delayed: [+,−,+,−]/√2",
+              "html": "<div class=\"verified-equation\" role=\"math\">I: [+,−,−,+]/√2; Q delayed: [+,−,+,−]/√2</div>"
+            }
+          ],
+          "reason": "Q sign အပြောင်းတွေက half-symbol ticks မှာဖြစ်လို့ I sign အပြောင်းတွေနဲ့ မတိုက်ဆိုင်တော့ဘူး။",
+          "method": "Draw I steps at integer Ts, Q steps at half-integer Ts. Label y-axis ±0.7071. Use a common time axis from 0 to4.5Ts.",
+          "finalAnswer": "Staggered I and Q transitions.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "n",
+          "title": "OQPSK trajectory",
+          "question": "Explain how constellation transitions differ from QPSK.",
+          "equations": [
+            "I/Q coordinate jumps staggered by T_S/2",
+            "A transition changes one coordinate at a time",
+            "No direct diametric ±180° jumps",
+            "Phase step magnitude ≤90° for ideal OQPSK"
+          ],
+          "display": [
+            {
+              "latex": "I/Q coordinate jumps staggered by T_S/2",
+              "html": "<div class=\"verified-equation\" role=\"math\">I/Q coordinate jumps staggered by T_S/2</div>"
+            },
+            {
+              "latex": "A transition changes one coordinate at a time",
+              "html": "<div class=\"verified-equation\" role=\"math\">A transition changes one coordinate at a time</div>"
+            },
+            {
+              "latex": "No direct diametric ±180° jumps",
+              "html": "<div class=\"verified-equation\" role=\"math\">No direct diametric ±180° jumps</div>"
+            },
+            {
+              "latex": "Phase step magnitude ≤90° for ideal OQPSK",
+              "html": "<div class=\"verified-equation\" role=\"math\">Phase step magnitude ≤90° for ideal OQPSK</div>"
+            }
+          ],
+          "reason": "Constellation ထဲ diagonal အပြောင်းအလဲတစ်ခုကို one-axis transition နှစ်ကြိမ်အဖြစ် ခွဲတယ်။ Origin ဖြတ်တဲ့ direct jump မရှိတော့ဘူး။",
+          "method": "Mark QPSK points and intermediate points after only one coordinate changes. Label temporal sequence at integer and half-symbol boundaries. Show same final states but no simultaneous I/Q sign flip.",
+          "finalAnswer": "OQPSK avoids instantaneous 180° constellation changes.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
+        },
+        {
+          "label": "o",
+          "title": "Advantage over QPSK",
+          "question": "Explain why OQPSK envelope is less sensitive to pulse filtering.",
+          "equations": [
+            "Conventional QPSK may have 180° phase jumps",
+            "OQPSK restricts symbol transition angle to ≤90°",
+            "Reduced envelope excursions after filtering improve nonlinear-amplifier robustness"
+          ],
+          "display": [
+            {
+              "latex": "Conventional QPSK may have 180° phase jumps",
+              "html": "<div class=\"verified-equation\" role=\"math\">Conventional QPSK may have 180° phase jumps</div>"
+            },
+            {
+              "latex": "OQPSK restricts symbol transition angle to ≤90°",
+              "html": "<div class=\"verified-equation\" role=\"math\">OQPSK restricts symbol transition angle to ≤90°</div>"
+            },
+            {
+              "latex": "Reduced envelope excursions after filtering improve nonlinear-amplifier robustness",
+              "html": "<div class=\"verified-equation\" role=\"math\">Reduced envelope excursions after filtering improve nonlinear-amplifier robustness</div>"
+            }
+          ],
+          "reason": "180° jump တွေက pulse shaping/filtering အောက် envelope dip လုပ်တတ်တယ်။ OQPSK ရဲ့ staggered I/Q changes ကြောင့် peak-to-average effects နည်းနိုင်တယ်။",
+          "method": "Compare h and n: QPSK has diagonal opposite jumps, OQPSK has two staggered one-axis jumps. This tends to reduce envelope variability and regrowth in nonlinear amplifiers, though exact PAPR depends on filtering.",
+          "finalAnswer": "Advantage: avoids 180° transitions and typically reduces envelope fluctuations.",
+          "verification": "Independent solution based on inspected original Fig.2.2–2.3 constellations and Fig.2.1 pulse-chain"
         }
       ]
     }
