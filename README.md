@@ -59,15 +59,15 @@ Run `node tools/smoke_public.cjs`. Study data remains compatible with the previo
 
 The generated Eric M.Sc EEIT Study Hub logo is included in `source/assets/eeit-study-hub-logo.webp` (optimized for the web), alongside `source/brand-ui.css` for flat, responsive branding. The original logo design is represented in the website sidebar, mobile header and dashboard hero.
 
-## Why / Method / Final Answer dialogs (v1.3)
+## Inline complete solution view (6 November 2026)
 
-Every worked part offers dedicated accessible popups for the Myanmar method reason, calculation method and final answer. Content source notes distinguish original practice, independent study derivations and source-only entries. Original course PDFs and instructor-owned question scans remain excluded from the public build. Existing logo, Firebase integration and local storage keys are unchanged.
+The exercise page now shows all available subquestions (a), (b), (c), etc. directly in document order. Each part has Question/Givens, Method, mathematical work, Myanmar rationale, final answer, independent-verification note, and personal progress/notes. The bottom of each worked exercise includes an **Overall Solution / Final Answer Summary**. No Why/Method/Final Answer dialog script is loaded, and retired popup files are excluded from the public distribution. Content provenance and missing calculations remain explicit. Source material is private, and no unofficial answers are invented.
 
 ## Live-site verification
 
 `node tools/live_check.mjs` performs HTTP checks against the deployed Render site: HTML, CSS/JavaScript assets, 82-entry content JSON, actual image headers and Firebase client configuration presence (never logs the config values). `.github/workflows/eeit-live-check.yml` runs this check when `main` changes. The app's original course PDFs and privately provided question scans remain excluded from deployment.
 
-We intentionally load only `enhancements.js` for the three explanation dialogs. The older `reason-ui.js` remains in the repository for historical reference, but is no longer loaded; running both scripts could overwrite each other's exercise rationale controls.
+The website loads `inline-solutions.css` and the revised `app.js` only for worked-solution presentation; the old `enhancements.js` and `reason-ui.js` implementations are not loaded or published.
 
 ## Independent exercise expansion — 6 November 2026
 
@@ -75,6 +75,10 @@ The additive `source/data/verified-expansion.json` supplies **15 reviewed exerci
 
 Verified expansion coverage: Digital Communications OFDM 4.1 (a–j), 5G NR 4.2 (a–f), LTE 4.3 (a–e), CDMA 5.1 (a–g), Equalization 3.1 (a–k), MAP/ML 3.2 (a–k) and Viterbi 3.3 (a–h); Electrical Power Systems II symbolic PST, per-unit, three-bus Y-bus, and Newton–Raphson Jacobian worked examples; Control Systems I.2 state-space and system tuples; Microwave Engineering 1.2 full link budget (a–c) and 1.3 coax fields (a–g); Microsystem Engineering new independent mass–spring practice (a–c). Numerical examples introduced for teaching are clearly labelled illustrative and are not claimed to be professor originals.
 
-**Important:** Existing source-only exercises and legacy unreviewed subparts are deliberately not relabelled solved. For the reviewed additions, each subpart contains independent calculation expressions, why, solving method, and final-answer popup content. Several original tutorial questions require private figures or additional source information; they have not been invented.
+**Important:** Existing source-only exercises and legacy unreviewed subparts are deliberately not relabelled solved. For the reviewed additions, each revised subpart contains study calculation expressions, a reason, the solving method, and an inline final-answer section. Several original tutorial questions require private figures or additional source information; they have not been invented.
 
 Run `node tools/smoke_public.cjs` for consistency checks, build and security/copyright safeguards.
+
+## Solution-audit status
+
+The available course exercise library and independently written practice do **not** establish that all official problems have complete validated worked answers. This UI change preserves existing course exercise IDs and sync storage without adding invented givens or figures. All recorded solutions are displayed inline; missing written methods/final answers are visibly labelled pending review. Before marking the full bank mathematically complete, compare every numerical result and assumption against the original private question sheet and correct any legacy mathematical errors.
