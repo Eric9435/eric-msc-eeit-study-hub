@@ -10,4 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check content, JavaScript and public build
-        run: node tools/smoke_public.cjs
+        run: |
+          node tools/smoke_public.cjs
+          node tools/unit-check.mjs
