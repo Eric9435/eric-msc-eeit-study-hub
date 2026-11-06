@@ -20,6 +20,25 @@ for(const over of ext.overrides){
 const overrideMap=new Map(ext.overrides.map(x=>[x.id,x]));
 const merged=data.exercises.map(e=>overrideMap.has(e.id)?{...e,...overrideMap.get(e.id)}:e);
 const parts=merged.reduce((n,e)=>n+e.parts.length,0);
+const originals=JSON.parse(fs.readFileSync(file('source/data/original-practice-reworked.json'),'utf8'));
+assert.equal(originals.overrides.length,21,'Expect all 21 rederived five-subject practice entries');
+const reworkedParts=originals.overrides.flatMap(e=>e.parts||[]);
+assert.equal(reworkedParts.length,63,'Expect 63 original practice subparts');
+for(const over of originals.overrides){
+ const source=data.exercises.find(e=>e.id===over.id);
+ assert(source,'Reworked practice missing source '+over.id);
+ assert.equal(source.parts.length,over.parts.length,'Reworked practice changed number of subparts '+over.id);
+ assert(source.parts.every((p,i)=>p.label===over.parts[i].label),'Reworked practice changed labels '+over.id);
+ for(const p of over.parts){
+  assert(p.method&&p.finalAnswer&&p.reason&&p.working?.length>=4,'Missing complete original derivation '+over.id+':'+p.label);
+  assert(p.working.every(step=>step.label&&step.value),'Incomplete calculation step '+over.id+':'+p.label);
+ }
+}
+const originalMap=new Map(originals.overrides.map(e=>[e.id,e]));
+const allMerged=merged.map(e=>originalMap.has(e.id)?{...e,...originalMap.get(e.id)}:e);
+const bySubject=new Map(data.subjects.map(s=>[s.id,allMerged.filter(e=>e.subject===s.id)]));
+assert([...bySubject.values()].every(es=>es.some(e=>originalMap.has(e.id))),'Original worked practice missing in one of the five subjects');
+
 assert(merged.filter(e=>e.parts.length===0).length<30,'Verified expansion did not reduce source-only count');
 assert(parts>=223,'Expected at least 223 documented guided subquestions');
 assert.equal(new Set(data.exercises.map(e=>e.id)).size,82,'Duplicate exercise IDs');
@@ -31,8 +50,9 @@ for(const e of data.exercises){
 assert(!JSON.stringify(data).includes('sourceQuestionText'),'Original instructor text in public data');
 assert(!JSON.stringify(data).includes('data:image/'),'Private image data leaked');
 assert(!JSON.stringify(ext).includes('data:image/'),'Private images in independent derivations');
+assert(!JSON.stringify(originals).includes('data:image/'),'Private images leaked into original practice data');
 cp.execFileSync(process.execPath,[file('tools/build_public.cjs')],{cwd:root,stdio:'inherit'});
-for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','visuals.css','visuals.mjs','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','assets/favicon.svg'])
+for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','visuals.css','visuals.mjs','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','data/original-practice-reworked.json','assets/favicon.svg'])
  assert(fs.existsSync(file('public/'+name)),'Missing public file '+name);
 assert(!fs.existsSync(file('public/assets/questions')),'Original course page images published');
 const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?walk(path.join(d,x.name)):[path.join(d,x.name)]);
@@ -48,6 +68,9 @@ assert(fullSource.includes('paper-part')&&fullSource.includes('COMPLETE WORKING 
 assert(!fullSource.includes('showPartExplanation('),'Explanation popup should be removed');
 assert(!fullSource.includes('Overall Solution / Final Answer Summary'),'Old short answer recap is still present');
 assert(index.includes('a4-paper.css'),'A4 white-paper CSS not referenced');
+assert(fullSource.includes('paper-workline-label'),'Given-to-check step rendering missing');
+assert(fullSource.includes('original-practice-reworked.json'),'Original practice data not fetched');
+assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('original-practice-reworked.json'),'Original practice data not precached offline');
 assert(index.includes('visuals.css'),'Visual stylesheet not loaded');
 assert(fs.readFileSync(file('source/app.js'),'utf8').includes("from './visuals.mjs'"),'Visual module is not imported');
 assert(fs.readFileSync(file('source/app.js'),'utf8').includes('renderVisual(e,visualSettings.get(e.id))'),'Exercise page lacks visual panel');
@@ -55,4 +78,4 @@ assert(fs.readFileSync(file('source/sw.js'),'utf8').includes("'./visuals.mjs'"),
 assert(fs.readFileSync(file('source/a4-paper.css'),'utf8').includes('size:A4'),'A4 printing stylesheet missing');
 for(const old of ['enhancements.js','enhancements.css','reason-ui.js','reason-ui.css'])
  assert(!fs.existsSync(file('public/'+old)),'Retired popup asset shipped: '+old);
-console.log('PASS: 5 subjects; 82 exercise entries; '+parts+' guided subquestions with labelled study derivations; '+data.formulas.length+' formulas; public build, syntax and source-rights safeguards.');
+console.log('PASS: 5 subjects; 82 exercise entries; '+parts+' guided subquestions including 63 explicit original-practice calculation chains; '+data.formulas.length+' formulas; public build, syntax and source-rights safeguards.');
