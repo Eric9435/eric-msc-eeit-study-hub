@@ -1,5 +1,5 @@
-const CACHE='eeit-exercise-integrated-v6';
-const CORE=['./','./index.html','./styles.css','./app.js','./cloud.css','./brand-ui.css','./reason-ui.css','./reason-ui.js','./enhancements.js','./enhancements.css','./cloud.js','./assets/eeit-study-hub-logo.webp','./data/content.json','./manifest.webmanifest','./assets/favicon.svg'];
+const CACHE='eeit-exercise-integrated-v7';
+const CORE=['./','./index.html','./styles.css','./app.js','./cloud.css','./brand-ui.css','./enhancements.js','./enhancements.css','./cloud.js','./assets/eeit-study-hub-logo.webp','./data/content.json','./manifest.webmanifest','./assets/favicon.svg'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{

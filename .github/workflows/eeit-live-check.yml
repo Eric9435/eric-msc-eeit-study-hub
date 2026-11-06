@@ -1,0 +1,18 @@
+name: EEIT deployed website health check
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  live-health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify live Render website and Firebase client setup
+        run: node tools/live_check.mjs
+        env:
+          EEIT_SITE_URL: https://eric-msc-eeit-study-hub.onrender.com

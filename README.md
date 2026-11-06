@@ -59,10 +59,12 @@ Run `node tools/smoke_public.cjs`. Study data remains compatible with the previo
 
 The generated Eric M.Sc EEIT Study Hub logo is included in `source/assets/eeit-study-hub-logo.webp` (optimized for the web), alongside `source/brand-ui.css` for flat, responsive branding. The original logo design is represented in the website sidebar, mobile header and dashboard hero.
 
-### Reasoning popups
-
-Each worked exercise contains a keyboard-accessible **Why this method?** button. It opens a responsive modal displaying the independent Myanmar reasoning for that specific exercise part. Escape, close button and tapping outside dismiss it; focus returns to the original button. No third-party library required.
-
 ## Why / Method / Final Answer dialogs (v1.3)
 
 Every worked part offers dedicated accessible popups for the Myanmar method reason, calculation method and final answer. Content source notes distinguish original practice, independent study derivations and source-only entries. Original course PDFs and instructor-owned question scans remain excluded from the public build. Existing logo, Firebase integration and local storage keys are unchanged.
+
+## Live-site verification
+
+`node tools/live_check.mjs` performs HTTP checks against the deployed Render site: HTML, CSS/JavaScript assets, 82-entry content JSON, actual image headers and Firebase client configuration presence (never logs the config values). `.github/workflows/eeit-live-check.yml` runs this check when `main` changes. The app's original course PDFs and privately provided question scans remain excluded from deployment.
+
+We intentionally load only `enhancements.js` for the three explanation dialogs. The older `reason-ui.js` remains in the repository for historical reference, but is no longer loaded; running both scripts could overwrite each other's exercise rationale controls.
