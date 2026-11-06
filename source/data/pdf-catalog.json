@@ -2804,7 +2804,7 @@
     "fullyLinkedOriginal": 42,
     "lectureReferenceOnly": 22,
     "standaloneOrUnlinked": 18,
-    "sourceOnlyWithoutSolution": 12,
+    "sourceOnlyWithoutSolution": 8,
     "bySubject": {
       "digital": {
         "sets": 21,
@@ -2832,7 +2832,7 @@
         "exact": 18,
         "related": 0,
         "other": 5,
-        "withoutWorkedSolution": 4
+        "withoutWorkedSolution": 0
       },
       "micro": {
         "sets": 10,
@@ -2842,6 +2842,6 @@
         "withoutWorkedSolution": 0
       }
     },
-    "description": "Exact means question and sample-solution page headings were verified in real owner-private uploaded PDFs. Related means only a topic lecture reference, NOT the exact exercise. Other includes independently authored practice and entries lacking direct source mapping. Source-only means no full worked parts in website, even where PDF source is available."
+    "description": "Source-only means no fully written solution in the current runtime merged website data. Four formerly source-only Microwave questions are now independently rederived from their original question and reference solutions. Eight source-only sets remain (Digital: 3, Power: 5). The 23 additional independent MEMS project practices are tracked separately, beyond the 82 original indexed entries."
   }
 }
