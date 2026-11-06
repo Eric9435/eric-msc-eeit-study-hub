@@ -1,8 +1,8 @@
 {
-  "revision": "2026-11-06",
+  "revision": "2026-11-06-recovered-23-numbered-project-practices",
   "kind": "recovered-ChatGPT-Project-independent-practice",
   "provenance": "Past Micro TUHH project practice calculations. None are asserted to be an official TUHH exercise or question.",
-  "coverageNote": "Only exercises with sufficiently recoverable given data are included. Gaps in 1–30 have not been invented.",
+  "coverageNote": "Only exercises with recoverable numerical givens are included; some numbered exercises repeat the same problem with different exercise numbers. All are labeled independent practice, not official professor questions. Unrecoverable numbers were not fabricated.",
   "exercises": [
     {
       "id": "project-mems-01",
@@ -703,6 +703,546 @@
           ],
           "finalAnswer": "I≈1.333×10⁻²³ m⁴; k≈0.80 N/m; δ≈1.25 μm; σmax≈15 MPa.",
           "verification": "Recalculated with stated SI quantities; illustrative project practice, not a professor-approved answer."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-02",
+      "subject": "micro",
+      "number": "02",
+      "title": "MEMS scaling laws: cube surface and volume",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "MEMS scaling laws: cube surface and volume",
+          "question": "An independent practice cube decreases from 1 mm to 100 µm side. Calculate its surface area, volume and surface-to-volume ratios at both sizes.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Surface/volume ratio သည် 1/L အတိုင်း တိုးသောကြောင့် microscale မှာ surface effects ပိုအရေးပါသည်။ ဤနံပါတ်သည် Project Practice 1 နှင့် scaling concept တူသည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "L1=1 mm=1×10⁻³ m; L2=100 µm=1×10⁻⁴ m."
+            },
+            {
+              "label": "Governing equation",
+              "value": "A=6L²; V=L³; A/V=6/L."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "A1=6×10⁻⁶ m², V1=10⁻⁹ m³, A1/V1=6000 m⁻¹. A2=6×10⁻⁸ m², V2=10⁻¹² m³, A2/V2=60000 m⁻¹."
+            },
+            {
+              "label": "Independent verification",
+              "value": "Length ratio 0.1 gives area factor 0.01, volume factor 0.001, A/V factor 10."
+            }
+          ],
+          "equations": [
+            "A=6L²; V=L³; A/V=6/L.",
+            "A1=6×10⁻⁶ m², V1=10⁻⁹ m³, A1/V1=6000 m⁻¹. A2=6×10⁻⁸ m², V2=10⁻¹² m³, A2/V2=60000 m⁻¹."
+          ],
+          "display": [
+            {
+              "latex": "A=6L²; V=L³; A/V=6/L."
+            },
+            {
+              "latex": "A1=6×10⁻⁶ m², V1=10⁻⁹ m³, A1/V1=6000 m⁻¹. A2=6×10⁻⁸ m², V2=10⁻¹² m³, A2/V2=60000 m⁻¹."
+            }
+          ],
+          "finalAnswer": "A/V increases by 10×: 6,000→60,000 m⁻¹.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-03",
+      "subject": "micro",
+      "number": "03",
+      "title": "MEMS mass–spring resonance",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "MEMS mass–spring resonance",
+          "question": "For undamped mass m=2 µg and spring stiffness k=20 N/m, calculate angular natural frequency and resonant frequency.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Undamped harmonic oscillator m ẍ+kx=0 ၏ eigenfrequency ကို frequency unit သို့ပြောင်းခြင်းဖြစ်သည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "m=2 µg=2×10⁻⁹ kg; k=20 N/m."
+            },
+            {
+              "label": "Governing equation",
+              "value": "ω₀=√(k/m); f₀=ω₀/(2π)."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "ω₀=√(20/(2×10⁻⁹))=100,000 rad/s; f₀=100,000/(2π)=15,915.494 Hz."
+            },
+            {
+              "label": "Independent verification",
+              "value": "(rad/s)/(2π) gives Hz; √(20/2e−9)=1e5."
+            }
+          ],
+          "equations": [
+            "ω₀=√(k/m); f₀=ω₀/(2π).",
+            "ω₀=√(20/(2×10⁻⁹))=100,000 rad/s; f₀=100,000/(2π)=15,915.494 Hz."
+          ],
+          "display": [
+            {
+              "latex": "ω₀=√(k/m); f₀=ω₀/(2π)."
+            },
+            {
+              "latex": "ω₀=√(20/(2×10⁻⁹))=100,000 rad/s; f₀=100,000/(2π)=15,915.494 Hz."
+            }
+          ],
+          "finalAnswer": "ω₀=100,000 rad/s; f₀≈15.9155 kHz.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-04",
+      "subject": "micro",
+      "number": "04",
+      "title": "Piezoresistor gauge factor",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Piezoresistor gauge factor",
+          "question": "A silicon piezoresistor has R0=1000 Ω, gauge factor GF=50, applied strain ε=500 με. Calculate resistance change and new resistance.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Gauge factor သည် fractional resistance change ကို mechanical strain ဖြင့် normalize လုပ်ထားသော sensitivity ဖြစ်သည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "R0=1000 Ω; GF=50; ε=500×10⁻⁶=0.0005."
+            },
+            {
+              "label": "Governing equation",
+              "value": "GF=(ΔR/R0)/ε; ΔR=GF ε R0; R=R0+ΔR."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "ΔR=50×0.0005×1000=25 Ω; R=1000+25=1025 Ω."
+            },
+            {
+              "label": "Independent verification",
+              "value": "ΔR/R0=0.025=GF×ε=50×0.0005."
+            }
+          ],
+          "equations": [
+            "GF=(ΔR/R0)/ε; ΔR=GF ε R0; R=R0+ΔR.",
+            "ΔR=50×0.0005×1000=25 Ω; R=1000+25=1025 Ω."
+          ],
+          "display": [
+            {
+              "latex": "GF=(ΔR/R0)/ε; ΔR=GF ε R0; R=R0+ΔR."
+            },
+            {
+              "latex": "ΔR=50×0.0005×1000=25 Ω; R=1000+25=1025 Ω."
+            }
+          ],
+          "finalAnswer": "ΔR=25 Ω; R=1025 Ω (+2.5%).",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-06",
+      "subject": "micro",
+      "number": "06",
+      "title": "Diffusion length in silicon",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Diffusion length in silicon",
+          "question": "For diffusion coefficient D=1×10⁻¹² m²/s and diffusion duration t=100 s, compute one-dimensional RMS diffusion distance.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Diffusion random-walk process ၏ mean-squared displacement 2Dt ဖြစ်၍ square root ကို distance အဖြစ်ယူသည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "D=1×10⁻¹² m²/s; t=100 s."
+            },
+            {
+              "label": "Governing equation",
+              "value": "σ=√(2Dt)."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "σ=√(2×10⁻¹²×100)=√(2×10⁻¹⁰)=1.41421×10⁻⁵ m=14.1421 µm."
+            },
+            {
+              "label": "Independent verification",
+              "value": "Under 1D Gaussian diffusion, variance σ²=2Dt=2×10⁻¹⁰ m²."
+            }
+          ],
+          "equations": [
+            "σ=√(2Dt).",
+            "σ=√(2×10⁻¹²×100)=√(2×10⁻¹⁰)=1.41421×10⁻⁵ m=14.1421 µm."
+          ],
+          "display": [
+            {
+              "latex": "σ=√(2Dt)."
+            },
+            {
+              "latex": "σ=√(2×10⁻¹²×100)=√(2×10⁻¹⁰)=1.41421×10⁻⁵ m=14.1421 µm."
+            }
+          ],
+          "finalAnswer": "RMS diffusion distance σ≈14.14 µm.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-09",
+      "subject": "micro",
+      "number": "09",
+      "title": "Silicon cantilever stiffness and bending",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Silicon cantilever stiffness and bending",
+          "question": "Independent practice cantilever L=200 µm, w=20 µm, t=2 µm, E=160 GPa and tip load F=1 µN. Find I,k,deflection,max stress.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Cantilever အတွက် bending stiffness EI ကိုသုံး၍ Hooke law နဲ့ displacement စစ်တယ်။ အခြားနံပါတ်တွေနဲ့ အချက်အလက် တူခြင်းကို ဖုံးမထားဘူး။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "L=200×10⁻⁶ m; w=20×10⁻⁶ m; t=2×10⁻⁶ m; E=160×10⁹ Pa; F=1×10⁻⁶ N."
+            },
+            {
+              "label": "Governing equation",
+              "value": "I=wt³/12; k=3EI/L³; δ=F/k; σmax=6FL/(wt²)."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "I=1.33333×10⁻²³ m⁴; k=0.8 N/m; δ=1.25×10⁻⁶ m; σmax=1.5×10⁷ Pa."
+            },
+            {
+              "label": "Independent verification",
+              "value": "kδ=(0.8)(1.25e−6)=1.0e−6 N; same givens were revisited as Practices 11 and 30."
+            }
+          ],
+          "equations": [
+            "I=wt³/12; k=3EI/L³; δ=F/k; σmax=6FL/(wt²).",
+            "I=1.33333×10⁻²³ m⁴; k=0.8 N/m; δ=1.25×10⁻⁶ m; σmax=1.5×10⁷ Pa."
+          ],
+          "display": [
+            {
+              "latex": "I=wt³/12; k=3EI/L³; δ=F/k; σmax=6FL/(wt²)."
+            },
+            {
+              "latex": "I=1.33333×10⁻²³ m⁴; k=0.8 N/m; δ=1.25×10⁻⁶ m; σmax=1.5×10⁷ Pa."
+            }
+          ],
+          "finalAnswer": "I≈1.333×10⁻²³ m⁴; k≈0.80 N/m; δ≈1.25 µm; σmax≈15 MPa.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-15",
+      "subject": "micro",
+      "number": "15",
+      "title": "Parallel-plate capacitance under motion",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Parallel-plate capacitance under motion",
+          "question": "Plates of 200 µm×200 µm have original gap 2 µm and approach by x=0.2 µm. Compute C0, C1, ΔC and percentage increase.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Area constant ရှိသော parallel plate sensor တွင် gap ကျဉ်းသလို C∝1/gap တိုးသည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "A=(200×10⁻⁶)²=4×10⁻⁸ m²; d=2×10⁻⁶ m; x=0.2×10⁻⁶ m; ε0=8.8541878128×10⁻¹² F/m."
+            },
+            {
+              "label": "Governing equation",
+              "value": "C0=ε0 A/d; C1=ε0 A/(d−x); ΔC=C1−C0."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "C0=0.177083756 pF; C1=0.196759729 pF; ΔC=0.019675973 pF=19.675973 fF; 100ΔC/C0=11.111%."
+            },
+            {
+              "label": "Independent verification",
+              "value": "d/(d−x)=2/1.8=1.11111 ⇒ capacitance increase 11.111%."
+            }
+          ],
+          "equations": [
+            "C0=ε0 A/d; C1=ε0 A/(d−x); ΔC=C1−C0.",
+            "C0=0.177083756 pF; C1=0.196759729 pF; ΔC=0.019675973 pF=19.675973 fF; 100ΔC/C0=11.111%."
+          ],
+          "display": [
+            {
+              "latex": "C0=ε0 A/d; C1=ε0 A/(d−x); ΔC=C1−C0."
+            },
+            {
+              "latex": "C0=0.177083756 pF; C1=0.196759729 pF; ΔC=0.019675973 pF=19.675973 fF; 100ΔC/C0=11.111%."
+            }
+          ],
+          "finalAnswer": "C0≈0.17708 pF; C1≈0.19676 pF; ΔC≈19.68 fF; +11.11%.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-16",
+      "subject": "micro",
+      "number": "16",
+      "title": "Electrostatic actuator pull-in threshold",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Electrostatic actuator pull-in threshold",
+          "question": "For parallel plates A=1×10⁻⁸ m², initial gap g0=2 µm, spring k=2 N/m, calculate pull-in displacement and voltage.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Pull-in condition သည် spring restoring force နဲ့ electric-force derivative ညီသော stability limit ကို အသုံးပြုသည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "A=1×10⁻⁸ m²; g0=2×10⁻⁶ m; k=2 N/m; ε0=8.8541878128×10⁻¹² F/m."
+            },
+            {
+              "label": "Governing equation",
+              "value": "x_PI=g0/3; V_PI=√(8k g0³/(27 ε0 A))."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "x_PI=0.666667 µm; V_PI=√(8×2×(2e−6)³/(27×8.8541878128e−12×1e−8))=7.31726423 V."
+            },
+            {
+              "label": "Independent verification",
+              "value": "At x=g0/3, electrostatic negative stiffness equals k; voltage is lower than k=10 N/m case by √(2/10)."
+            }
+          ],
+          "equations": [
+            "x_PI=g0/3; V_PI=√(8k g0³/(27 ε0 A)).",
+            "x_PI=0.666667 µm; V_PI=√(8×2×(2e−6)³/(27×8.8541878128e−12×1e−8))=7.31726423 V."
+          ],
+          "display": [
+            {
+              "latex": "x_PI=g0/3; V_PI=√(8k g0³/(27 ε0 A))."
+            },
+            {
+              "latex": "x_PI=0.666667 µm; V_PI=√(8×2×(2e−6)³/(27×8.8541878128e−12×1e−8))=7.31726423 V."
+            }
+          ],
+          "finalAnswer": "x_PI≈0.6667 µm; V_PI≈7.317 V.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-18",
+      "subject": "micro",
+      "number": "18",
+      "title": "Large-area parallel-plate pull-in",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Large-area parallel-plate pull-in",
+          "question": "Parallel-plate actuator A=(200 µm)², gap d=2 µm, stiffness k=10 N/m. Compute C0, x_PI, V_PI and F_PI.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Area ပိုကြီးလာလျှင် electrostatic force တိုးပြီး required pull-in voltage ကျသွားတယ်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "A=(200×10⁻⁶)²=4×10⁻⁸ m²; d=2×10⁻⁶ m; k=10 N/m."
+            },
+            {
+              "label": "Governing equation",
+              "value": "C0=ε0A/d; x_PI=d/3; V_PI=√(8kd³/(27ε0A)); F_PI=k d/3."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "C0=177.0838 fF; x_PI=0.666667 µm; V_PI=8.18095011 V; F_PI=6.66667 µN."
+            },
+            {
+              "label": "Independent verification",
+              "value": "Compared with A=1×10⁻⁸ m², area is 4× ⇒ threshold voltage is half for same k,g."
+            }
+          ],
+          "equations": [
+            "C0=ε0A/d; x_PI=d/3; V_PI=√(8kd³/(27ε0A)); F_PI=k d/3.",
+            "C0=177.0838 fF; x_PI=0.666667 µm; V_PI=8.18095011 V; F_PI=6.66667 µN."
+          ],
+          "display": [
+            {
+              "latex": "C0=ε0A/d; x_PI=d/3; V_PI=√(8kd³/(27ε0A)); F_PI=k d/3."
+            },
+            {
+              "latex": "C0=177.0838 fF; x_PI=0.666667 µm; V_PI=8.18095011 V; F_PI=6.66667 µN."
+            }
+          ],
+          "finalAnswer": "C0≈0.1771 pF; x_PI≈0.6667 µm; V_PI≈8.181 V; F_PI≈6.667 µN.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-20",
+      "subject": "micro",
+      "number": "20",
+      "title": "Differential capacitive accelerometer under 10 g",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Differential capacitive accelerometer under 10 g",
+          "question": "Symmetric sensor m=2×10⁻⁹ kg, spring k=1 N/m, each plate A=2×10⁻⁸ m², gaps d=2 µm, acceleration a=98.1 m/s². Find x and both capacitances.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Differential accelerometer သည် moving mass နှင့် fixed plates နှစ်ဘက် capacitance ကို နှုတ်၍ output sensitivity ပိုကောင်းစေသည်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "m=2×10⁻⁹ kg; k=1 N/m; A=2×10⁻⁸ m²; d=2×10⁻⁶ m; a=98.1 m/s²."
+            },
+            {
+              "label": "Governing equation",
+              "value": "x=ma/k; C±=ε0 A/(d∓x); ΔC=C+−C−."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "x=1.962×10⁻⁷ m=0.1962 µm; C0=88.54188 fF; C+=98.17261 fF; C−=80.63189 fF; ΔC=17.54072 fF."
+            },
+            {
+              "label": "Independent verification",
+              "value": "Rest gaps d−x=1.8038 µm and d+x=2.1962 µm positive; both C values recovered by εA/g."
+            }
+          ],
+          "equations": [
+            "x=ma/k; C±=ε0 A/(d∓x); ΔC=C+−C−.",
+            "x=1.962×10⁻⁷ m=0.1962 µm; C0=88.54188 fF; C+=98.17261 fF; C−=80.63189 fF; ΔC=17.54072 fF."
+          ],
+          "display": [
+            {
+              "latex": "x=ma/k; C±=ε0 A/(d∓x); ΔC=C+−C−."
+            },
+            {
+              "latex": "x=1.962×10⁻⁷ m=0.1962 µm; C0=88.54188 fF; C+=98.17261 fF; C−=80.63189 fF; ΔC=17.54072 fF."
+            }
+          ],
+          "finalAnswer": "x≈0.1962 µm; C+≈98.173 fF; C−≈80.632 fF; differential change≈17.541 fF.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
+        }
+      ]
+    },
+    {
+      "id": "project-mems-27",
+      "subject": "micro",
+      "number": "27",
+      "title": "Finite-voltage MEMS plate equilibrium",
+      "topic": "Project calculations · independent MEMS practice",
+      "source": "Reconstructed from earlier Micro TUHH ChatGPT Project practice; not an official exercise sheet",
+      "status": "worked",
+      "originalPractice": true,
+      "contentProvenance": "chatgpt-project-practice",
+      "verificationState": "independently-recalculated-practice",
+      "verificationNote": "Recovered from prior independent ChatGPT project practice; not a claim of an original official TUHH problem. Numerical inputs and units independently rechecked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Finite-voltage MEMS plate equilibrium",
+          "question": "Actuator with A=1×10⁻⁸ m², gap d=2 µm, k=10 N/m, applied V=10 V. Find initial capacitance, initial force, stable displacement, equilibrium force and V_PI.",
+          "method": "Given physical quantities ကို SI units ပြောင်းပြီး governing relation ကို ရွေးပါ။ Substitution ပြုလုပ်၊ algebra ဖြေပြီး output units နဲ့ physical consistency ပြန်စစ်ပါ။",
+          "reason": "Electrostatic force သည် displacement တိုးသလို gap ပြောင်းသော nonlinear force ဖြစ်သောကြောင့် x=Fe(0)/k မဟုတ်ဘဲ implicit equilibrium ဖြေမှန်တယ်။",
+          "working": [
+            {
+              "label": "Given / SI values",
+              "value": "A=1×10⁻⁸ m²; d=2×10⁻⁶ m; k=10 N/m; V=10 V; ε0=8.8541878128×10⁻¹² F/m."
+            },
+            {
+              "label": "Governing equation",
+              "value": "C0=ε0A/d; F_e(x)=ε0AV²/[2(d−x)²]; kx=F_e(x); V_PI=√(8kd³/(27ε0A))."
+            },
+            {
+              "label": "Substitution and numerical calculation",
+              "value": "C0=44.27094 fF; Fe(0)=1.1067735 µN. Solve kx(d−x)²=ε0AV²/2 for stable x<d/3: x=0.126070085 µm; kx=Fe(x)=1.26070085 µN; V_PI=16.3619002 V."
+            },
+            {
+              "label": "Independent verification",
+              "value": "Substituting x=1.26070085e−7 m into kx−ε0AV²/(2(d−x)²) gives ~0 N; 10 V < pull-in threshold 16.36 V."
+            }
+          ],
+          "equations": [
+            "C0=ε0A/d; F_e(x)=ε0AV²/[2(d−x)²]; kx=F_e(x); V_PI=√(8kd³/(27ε0A)).",
+            "C0=44.27094 fF; Fe(0)=1.1067735 µN. Solve kx(d−x)²=ε0AV²/2 for stable x<d/3: x=0.126070085 µm; kx=Fe(x)=1.26070085 µN; V_PI=16.3619002 V."
+          ],
+          "display": [
+            {
+              "latex": "C0=ε0A/d; F_e(x)=ε0AV²/[2(d−x)²]; kx=F_e(x); V_PI=√(8kd³/(27ε0A))."
+            },
+            {
+              "latex": "C0=44.27094 fF; Fe(0)=1.1067735 µN. Solve kx(d−x)²=ε0AV²/2 for stable x<d/3: x=0.126070085 µm; kx=Fe(x)=1.26070085 µN; V_PI=16.3619002 V."
+            }
+          ],
+          "finalAnswer": "C0≈44.27 fF; Fe(0)≈1.1068 µN; stable x≈0.12607 µm; equilibrium F≈1.2607 µN; V_PI≈16.36 V.",
+          "verification": "Numerical calculation checked from recovered original practice givens. Independent practice only."
         }
       ]
     }
