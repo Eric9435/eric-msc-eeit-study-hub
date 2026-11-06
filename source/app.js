@@ -58,9 +58,29 @@ function dashboard(){const dc=base.subjects[0],recent=study.recent.map(id=>allEx
 <div class="metrics"><div class="metric"><div class="metric-label">Subjects</div><div class="metric-number">${base.subjects.length}</div><div class="metric-detail">M.Sc. EEIT curriculum</div></div><div class="metric"><div class="metric-label">Exercise sets</div><div class="metric-number">${allExercises().length}</div><div class="metric-detail">Across five engineering subjects</div></div><div class="metric"><div class="metric-label">Guided solutions</div><div class="metric-number">${allExercises().filter(x=>x.parts?.length).length}</div><div class="metric-detail">Exercise sets with authored answers</div></div><div class="metric"><div class="metric-label">Mastered parts</div><div class="metric-number">${mastered()}</div><div class="metric-detail">Marked confident by you</div></div></div>
 ${section('Your subjects','Select a course to view its exercise collection.')}
 <div class="subject-grid">${base.subjects.map(s=>{const n=totalFor(s.id),d=doneFor(s.id);return `<button data-action="subject" data-id="${s.id}" class="subject-card"><div class="subject-head">${subjectTag(s)}${badge(countFor(s.id)?countFor(s.id)+' sets':'Ready for import')}</div><h3>${escape(s.title)}</h3><p>${escape(s.description)}</p><div class="mini-progress"><div style="width:${percent(d,n)}%"></div></div><div class="subject-foot"><span>${n?d+' / '+n+' guided parts':'Question bank not imported yet'}</span>${icon('arrow',14)}</div></button>`;}).join('')}</div>
+${readinessAudit()}
 ${section('Recently opened','Continue where you left off.',`<button class="btn small" data-action="navigate" data-id="library">View all ${icon('arrow',13)}</button>`)}
 ${recent.length?`<div class="exercise-list">${recent.map(x=>exerciseRow(x)).join('')}</div>`:`<div class="note-panel"><strong>Your next exercise:</strong> Start with Exercise 1.1 — Quadrature Amplitude Modulation. Progress saves automatically in this browser.</div>`}
 <div class="note-panel" style="margin-top:20px"><strong>Study material provenance:</strong> The Digital Communications library contains 15 tutorial question sets; selected exercises have independent solutions. The other four subjects include original worked practice examples, not official professor solutions. Source question-sheet images and PDFs stay out of public hosting.</div>`;}
+function readinessAudit(){
+ const courses=base.subjects.map(course=>{
+  const es=base.exercises.filter(e=>e.subject===course.id);
+  const subparts=es.flatMap(e=>e.parts||[]);
+  const documented=subparts.filter(p=>p.method&&p.reason&&p.finalAnswer&&((p.working&&p.working.length)||(p.display&&p.display.length)||(p.equations&&p.equations.length))).length;
+  const sourceOnly=es.filter(e=>!(e.parts||[]).length).length;
+  return {course,sets:es.length,parts:subparts.length,documented,sourceOnly};
+ });
+ const documented=courses.reduce((n,x)=>n+x.documented,0),parts=courses.reduce((n,x)=>n+x.parts,0),pending=courses.reduce((n,x)=>n+x.sourceOnly,0);
+ return `<section class="exam-audit-section" aria-labelledby="exam-audit-title">
+  <div class="section-head"><div><h2 id="exam-audit-title">Exam preparation audit</h2><p>Content coverage is not proof of mathematical correctness or exam readiness.</p></div></div>
+  <div class="exam-audit-strip"><strong>Exam-readiness status: not yet certified</strong><span>${documented}/${parts} guided parts have recorded working · ${pending} sets still have no worked parts</span></div>
+  <div class="exam-audit-table-wrap"><table class="exam-audit-table">
+   <thead><tr><th>Subject</th><th>Sets</th><th>Worked parts documented</th><th>Source-only sets</th></tr></thead>
+   <tbody>${courses.map(x=>`<tr><th><button data-action="subject" data-id="${escape(x.course.id)}">${escape(x.course.title)}</button></th><td>${x.sets}</td><td>${x.documented} / ${x.parts}</td><td>${x.sourceOnly}</td></tr>`).join('')}</tbody>
+  </table></div>
+  <p class="exam-audit-footnote">Documented means a method, reason, equations and answer are present. Independent verification of every official numerical value, figures, source completeness and examination scope must still be completed. Original instructor-owned PDFs are not publicly hosted.</p>
+ </section>`;
+}
 function exerciseRow(e){const dc=e.subject==='digital',worked=Boolean(e.parts?.length),d=(e.parts||[]).filter(p=>read('completed',e.id+':'+p.label)).length;return `<button class="exercise-row" data-action="open" data-id="${escape(e.id)}"><div class="exercise-num">${escape(e.number)}</div><div class="exercise-info"><h3>${escape(e.title)}</h3><p>${escape(subject(e.subject)?.title||'Custom subject')} · ${escape(e.topic||'Practice')} ${worked?'· '+d+'/'+e.parts.length+' reviewed':''}</p></div><div class="exercise-right">${badge(worked?'Worked solution':'Original questions only',worked?'green':'amber')}${icon('chevron',18)}</div></button>`;}
 function library(){let arr=allExercises().filter(x=>(filterSubject==='all'||x.subject===filterSubject)&&(filterState==='all'||(filterState==='worked'?x.parts?.length:filterState==='questions'?!x.parts?.length:filterState==='reviewed'?(x.parts||[]).some(p=>read('completed',x.id+':'+p.label)):true))&&(!keyword||[x.title,x.number,x.topic,subject(x.subject)?.title].join(' ').toLowerCase().includes(keyword.toLowerCase())));
 return `<div class="eyebrow">Your library</div><h1 class="page-title">Exercise Library</h1><p class="page-sub">Explore exercises across all five subjects, with self-authored examples and worked answers clearly distinguished from question-only references.</p>
