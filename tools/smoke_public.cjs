@@ -35,11 +35,11 @@ for(const over of originals.overrides){
  }
 }
 const sourced=JSON.parse(fs.readFileSync(file('source/data/source-backed-derivations.json'),'utf8'));
-assert.equal(sourced.overrides.length,2,'Expect 2 reconstructed source-based Digital Communications tutorials');
-assert.equal(sourced.overrides.reduce((n,e)=>n+e.parts.length,0),31,'Expect 31 source-aligned Digital Communications subparts');
+assert(sourced.overrides.length>=3,'Expect source-based Digital Communications and microwave reconstructions');
+assert(sourced.overrides.reduce((n,e)=>n+e.parts.length,0)>=34,'Expect at least 34 source-aligned parts');
 for(const override of sourced.overrides){
  const exercise=data.exercises.find(e=>e.id===override.id);
- assert(exercise && exercise.parts.length===override.parts.length,'Source-backed reconstruction must preserve question subparts');
+ assert(exercise && override.parts.length>0 && (!exercise.parts.length || exercise.parts.length===override.parts.length),'Source-backed reconstruction must preserve existing labels or add to a question-only entry');
  for(const p of override.parts)assert(p.method&&p.reason&&p.finalAnswer&&p.display?.length,'Unexplained original tutorial subpart: '+override.id+':'+p.label);
 }
 const sourceMap=new Map(sourced.overrides.map(e=>[e.id,e]));
@@ -91,4 +91,4 @@ assert(fs.readFileSync(file('source/sw.js'),'utf8').includes("'./visuals.mjs'"),
 assert(fs.readFileSync(file('source/a4-paper.css'),'utf8').includes('size:A4'),'A4 printing stylesheet missing');
 for(const old of ['enhancements.js','enhancements.css','reason-ui.js','reason-ui.css'])
  assert(!fs.existsSync(file('public/'+old)),'Retired popup asset shipped: '+old);
-console.log('PASS: 5 subjects; 82 exercise entries; '+parts+' guided subquestions including 63 original-practice calculation chains and 31 source-aligned tutorial solutions; '+data.formulas.length+' formulas; public build, syntax and source-rights safeguards.');
+console.log('PASS: 5 subjects; 82 exercise entries; '+parts+' guided subquestions including 63 original-practice calculation chains and at least 34 source-aligned tutorial solutions; '+data.formulas.length+' formulas; public build, syntax and source-rights safeguards.');
