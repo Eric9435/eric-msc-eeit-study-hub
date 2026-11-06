@@ -68,14 +68,70 @@ ${arr.length?`<div class="exercise-list">${arr.map(exerciseRow).join('')}</div>`
 function math(html){return `<div class="math-line">${html||''}</div>`;}
 function renderSource(e){if(e.sourcePages?.length){return `<div class="paper"><div class="mini-label">Official original questions • source pages ${e.sourcePages.join(', ')}</div><h2>Question sheet — Exercise ${escape(e.number)}</h2><div class="source-pages">${e.sourcePages.map(n=>`<div class="image-scroll"><img loading="lazy" class="source-img" data-action="zoom" src="assets/questions/dc-page-${String(n).padStart(2,'0')}.webp" alt="Original Digital Communications Tutorial question page ${n}"></div>`).join('')}</div><div class="resource">Tap a page to zoom. The full private package includes the original question-sheet PDF.</div></div>`;}
 return `<div class="paper"><div class="mini-label">Question</div><h2>${escape(e.title)}</h2><p>${escape(e.question||'Question text has not yet been imported.')}</p></div>`;}
-function renderWorked(e){const parts=e.parts||[];if(!parts.length)return `<div class="no-content"><h3>Independent worked solution not yet included</h3><p>The original question pages are available, but a verified full derivation has not been added to this website. This is intentionally labeled to avoid presenting copied or guessed answers as completed work.</p><button class="btn btn-primary" data-action="tab" data-id="source">${icon('file')} View original questions</button></div>`;
-const p=parts.find(x=>x.label===activePart)||parts[0];const key=e.id+':'+p.label;const done=read('completed',key),master=read('mastered',key),book=read('bookmarks',key);return `<div class="paper"><div class="mini-label">Guided solution · ${parts.length} subquestions</div><h2>${escape(e.number)} — ${escape(p.title)}</h2><div class="parts-nav">${parts.map(part=>`<button class="part-button ${activePart===part.label?'active':''} ${read('completed',e.id+':'+part.label)?'done':''}" aria-label="Part ${part.label}" data-action="part" data-id="${escape(part.label)}">${escape(part.label)}</button>`).join('')}</div>
-<h3>Question ${escape(p.label)})</h3><p>${escape(p.question)}</p><div class="buttons no-print"><button class="btn small" data-action="tab" data-id="source">${icon('file',14)} Original wording & figures</button><button class="btn small" data-action="solution-toggle">${icon(hideSolution?'eye':'eyeoff',14)} ${hideSolution?'Show calculations':'Hide calculations'}</button></div>
-${hideSolution?`<div class="note-panel" style="margin:16px 0">Calculations hidden for self-practice. Reveal when you are ready to check your solution.</div>`:`<div class="calculations"><div class="mini-label">Calculation</div>${p.display?.length?p.display.map(x=>math(x.html)).join(''):`<p>${escape(p.solution||'No formula supplied.')}</p>`}</div><div class="reason"><div class="mini-label" style="color:var(--brand)">Why this method?</div><p>${escape(p.reason||'Review the relevant governing equation and substitute the given values.')}</p></div>`}
-<div class="solution-toolbar no-print"><button class="btn ${done?'btn-soft':'btn-primary'}" data-action="complete" data-id="${escape(key)}">${icon('check')} ${done?'Reviewed ✓':'Mark reviewed'}</button><button class="btn ${master?'btn-soft':''}" data-action="master" data-id="${escape(key)}">${icon('check')} ${master?'Mastered ✓':'Mark mastered'}</button><button class="btn ${book?'btn-soft':''}" data-action="bookmark" data-id="${escape(key)}">${icon('bookmark')} ${book?'Saved':'Bookmark'}</button><button class="btn" data-action="next-part">Next ${icon('arrow',14)}</button></div>
-</div><div class="paper no-print"><div class="mini-label">Personal notes · auto-saved</div><textarea class="field" style="width:100%;min-height:125px;border:1px solid var(--line);border-radius:9px;background:var(--surface-alt);color:var(--ink);padding:12px;font-size:12px;line-height:1.7;resize:vertical" data-action="notes" data-id="${escape(key)}" placeholder="Your own derivation, mistakes or exam reminders…">${escape(read('notes',key)||'')}</textarea></div>`;}
+function renderFullSolution(e) {
+  const parts = Array.isArray(e.parts) ? e.parts : [];
+  if (!parts.length) {
+    return `<div class="paper full-solution-page"><div class="solution-overview-head"><div class="mini-label">Overall solution · source required</div><h2>Exercise ${escape(e.number)} — ${escape(e.title)}</h2></div><div class="inline-caution"><strong>Not solved yet.</strong> This entry contains a course reference but no complete question and independently checked derivation in this library. No answer has been invented.</div><p>${escape(e.question || 'Consult the original privately held question sheet for the numerical givens and figures.')}</p><button class="btn" data-action="tab" data-id="source">View source reference</button></div>`;
+  }
+  const partAnswer = p => String(p.finalAnswer || '').trim();
+  const hasWorking = p => Boolean((p.display && p.display.length) || (p.equations && p.equations.length) || p.solution);
+  const renderEquations = p => {
+    if (Array.isArray(p.display) && p.display.length) {
+      return p.display.map(d => `<div class="inline-equation">${math(d.html || `<code class="raw-tex">${escape(d.latex || '')}</code>`)}</div>`).join('');
+    }
+    if (Array.isArray(p.equations) && p.equations.length) {
+      return p.equations.map(line => `<div class="inline-equation"><code class="raw-tex">${escape(line)}</code></div>`).join('');
+    }
+    if (p.solution) return `<div class="inline-equation"><p class="solution-raw-text">${escape(p.solution)}</p></div>`;
+    return `<p class="inline-missing">No independently checked calculation has been added for this part.</p>`;
+  };
+  const renderPart = (p, i) => {
+    const key = e.id + ':' + p.label;
+    const done = read('completed', key);
+    const master = read('mastered', key);
+    const book = read('bookmarks', key);
+    const final = partAnswer(p);
+    const isActive = activePart === p.label;
+    return `<article class="inline-part ${isActive ? 'is-active' : ''}" aria-labelledby="solution-part-${i}">
+      <header class="inline-part-head">
+        <span class="inline-part-index">${escape(String(p.label).toUpperCase())}</span>
+        <div><div class="mini-label">Subquestion ${escape(p.label)} · ${i + 1} of ${parts.length}</div><h3 id="solution-part-${i}">${escape(p.title || 'Worked subquestion')}</h3></div>
+        <span class="inline-status ${final && hasWorking(p) ? 'has-study-notes' : 'needs-review'}">${final && hasWorking(p) ? 'Study working available' : 'Needs full verification'}</span>
+      </header>
+      <div class="inline-part-body">
+        <section class="inline-explain"><h4>Question / Given</h4><p>${escape(p.question || 'Exact source wording is not imported.')}</p></section>
+        ${hideSolution ? `<div class="inline-hidden">Calculations hidden for self-practice. Select “Show all calculations” above to reveal the complete workings.</div>` : `
+          <section class="inline-explain"><h4>Method — ဘယ်လိုတွက်မလဲ</h4>${p.method ? `<p class="myanmar-text">${escape(p.method)}</p>` : `<p class="inline-missing">A full independently checked written derivation has not been recorded for this subquestion. The equations below are study notes, not a validated complete solution.</p>`}</section>
+          <section class="inline-explain"><h4>Calculation / Equations</h4><div class="inline-equations">${renderEquations(p)}</div></section>
+          <section class="inline-explain"><h4>Why this method? — ဘာကြောင့်လဲ</h4>${p.reason ? `<p class="myanmar-text">${escape(p.reason)}</p>` : `<p class="inline-missing">An independently checked reason is not yet supplied.</p>`}</section>
+          <section class="inline-final"><h4>Final answer</h4>${final ? `<p>${escape(final)}</p>` : p.solution ? `<p class="inline-missing">Study result (not yet independently audited): ${escape(p.solution)}</p>` : `<p class="inline-missing">No separately checked final answer recorded.</p>`}</section>
+          <p class="inline-provenance">${escape(p.verification || e.verificationNote || e.verificationState || 'Study notes only · full independent audit pending')}</p>`}
+        <div class="solution-toolbar no-print">
+          <button class="btn ${done ? 'btn-soft' : 'btn-primary'}" data-action="complete" data-id="${escape(key)}">${icon('check')} ${done ? 'Reviewed ✓' : 'Mark reviewed'}</button>
+          <button class="btn ${master ? 'btn-soft' : ''}" data-action="master" data-id="${escape(key)}">${icon('check')} ${master ? 'Mastered ✓' : 'Mark mastered'}</button>
+          <button class="btn ${book ? 'btn-soft' : ''}" data-action="bookmark" data-id="${escape(key)}">${icon('bookmark')} ${book ? 'Saved' : 'Bookmark'}</button>
+        </div>
+        <details class="inline-notes no-print"><summary>Personal study notes · auto-saved</summary><textarea data-action="notes" data-id="${escape(key)}" aria-label="Notes for part ${escape(p.label)}" placeholder="Write your derivation or exam reminders here...">${escape(read('notes', key) || '')}</textarea></details>
+      </div>
+    </article>`;
+  };
+  const allFullyDocumented = parts.every(p => p.method && p.reason && partAnswer(p) && hasWorking(p));
+  const summary = parts.map(p => `<div class="overall-row"><span>(${escape(p.label)})</span><div><strong>${escape(p.title || 'Subquestion')}</strong><p>${partAnswer(p) ? escape(partAnswer(p)) : 'Final answer not independently recorded — use the detailed notes above.'}</p></div></div>`).join('');
+  return `<div class="paper full-solution-page">
+    <div class="solution-overview-head">
+      <div class="mini-label">Complete exercise view · all subquestions on one page</div>
+      <h2>Exercise ${escape(e.number)} — ${escape(e.title)}</h2>
+      <p class="page-sub">Read the full solution from the first subquestion to the final answer. Calculations are shown directly in the webpage — no popups.</p>
+      <div class="inline-meta"><span>${parts.length} subquestions</span><span>${escape(e.topic || 'Engineering')}</span><span>${allFullyDocumented ? 'Written method and final answers available for each part' : 'Some derivations or final answers still require independent audit'}</span></div>
+      <div class="buttons no-print"><button class="btn small" data-action="solution-toggle">${icon(hideSolution ? 'eye' : 'eyeoff', 14)} ${hideSolution ? 'Show all calculations' : 'Hide all calculations'}</button><button class="btn small" data-action="tab" data-id="source">${icon('file', 14)} Source reference</button></div>
+    </div>
+    <div class="inline-solution-list">${parts.map(renderPart).join('')}</div>
+    ${hideSolution ? '' : `<section class="overall-summary" aria-labelledby="overall-answer-heading"><div class="mini-label">One-page recap</div><h3 id="overall-answer-heading">Overall Solution / Final Answer Summary</h3><p>All recorded final results, in question order. Use each derivation above to trace the assumptions and calculations.</p>${summary}</section>`}
+    <div class="inline-caution"><strong>Accuracy note:</strong> An existing written solution is not the same as a fully independently verified result. Missing official question wording, source diagrams, or numerical givens must be checked against the user's own course materials; incomplete entries are labelled rather than guessed.</div>
+  </div>`;
+}
 function viewExercise(){const e=currentExercise();if(!e)return '<div class="empty-state">Exercise not found.</div>';const s=subject(e.subject);const done=(e.parts||[]).filter(p=>read('completed',e.id+':'+p.label)).length;return `<div class="eyebrow"><a href="#library" class="overline-link">← Exercise library</a> / ${escape(s?.title||'')}</div><div class="buttons" style="justify-content:space-between;align-items:center;margin:13px 0 18px"><div><h1 class="page-title" style="margin-bottom:4px">Exercise ${escape(e.number)}</h1><p class="page-sub">${escape(e.title)}</p></div>${badge(e.parts?.length?'Guided working available':'Original questions only',e.parts?.length?'green':'amber')}</div>
-<div class="details-layout"><div class="workspace-main"><div class="toolbar no-print" style="margin-top:0"><button class="btn ${exerciseTab==='worked'?'btn-primary':''}" data-action="tab" data-id="worked">${icon('sigma',15)} Worked solution</button><button class="btn ${exerciseTab==='source'?'btn-primary':''}" data-action="tab" data-id="source">${icon('file',15)} Original questions</button><span class="spacer"></span><button class="btn" data-action="print">${icon('print',15)} Print</button></div>${exerciseTab==='source'?renderSource(e):renderWorked(e)}</div>
+<div class="details-layout"><div class="workspace-main"><div class="toolbar no-print" style="margin-top:0"><button class="btn ${exerciseTab==='worked'?'btn-primary':''}" data-action="tab" data-id="worked">${icon('sigma',15)} Worked solution</button><button class="btn ${exerciseTab==='source'?'btn-primary':''}" data-action="tab" data-id="source">${icon('file',15)} Original questions</button><span class="spacer"></span><button class="btn" data-action="print">${icon('print',15)} Print</button></div>${exerciseTab==='source'?renderSource(e):renderFullSolution(e)}</div>
 <aside class="workspace-side"><div class="side-panel"><h3>Exercise information</h3><div class="side-info"><span>Subject</span><strong>${escape(s?.short||'')}</strong></div><div class="side-info"><span>Chapter</span><strong>${escape(e.topic||'Custom')}</strong></div><div class="side-info"><span>Question pages</span><strong>${e.sourcePages?.length?e.sourcePages.join('–'):'Custom'}</strong></div><div class="side-info"><span>Guided parts</span><strong>${e.parts?.length||0}</strong></div><div class="side-info"><span>Reviewed</span><strong>${done}/${e.parts?.length||0}</strong></div><div class="mini-progress" style="margin-top:14px"><div style="width:${percent(done,e.parts?.length||0)}%"></div></div></div>
 <div class="side-panel"><h3>Study method</h3><p>Read the original question, solve on paper, reveal the mathematical derivation, then check the short Myanmar reason.</p><button class="btn small" data-action="tab" data-id="source">${icon('file',13)} Open source question</button></div>
 ${e.source==='TUHH Digital Communications Tutorial Questions, WS 2026/27'?`<div class="side-panel"><h3>Source</h3><p>Official question sheet, WS 2026/27. The worked notes are independent study material, not official TUHH solutions; verify important calculations against the source.</p></div>`:''}</aside></div>`;}
