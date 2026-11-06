@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-06.3",
+  "version": "2026-11-06.4",
   "description": "Private Google Drive-backed EEIT catalog: 123 original PDFs stored with owner-only Drive permissions; older ChatGPT Library metadata references remain listed where unmatched. File IDs do not grant public access.",
   "statusMeaning": {
     "recordType": "Library filename verified in user-associated Files vs. filename only from archived source audit",
@@ -1234,7 +1234,99 @@
       "drive_id": "1NGhuSNzuBKPek4KQvKVLWz9iQK0MshR0",
       "drive_bytes": 3051658,
       "drive_path": "Digital_Communications/Tutorial_Material/tutorials_dc.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "exercisePages": {
+        "dc-1.1": {
+          "question": 3,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "source-dc-1-2": {
+          "question": 5,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-1.3": {
+          "question": 5,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "source-dc-1-4": {
+          "question": 6,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.1": {
+          "question": 7,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.2": {
+          "question": 9,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.3": {
+          "question": 11,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "source-dc-2-4": {
+          "question": 13,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.5": {
+          "question": 13,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.6": {
+          "question": 15,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.7": {
+          "question": 17,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-3.1": {
+          "question": 19,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-3.2": {
+          "question": 21,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-3.3": {
+          "question": 22,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-4.1": {
+          "question": 25,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-4.2": {
+          "question": 26,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-4.3": {
+          "question": 27,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-5.1": {
+          "question": 29,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        }
+      }
     },
     {
       "id": "a054",
@@ -1250,7 +1342,99 @@
       "drive_id": "1bX5DzEFjf8kYzziWTrJmEHruHXCn8HKp",
       "drive_bytes": 7651210,
       "drive_path": "Digital_Communications/Tutorial_Material/tutorials_dc_solutions.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "exercisePages": {
+        "dc-1.1": {
+          "solution": 3,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "source-dc-1-2": {
+          "solution": 12,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-1.3": {
+          "solution": 12,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "source-dc-1-4": {
+          "solution": 19,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.1": {
+          "solution": 20,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.2": {
+          "solution": 29,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.3": {
+          "solution": 45,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "source-dc-2-4": {
+          "solution": 49,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.5": {
+          "solution": 49,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.6": {
+          "solution": 52,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-2.7": {
+          "solution": 56,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-3.1": {
+          "solution": 62,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-3.2": {
+          "solution": 67,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-3.3": {
+          "solution": 72,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-4.1": {
+          "solution": 78,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-4.2": {
+          "solution": 84,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-4.3": {
+          "solution": 85,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "dc-5.1": {
+          "solution": 88,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        }
+      }
     },
     {
       "id": "a055",
@@ -1698,7 +1882,24 @@
       "drive_id": "1fxBfZxjaSdMC0q54e-rYDlQuuvZd52dg",
       "drive_bytes": 185428,
       "drive_path": "Control_Systems/Exercises/Exercise1_Sol_Introduction_Sheet_1.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "exercisePages": {
+        "official-cstd-I1": {
+          "solution": 1,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-cstd-I2": {
+          "solution": 2,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-cstd-I3": {
+          "solution": 3,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        }
+      }
     },
     {
       "id": "drive-004",
@@ -1714,7 +1915,24 @@
       "drive_id": "1EOiuIcO3l4WfGzwLu5jmfTAKKK1R2PVX",
       "drive_bytes": 159902,
       "drive_path": "Control_Systems/Exercises/Exercise2_Introduction_Sheet_2.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "exercisePages": {
+        "official-cstd-I4": {
+          "question": 1,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-cstd-I5": {
+          "question": 1,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-cstd-I6": {
+          "question": 1,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        }
+      }
     },
     {
       "id": "drive-005",
@@ -1762,7 +1980,24 @@
       "drive_id": "1ylD6zuyGmzfQCa0c4IBLp2ktC7ZP1Y-h",
       "drive_bytes": 193282,
       "drive_path": "Control_Systems/Exercises/Groups_A_+_B/Exercise2_Sol_Introduction_Sheet_2.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "exercisePages": {
+        "official-cstd-I4": {
+          "solution": 1,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-cstd-I5": {
+          "solution": 2,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-cstd-I6": {
+          "solution": 2,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        }
+      }
     },
     {
       "id": "drive-008",
@@ -1922,7 +2157,24 @@
       "drive_id": "1034TXbfky0L5PljmD5Dw_uXwqXOgHYYF",
       "drive_bytes": 160646,
       "drive_path": "Control_Systems/Exercises/Exercise1_Introduction_Sheet_1.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "exercisePages": {
+        "official-cstd-I1": {
+          "question": 1,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-cstd-I2": {
+          "question": 1,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-cstd-I3": {
+          "question": 2,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        }
+      }
     },
     {
       "id": "drive-024",
@@ -2242,7 +2494,99 @@
       "drive_id": "1HjuNAPs77eWapYIjzxB6XkPf7vs0EuVb",
       "drive_bytes": 432847,
       "drive_path": "Microwave_Engineering/Exercise/Exercise/Exercise.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "exercisePages": {
+        "official-mw-1-1": {
+          "question": 2,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-1-2": {
+          "question": 3,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-1-3": {
+          "question": 4,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-2-1": {
+          "question": 5,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-2-2": {
+          "question": 5,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-2-3": {
+          "question": 6,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-2-4": {
+          "question": 7,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-2-5": {
+          "question": 7,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-3-1": {
+          "question": 8,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-3-2": {
+          "question": 8,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-3-3": {
+          "question": 9,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-3-4": {
+          "question": 9,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-4-1": {
+          "question": 10,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-4-2": {
+          "question": 10,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-4-3": {
+          "question": 11,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-5-1": {
+          "question": 12,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-5-2": {
+          "question": 12,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-5-3": {
+          "question": 13,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        }
+      }
     },
     {
       "id": "drive-061",
@@ -2258,7 +2602,99 @@
       "drive_id": "1kxue2YWIDVp-LdU7uovxHD0swEPkmrH5",
       "drive_bytes": 1629010,
       "drive_path": "Microwave_Engineering/Exercise/Exercise/Exercise_sol.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "exercisePages": {
+        "official-mw-1-1": {
+          "solution": 3,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-1-2": {
+          "solution": 5,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-1-3": {
+          "solution": 6,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-2-1": {
+          "solution": 9,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-2-2": {
+          "solution": 9,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-2-3": {
+          "solution": 10,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-2-4": {
+          "solution": 12,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-2-5": {
+          "solution": 18,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-3-1": {
+          "solution": 21,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-3-2": {
+          "solution": 23,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-3-3": {
+          "solution": 25,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-3-4": {
+          "solution": 28,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-4-1": {
+          "solution": 30,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-4-2": {
+          "solution": 30,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-4-3": {
+          "solution": 33,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-5-1": {
+          "solution": 36,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-5-2": {
+          "solution": 36,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        },
+        "official-mw-5-3": {
+          "solution": 39,
+          "linkBasis": "Verified problem/task heading in the uploaded source PDF; page number is 1-based PDF viewer page",
+          "sourceType": "original-source"
+        }
+      }
     },
     {
       "id": "drive-062",
@@ -2308,5 +2744,10 @@
       "drive_path": "Microwave_Engineering/Labortory/Lab_HF_WT2627.pdf",
       "drive_visibility": "private-owner-only"
     }
-  ]
+  ],
+  "exerciseLinkAudit": {
+    "verifiedSourceExerciseCount": 42,
+    "verifiedPdfPageLinks": 84,
+    "note": "42 original exercise sets mapped to uploaded original questions and official sample-solutions using first matching PDF task headings. Original 10 metadata-only PDF references remain separate; independent practice is not represented as an official PDF exercise."
+  }
 }
