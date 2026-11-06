@@ -43,7 +43,7 @@ const displayType=e=>kindTitles[e.kind]||e.kind;
 function setMessage(host,message,error=false){const target=host.querySelector('[data-document-message]');if(target){target.textContent=message;target.dataset.error=error?'true':'false';}}
 function releaseReader(){if(activeObjectUrl){URL.revokeObjectURL(activeObjectUrl);activeObjectUrl=null}activeReader=null;}
 function recordIndex(records){return new Map(records.filter(r=>r&&r.key).map(r=>[r.key,r]))}
-function makeCard(entry,records){const saved=records.get(docKey(entry.id));const article=element('article','document-entry');article.dataset.docId=entry.id;
+function makeCard(entry,records,exerciseId){const saved=records.get(docKey(entry.id));const article=element('article','document-entry');article.dataset.docId=entry.id;
  const intro=element('div','document-entry-intro');intro.append(element('div','document-kind',displayType(entry)));
  const name=element('h3','document-entry-title',entry.title);intro.append(name);
  intro.append(element('p','document-entry-filename',entry.filename));
@@ -51,6 +51,11 @@ function makeCard(entry,records){const saved=records.get(docKey(entry.id));const
  meta.append(element('span','',entry.pages?String(entry.pages)+' pages':'Pages not indexed'));
  meta.append(element('span','',entry.recordType==='library-file-identified'?'Named Library source':'Archived PDF reference'));
  const state=element('span',saved?'document-state-present':'document-state-missing',saved?'Saved on this device':'Not attached');meta.append(state);
+ if(exerciseId&&entry.exercisePages?.[exerciseId]){
+  const refs=entry.exercisePages[exerciseId];
+  const citation=[refs.question?'Question p. '+refs.question:null,refs.solution?'Sample answer p. '+refs.solution:null].filter(Boolean).join(' · ');
+  if(citation)meta.append(element('span','document-page-reference',citation));
+ }
  intro.append(meta);
  if(entry.note&&entry.recordType==='library-file-identified')intro.append(element('p','document-entry-note',entry.note));
  article.append(intro);
@@ -58,6 +63,8 @@ function makeCard(entry,records){const saved=records.get(docKey(entry.id));const
  const label=element('label','document-attach',saved?'Replace PDF':'Attach PDF');
  const input=element('input');input.type='file';input.accept='.pdf,application/pdf';input.dataset.documentAttach=entry.id;input.setAttribute('aria-label','Attach '+entry.title+' as PDF');label.append(input);controls.append(label);
  if(saved){const view=element('button','document-secondary','Read PDF');view.type='button';view.dataset.documentRead=entry.id;controls.append(view);
+ const pages=exerciseId&&entry.exercisePages?.[exerciseId];
+ if(pages){for(const [kind,page] of Object.entries(pages)){if(!page)continue;const link=element('button','document-secondary','Go to '+(kind==='question'?'question':'answer')+' p. '+page);link.type='button';link.dataset.documentRead=entry.id;link.dataset.documentPage=String(page);controls.append(link)}}
  const remove=element('button','document-secondary','Remove');remove.type='button';remove.dataset.documentRemove=entry.id;controls.append(remove)}
  article.append(controls);return article}
 const ranked=(a,b)=>{const x=a.recordType==='library-file-identified'?0:1,y=b.recordType==='library-file-identified'?0:1;return x-y||a.filename.localeCompare(b.filename)};
@@ -113,7 +120,7 @@ function renderShelf(host,doc,all){const course=host.dataset.course;const record
  host.replaceChildren();
  host.append(element('h3','','Original PDF references for this exercise'));
  host.append(element('p','source-shelf-intro','Source files are kept privately on this device. Match the original question, sample solution and independent working against the white-paper derivation.'));
- const list=element('div','document-cards');for(const entry of entries)list.append(makeCard(entry,records));host.append(list);
+ const list=element('div','document-cards');for(const entry of entries)list.append(makeCard(entry,records,host.dataset.exercise));host.append(list);
  if(legacy.length){const section=element('div','document-legacy');section.append(element('h4','','Previously attached course files'));
  for(const item of legacy){const row=element('div','document-legacy-row');
  row.append(element('span','',item.filename||'Previous PDF'));
@@ -134,17 +141,18 @@ function getHost(node){return node.closest('[data-eeit-document-library],[data-e
 function setHostStatus(host,text,isError){let status=host.querySelector('[data-document-operation]');
  if(!status){status=element('p','document-operation');status.dataset.documentOperation='yes';host.prepend(status)}
  status.textContent=text;status.dataset.error=isError?'true':'false'}
-async function readRecord(host,record){if(!record||!record.blob)return;
+async function readRecord(host,record,page){if(!record||!record.blob)return;
  releaseReader();
  const container=host.querySelector('[data-document-reader]');if(!container)return;
  container.replaceChildren();
  const header=element('div','document-reader-top');
  header.append(element('strong','',record.filename));
  const url=URL.createObjectURL(record.blob);activeObjectUrl=url;activeReader=container;
- const link=element('a','document-reader-open','Open in a new browser tab');link.href=url;link.target='_blank';link.rel='noopener noreferrer';header.append(link);
+ const selectedUrl=Number.isInteger(page)&&page>0?url+'#page='+page:url;
+ const link=element('a','document-reader-open','Open in a new browser tab');link.href=selectedUrl;link.target='_blank';link.rel='noopener noreferrer';header.append(link);
  const close=element('button','document-secondary','Close reader');close.type='button';close.dataset.documentClose='yes';header.append(close);
  container.append(header);
- const iframe=element('iframe','document-pdf-frame');iframe.src=url;iframe.loading='lazy';iframe.title='Local PDF '+record.filename;container.append(iframe);
+ const iframe=element('iframe','document-pdf-frame');iframe.src=selectedUrl;iframe.loading='lazy';iframe.title='Local PDF '+record.filename;container.append(iframe);
  container.append(element('p','document-reader-note','On Android, the browser may open the original PDF in a separate tab if inline PDF rendering is not supported.'));
  container.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
@@ -196,7 +204,7 @@ document.addEventListener('click',async event=>{
  try{
   if(legacy){const item=await dbOp('readonly',st=>st.get(legacy.dataset.documentLegacyRead));if(item)await readRecord(host,item);return}
   const id=(read?.dataset.documentRead||remove?.dataset.documentRemove),item=await dbOp('readonly',st=>st.get(docKey(id)));
-  if(read){if(item)await readRecord(host,item);else setHostStatus(host,'PDF not yet attached on this device.',true);return}
+  if(read){if(item)await readRecord(host,item,Number(read.dataset.documentPage)||null);else setHostStatus(host,'PDF not yet attached on this device.',true);return}
   if(remove&&item&&confirm('Remove this private PDF copy from the browser?')){
    if(activeReader?.closest('[data-eeit-document-library],[data-eeit-source-shelf]')===host)releaseReader();
    await dropDoc(id);await refreshHost(host);setHostStatus(host,'Local PDF removed. The catalog record remains.',false);
