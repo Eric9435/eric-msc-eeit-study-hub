@@ -105,6 +105,9 @@ assert(fullSource.includes("route==='documents'?documentLibrary()"),'PDF documen
 const pdfModule=fs.readFileSync(file('source/source-library.mjs'),'utf8');
 assert(pdfModule.includes('pdf-catalog.json'),'PDF module does not load catalog');
 assert(pdfModule.includes('data-document-bulk'),'Bulk PDF onboarding missing');
+assert(pdfModule.includes('data-document-zip'),'ZIP archive onboarding missing');
+assert(pdfModule.includes('zipDirectory')&&pdfModule.includes('zipMember'),'ZIP archive parser missing');
+assert(pdfModule.includes('findZipCatalogMatch'),'ZIP source path matching missing');
 assert(pdfModule.includes('dataset.documentPage'),'PDF deep-page viewer links missing');
 assert(pdfModule.includes("KEY_PREFIX='catalog:'"),'Individual PDF keys not implemented');
 assert(pdfModule.includes('file.slice(0,5).text()'),'PDF header verification missing');
