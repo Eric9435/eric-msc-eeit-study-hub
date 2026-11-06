@@ -1,3 +1,4 @@
+import {renderVisual} from './visuals.mjs';
 const $=s=>document.querySelector(s);
 const escape=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const icon=(n,size=17)=>{
@@ -5,6 +6,7 @@ const p={home:'<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1
 return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p[n]||p.file}</svg>`;
 };
 let base={subjects:[],exercises:[],formulas:[],sourceSkipped:[]};
+const visualSettings=new Map(); // ephemeral interactive illustration settings; not study progress
 const LOCAL_KEY='eric-eeit-exercise:v1'; // preserves existing local progress
 const blank=()=>({completed:{},mastered:{},bookmarks:{},notes:{},custom:[],recent:[],theme:'light',lastCourse:'all'});
 let study=loadLocal(),route='dashboard',focusedId='dc-1.1',activePart='a',exerciseTab='worked',hideSolution=false,filterSubject='all',filterState='all',keyword='',formulaSearch='',modal='',sideOpen=false,toastTimer=null;
@@ -165,7 +167,7 @@ function renderFullSolution(e) {
   </article>`;
 }
 function viewExercise(){const e=currentExercise();if(!e)return '<div class="empty-state">Exercise not found.</div>';const s=subject(e.subject);const done=(e.parts||[]).filter(p=>read('completed',e.id+':'+p.label)).length;return `<div class="eyebrow"><a href="#library" class="overline-link">← Exercise library</a> / ${escape(s?.title||'')}</div><div class="buttons" style="justify-content:space-between;align-items:center;margin:13px 0 18px"><div><h1 class="page-title" style="margin-bottom:4px">Exercise ${escape(e.number)}</h1><p class="page-sub">${escape(e.title)}</p></div>${badge(e.parts?.length?'Guided working available':'Original questions only',e.parts?.length?'green':'amber')}</div>
-<div class="details-layout ${exerciseTab==='worked'?'paper-reading-layout':''}"><div class="workspace-main"><div class="toolbar no-print" style="margin-top:0"><button class="btn ${exerciseTab==='worked'?'btn-primary':''}" data-action="tab" data-id="worked">${icon('sigma',15)} Worked solution</button><button class="btn ${exerciseTab==='source'?'btn-primary':''}" data-action="tab" data-id="source">${icon('file',15)} Original questions</button><span class="spacer"></span><button class="btn" data-action="print">${icon('print',15)} Print</button></div>${exerciseTab==='source'?renderSource(e):renderFullSolution(e)}</div>
+<div class="details-layout ${exerciseTab==='worked'?'paper-reading-layout':''}"><div class="workspace-main"><div class="toolbar no-print" style="margin-top:0"><button class="btn ${exerciseTab==='worked'?'btn-primary':''}" data-action="tab" data-id="worked">${icon('sigma',15)} Worked solution</button><button class="btn ${exerciseTab==='source'?'btn-primary':''}" data-action="tab" data-id="source">${icon('file',15)} Original questions</button><span class="spacer"></span><button class="btn" data-action="print">${icon('print',15)} Print</button></div>${renderVisual(e,visualSettings.get(e.id))}${exerciseTab==='source'?renderSource(e):renderFullSolution(e)}</div>
 <aside class="workspace-side"><div class="side-panel"><h3>Exercise information</h3><div class="side-info"><span>Subject</span><strong>${escape(s?.short||'')}</strong></div><div class="side-info"><span>Chapter</span><strong>${escape(e.topic||'Custom')}</strong></div><div class="side-info"><span>Question pages</span><strong>${e.sourcePages?.length?e.sourcePages.join('–'):'Custom'}</strong></div><div class="side-info"><span>Guided parts</span><strong>${e.parts?.length||0}</strong></div><div class="side-info"><span>Reviewed</span><strong>${done}/${e.parts?.length||0}</strong></div><div class="mini-progress" style="margin-top:14px"><div style="width:${percent(done,e.parts?.length||0)}%"></div></div></div>
 <div class="side-panel"><h3>Study method</h3><p>Read the whole worked derivation on the white paper, check every equation against the source, then mark reviewed.</p><button class="btn small" data-action="tab" data-id="source">${icon('file',13)} Open source question</button></div>
 ${e.source==='TUHH Digital Communications Tutorial Questions, WS 2026/27'?`<div class="side-panel"><h3>Source</h3><p>Official question sheet, WS 2026/27. The worked notes are independent study material, not official TUHH solutions; verify important calculations against the source.</p></div>`:''}</aside></div>`;}
@@ -204,7 +206,25 @@ if(a==='import'){$('#import-picker')?.click();return;}
 if(a==='reset'){if(confirm('Reset local progress, notes and custom exercises on this device?')){study=blank();persist();render();notify('Local data reset.');}return;}
 });
 document.addEventListener('input',e=>{
-const a=e.target.dataset.action;if(a==='notes'){stamp('notes',e.target.dataset.id,e.target.value);return;}
+const a=e.target.dataset.action;
+if(a==='visual-slider'){
+ const id=e.target.dataset.id,ex=allExercises().find(item=>item.id===id);
+ const value=Number(e.target.value);
+ if(!ex||!Number.isFinite(value))return;
+ visualSettings.set(id,value);
+ const current=e.target.closest('.eeit-viz-panel');
+ const container=document.createElement('div');
+ container.innerHTML=renderVisual(ex,value);
+ const fresh=container.querySelector('.eeit-viz-panel');
+ if(current&&fresh){
+   const previousGraphic=current.querySelector('.eeit-viz-graphic'),newGraphic=fresh.querySelector('.eeit-viz-graphic');
+   if(previousGraphic&&newGraphic)previousGraphic.replaceWith(newGraphic);
+   const indicator=current.querySelector('.eeit-viz-value'),newIndicator=fresh.querySelector('.eeit-viz-value');
+   if(indicator&&newIndicator)indicator.textContent=newIndicator.textContent;
+ }
+ return;
+}
+if(a==='notes'){stamp('notes',e.target.dataset.id,e.target.value);return;}
 if(a==='search'||a==='formula-search'){const pos=e.target.selectionStart??0;if(a==='search')keyword=e.target.value;else formulaSearch=e.target.value;render();const el=$(`.content [data-action="${a}"]`)||$(`.topbar [data-action="${a}"]`);if(el){el.focus();try{el.setSelectionRange(pos,pos);}catch{}}}
 });
 document.addEventListener('change',async e=>{
