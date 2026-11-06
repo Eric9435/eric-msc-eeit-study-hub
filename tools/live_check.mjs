@@ -14,6 +14,7 @@ async function check(){
   const index=(await get('/')).bytes.toString('utf8');
   assert.match(index,/Eric M\.Sc EEIT/i,'Study hub title missing');
   assert(index.includes('inline-solutions.css'),'Inline solution stylesheet missing');
+  assert(index.includes('a4-paper.css'),'A4 paper stylesheet not loaded');
   assert(!index.includes('enhancements.js'),'Retired popup script must not be loaded');
   assert(!index.includes('src="reason-ui.js"'),'Two conflicting reasoning scripts are loading');
   const content=JSON.parse((await get('/data/content.json')).bytes.toString('utf8'));
@@ -29,12 +30,13 @@ async function check(){
   assert(merged.reduce((n,e)=>n+(e.parts||[]).length,0)>=223,'Merged worked subparts are missing');
   const logo=(await get('/assets/eeit-study-hub-logo.webp')).bytes;
   assert(logo.length>2000 && logo.toString('ascii',0,4)==='RIFF' && logo.toString('ascii',8,12)==='WEBP','Invalid logo file');
-  for(const path of ['/styles.css','/brand-ui.css','/inline-solutions.css','/app.js','/cloud.js','/sw.js','/manifest.webmanifest']){
+  for(const path of ['/styles.css','/brand-ui.css','/inline-solutions.css','/a4-paper.css','/app.js','/cloud.js','/sw.js','/manifest.webmanifest']){
     const {bytes}=await get(path);
     assert(bytes.length>100,'Empty web asset '+path);
   }
   const app=(await get('/app.js')).bytes.toString('utf8');
-  assert(app.includes('Overall Solution / Final Answer Summary'),'Inline overall solutions not deployed');
+  assert(app.includes('COMPLETE WORKING · FROM START TO FINISH'),'Full paper derivation not deployed');
+  assert(!app.includes('showPartExplanation('),'Obsolete popup still deployed');
   const config=(await get('/cloud-config.js')).bytes.toString('utf8');
   assert.match(config,/window\.EEIT_FIREBASE_CONFIG\s*=\s*\{/,'Firebase web app configuration missing');
   console.log('PASS live HTTP: website, HTML, 5 subjects, 82 exercises, at least 277 merged parts, 69 formulas, valid logo, JS/CSS assets, Firebase web configuration present.');
