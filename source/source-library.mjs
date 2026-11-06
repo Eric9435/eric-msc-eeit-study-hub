@@ -101,6 +101,10 @@ function renderLibrary(host,doc,all){
  const bulkInput=element('input');bulkInput.type='file';bulkInput.accept='.pdf,application/pdf';bulkInput.multiple=true;bulkInput.dataset.documentBulk='yes';
  bulkInput.setAttribute('aria-label','Attach multiple PDFs by matching filenames');
  bulkLabel.append(bulkInput);bulk.append(bulkLabel);
+ const archiveLabel=element('label','document-attach document-zip-attach','Import course ZIP archive');
+ const archiveInput=element('input');archiveInput.type='file';archiveInput.accept='.zip,application/zip,application/x-zip-compressed';
+ archiveInput.dataset.documentZip='yes';archiveInput.setAttribute('aria-label','Import original course PDFs from one ZIP archive');
+ archiveLabel.append(archiveInput);bulk.append(archiveLabel);
  host.append(bulk);
  const grid=element('div','document-list-grid');grid.dataset.documentEntries='yes';host.append(grid);
  const notice=element('p','document-library-notice','Catalog metadata is not a downloadable PDF. To read the actual source file here, attach your own copy. Course PDFs remain in your local browser storage unless you remove them or clear browser data.');host.append(notice);
@@ -156,7 +160,102 @@ async function readRecord(host,record,page){if(!record||!record.blob)return;
  container.append(element('p','document-reader-note','On Android, the browser may open the original PDF in a separate tab if inline PDF rendering is not supported.'));
  container.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
+
+/* Safe, client-only ZIP archive importer. Reads central directory and individually
+   verifies matching PDF members. Original PDF bytes never leave this browser. */
+const ZIP_MAX_BYTES=700_000_000;
+const ZIP_MAX_ENTRIES=1600;
+const ZIP_MAX_EXTRACTED=550_000_000;
+const ZIP_TEXT=new TextDecoder('utf-8',{fatal:false});
+const zipNormalize=name=>String(name).normalize('NFKC').replace(/\\/g,'/').replace(/^\.\//,'').toLowerCase();
+const zipBasename=name=>zipNormalize(name).split('/').pop();
+function findZipCatalogMatch(member,manifest){
+ const path=zipNormalize(member),base=zipBasename(member);
+ const exact=manifest.entries.filter(x=>zipNormalize(x.path||x.filename)===path||path.endsWith('/'+zipNormalize(x.path||x.filename)));
+ if(exact.length===1)return exact[0];
+ if(exact.length>1)return null;
+ const names=manifest.entries.filter(x=>zipBasename(x.filename)===base);
+ return names.length===1?names[0]:null;
+}
+async function zipDirectory(file){
+ if(file.size>ZIP_MAX_BYTES)throw Error('ZIP file exceeds 700 MB. Split it into smaller archives.');
+ const tailSize=Math.min(file.size,65557);
+ const tail=new DataView(await file.slice(file.size-tailSize).arrayBuffer());
+ let eocd=-1;
+ for(let p=tail.byteLength-22;p>=0;p--){
+  if(tail.getUint32(p,true)===0x06054b50){eocd=p;break}
+ }
+ if(eocd<0)throw Error('ZIP central-directory footer not found.');
+ if(tail.getUint16(eocd+4,true)!==0||tail.getUint16(eocd+6,true)!==0)throw Error('Multi-disk ZIP files are not supported.');
+ const total=tail.getUint16(eocd+10,true),length=tail.getUint32(eocd+12,true),offset=tail.getUint32(eocd+16,true);
+ if(total===65535||offset===0xffffffff||length===0xffffffff)throw Error('ZIP64 archive is not supported; select smaller ZIP files.');
+ if(total>ZIP_MAX_ENTRIES)throw Error('Too many files in ZIP archive.');
+ if(offset+length>file.size)throw Error('Invalid ZIP central directory offset.');
+ const view=new DataView(await file.slice(offset,offset+length).arrayBuffer());
+ const output=[];let pos=0;
+ for(let i=0;i<total;i++){
+  if(pos+46>view.byteLength||view.getUint32(pos,true)!==0x02014b50)throw Error('Invalid ZIP central directory item '+(i+1));
+  const flags=view.getUint16(pos+8,true),method=view.getUint16(pos+10,true),size=view.getUint32(pos+20,true),expanded=view.getUint32(pos+24,true);
+  const nameLength=view.getUint16(pos+28,true),extra=view.getUint16(pos+30,true),comment=view.getUint16(pos+32,true);
+  const local=view.getUint32(pos+42,true);
+  if(pos+46+nameLength+extra+comment>view.byteLength)throw Error('Truncated ZIP directory.');
+  const name=ZIP_TEXT.decode(new Uint8Array(view.buffer,view.byteOffset+pos+46,nameLength));
+  output.push({name,flags,method,size,expanded,local});
+  pos+=46+nameLength+extra+comment;
+ }
+ return output;
+}
+async function zipMember(file,item){
+ if(item.flags&1)throw Error('Password-protected PDF not supported.');
+ if(item.expanded>MAX_PDF_BYTES||item.size>MAX_PDF_BYTES)throw Error('PDF member exceeds 70 MB.');
+ if(![0,8].includes(item.method))throw Error('Unsupported ZIP compression: '+item.method);
+ const head=new DataView(await file.slice(item.local,item.local+30).arrayBuffer());
+ if(head.byteLength<30||head.getUint32(0,true)!==0x04034b50)throw Error('Invalid local ZIP member header');
+ const dataStart=item.local+30+head.getUint16(26,true)+head.getUint16(28,true);
+ if(dataStart+item.size>file.size)throw Error('ZIP member exceeds archive bounds');
+ const compressed=file.slice(dataStart,dataStart+item.size);
+ let pdf;
+ if(item.method===0)pdf=compressed;
+ else{
+  if(typeof DecompressionStream!=='function')throw Error('This browser cannot decompress ZIP files.');
+  const stream=compressed.stream().pipeThrough(new DecompressionStream('deflate-raw'));
+  pdf=await new Response(stream).blob();
+ }
+ if(pdf.size!==item.expanded||pdf.size>MAX_PDF_BYTES)throw Error('PDF ZIP member size mismatch');
+ if((await pdf.slice(0,5).text())!=='%PDF-')throw Error('ZIP member is not a PDF file');
+ return pdf;
+}
+async function importZipArchive(host,file){
+ if(!/\.zip$/i.test(file.name))throw Error('Please choose a .zip archive.');
+ const items=await zipDirectory(file),manifest=await catalog();
+ let matched=0,ignored=0,failed=0,extracted=0;
+ const importedIds=new Set(),errors=[];
+ const pdfs=items.filter(x=>x.name.toLowerCase().endsWith('.pdf')&&!x.name.endsWith('/'));
+ setHostStatus(host,'Importing PDFs from ZIP locally: 0 / '+pdfs.length+'. Keep this page open.',false);
+ for(const member of pdfs){
+  const record=findZipCatalogMatch(member.name,manifest);
+  if(!record||importedIds.has(record.id)){ignored++;continue}
+  if(extracted+member.expanded>ZIP_MAX_EXTRACTED){failed++;errors.push('Archive expansion limit reached');break}
+  try{
+   const pdf=await zipMember(file,member);
+   await putDoc({key:docKey(record.id),id:record.id,subject:record.subject,filename:member.name.split('/').pop(),
+    blob:pdf,size:pdf.size,savedAt:Date.now(),sourceArchive:file.name});
+   extracted+=pdf.size;importedIds.add(record.id);matched++;
+  }catch(error){failed++;if(errors.length<3)errors.push(member.name+': '+error.message)}
+  if((matched+failed)%5===0)setHostStatus(host,'ZIP import: '+matched+' attached · '+ignored+' unmatched · '+failed+' failed.',failed>0);
+ }
+ await refreshHost(host);
+ const status=matched+' PDFs attached privately from '+file.name+'. '+ignored+' not uniquely matched and '+failed+' failed.';
+ setHostStatus(host,status+(errors.length?' '+errors.join('; '):''),failed>0);
+}
+
 document.addEventListener('change',async event=>{
+ const zip=event.target.closest?.('[data-document-zip]');
+ if(zip){
+  const host=getHost(zip),file=zip.files?.[0];zip.value='';
+  if(host&&file){try{await importZipArchive(host,file)}catch(error){setHostStatus(host,'ZIP import failed: '+error.message,true)}}
+  return;
+ }
  const multi=event.target.closest?.('[data-document-bulk]');
  if(multi){
   const host=getHost(multi),files=Array.from(multi.files||[]);multi.value='';
