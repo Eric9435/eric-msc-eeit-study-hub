@@ -22,3 +22,18 @@ textarea{font-family:inherit}
 @media (max-width:700px){.local-pill{font-size:10px;padding:6px 9px}.topbar-actions{gap:7px}.content{padding-bottom:calc(54px + env(safe-area-inset-bottom))}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 @media print{.local-pill{display:none}.reason{border-color:#777}}
+/* Exam preparation content audit */
+.exam-audit-section{margin:32px 0 25px}
+.exam-audit-strip{display:flex;align-items:center;flex-wrap:wrap;gap:9px 18px;padding:14px 17px;border:1px solid var(--line);border-radius:12px;background:var(--surface);font-size:12px}
+.exam-audit-strip strong{color:var(--ink)}
+.exam-audit-strip span{color:var(--muted);line-height:1.6}
+.exam-audit-table-wrap{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.exam-audit-table{width:100%;min-width:520px;border-collapse:collapse;font-size:12px;color:var(--text)}
+.exam-audit-table th,.exam-audit-table td{padding:14px 13px;border-bottom:1px solid var(--line);text-align:left;line-height:1.5}
+.exam-audit-table thead th{background:var(--surface-alt);font-weight:700;color:var(--muted);font-size:11px}
+.exam-audit-table tbody tr:last-child th,.exam-audit-table tbody tr:last-child td{border-bottom:0}
+.exam-audit-table tbody th{font-weight:700}
+.exam-audit-table button{padding:0;border:0;background:transparent;color:var(--brand);font-weight:700;text-align:left;cursor:pointer}
+.exam-audit-table button:hover{text-decoration:underline}
+.exam-audit-footnote{font-size:11px;line-height:1.85;color:var(--muted);margin:12px 2px 0}
+@media(max-width:700px){.exam-audit-section{margin-top:26px}.exam-audit-table{font-size:11px}.exam-audit-table th,.exam-audit-table td{padding:12px 10px}}
