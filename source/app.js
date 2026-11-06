@@ -138,5 +138,21 @@ document.addEventListener('keydown',event=>{
   setTimeout(()=>{const target=document.querySelector('.content input[data-action="search"]')||document.querySelector('.topbar input[data-action="search"]');target?.focus();},0);
  }
 });
-async function start(){try{const r=await fetch('data/content.json');if(!r.ok)throw Error('Unable to load study content');base=await r.json();setRoute();if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(()=>{});}catch(e){$('#app').innerHTML=`<div class="loading">${escape(e.message)}. Run the site using a local web server (see README.md).</div>`;}}
+async function start(){
+ try{
+  const [r,extra]=await Promise.all([fetch('data/content.json'),fetch('data/verified-expansion.json')]);
+  if(!r.ok)throw Error('Unable to load study content');
+  if(!extra.ok)throw Error('Unable to load verified exercises');
+  const original=await r.json(), extension=await extra.json();
+  if(!Array.isArray(original.exercises)||!Array.isArray(extension.overrides))throw Error('Invalid exercise data');
+  const map=new Map(extension.overrides.map(e=>[e.id,e]));
+  if(map.size!==extension.overrides.length)throw Error('Duplicate verified exercise IDs');
+  for(const entry of extension.overrides){
+   if(!original.exercises.some(e=>e.id===entry.id)||!Array.isArray(entry.parts)||!entry.parts.length)throw Error('Verified content references a missing exercise: '+entry.id);
+  }
+  original.exercises=original.exercises.map(e=>map.has(e.id)?{...e,...map.get(e.id),parts:map.get(e.id).parts}:e);
+  base=original;setRoute();
+  if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
+ }catch(e){$('#app').innerHTML=`<div class="loading">${escape(e.message)}. Run the site using a local web server (see README.md).</div>`;}
+}
 start();
