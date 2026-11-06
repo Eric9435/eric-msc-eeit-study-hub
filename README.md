@@ -86,3 +86,7 @@ The available course exercise library and independently written practice do **no
 ### Latest coverage QA
 
 Across the original 82 study-exercise entries, **69** now have guided worked parts with **277** individual subparts. **13** remain source-only (including 3 genuine heading-only placeholders in the original Digital Communications tutorial, which cannot be independently solved without a question). Original legacy worked parts outside the 21 reviewed expansion entries are not claimed to have undergone a comprehensive independent source audit.
+
+## A4 continuous white-paper edition (6 November 2026)
+
+Exercise worked pages are now centered white A4 documents on gray workspaces, including dark-theme sessions. The **Overall Solution** heading contains every available subquestion in order with its source question, method, displayed derivation, Myanmar reasoning, and final result. It is not a short recap. No popup explanation buttons appear. Missing derivations and official givens are explicitly flagged. Printing uses A4 pagination across long worked solutions; mobile uses a full-width white reading canvas. Changes are in `source/app.js`, `source/a4-paper.css`, and the PWA cache. Progress, bookmarks, notes and cloud account paths are unchanged.
