@@ -1,0 +1,78 @@
+/* A4 WHITE PAPER SOLUTION VIEW — no cards, modal explanations, or answer recaps */
+.paper-reading-layout{display:block!important;width:100%;max-width:none;min-width:0}
+.paper-reading-layout>.workspace-main{width:100%;max-width:none;min-width:0}
+.paper-reading-layout>.workspace-side{display:none!important}
+.paper-reading-layout>.workspace-main>.toolbar{display:flex;max-width:210mm;margin-inline:auto;margin-bottom:12px!important;flex-wrap:wrap}
+.paper-reading-layout .a4-paper{
+  box-sizing:border-box;width:min(100%,210mm);max-width:210mm;min-height:297mm;
+  margin:12px auto 36px!important;padding:21mm 19mm 22mm!important;
+  background:#fff!important;color:#1b2836!important;border:1px solid #e0e3e7!important;
+  border-radius:2px!important;box-shadow:0 14px 42px rgba(19,30,44,.12)!important;
+  overflow:visible!important;font-family:Arial,Inter,"Noto Sans Myanmar","Myanmar Text",Padauk,system-ui,sans-serif;
+  font-size:13px;line-height:1.8;color-scheme:light;
+}
+.a4-paper *{box-sizing:border-box}
+.a4-paper .paper-topline{display:flex;justify-content:space-between;gap:12px;text-transform:uppercase;font-size:9px;font-weight:800;letter-spacing:.11em;color:#4b5b6c}
+.a4-paper .paper-subject{margin:26px 0 6px!important;font-size:11px!important;color:#526272!important;font-weight:700}
+.a4-paper .paper-document-head h1{margin:0 0 18px;color:#16283d;font-size:23px;font-weight:800;line-height:1.33;letter-spacing:-.03em}
+.a4-paper .paper-document-head h1 span{font-weight:500;display:block;font-size:17px;letter-spacing:0;margin-top:5px}
+.a4-paper .paper-rule{height:2px;background:#183754;margin:0 0 10px}
+.a4-paper .paper-document-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:7px 16px;font-size:10px;color:#687684;margin-bottom:28px}
+.a4-paper h2,.a4-paper h3,.a4-paper h4,.a4-paper strong{color:#1b2836}
+.a4-paper .paper-introduction{padding:0 0 24px;border-bottom:1px solid #dfe3e8}
+.a4-paper .paper-introduction h2{font-size:14px;letter-spacing:.02em;font-weight:800;margin:0 0 9px;color:#19344e}
+.a4-paper .paper-introduction p,.a4-paper .paper-statement p{margin:0;font-size:13px;line-height:1.85;color:#233345;white-space:pre-wrap;overflow-wrap:anywhere}
+.a4-paper .paper-controls{display:flex;gap:9px;flex-wrap:wrap;margin:-11px 0 24px}
+.a4-paper .paper-controls .btn{font-size:11px;background:white;color:#1e405f;border:1px solid #c9d2dd}
+.a4-paper .paper-section-title{padding:24px 0 10px}
+.a4-paper .paper-section-title>span{font-size:9px;letter-spacing:.14em;font-weight:800;color:#596b7e}
+.a4-paper .paper-section-title h2{font-size:20px;line-height:1.3;margin:5px 0 8px;color:#172d43}
+.a4-paper .paper-section-title>p{font-size:12px;line-height:1.75;color:#5d6a76;margin:0}
+.a4-paper .paper-part{border:0!important;background:transparent!important;border-radius:0!important;box-shadow:none!important;padding:21px 0 24px;border-bottom:1px solid #d9dee4!important;margin:0;break-inside:auto;overflow:visible}
+.a4-paper .paper-part:last-child{border-bottom:0!important}
+.a4-paper .paper-part-heading{display:flex;align-items:baseline;gap:12px;padding:0;margin:0 0 15px;background:none!important;border:0!important;break-after:avoid}
+.a4-paper .paper-part-heading>span{min-width:24px;color:#152f48;font-size:14px;font-weight:800}
+.a4-paper .paper-part-heading h3{margin:0;color:#15283c;font-size:15px;font-weight:800;line-height:1.5}
+.a4-paper .paper-part h4{margin:0 0 7px;color:#425469;font-size:10px;letter-spacing:.045em;text-transform:uppercase;font-weight:800;break-after:avoid}
+.a4-paper .paper-statement,.a4-paper .paper-method,.a4-paper .paper-calculation,.a4-paper .paper-reason{margin:0 0 19px;padding:0;border:0;background:transparent}
+.a4-paper .paper-method p,.a4-paper .paper-reason p{font-size:13px;line-height:1.95;color:#2d3f50;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.a4-paper .paper-calculation{margin-top:18px}
+.a4-paper .paper-equation{margin:5px 0;padding:8px 4px!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;max-width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;break-inside:avoid}
+.a4-paper .paper-equation .math-line{padding:0!important;margin:0!important;min-width:0!important;width:max-content;max-width:none;background:transparent!important;border:0!important;box-shadow:none!important;font-size:16px!important;color:#192b3d!important}
+.a4-paper .paper-equation math{font-size:17px;color:#182a3c}
+.a4-paper .paper-equation .verified-equation,.a4-paper .paper-equation .raw-tex{display:block;font:500 13px/1.85 "DejaVu Sans Mono",Consolas,ui-monospace,monospace!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;color:#1e2d3d!important}
+.a4-paper .paper-raw-solution{margin:0;white-space:pre-wrap;color:#233345;line-height:1.8}
+.a4-paper .paper-answer{padding:11px 0 5px;margin:10px 0 0;background:transparent!important;border:0!important;border-radius:0!important;break-inside:avoid}
+.a4-paper .paper-answer strong{display:inline-block;padding-bottom:2px;border-bottom:1.5px solid #203a54;font-size:12px}
+.a4-paper .paper-answer p{margin:7px 0 0!important;font-size:14px!important;font-weight:700;line-height:1.75;color:#12263d;white-space:pre-wrap;overflow-wrap:anywhere}
+.a4-paper .paper-pending{font-size:12px!important;line-height:1.7;color:#78552c!important;margin:8px 0 11px}
+.a4-paper .paper-part-tools{display:flex;flex-wrap:wrap;gap:7px;margin:17px 0 0;padding:8px 0 0;border-top:1px dashed #dde1e6}
+.a4-paper .paper-part-tools .btn{background:white;color:#1b405c;border:1px solid #c9d2d9;font-size:10px;min-height:31px;padding:5px 9px}
+.a4-paper .paper-notes{flex-basis:100%;color:#536275;font-size:11px;border:0}
+.a4-paper .paper-notes summary{padding:4px 0;cursor:pointer}
+.a4-paper .paper-notes textarea{display:block;width:100%;min-height:80px;margin-top:7px;padding:10px;border:1px solid #c8d4dc;border-radius:4px;background:#fff;color:#1b2836;resize:vertical}
+.a4-paper .paper-document-footer{margin:28px 0 0;border-top:1px solid #cfd5dc;padding-top:11px;color:#647080}
+.a4-paper .paper-document-footer p{font-size:10px;line-height:1.65;color:#647080;margin:4px 0}
+.a4-paper .paper-document-footer strong{color:#33485f}
+.a4-paper .paper-actions{margin-top:18px}
+@media(max-width:850px){
+ .paper-reading-layout .a4-paper{padding:clamp(16px,4vw,30px)!important;margin:10px auto 22px!important;min-height:65vh;width:100%;max-width:100%;border-radius:0!important;box-shadow:none!important}
+ .paper-reading-layout>.workspace-main>.toolbar{margin-inline:0}
+ .a4-paper .paper-topline{font-size:8px;letter-spacing:.05em}
+ .a4-paper .paper-document-head h1{font-size:20px}
+ .a4-paper .paper-equation math{font-size:15px}
+}
+@media print {
+ @page{size:A4;margin:16mm 15mm}
+ html,body,.main,.content{background:#fff!important;color:#111!important}
+ .content:has(.a4-paper)>.eyebrow,.content:has(.a4-paper)>.buttons{display:none!important}
+ .paper-reading-layout>.workspace-main>.toolbar,.paper-reading-layout>.workspace-side{display:none!important}
+ .paper-reading-layout .a4-paper{width:auto!important;max-width:none!important;min-height:0!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important;overflow:visible!important}
+ .a4-paper .paper-controls,.a4-paper .no-print{display:none!important}
+ .a4-paper .paper-document-head{break-after:avoid}
+ .a4-paper .paper-part{break-inside:auto}
+ .a4-paper .paper-part-heading,.a4-paper .paper-answer{break-inside:avoid}
+ .a4-paper .paper-equation{overflow:visible;break-inside:avoid}
+ .a4-paper .paper-equation .math-line{max-width:100%;white-space:normal}
+ .a4-paper .paper-topline,.a4-paper .paper-rule{print-color-adjust:exact}
+}
