@@ -39,6 +39,10 @@ async function check(){
   assert(sourceDerived.overrides.length>=3,'Missing reconstructed original tutorial sets');
   assert(sourceDerived.overrides.reduce((n,e)=>n+e.parts.length,0)>=34,'Source-aligned tutorial set is incomplete');
   assert(sourceDerived.overrides.every(e=>e.parts.every(p=>p.method&&p.finalAnswer&&p.display?.length)),'Source-aligned tutorial method/formula missing');
+  const pdfCatalog=JSON.parse((await get('/data/pdf-catalog.json')).bytes.toString('utf8'));
+  assert(pdfCatalog.entries.length>=90,'Five-subject PDF catalog is not deployed');
+  assert.equal(new Set(pdfCatalog.entries.map(item=>item.subject)).size,5,'PDF library must cover all five subjects');
+  assert(pdfCatalog.entries.filter(item=>item.recordType==='library-file-identified').length>=10,'Named Library PDF files missing');
   const logo=(await get('/assets/eeit-study-hub-logo.webp')).bytes;
   assert(logo.length>2000 && logo.toString('ascii',0,4)==='RIFF' && logo.toString('ascii',8,12)==='WEBP','Invalid logo file');
   for(const path of ['/styles.css','/brand-ui.css','/inline-solutions.css','/a4-paper.css','/visuals.css','/visuals.mjs','/app.js','/cloud.js','/sw.js','/manifest.webmanifest']){
@@ -56,6 +60,8 @@ async function check(){
   assert(app.includes('not yet certified'),'Exam readiness must be presented honestly');
   assert(app.includes('data-eeit-source-shelf'),'Private original PDF shelf missing');
   assert(index.includes('source-library.mjs'),'Private source viewer shell not loaded');
+  assert(app.includes('PDF Document Library'),'PDF catalog navigation missing');
+  assert(app.includes('data-eeit-document-library'),'Document catalogue route missing');
   assert(app.includes('paper-workline-label'),'Step-by-step working not rendered');
   assert(!app.includes('showPartExplanation('),'Obsolete popup still deployed');
   const config=(await get('/cloud-config.js')).bytes.toString('utf8');
