@@ -14,7 +14,11 @@ A five-subject, responsive, installable study workspace for M.Sc Electrical Engi
 | Microwave Engineering | 4 new original practice sets × 3 worked parts |
 | Microsystem Engineering | 4 new original practice sets × 3 worked parts |
 
-**Integrated content release:** 82 exercise entries, 139 guided subquestions and 69 formula references. The 16 original practice sets and all five-subject branding have been preserved. 30 course-referenced entries are still source-only; some other worked sets have only partial subpart coverage. Newer calculations were derived independently, but legacy solutions have not all been comprehensively reaudited. This is not a claim that every official tutorial is fully solved.
+**Professional project integration (6 November 2026):** The source catalog retains its original 82 entries. Runtime now merges independent reconstructions and **13 recovered, recalculated Micro TUHH project practice entries** into **95 visible exercise sets, 306 guided subquestions and 69 formula references**. Four source-identified Microwave tasks (3.3, 3.4, 5.2, 5.3) now have fresh working. **Eight source-only entries** remain because the full question/diagram/numerical givens are not available. Recorded solutions and regression tests do not imply an exhaustive mathematical audit of every older calculation or official exam certification.
+
+## Project practice recovered from earlier ChatGPT work — 6 November 2026
+
+The `source/data/project-practice.json` archive contains independently recomputed MEMS exercises **1, 5, 7, 8, 10, 11, 12, 13, 14, 25, 26, 29, 30**. Their previously assigned numbers are retained, but they are *not* claimed to be official TUHH exercises. Original question data for the remaining numbered project exercises was not reliably recoverable, so gaps are disclosed instead of invented. A prior comb-drive example gave 4.427 pF; the stated N=50, t=10 μm, L=100 μm, g=2 μm values recompute to **0.4427 pF**.
 
 ## Core capabilities
 
@@ -61,7 +65,7 @@ The generated Eric M.Sc EEIT Study Hub logo is included in `source/assets/eeit-s
 
 ## Inline complete solution view (6 November 2026)
 
-The exercise page now shows all available subquestions (a), (b), (c), etc. directly in document order. Each part has Question/Givens, Method, mathematical work, Myanmar rationale, final answer, independent-verification note, and personal progress/notes. The bottom of each worked exercise includes an **Overall Solution / Final Answer Summary**. No Why/Method/Final Answer dialog script is loaded, and retired popup files are excluded from the public distribution. Content provenance and missing calculations remain explicit. Source material is private, and no unofficial answers are invented.
+The exercise page displays all available subquestions (a), (b), (c), etc. in document order and retains the original source reference. Symbolic formulas **and** individually annotated substitutions/checks are now rendered together, with **separate accessible Myanmar Method and Why dialogs** for on-screen learning. A4 print includes complete explanations inline. Each part has its own final answer, source/verification note and local review tools. Retired popup scripts are still excluded; the explanations use the current app's native dialog. Course PDFs stay private and missing problems are never filled with fabricated official questions.
 
 ## Live-site verification
 
