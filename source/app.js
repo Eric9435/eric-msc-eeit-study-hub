@@ -91,13 +91,13 @@ function math(html){return `<div class="math-line">${html||''}</div>`;}
 function renderSource(e) {
   const pages = Array.isArray(e.sourcePages) ? e.sourcePages : [];
   const source = e.source || 'Personal course question reference';
-  const reference = e.sourcePageRef || (pages.length ? 'Pages ' + pages.join(', ') : 'No page number supplied');
+  const reference = e.sourcePageRef || (pages.length ? 'Archived study-index pages ' + pages.join(', ') : 'For verified question and solution PDF pages, use the links below');
   return `<div class="paper"><div class="mini-label">Source wording and figures · private study materials</div>
     <h2>Exercise ${escape(e.number)} — Source reference</h2>
     <p>${escape(e.question || 'The full official question text and diagrams are not included in this public site.')}</p>
     <div class="inline-caution"><strong>Original material is private.</strong> Uploaded source PDFs are linked from the owner's private Google Drive below. Exact Question/Sample Solution page links appear only when verified against those PDFs. A related lecture is not an official exercise solution.</div>
-    <div class="side-info"><span>Document</span><strong>${escape(source)}</strong></div>
-    <div class="side-info"><span>Reference</span><strong>${escape(reference)}</strong></div>
+    <div class="side-info"><span>Original study-index label (may refer to an older compilation)</span><strong>${escape(source)}</strong></div>
+    <div class="side-info"><span>Historical page reference — exact uploaded PDF pages are shown below</span><strong>${escape(reference)}</strong></div>
     <section class="source-archive" data-eeit-source-shelf data-course="${escape(e.subject)}" data-exercise="${escape(e.id)}" data-source-only="${!(e.parts||[]).length}" aria-label="Original course question and answer documents">
       <h3>Original PDFs for this course</h3>
       <p>Searching the source catalog and local browser files…</p>
