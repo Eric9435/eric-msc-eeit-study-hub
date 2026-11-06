@@ -65,6 +65,8 @@ async function check(){
   assert(index.includes('source-library.mjs'),'Private source viewer shell not loaded');
   assert(app.includes('PDF Document Library'),'PDF catalog navigation missing');
   assert(app.includes('data-eeit-document-library'),'Document catalogue route missing');
+  const privateReader=(await get('/source-library.mjs')).bytes.toString('utf8');
+  assert(privateReader.includes('data-document-zip')&&privateReader.includes('zipDirectory'),'ZIP importer missing from deployed source viewer');
   assert(app.includes('paper-workline-label'),'Step-by-step working not rendered');
   assert(!app.includes('showPartExplanation('),'Obsolete popup still deployed');
   const config=(await get('/cloud-config.js')).bytes.toString('utf8');
