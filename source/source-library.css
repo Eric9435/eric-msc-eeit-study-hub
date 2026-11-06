@@ -98,3 +98,27 @@
 .document-entry-actions .document-local-attach:focus-within{outline:2px solid var(--brand-hi);outline-offset:2px}
 .source-archive .document-cloud-read{background:#173b5b;color:#fff}
 @media(max-width:650px){.document-entry-actions .document-cloud-read{flex-basis:100%}}
+
+/* Audit-correct PDF links: exact source vs related lecture */
+.document-match-exact,.document-match-related,.document-match-unlinked{
+ padding:14px 17px;border:1px solid var(--line);border-radius:10px;
+ background:var(--surface);margin:13px 0 16px;
+}
+.document-match-exact strong,.document-match-related strong,.document-match-unlinked strong{
+ font-size:12px;font-weight:800;color:var(--ink);line-height:1.7
+}
+.document-match-exact p,.document-match-related p,.document-match-unlinked p{
+ font-size:11px;line-height:1.85;color:var(--muted);margin:7px 0 0
+}
+.document-match-exact{border-left:3px solid #34775b}
+.document-match-related{border-left:3px solid #a07c3f}
+.document-match-unlinked{border-left:3px solid var(--line)}
+.document-reference-related{
+ display:inline-flex;align-items:center;border:1px solid var(--line);
+ background:var(--surface-alt);color:var(--muted);padding:2px 6px;
+ border-radius:5px;font-size:10px;font-weight:700
+}
+.document-source-pending{
+ padding:11px 14px;background:var(--surface-alt);border:1px solid var(--line);
+ border-radius:9px;font-size:11px!important;line-height:1.8;color:var(--text)
+}
