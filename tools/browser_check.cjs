@@ -21,6 +21,7 @@ async function check(){
    await desktop.screenshot({path:'artifacts/eeit-desktop.png',fullPage:true});
    await desktop.locator('.subject-card').first().click();
    await desktop.waitForURL('**/#library');
+   await desktop.locator('.exercise-row').first().waitFor({timeout:20000});
    assert(await desktop.locator('.exercise-row').count()>0,'Subject exercise list empty');
    await desktop.locator('.exercise-row').first().click();
    await desktop.waitForURL(/#exercise\//);
@@ -39,7 +40,7 @@ async function check(){
    await desktop.locator('.topbar [data-action="theme"]').click();
    assert.equal(await desktop.locator('html').getAttribute('data-theme'),'dark','Dark theme did not apply');
    await desktop.reload({waitUntil:'domcontentloaded'});
-   await desktop.waitForSelector('.subject-card').catch(()=>{});
+   await desktop.locator('.page-title').first().waitFor({timeout:15000});
    assert.equal(await desktop.locator('html').getAttribute('data-theme'),'dark','Saved appearance did not persist after reload');
    phone=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1});
    phone.on('pageerror',e=>pageErrors.push('mobile: '+e.message));
@@ -63,6 +64,7 @@ async function check(){
    if(pageErrors.length)console.log('Browser messages (nonfatal): '+pageErrors.slice(0,5).join(' | '));
  }catch(err){
    if(desktop)await desktop.screenshot({path:'artifacts/eeit-browser-failure.png',fullPage:true}).catch(()=>{});
+   if(phone)await phone.screenshot({path:'artifacts/eeit-mobile-failure.png',fullPage:true}).catch(()=>{});
    throw err;
  }finally{await browser.close()}
 }
