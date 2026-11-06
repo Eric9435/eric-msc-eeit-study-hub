@@ -86,3 +86,31 @@
 .a4-paper .paper-calculation:has(.paper-workline){padding:4px 0 3px}
 @media(max-width:700px){.a4-paper .paper-workline-equation{font-size:12px;line-height:1.8}.a4-paper .paper-workline-label{font-size:9px}}
 @media print{.a4-paper .paper-workline{break-inside:avoid}.a4-paper .paper-workline-equation{font-size:11px}.a4-paper .paper-workline-label{font-size:9px}}
+
+
+/* Professional equation-first presentation; explanations are accessible in dialogs on screen. */
+.a4-paper .paper-provenance{margin:-15px 0 24px!important;font-size:10px!important;line-height:1.7!important;color:#657586!important;border-left:2px solid #9bb0c2;padding-left:11px}
+.a4-paper .paper-math-full{display:flex;flex-direction:column;gap:12px;min-width:0}
+.a4-paper .paper-annotated-working{margin-top:7px;padding-top:11px;border-top:1px solid #e5eaf0}
+.a4-paper .paper-annotated-working h5{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#50677d;font-weight:800;margin:0 0 15px}
+.a4-paper .paper-symbolic-working{padding:7px 0 12px;border-bottom:1px solid #eef1f4;min-width:0}
+.a4-paper .paper-symbolic-working .paper-equation{padding:5px 0!important}
+.a4-paper .paper-print-explanation{display:none}
+.a4-paper .paper-explain-trigger{min-height:36px!important;padding:7px 11px!important;border:1px solid #9db6cc!important;border-radius:7px!important;color:#1b496f!important;background:#f7fafc!important;white-space:normal!important;text-align:left}
+.a4-paper .paper-explain-trigger:hover{background:#e8f2f9!important}
+.a4-paper .paper-verification{margin:13px 0 0;border-top:1px dashed #d9dfe6;padding-top:10px;color:#68798a}
+.a4-paper .paper-verification strong{display:block;font:800 9px/1.6 Arial,Inter,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.055em;color:#607286}
+.a4-paper .paper-verification p{margin:3px 0 0;font:11px/1.7 Arial,Inter,system-ui,sans-serif;color:#6b7784}
+.eeit-explanation-modal{border:1px solid var(--line,#dfe7ef);border-radius:14px;width:min(600px,calc(100vw - 32px));max-height:85vh;overflow:auto;box-shadow:0 18px 70px rgba(11,25,42,.25);padding:24px 25px;background:var(--surface,#fff);color:var(--text,#263a53);color-scheme:normal}
+.eeit-explanation-modal::backdrop{background:rgba(11,25,42,.62)}
+.eeit-explanation-head{display:flex;align-items:start;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line,#dfe7ef);padding-bottom:14px}
+.eeit-explanation-head h2{font-size:17px;line-height:1.5;color:var(--ink,#14263d);margin:0;font-weight:800}
+.eeit-explanation-modal>.myanmar-text{font-size:14px;line-height:2.05;white-space:pre-wrap;margin:23px 0 17px;overflow-wrap:anywhere}
+.eeit-explanation-foot{font-size:11px;line-height:1.65;border-top:1px solid var(--line,#dfe7ef);padding-top:11px;color:var(--muted,#697e96);margin:0}
+@media(max-width:700px){.eeit-explanation-modal{padding:17px 16px}.eeit-explanation-head h2{font-size:15px}.a4-paper .paper-provenance{margin-top:-8px!important}}
+@media print{
+ .a4-paper .paper-print-explanation{display:block!important;font-size:11px!important;line-height:1.85!important;white-space:pre-wrap}
+ .a4-paper .paper-explain-trigger,.eeit-explanation-modal{display:none!important}
+ .a4-paper .paper-annotated-working{break-inside:auto}
+ .a4-paper .paper-symbolic-working{break-inside:auto}
+}
