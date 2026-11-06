@@ -16,7 +16,8 @@ async function check(){
    assert.equal(await desktop.locator('.subject-card').count(),5,'Five cards must appear');
    const logo=desktop.locator('.hero-logo-panel img');
    await logo.waitFor();
-   assert(await logo.evaluate(el=>el.complete&&el.naturalWidth>0),'Hero logo did not render');
+   await logo.evaluate(async img=>{await img.decode();});
+   assert(await logo.evaluate(el=>el.complete&&el.naturalWidth>0),'Hero logo did not render after image decoding');
    await desktop.screenshot({path:'artifacts/eeit-desktop.png',fullPage:true});
    await desktop.locator('.subject-card').first().click();
    await desktop.waitForURL('**/#library');
@@ -41,7 +42,8 @@ async function check(){
    await phone.waitForSelector('.subject-card',{timeout:35000});
    assert.equal(await phone.locator('.subject-card').count(),5,'Missing mobile subject cards');
    const mobileLogo=phone.locator('.mobile-brand img');
-   assert(await mobileLogo.evaluate(el=>el.complete&&el.naturalWidth>0),'Mobile logo did not render');
+   await mobileLogo.evaluate(async img=>{await img.decode();});
+   assert(await mobileLogo.evaluate(el=>el.complete&&el.naturalWidth>0),'Mobile logo did not render after image decoding');
    await phone.screenshot({path:'artifacts/eeit-mobile.png',fullPage:true});
    await phone.locator('.mobile-menu').click();
    assert(await phone.locator('.sidebar.open').isVisible(),'Mobile drawer did not open');
