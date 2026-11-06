@@ -1,4 +1,4 @@
-/* Eric EEIT: full-page engineering solutions, no explanation modals. Flat/mobile-first. */
+/* Eric EEIT: full-page engineering solutions with optional per-part dialogs. Flat/mobile-first. */
 .full-solution-page{padding:clamp(18px,3.3vw,34px);overflow:hidden}
 .solution-overview-head{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:20px}
 .solution-overview-head h2{margin:8px 0 11px;color:var(--ink);font-size:clamp(1.3rem,2.5vw,1.8rem);line-height:1.35;overflow-wrap:anywhere}
@@ -46,3 +46,16 @@
 .overall-row p{font-size:13px;line-height:1.75;margin:5px 0 0;overflow-wrap:anywhere;white-space:pre-wrap}
 @media(max-width:700px){.inline-part-head{flex-wrap:wrap;padding:14px;gap:10px}.inline-status{margin-left:47px}.inline-part-body{padding:14px}.overall-summary{padding:16px}.inline-meta{gap:6px}.inline-solution-list{gap:14px}.full-solution-page .solution-toolbar{gap:6px;flex-wrap:wrap}.full-solution-page .solution-toolbar .btn{flex:1 1 125px;justify-content:center}}
 @media print{.full-solution-page{padding:0;border:0}.inline-part{break-inside:auto;margin:12px 0;border-color:#a7b4be}.inline-part-head{background:white}.inline-equation,.overall-summary{background:white}.inline-notes,.full-solution-page .no-print{display:none!important}.inline-caution{font-size:10px}.inline-solution-list{gap:8px}}
+
+/* Optional explanation dialogs accompany, but never replace, the readable inline workings. */
+.eeit-popup-tools{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 17px;padding:0}
+.eeit-popup-tools .btn{font-size:12px;border-radius:9px}
+.eeit-explanation-dialog{position:fixed;inset:0;margin:auto;width:min(620px,calc(100vw - 28px));max-height:min(85vh,850px);overflow:auto;border:1px solid var(--line);border-radius:15px;background:var(--surface);color:var(--ink);padding:0;box-shadow:0 25px 75px rgba(0,0,0,.18)}
+.eeit-explanation-dialog::backdrop{background:rgba(13,27,41,.55)}
+.eeit-dialog-shell{padding:clamp(17px,3vw,27px)}
+.eeit-dialog-header{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.eeit-dialog-header h2{font-size:1.1rem;margin:0;line-height:1.4}
+.eeit-dialog-text{line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere;margin:18px 0}
+.eeit-dialog-provenance{border-top:1px solid var(--line);padding-top:12px;margin:14px 0 0;font-size:12px;color:var(--muted)}
+@media(max-width:700px){.eeit-popup-tools .btn{flex:1 1 125px;justify-content:center}}
+@media print{.eeit-popup-tools,.eeit-explanation-dialog{display:none!important}}
