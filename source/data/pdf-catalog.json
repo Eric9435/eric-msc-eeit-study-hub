@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-06.4",
+  "version": "2026-11-06.5",
   "description": "Private Google Drive-backed EEIT catalog: 123 original PDFs stored with owner-only Drive permissions; older ChatGPT Library metadata references remain listed where unmatched. File IDs do not grant public access.",
   "statusMeaning": {
     "recordType": "Library filename verified in user-associated Files vs. filename only from archived source audit",
@@ -370,7 +370,15 @@
       "drive_id": "1nYKZZJSRPsvNzNnVwOiATaaO7a_LC3NK",
       "drive_bytes": 5130091,
       "drive_path": "Microsystem_Engineering/Lecture_slides/MSE_-_01_-_Introduction.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "relatedExerciseIds": [
+        "practice-micro-cap",
+        "practice-mse-spring",
+        "practice-mse-thermal",
+        "original-mse1",
+        "original-mse3"
+      ],
+      "relatedReferenceNote": "Lecture reference for independent practice; not an instructor-issued exercise or its official answer."
     },
     {
       "id": "a000",
@@ -427,7 +435,7 @@
       "filename": "Digital_Communications_2026_Tutorial_Solutions.pdf",
       "path": "Digital_Communications/Additional_Student_Files/Digital_Communications_2026_Tutorial_Solutions.pdf",
       "pages": 94,
-      "kind": "questions-solutions",
+      "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Appears duplicate tutorial version",
       "recordType": "archive-index",
@@ -1335,7 +1343,7 @@
       "filename": "tutorials_dc_solutions.pdf",
       "path": "Digital_Communications/Tutorial_Material/tutorials_dc_solutions.pdf",
       "pages": 94,
-      "kind": "questions-solutions",
+      "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
       "recordType": "archive-index",
@@ -1875,7 +1883,7 @@
       "filename": "Exercise1_Sol_Introduction_Sheet_1.pdf",
       "path": "Control_Systems/Exercises/Exercise1_Sol_Introduction_Sheet_1.pdf",
       "pages": null,
-      "kind": "question",
+      "kind": "solution",
       "provenance": "Uploaded from user-provided five-subject master ZIP",
       "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
       "recordType": "private-drive-file",
@@ -1973,7 +1981,7 @@
       "filename": "Exercise2_Sol_Introduction_Sheet_2.pdf",
       "path": "Control_Systems/Exercises/Groups_A_+_B/Exercise2_Sol_Introduction_Sheet_2.pdf",
       "pages": null,
-      "kind": "question",
+      "kind": "solution",
       "provenance": "Uploaded from user-provided five-subject master ZIP",
       "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
       "recordType": "private-drive-file",
@@ -2334,7 +2342,13 @@
       "drive_id": "1kvjT51Sb6bHOTs_QDg6sQbtmNlkrUHMq",
       "drive_bytes": 7689304,
       "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_2_Components_and_Grid_Models_Part_2_261025.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "relatedExerciseIds": [
+        "source-eps-ex-04",
+        "source-eps-ex-05",
+        "source-eps-ex-06"
+      ],
+      "relatedReferenceNote": "Relevant lecture chapter for this topic; this is NOT the exact original extracted exercise PDF or an official exercise solution."
     },
     {
       "id": "drive-042",
@@ -2382,7 +2396,16 @@
       "drive_id": "1-px_vHQhtF9Wk7tj0rfAbKEgLK9RsZKr",
       "drive_bytes": 6223566,
       "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_5_Power_Flow_Calculation_301125.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "relatedExerciseIds": [
+        "source-eps-nr",
+        "source-eps-bus",
+        "source-eps-ex-06",
+        "source-eps-ex-07",
+        "source-eps-ex-08",
+        "source-eps-ex-09"
+      ],
+      "relatedReferenceNote": "Relevant lecture chapter for this topic; this is NOT the exact original extracted exercise PDF or an official exercise solution."
     },
     {
       "id": "drive-045",
@@ -2398,7 +2421,11 @@
       "drive_id": "19c9maAfIT63T8QnSFaFtFfInYcdp7w4C",
       "drive_bytes": 2060672,
       "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_6_Optimization_011225.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "relatedExerciseIds": [
+        "source-eps-dispatch"
+      ],
+      "relatedReferenceNote": "Relevant lecture chapter for this topic; this is NOT the exact original extracted exercise PDF or an official exercise solution."
     },
     {
       "id": "drive-046",
@@ -2414,7 +2441,11 @@
       "drive_id": "1qr1kJdhr_t99a6gqcrpLf7J77m6jS9Sw",
       "drive_bytes": 3435583,
       "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_7_Symm_Short_Circuit_Calc_071225.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "relatedExerciseIds": [
+        "source-eps-ex-10"
+      ],
+      "relatedReferenceNote": "Relevant lecture chapter for this topic; this is NOT the exact original extracted exercise PDF or an official exercise solution."
     },
     {
       "id": "drive-047",
@@ -2430,7 +2461,11 @@
       "drive_id": "18bcBP3uERDs0Z1p68TdyTxmuBQoq8cfY",
       "drive_bytes": 5295543,
       "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_8_Asymm_El_Fault_Calculation_081225.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "relatedExerciseIds": [
+        "source-eps-ex-11"
+      ],
+      "relatedReferenceNote": "Relevant lecture chapter for this topic; this is NOT the exact original extracted exercise PDF or an official exercise solution."
     },
     {
       "id": "drive-048",
@@ -2446,7 +2481,11 @@
       "drive_id": "154mA0WTA7ITA85jEqkqhedS3C8Afzr2V",
       "drive_bytes": 2372053,
       "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_9_State_Estimation_040126.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "relatedExerciseIds": [
+        "source-eps-ex-12"
+      ],
+      "relatedReferenceNote": "Relevant lecture chapter for this topic; this is NOT the exact original extracted exercise PDF or an official exercise solution."
     },
     {
       "id": "drive-052",
@@ -2478,7 +2517,15 @@
       "drive_id": "1bacqDWtcp3r7Cj9y2i82kF1Jfj4ibMy4",
       "drive_bytes": 2836119,
       "drive_path": "Microsystem_Engineering/Lecture_slides/MSE_-_02_-_Scaling.pdf",
-      "drive_visibility": "private-owner-only"
+      "drive_visibility": "private-owner-only",
+      "relatedExerciseIds": [
+        "practice-mse-etch",
+        "practice-mse-piezoresistive",
+        "practice-mse-diffusion",
+        "original-mse2",
+        "original-mse4"
+      ],
+      "relatedReferenceNote": "Lecture reference for independent practice; not an instructor-issued exercise or its official answer."
     },
     {
       "id": "drive-060",
@@ -2749,5 +2796,6 @@
     "verifiedSourceExerciseCount": 42,
     "verifiedPdfPageLinks": 84,
     "note": "42 original exercise sets mapped to uploaded original questions and official sample-solutions using first matching PDF task headings. Original 10 metadata-only PDF references remain separate; independent practice is not represented as an official PDF exercise."
-  }
+  },
+  "auditNotes": "Only 42 exercise sets have verified exact question+official-answer PDF page references. EPS II 12 lecture-derived sets have related lecture references rather than exact source PDFs. Independent MEMS practice has related lecture references, not official exercise sheets. 123 uploaded PDFs include lecture/lab/exam/notes, not 123 exercise sheets."
 }
