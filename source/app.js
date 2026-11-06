@@ -170,16 +170,17 @@ function renderFullSolution(e) {
       <div class="paper-statement"><h4>Question / Given information</h4><p>${escape(p.question || 'Original source question wording is unavailable.')}</p></div>
       ${hideSolution ? '<p class="paper-pending">Working hidden for self-practice. Use “Show complete solution” above to reveal it.</p>' : `
         <div class="paper-method"><h4>Method / ဖြေရှင်းနည်း</h4>
-          ${p.method ? `<p class="myanmar-text">${escape(p.method)}</p>` : '<p class="paper-pending">A complete written method is not yet available for this subquestion.</p>'}
+          ${p.method ? `<button class="btn small paper-explain-trigger no-print" data-action="solution-explanation" data-id="${escape(key)}" data-kind="method">Explain method · Myanmar</button><p class="myanmar-text paper-print-explanation">${escape(p.method)}</p>` : '<p class="paper-pending">A complete written method is not yet available for this subquestion.</p>'}
         </div>
         <div class="paper-calculation"><h4>Full derivation and calculation</h4>
           ${renderMath(p)}
         </div>
         <div class="paper-reason"><h4>Reason / ဘာကြောင့် ဒီနည်းလမ်းသုံးလဲ</h4>
-          ${p.reason ? `<p class="myanmar-text">${escape(p.reason)}</p>` : '<p class="paper-pending">The mathematical rationale still needs review.</p>'}
+          ${p.reason ? `<button class="btn small paper-explain-trigger no-print" data-action="solution-explanation" data-id="${escape(key)}" data-kind="reason">Why this formula? · Myanmar</button><p class="myanmar-text paper-print-explanation">${escape(p.reason)}</p>` : '<p class="paper-pending">The mathematical rationale still needs review.</p>'}
         </div>
-        <div class="paper-answer"><strong>Answer (${escape(p.label)})</strong>
+        <div class="paper-answer"><strong>Final Answer (${escape(p.label)})</strong>
           <p>${final ? escape(final) : p.solution ? escape(p.solution) : 'No independently documented final answer yet.'}</p></div>
+        ${p.verification ? `<div class="paper-verification"><strong>Verification note</strong><p>${escape(p.verification)}</p></div>` : ''}
         ${documented(p) ? '' : '<p class="paper-pending">This part contains incomplete study notes; it is not a verified complete calculation.</p>'}
       `}
       <div class="paper-part-tools no-print">
