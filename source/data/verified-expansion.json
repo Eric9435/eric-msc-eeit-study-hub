@@ -1,5 +1,5 @@
 {
-  "revision": "2026-11-06-independent-derivations-6",
+  "revision": "2026-11-06-independent-derivations-7",
   "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
   "overrides": [
     {
@@ -2900,6 +2900,164 @@
           "method": "Read labels from original Fig.2.5. Top/bottom bit direct q, second bit parity of signs, so exactly one of independent I,Q errors probability 2q(1−q). Average two bit errors။",
           "finalAnswer": "Natural-mapped Pb=(3/2)Q(√(2γ_b))−Q²(√(2γ_b)).",
           "verification": "Re-derived from AWGN Gaussian tail and independently inspected original 2026/27 constellation image"
+        }
+      ]
+    },
+    {
+      "id": "dc-2.3",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Source mixer uses +√2cos(ωt+φ₀) and −√2sin(ωt+φ₀), hence equivalent baseband rotates by exp(−jφ₀), not exp(+jφ₀). Verified directly from original figure.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "In-phase mixer output",
+          "question": "Compute unfiltered r_I and post-lowpass r_BB,I for phase-offset φ₀.",
+          "equations": [
+            "s(t)=√2[s_I(t)cosω_ct−s_Q(t)sinω_ct]",
+            "r_I(t)=√2 s(t) cos(ω_ct+φ₀)",
+            "=2s_I cosω_ct cos(ω_ct+φ₀)−2s_Q sinω_ct cos(ω_ct+φ₀)",
+            "LP{r_I}=s_I cosφ₀+s_Q sinφ₀"
+          ],
+          "display": [
+            {
+              "latex": "s(t)=√2[s_I(t)cosω_ct−s_Q(t)sinω_ct]",
+              "html": "<div class=\"verified-equation\" role=\"math\">s(t)=√2[s_I(t)cosω_ct−s_Q(t)sinω_ct]</div>"
+            },
+            {
+              "latex": "r_I(t)=√2 s(t) cos(ω_ct+φ₀)",
+              "html": "<div class=\"verified-equation\" role=\"math\">r_I(t)=√2 s(t) cos(ω_ct+φ₀)</div>"
+            },
+            {
+              "latex": "=2s_I cosω_ct cos(ω_ct+φ₀)−2s_Q sinω_ct cos(ω_ct+φ₀)",
+              "html": "<div class=\"verified-equation\" role=\"math\">=2s_I cosω_ct cos(ω_ct+φ₀)−2s_Q sinω_ct cos(ω_ct+φ₀)</div>"
+            },
+            {
+              "latex": "LP{r_I}=s_I cosφ₀+s_Q sinφ₀",
+              "html": "<div class=\"verified-equation\" role=\"math\">LP{r_I}=s_I cosφ₀+s_Q sinφ₀</div>"
+            }
+          ],
+          "reason": "Mixer ကို multiplier လုပ်လိုက်ရင် 2ωc high-frequency terms တွေ ပေါ်လာတယ်။ Lowpass filter က အဲ့ဒီ terms ဖယ်ပြီး desired I component ရတယ်။",
+          "method": "Use 2cosAcosB=cos(A−B)+cos(A+B), 2sinAcosB=sin(A+B)+sin(A−B). LP removes fast oscillations at 2ωc. Remaining constant-phase terms are sIcosφ+sQsinφ.",
+          "finalAnswer": "r_BB,I=s_I cosφ₀+s_Q sinφ₀.",
+          "verification": "Independently derived using original quadrature mixer signs inspected in Fig.2.6 and constellation Fig.2.7"
+        },
+        {
+          "label": "b",
+          "title": "Quadrature mixer output",
+          "question": "Compute unfiltered r_Q and post-lowpass r_BB,Q, using the minus-sine receiver mixer.",
+          "equations": [
+            "r_Q(t)=−√2 s(t) sin(ω_ct+φ₀)",
+            "=−2s_I cosω_ct sin(ω_ct+φ₀)+2s_Q sinω_ct sin(ω_ct+φ₀)",
+            "LP{r_Q}=−s_I sinφ₀+s_Q cosφ₀"
+          ],
+          "display": [
+            {
+              "latex": "r_Q(t)=−√2 s(t) sin(ω_ct+φ₀)",
+              "html": "<div class=\"verified-equation\" role=\"math\">r_Q(t)=−√2 s(t) sin(ω_ct+φ₀)</div>"
+            },
+            {
+              "latex": "=−2s_I cosω_ct sin(ω_ct+φ₀)+2s_Q sinω_ct sin(ω_ct+φ₀)",
+              "html": "<div class=\"verified-equation\" role=\"math\">=−2s_I cosω_ct sin(ω_ct+φ₀)+2s_Q sinω_ct sin(ω_ct+φ₀)</div>"
+            },
+            {
+              "latex": "LP{r_Q}=−s_I sinφ₀+s_Q cosφ₀",
+              "html": "<div class=\"verified-equation\" role=\"math\">LP{r_Q}=−s_I sinφ₀+s_Q cosφ₀</div>"
+            }
+          ],
+          "reason": "Receiver Q branch သည် minus sine multiplier ဖြစ်လို့ cross-coupling term ကို sign မမှားဖို့ အရေးကြီးတယ်။",
+          "method": "Use 2cosA sinB=sin(A+B)+sin(B−A), 2sinA sinB=cos(A−B)−cos(A+B). The 2ωc components disappear after LP.",
+          "finalAnswer": "r_BB,Q=−s_I sinφ₀+s_Q cosφ₀.",
+          "verification": "Independently derived using original quadrature mixer signs inspected in Fig.2.6 and constellation Fig.2.7"
+        },
+        {
+          "label": "c",
+          "title": "Complex phase rotation",
+          "question": "Relate r_BB to transmitter s_BB.",
+          "equations": [
+            "r_BB=(s_I cosφ₀+s_Q sinφ₀)+j(−s_I sinφ₀+s_Q cosφ₀)",
+            "= (s_I+j s_Q)(cosφ₀−j sinφ₀)",
+            "r_BB=s_BB exp(−jφ₀)"
+          ],
+          "display": [
+            {
+              "latex": "r_BB=(s_I cosφ₀+s_Q sinφ₀)+j(−s_I sinφ₀+s_Q cosφ₀)",
+              "html": "<div class=\"verified-equation\" role=\"math\">r_BB=(s_I cosφ₀+s_Q sinφ₀)+j(−s_I sinφ₀+s_Q cosφ₀)</div>"
+            },
+            {
+              "latex": "= (s_I+j s_Q)(cosφ₀−j sinφ₀)",
+              "html": "<div class=\"verified-equation\" role=\"math\">= (s_I+j s_Q)(cosφ₀−j sinφ₀)</div>"
+            },
+            {
+              "latex": "r_BB=s_BB exp(−jφ₀)",
+              "html": "<div class=\"verified-equation\" role=\"math\">r_BB=s_BB exp(−jφ₀)</div>"
+            }
+          ],
+          "reason": "Receiver oscillator အချိန် phase ပိုသွားတာကြောင့် received constellation က complex plane ထဲ clockwise angle φ₀ လှည့်သွားတယ်။",
+          "method": "a,b I,Q expressions ကို complex form ပေါင်းပါ။ Euler formula exp(−jφ)=cosφ−jsinφ ဖြင့် factor ထုတ်ပါ။ Amplitude |e^(−jφ)|=1 ဖြစ်လို့ phase only error.",
+          "finalAnswer": "r_BB=s_BB e^(−jφ₀).",
+          "verification": "Independently derived using original quadrature mixer signs inspected in Fig.2.6 and constellation Fig.2.7"
+        },
+        {
+          "label": "d",
+          "title": "Discrete-time flow diagram",
+          "question": "Sketch the equivalent baseband chain with transmit symbols d_n and decisions d̂_n.",
+          "equations": [
+            "d_n → pulse shaping/channel/filtering → multiply e^(−jφ₀) → symbol sampler → decision slicer → d̂_n",
+            "Ideal ISI-free matched samples: y_n=d_n e^(−jφ₀)",
+            "Decision: d̂_n=Q_constellation(y_n)"
+          ],
+          "display": [
+            {
+              "latex": "d_n → pulse shaping/channel/filtering → multiply e^(−jφ₀) → symbol sampler → decision slicer → d̂_n",
+              "html": "<div class=\"verified-equation\" role=\"math\">d_n → pulse shaping/channel/filtering → multiply e^(−jφ₀) → symbol sampler → decision slicer → d̂_n</div>"
+            },
+            {
+              "latex": "Ideal ISI-free matched samples: y_n=d_n e^(−jφ₀)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Ideal ISI-free matched samples: y_n=d_n e^(−jφ₀)</div>"
+            },
+            {
+              "latex": "Decision: d̂_n=Q_constellation(y_n)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Decision: d̂_n=Q_constellation(y_n)</div>"
+            }
+          ],
+          "reason": "Actual system ကို complex baseband ကြည့်ရင် transmitter symbol နဲ့ receiver decision ကြား phase error multiplier တစ်ခု ထပ်ပါနေသလိုပဲ ဖြစ်တယ်။",
+          "method": "Channel h_eff ကို general case ထဲဆို convolution block အဖြစ် ထည့်ပါ။ This ideal noiseless phase offset task has matched filter and sampling; if ISI-free normalisation, y_n=e^(−jφ₀)d_n။ Hard decision maps to nearest constellation point.",
+          "finalAnswer": "Equivalent baseband scalar multiplier e^(−jφ₀) before detector.",
+          "verification": "Independently derived using original quadrature mixer signs inspected in Fig.2.6 and constellation Fig.2.7"
+        },
+        {
+          "label": "e",
+          "title": "QPSK constellation at φ₀=π/8",
+          "question": "Rotate original four diagonal QPSK points and decide whether hard slicing yields symbol errors.",
+          "equations": [
+            "φ₀=π/8=22.5°",
+            "Original phases: 45°,135°,225°,315°",
+            "Received phases: 22.5°,112.5°,202.5°,292.5°",
+            "All points remain in their original I/Q decision quadrants → no ideal hard-decision symbol errors"
+          ],
+          "display": [
+            {
+              "latex": "φ₀=π/8=22.5°",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ₀=π/8=22.5°</div>"
+            },
+            {
+              "latex": "Original phases: 45°,135°,225°,315°",
+              "html": "<div class=\"verified-equation\" role=\"math\">Original phases: 45°,135°,225°,315°</div>"
+            },
+            {
+              "latex": "Received phases: 22.5°,112.5°,202.5°,292.5°",
+              "html": "<div class=\"verified-equation\" role=\"math\">Received phases: 22.5°,112.5°,202.5°,292.5°</div>"
+            },
+            {
+              "latex": "All points remain in their original I/Q decision quadrants → no ideal hard-decision symbol errors",
+              "html": "<div class=\"verified-equation\" role=\"math\">All points remain in their original I/Q decision quadrants → no ideal hard-decision symbol errors</div>"
+            }
+          ],
+          "reason": "Rotate 22.5° က QPSK point နဲ့ decision boundary ကြား original 45° margin ထက်နည်းလို့ boundary မဖြတ်ဘူး။ Noise မရှိရင် symbol မှားမသွားဘူး။",
+          "method": "Fig.2.7 QPSK states diagonal phases ±45°,±135°။ Receiver rotation −22.5° ကို subtract လုပ်ပါ။ Each resulting phase still inside same 90° quadrant region. Threshold decision boundaries are I=0 and Q=0.",
+          "finalAnswer": "No noiseless symbol errors at |φ₀|=22.5° (<45° margin).",
+          "verification": "Independently derived using original quadrature mixer signs inspected in Fig.2.6 and constellation Fig.2.7"
         }
       ]
     }
