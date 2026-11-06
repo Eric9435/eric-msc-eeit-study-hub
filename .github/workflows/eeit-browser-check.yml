@@ -1,0 +1,30 @@
+name: EEIT interactive browser check
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  live-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install browser test tools
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Check desktop and mobile interactions
+        run: node tools/browser_check.cjs
+        env:
+          EEIT_SITE_URL: https://eric-msc-eeit-study-hub.onrender.com
+      - name: Save screenshots and test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eeit-site-browser-check
+          path: artifacts/
+          if-no-files-found: ignore
+          retention-days: 3
