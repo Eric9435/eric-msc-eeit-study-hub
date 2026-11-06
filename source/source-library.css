@@ -80,3 +80,12 @@
 
 .document-page-reference{display:inline-flex;align-items:center;gap:5px;color:var(--ink);background:var(--surface-alt);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-weight:750}
 .source-archive .document-entry-actions .document-secondary{font-size:10px}
+
+/* One-archive PDF onboarding */
+.document-bulk-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 13px;padding:15px;margin:0 0 18px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.document-bulk-intro{flex:1 1 260px;display:flex;flex-direction:column;gap:4px;font-size:12px;line-height:1.65}
+.document-bulk-intro strong{color:var(--ink);font-weight:800}
+.document-bulk-intro span{color:var(--muted);font-size:11px}
+.document-zip-attach{background:#203d59;border-color:#203d59}
+.document-zip-attach:hover{background:#152d45}
+@media(max-width:670px){.document-bulk-bar{align-items:stretch;padding:13px}.document-bulk-bar .document-attach{flex:1 1 140px}}
