@@ -1,124 +1,171 @@
-/* Private original course documents: IndexedDB only, never sent to Firebase or Render. */
-const DATABASE='eric-eeit-private-source-pdfs-v1';
+/* Eric EEIT Document Library: a 92-item source catalog with private browser-only PDF storage.
+   No PDF bytes are transmitted to Render, GitHub, Firebase, or the catalog endpoint. */
+const DB_NAME='eric-eeit-private-source-pdfs-v1';
 const STORE='documents';
-const active=new Map();
-const urls=new WeakMap();
-function openDatabase(){
- return new Promise((resolve,reject)=>{
-  if(!('indexedDB' in window)){reject(Error('This browser does not support local PDF storage.'));return;}
-  const req=indexedDB.open(DATABASE,1);
-  req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(STORE))req.result.createObjectStore(STORE,{keyPath:'key'});};
-  req.onsuccess=()=>resolve(req.result);
-  req.onerror=()=>reject(req.error||Error('Unable to open local document database.'));
- });
+const KEY_PREFIX='catalog:';
+const MAX_PDF_BYTES=70_000_000;
+let catalogPromise=null,activeObjectUrl=null,activeReader=null;
+const shelfMap=new WeakMap();
+const kindTitles={
+ 'questions-solutions':'Questions + sample solutions',
+ 'question':'Original question sheet',
+ 'solution':'Original sample solutions',
+ 'past-exam':'Past examination',
+ 'lecture':'Lecture material',
+ 'lecture-example':'Lecture worked example',
+ 'lab':'Laboratory material',
+ 'reference':'Reference',
+ 'administrative':'Course information',
+ 'independent-working':'Independent worked solutions'
+};
+const courseNames={digital:'Digital Communications',power:'Electrical Power Systems II',control:'Control Systems Theory and Design',microwave:'Microwave Engineering',micro:'Microsystem Engineering'};
+function catalog(){return catalogPromise||(catalogPromise=fetch('./data/pdf-catalog.json',{cache:'no-cache'}).then(async r=>{if(!r.ok)throw Error('PDF catalog unavailable ('+r.status+')');const doc=await r.json();if(!Array.isArray(doc.entries)||doc.entries.length<80||!doc.entries.every(e=>e.id&&e.subject&&e.filename))throw Error('Invalid document catalog');return doc;}).catch(e=>{catalogPromise=null;throw e}));}
+function openDB(){return new Promise((resolve,reject)=>{
+ if(!('indexedDB' in window)){reject(Error('Browser does not support IndexedDB'));return;}
+ const r=indexedDB.open(DB_NAME,1);
+ r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains(STORE))r.result.createObjectStore(STORE,{keyPath:'key'});};
+ r.onsuccess=()=>resolve(r.result);
+ r.onerror=()=>reject(r.error||Error('Cannot open local PDF storage'));
+});}
+async function dbOp(mode,work){const db=await openDB();try{return await new Promise((resolve,reject)=>{
+ const tx=db.transaction(STORE,mode),st=tx.objectStore(STORE);let value;
+ try{const req=work(st);if(req){req.onsuccess=()=>{value=req.result};req.onerror=()=>reject(req.error||Error('Database operation failed'))}}catch(e){reject(e);return;}
+ tx.oncomplete=()=>resolve(value);tx.onerror=()=>reject(tx.error||Error('Database transaction failed'));
+ tx.onabort=()=>reject(tx.error||Error('Database transaction aborted'));
+});}finally{db.close()}}
+const fetchAll=()=>dbOp('readonly',st=>st.getAll());
+const putDoc=r=>dbOp('readwrite',st=>st.put(r));
+const dropDoc=id=>dbOp('readwrite',st=>st.delete(KEY_PREFIX+id));
+const docKey=id=>KEY_PREFIX+id;
+const element=(tag,klass,text)=>{const n=document.createElement(tag);if(klass)n.className=klass;if(text!==undefined)n.textContent=text;return n;};
+const describe=e=>e.note||'Listed in the TUHH course PDF source inventory. Attach your locally authorized PDF copy to view it.';
+const displayType=e=>kindTitles[e.kind]||e.kind;
+function setMessage(host,message,error=false){const target=host.querySelector('[data-document-message]');if(target){target.textContent=message;target.dataset.error=error?'true':'false';}}
+function releaseReader(){if(activeObjectUrl){URL.revokeObjectURL(activeObjectUrl);activeObjectUrl=null}activeReader=null;}
+function recordIndex(records){return new Map(records.filter(r=>r&&r.key).map(r=>[r.key,r]))}
+function makeCard(entry,records){const saved=records.get(docKey(entry.id));const article=element('article','document-entry');article.dataset.docId=entry.id;
+ const intro=element('div','document-entry-intro');intro.append(element('div','document-kind',displayType(entry)));
+ const name=element('h3','document-entry-title',entry.title);intro.append(name);
+ intro.append(element('p','document-entry-filename',entry.filename));
+ const meta=element('div','document-entry-meta');
+ meta.append(element('span','',entry.pages?String(entry.pages)+' pages':'Pages not indexed'));
+ meta.append(element('span','',entry.recordType==='library-file-identified'?'Named Library source':'Archived PDF reference'));
+ const state=element('span',saved?'document-state-present':'document-state-missing',saved?'Saved on this device':'Not attached');meta.append(state);
+ intro.append(meta);
+ if(entry.note&&entry.recordType==='library-file-identified')intro.append(element('p','document-entry-note',entry.note));
+ article.append(intro);
+ const controls=element('div','document-entry-actions');
+ const label=element('label','document-attach',saved?'Replace PDF':'Attach PDF');
+ const input=element('input');input.type='file';input.accept='.pdf,application/pdf';input.dataset.documentAttach=entry.id;input.setAttribute('aria-label','Attach '+entry.title+' as PDF');label.append(input);controls.append(label);
+ if(saved){const view=element('button','document-secondary','Read PDF');view.type='button';view.dataset.documentRead=entry.id;controls.append(view);
+ const remove=element('button','document-secondary','Remove');remove.type='button';remove.dataset.documentRemove=entry.id;controls.append(remove)}
+ article.append(controls);return article}
+const ranked=(a,b)=>{const x=a.recordType==='library-file-identified'?0:1,y=b.recordType==='library-file-identified'?0:1;return x-y||a.filename.localeCompare(b.filename)};
+function renderLibrary(host,doc,all){
+ const previousSearch=host.querySelector('[data-document-search]')?.value||'';
+ const previousSubject=host.querySelector('[data-document-course]')?.value||'all';
+ const previousKind=host.querySelector('[data-document-kind]')?.value||'all';
+ const records=recordIndex(all);
+ host.replaceChildren();
+ const heading=element('div','document-library-header');
+ heading.append(element('h2','','Course PDF library'));
+ heading.append(element('p','','Browse the 81 archived TUHH source references and identified Library PDFs. Each document has its own private attach/read control. No instructor PDF is publicly hosted.'));
+ host.append(heading);
+ const count=element('div','document-counts');
+ const attached=doc.entries.filter(x=>records.has(docKey(x.id))).length;
+ count.append(element('strong','',doc.entries.length+' indexed source records'));
+ count.append(element('span','',attached+' attached in this browser'));
+ count.append(element('span','','Local files do not sync with Google Sign-In'));
+ host.append(count);
+ const filters=element('div','document-filters');
+ const search=element('input');search.type='search';search.placeholder='Search filename, chapter or type';search.value=previousSearch;search.dataset.documentSearch='yes';search.setAttribute('aria-label','Search PDF catalog');filters.append(search);
+ const sub=element('select');sub.dataset.documentCourse='yes';sub.setAttribute('aria-label','Filter PDF by subject');
+ for(const [id,name] of [['all','All 5 subjects'],...Object.entries(courseNames)]){const opt=element('option','',name);opt.value=id;sub.append(opt)}sub.value=previousSubject;filters.append(sub);
+ const kinds=[...new Set(doc.entries.map(x=>x.kind))].sort();
+ const type=element('select');type.dataset.documentKind='yes';type.setAttribute('aria-label','Filter PDF by type');
+ for(const [id,name] of [['all','All document types'],...kinds.map(x=>[x,kindTitles[x]||x])]){const opt=element('option','',name);opt.value=id;type.append(opt)}type.value=previousKind;filters.append(type);
+ host.append(filters);
+ const grid=element('div','document-list-grid');grid.dataset.documentEntries='yes';host.append(grid);
+ const notice=element('p','document-library-notice','Catalog metadata is not a downloadable PDF. To read the actual source file here, attach your own copy. Course PDFs remain in your local browser storage unless you remove them or clear browser data.');host.append(notice);
+ const update=()=>{const q=search.value.trim().toLowerCase(),subject=sub.value,kind=type.value;grid.replaceChildren();
+ const filtered=doc.entries.filter(x=>(subject==='all'||x.subject===subject)&&(kind==='all'||x.kind===kind)&&(!q||[x.filename,x.title,x.note||'',courseNames[x.subject],displayType(x)].join(' ').toLowerCase().includes(q))).sort(ranked);
+ if(!filtered.length){grid.append(element('p','document-empty','No PDF records match your filters.'));return;}
+ const groups=subject==='all'?Object.keys(courseNames):[subject];
+ for(const course of groups){const matches=filtered.filter(x=>x.subject===course);if(!matches.length)continue;const section=element('section','document-course-section');
+ const head=element('h3','document-course-title',courseNames[course]+' · '+matches.length+' files');section.append(head);
+ const rows=element('div','document-cards');for(const entry of matches)rows.append(makeCard(entry,records));section.append(rows);grid.append(section)}
+ };
+ for(const el of [search,sub,type])el.addEventListener(el===search?'input':'change',update);
+ update();
+ const reader=element('div','document-main-reader');reader.dataset.documentReader='yes';host.append(reader);
 }
-async function databaseOperation(mode,action){
- const db=await openDatabase();
- try{return await new Promise((resolve,reject)=>{
-  const tx=db.transaction(STORE,mode),store=tx.objectStore(STORE);
-  let result;
-  try{const req=action(store);if(req){req.onsuccess=()=>{result=req.result;};req.onerror=()=>reject(req.error||Error('Local document request failed.'));}}
-  catch(error){reject(error);return;}
-  tx.oncomplete=()=>resolve(result);
-  tx.onerror=()=>reject(tx.error||Error('Local document storage operation failed.'));
-  tx.onabort=()=>reject(tx.error||Error('Local document storage was aborted.'));
- });}finally{db.close();}
+function renderShelf(host,doc,all){const course=host.dataset.course;const records=recordIndex(all);const entries=doc.entries.filter(e=>e.subject===course&&e.recordType==='library-file-identified').sort(ranked);const legacy=all.filter(x=>x.key===course+':question'||x.key===course+':solution');
+ host.replaceChildren();
+ host.append(element('h3','','Original PDF references for this exercise'));
+ host.append(element('p','source-shelf-intro','Source files are kept privately on this device. Match the original question, sample solution and independent working against the white-paper derivation.'));
+ const list=element('div','document-cards');for(const entry of entries)list.append(makeCard(entry,records));host.append(list);
+ if(legacy.length){const section=element('div','document-legacy');section.append(element('h4','','Previously attached course files'));
+ for(const item of legacy){const row=element('div','document-legacy-row');
+ row.append(element('span','',item.filename||'Previous PDF'));
+ const button=element('button','document-secondary','Read earlier attachment');button.type='button';button.dataset.documentLegacyRead=item.key;row.append(button);section.append(row)}host.append(section)}
+ const link=element('a','document-all-link','See all PDFs for '+(courseNames[course]||'this subject'));link.href='#documents';host.append(link);
+ const reader=element('div','document-main-reader');reader.dataset.documentReader='yes';host.append(reader);
 }
-const key=(course,kind)=>course+':'+kind;
-const get=(course,kind)=>databaseOperation('readonly',store=>store.get(key(course,kind)));
-const save=record=>databaseOperation('readwrite',store=>store.put(record));
-const erase=(course,kind)=>databaseOperation('readwrite',store=>store.delete(key(course,kind)));
-const kindName={question:'Original questions',solution:'Original sample solutions'};
-function clearUrl(shelf){const previous=urls.get(shelf);if(previous){URL.revokeObjectURL(previous);urls.delete(shelf);}}
-function showMessage(shelf,message){
- const status=shelf.querySelector('[data-eeit-source-status]');if(status)status.textContent=message;
+async function refreshHost(host){if(!host.isConnected)return;try{const [doc,all]=await Promise.all([catalog(),fetchAll()]);
+ if(!host.isConnected)return;
+ if(host.hasAttribute('data-eeit-document-library'))renderLibrary(host,doc,all);
+ else renderShelf(host,doc,all);
+ }catch(e){host.replaceChildren(element('p','document-error','PDF library unavailable: '+e.message))}}
+async function refreshVisible(){for(const host of document.querySelectorAll('[data-eeit-document-library],[data-eeit-source-shelf]'))await refreshHost(host)}
+function closeObsoleteReader(){if(activeReader&&!activeReader.isConnected)releaseReader()}
+function scan(){closeObsoleteReader();document.querySelectorAll('[data-eeit-document-library]:not([data-pdf-initialized]),[data-eeit-source-shelf]:not([data-pdf-initialized])').forEach(host=>{host.dataset.pdfInitialized='true';void refreshHost(host)})}
+function findEntry(id,doc){return doc.entries.find(e=>e.id===id)}
+function getHost(node){return node.closest('[data-eeit-document-library],[data-eeit-source-shelf]')}
+function setHostStatus(host,text,isError){let status=host.querySelector('[data-document-operation]');
+ if(!status){status=element('p','document-operation');status.dataset.documentOperation='yes';host.prepend(status)}
+ status.textContent=text;status.dataset.error=isError?'true':'false'}
+async function readRecord(host,record){if(!record||!record.blob)return;
+ releaseReader();
+ const container=host.querySelector('[data-document-reader]');if(!container)return;
+ container.replaceChildren();
+ const header=element('div','document-reader-top');
+ header.append(element('strong','',record.filename));
+ const url=URL.createObjectURL(record.blob);activeObjectUrl=url;activeReader=container;
+ const link=element('a','document-reader-open','Open in a new browser tab');link.href=url;link.target='_blank';link.rel='noopener noreferrer';header.append(link);
+ const close=element('button','document-secondary','Close reader');close.type='button';close.dataset.documentClose='yes';header.append(close);
+ container.append(header);
+ const iframe=element('iframe','document-pdf-frame');iframe.src=url;iframe.loading='lazy';iframe.title='Local PDF '+record.filename;container.append(iframe);
+ container.append(element('p','document-reader-note','On Android, the browser may open the original PDF in a separate tab if inline PDF rendering is not supported.'));
+ container.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function make(tag,cls,value){
- const element=document.createElement(tag);
- if(cls)element.className=cls;
- if(value!==undefined)element.textContent=value;
- return element;
-}
-async function renderShelf(shelf){
- if(!shelf.isConnected)return;
- const course=shelf.dataset.course,el=shelf.querySelector('[data-eeit-source-status]');
- if(!course||!el)return;
+document.addEventListener('change',async event=>{const input=event.target.closest?.('[data-document-attach]');if(!input)return;
+ const host=getHost(input),file=input.files?.[0],id=input.dataset.documentAttach;input.value='';if(!host||!file||!id)return;
  try{
-  const pair=await Promise.all([get(course,'question'),get(course,'solution')]);
-  if(!shelf.isConnected)return;
-  const docs={question:pair[0],solution:pair[1]};
-  el.replaceChildren();
-  let any=false;
-  for(const kind of ['question','solution']){
-   const entry=docs[kind],row=make('div','source-file-row');
-   row.append(make('strong','',kindName[kind]));
-   if(entry){
-    any=true;row.append(make('span','source-file-name',entry.filename));
-    const view=make('button','btn small','Read PDF');
-    view.type='button';view.dataset.sourceView=kind;row.append(view);
-    const remove=make('button','btn small','Remove local copy');
-    remove.type='button';remove.dataset.sourceRemove=kind;row.append(remove);
-   }else row.append(make('span','source-empty','Not attached on this device'));
-   el.append(row);
-  }
-  const kind=active.get(course)|| (docs.question?'question':docs.solution?'solution':null);
-  const reader=shelf.querySelector('[data-eeit-source-reader]');
-  clearUrl(shelf);
-  if(reader)reader.replaceChildren();
-  if(!any||!kind||!docs[kind]||!reader)return;
-  const record=docs[kind];
-  const url=URL.createObjectURL(record.blob);
-  urls.set(shelf,url);
-  active.set(course,kind);
-  const top=make('div','source-reader-header');
-  top.append(make('strong','',kindName[kind]+' · '+record.filename));
-  const open=make('a','source-pdf-link','Open PDF in new tab');
-  open.href=url;open.target='_blank';open.rel='noopener noreferrer';top.append(open);
-  reader.append(top);
-  const frame=make('iframe','source-pdf-frame');
-  frame.title=kindName[kind]+' for '+course;
-  frame.loading='lazy';frame.src=url;
-  reader.append(frame);
-  reader.append(make('p','source-pdf-note','If your mobile browser cannot display the PDF inside this page, select Open PDF in new tab above.'));
- }catch(error){showMessage(shelf,'Local source viewer: '+(error.message||'Storage unavailable.'));}
-}
-function scan(){
- document.querySelectorAll('[data-eeit-source-shelf]:not([data-source-initialized])').forEach(shelf=>{
-  shelf.setAttribute('data-source-initialized','true');
-  void renderShelf(shelf);
- });
-}
-document.addEventListener('change',async event=>{
- const input=event.target.closest?.('[data-eeit-import-source]');
- if(!input)return;
- const shelf=input.closest('[data-eeit-source-shelf]'),file=input.files?.[0];
- if(!shelf||!file)return;
- const kind=input.dataset.eeitImportSource,course=shelf.dataset.course;
- if(!['question','solution'].includes(kind)||!course)return;
- if(!/\.pdf$/i.test(file.name)|| !(file.type==='application/pdf'||file.type==='application/octet-stream'||!file.type)){
-  showMessage(shelf,'Only PDF documents are supported.');input.value='';return;
- }
- if(file.size>60_000_000){showMessage(shelf,'PDF exceeds the 60 MB local limit. Use a smaller copy.');input.value='';return;}
- try{
-  await save({key:key(course,kind),course,kind,filename:file.name,blob:file,size:file.size,savedAt:Date.now()});
-  active.set(course,kind);
-  await renderShelf(shelf);
- }catch(error){showMessage(shelf,'Could not store PDF locally: '+error.message);}
- input.value='';
+  const doc=await catalog(),entry=findEntry(id,doc);if(!entry)throw Error('Unknown document record');
+  if(file.size>MAX_PDF_BYTES)throw Error('This PDF exceeds the 70 MB on-device limit');
+  if(!/\.pdf$/i.test(file.name))throw Error('Please select a PDF file');
+  const signature=await file.slice(0,5).text();
+  if(signature!=='%PDF-')throw Error('This file is not a valid PDF document header');
+  // Explicit per-record attachment; accidental wrong-file matching is never treated as verified.
+  await putDoc({key:docKey(id),id,subject:entry.subject,filename:file.name,blob:file,size:file.size,savedAt:Date.now()});
+  await refreshHost(host);
+  setHostStatus(host,'Attached privately: '+file.name+'. Check the source before using its answers.',false);
+ }catch(e){setHostStatus(host,'Unable to attach PDF: '+e.message,true)}
 });
 document.addEventListener('click',async event=>{
- const view=event.target.closest?.('[data-source-view]');
- const remove=event.target.closest?.('[data-source-remove]');
- const target=view||remove;
- if(!target)return;
- const shelf=target.closest('[data-eeit-source-shelf]');
- if(!shelf)return;
- const course=shelf.dataset.course,kind=view?view.dataset.sourceView:remove.dataset.sourceRemove;
- if(!course||!['question','solution'].includes(kind))return;
- if(view){active.set(course,kind);void renderShelf(shelf);return;}
- if(!confirm('Remove this locally stored '+kindName[kind].toLowerCase()+' PDF from this browser?'))return;
- try{await erase(course,kind);active.delete(course);await renderShelf(shelf);}
- catch(error){showMessage(shelf,'Unable to remove local PDF: '+error.message);}
+ const read=event.target.closest?.('[data-document-read]'),remove=event.target.closest?.('[data-document-remove]'),legacy=event.target.closest?.('[data-document-legacy-read]'),close=event.target.closest?.('[data-document-close]');
+ const hit=read||remove||legacy||close;if(!hit)return;
+ const host=getHost(hit);if(!host)return;
+ if(close){releaseReader();host.querySelector('[data-document-reader]')?.replaceChildren();return}
+ try{
+  if(legacy){const item=await dbOp('readonly',st=>st.get(legacy.dataset.documentLegacyRead));if(item)await readRecord(host,item);return}
+  const id=(read?.dataset.documentRead||remove?.dataset.documentRemove),item=await dbOp('readonly',st=>st.get(docKey(id)));
+  if(read){if(item)await readRecord(host,item);else setHostStatus(host,'PDF not yet attached on this device.',true);return}
+  if(remove&&item&&confirm('Remove this private PDF copy from the browser?')){
+   if(activeReader?.closest('[data-eeit-document-library],[data-eeit-source-shelf]')===host)releaseReader();
+   await dropDoc(id);await refreshHost(host);setHostStatus(host,'Local PDF removed. The catalog record remains.',false);
+  }
+ }catch(e){setHostStatus(host,'Document operation failed: '+e.message,true)}
 });
 const observer=new MutationObserver(scan);
 observer.observe(document.documentElement,{childList:true,subtree:true});
