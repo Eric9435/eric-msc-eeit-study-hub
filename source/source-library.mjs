@@ -55,16 +55,19 @@ function makeCard(entry,records,exerciseId){
  meta.append(element('span','',inDrive?'Owner-restricted Google Drive':entry.recordType==='library-file-identified'?'Named Library source':'Archived reference'));
  meta.append(element('span',inDrive||saved?'document-state-present':'document-state-missing',saved?'Saved locally':inDrive?'Private PDF ready':'No PDF connected'));
  const pages=exerciseId&&entry.exercisePages?.[exerciseId];
+ const related=Boolean(exerciseId&&entry.relatedExerciseIds?.includes(exerciseId));
  if(pages){
-  const citation=[pages.question?'Question p. '+pages.question:null,pages.solution?'Sample answer p. '+pages.solution:null].filter(Boolean).join(' · ');
+  const citation=[pages.question?'Original question p. '+pages.question:null,pages.solution?'Sample solution p. '+pages.solution:null].filter(Boolean).join(' · ');
   if(citation)meta.append(element('span','document-page-reference',citation));
+ }else if(related){
+  meta.append(element('span','document-reference-related','Related lecture only — NOT the original exercise or its solution'));
  }
  intro.append(meta);
  if(entry.note&&entry.recordType==='library-file-identified')intro.append(element('p','document-entry-note',entry.note));
  article.append(intro);
  const controls=element('div','document-entry-actions');
  if(inDrive){
-  const open=element('button','document-attach document-cloud-read','Read original PDF');
+  const open=element('button','document-attach document-cloud-read',related?'Read related lecture':pages?'Read original question / solution':'Read course PDF');
   open.type='button';open.dataset.documentDrive=entry.drive_id;open.dataset.documentEntry=entry.id;controls.append(open);
   if(pages){for(const [kind,page] of Object.entries(pages)){
    if(!Number.isInteger(page)||page<=0)continue;
@@ -138,16 +141,44 @@ function renderLibrary(host,doc,all){
  update();
  const reader=element('div','document-main-reader');reader.dataset.documentReader='yes';host.append(reader);
 }
-function renderShelf(host,doc,all){const course=host.dataset.course;const records=recordIndex(all);const entries=doc.entries.filter(e=>e.subject===course&&(e.drive_id||e.recordType==='library-file-identified')).sort((a,b)=>Number(!a.exercisePages?.[host.dataset.exercise])-Number(!b.exercisePages?.[host.dataset.exercise])||ranked(a,b)).slice(0,12);const legacy=all.filter(x=>x.key===course+':question'||x.key===course+':solution');
+function renderShelf(host,doc,all){
+ const course=host.dataset.course,exerciseId=host.dataset.exercise,records=recordIndex(all);
+ const subjectDocs=doc.entries.filter(e=>e.subject===course&&e.drive_id);
+ const exact=subjectDocs.filter(e=>e.exercisePages?.[exerciseId]).sort((a,b)=>(a.kind==='question'?0:1)-(b.kind==='question'?0:1)||ranked(a,b));
+ const related=subjectDocs.filter(e=>!e.exercisePages?.[exerciseId]&&e.relatedExerciseIds?.includes(exerciseId)).sort(ranked);
+ const others=subjectDocs.filter(e=>!exact.includes(e)&&!related.includes(e)).sort(ranked);
+ const isSourceOnly=host.dataset.sourceOnly==='true';
+ const legacy=all.filter(x=>x.key===course+':question'||x.key===course+':solution');
  host.replaceChildren();
- host.append(element('h3','','Original PDF references for this exercise'));
- host.append(element('p','source-shelf-intro','Original question PDFs and official answers are available in private Google Drive. Select Read original PDF; your browser may ask you to sign in to the file-owner Google account.'));
- const list=element('div','document-cards');for(const entry of entries)list.append(makeCard(entry,records,host.dataset.exercise));host.append(list);
- if(legacy.length){const section=element('div','document-legacy');section.append(element('h4','','Previously attached course files'));
- for(const item of legacy){const row=element('div','document-legacy-row');
- row.append(element('span','',item.filename||'Previous PDF'));
- const button=element('button','document-secondary','Read earlier attachment');button.type='button';button.dataset.documentLegacyRead=item.key;row.append(button);section.append(row)}host.append(section)}
- const link=element('a','document-all-link','See all PDFs for '+(courseNames[course]||'this subject'));link.href='#documents';host.append(link);
+ host.append(element('h3','','Original exercise and solution PDFs'));
+ const status=element('div',exact.length?'document-match-exact':related.length?'document-match-related':'document-match-unlinked');
+ status.append(element('strong','',exact.length?'Original question / answer source found':related.length?'Related lecture materials only':'No exact original PDF link for this practice'));
+ status.append(element('p','',exact.length?
+  'Verified problem headings in the uploaded source PDFs. The question and sample-answer page links below refer to the real Drive files.':
+  related.length?'The PDFs below explain the topic, but do not contain a verified copy of this specific question and its official solution.':
+  'This exercise may be independently authored. Course files below are background references, not a claim of an official source or answer.'));
+ host.append(status);
+ if(isSourceOnly){
+  const pending=element('p','document-source-pending','Full independent worked solution for this exercise is still incomplete. The original source PDF is provided where available; this is NOT yet exam-certified.');
+  host.append(pending);
+ }
+ const list=element('div','document-cards');
+ const selected=[...exact,...related,...others.slice(0,Math.max(0,Math.min(3,6-exact.length-related.length)))];
+ for(const entry of selected)list.append(makeCard(entry,records,exerciseId));
+ host.append(list);
+ if(legacy.length){
+  const section=element('div','document-legacy');
+  section.append(element('h4','','Previously attached browser-only PDFs'));
+  for(const item of legacy){
+   const row=element('div','document-legacy-row');
+   row.append(element('span','',item.filename||'Previous PDF'));
+   const button=element('button','document-secondary','Read earlier attachment');button.type='button';
+   button.dataset.documentLegacyRead=item.key;row.append(button);section.append(row)
+  }
+  host.append(section);
+ }
+ const link=element('a','document-all-link','Browse all '+(courseNames[course]||'subject')+' PDFs');
+ link.href='#documents';host.append(link);
  const reader=element('div','document-main-reader');reader.dataset.documentReader='yes';host.append(reader);
 }
 async function refreshHost(host){if(!host.isConnected)return;try{const [doc,all]=await Promise.all([catalog(),fetchAll().catch(()=>[])]);
