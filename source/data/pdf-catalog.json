@@ -1,6 +1,6 @@
 {
-  "version": "2026-11-06.2",
-  "description": "Metadata only: catalog of named Library PDFs and archived 81-source inventory. PDF bytes cannot be copied automatically from ChatGPT Library; each document is attached privately in the user browser to view it. Specific exercise-to-page suggestions are included for curated compiled PDF documents where their navigator pages have been confirmed.",
+  "version": "2026-11-06.3",
+  "description": "Private Google Drive-backed EEIT catalog: 123 original PDFs stored with owner-only Drive permissions; older ChatGPT Library metadata references remain listed where unmatched. File IDs do not grant public access.",
   "statusMeaning": {
     "recordType": "Library filename verified in user-associated Files vs. filename only from archived source audit",
     "attachment": "not attached until the user selects the PDF file in their own browser"
@@ -10,7 +10,8 @@
     "power": "Electrical Power Systems II",
     "control": "Control Systems Theory and Design",
     "microwave": "Microwave Engineering",
-    "micro": "Microsystem Engineering"
+    "micro": "Microsystem Engineering",
+    "shared": "Shared Engineering Handbooks"
   },
   "entries": [
     {
@@ -145,7 +146,11 @@
       "kind": "independent-working",
       "provenance": "Named ChatGPT Library PDF",
       "note": "Full-course self-study problem and solution compilation; not an official examination paper.",
-      "recordType": "library-file-identified"
+      "recordType": "library-file-identified",
+      "drive_id": "1Vbdfgozz-dEq2z2CsS2mCf_FkbE1YngY",
+      "drive_bytes": 334398,
+      "drive_path": "Digital_Communications/Independent_Study_Notes/TUHH_Digital_Communications_Mega_Exam_Problem_Full_Course_EN_MM.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "lib006",
@@ -361,7 +366,11 @@
       "kind": "lecture",
       "provenance": "Named ChatGPT Library PDF",
       "note": "Microsystem Engineering introduction lecture slides, Winter Semester 2026/27.",
-      "recordType": "library-file-identified"
+      "recordType": "library-file-identified",
+      "drive_id": "1nYKZZJSRPsvNzNnVwOiATaaO7a_LC3NK",
+      "drive_bytes": 5130091,
+      "drive_path": "Microsystem_Engineering/Lecture_slides/MSE_-_01_-_Introduction.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a000",
@@ -373,7 +382,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Only Introduction and Stability Basics; not full course",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1gtKTzbMluJwJ2vc6vBLB6xtAUKPtmf64",
+      "drive_bytes": 32585254,
+      "drive_path": "Control_Systems/Lecture_Slides/Introduction.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a001",
@@ -385,7 +398,11 @@
       "kind": "administrative",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1NXFAfPZZeSRbSfFRrpTlp2iakq3zuq-k",
+      "drive_bytes": 2816265,
+      "drive_path": "Control_Systems/cstd_info.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a002",
@@ -397,7 +414,11 @@
       "kind": "question",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Appears duplicate tutorial version",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1d5yy6s6O6klcp_KAharPPcEZSV-hN5xR",
+      "drive_bytes": 3066954,
+      "drive_path": "Digital_Communications/Additional_Student_Files/Digital_Communications_2026_Tutorial_Questions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a003",
@@ -409,7 +430,11 @@
       "kind": "questions-solutions",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Appears duplicate tutorial version",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1sD1ZsBFAvo3vfYXybDhhf2sdQcvs1Trb",
+      "drive_bytes": 7660230,
+      "drive_path": "Digital_Communications/Additional_Student_Files/Digital_Communications_2026_Tutorial_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a004",
@@ -421,7 +446,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1-BWCFioiv0Zp97wXTYLc5ZW3dXdLIZVs",
+      "drive_bytes": 520851,
+      "drive_path": "Digital_Communications/Additional_Student_Files/Digital_Communications_Summer_2026_Past_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a005",
@@ -433,7 +462,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1db-6WlrS_-5dePqHrX-bBo7IIaXPJtVK",
+      "drive_bytes": 623614,
+      "drive_path": "Digital_Communications/Additional_Student_Files/Digital_Communications_Winter_2025_26_Past_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a006",
@@ -445,7 +478,11 @@
       "kind": "administrative",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1d_WSpyWN_auCYY9G0dhNq1OVMIQsoWjO",
+      "drive_bytes": 76872,
+      "drive_path": "Digital_Communications/Important_Guidelines_and_General_Information/Allowed_Aids_in_the_Exam__Zugelassene_Hilfsmittel_für_Klausur.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a007",
@@ -457,7 +494,11 @@
       "kind": "administrative",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1GPOYORW9JACIAynHokr_b6j3D0qOLNje",
+      "drive_bytes": 161724,
+      "drive_path": "Digital_Communications/Important_Guidelines_and_General_Information/Information_on_Teaching_Courses_at_the_Institute_of_Communications_WS26_27.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a008",
@@ -469,7 +510,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1MMjyLQduZz3m_34oF-VxD-USVH6-RifG",
+      "drive_bytes": 77035,
+      "drive_path": "Digital_Communications/Lab_Material/Attestation_Form_WS26_27.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a009",
@@ -481,7 +526,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1a4ZG7CvWpQWWfGNC8uX-Uc55pdBK3-gx",
+      "drive_bytes": 521867,
+      "drive_path": "Digital_Communications/Lab_Material/Lab_1_-_Digital_Data_Transmission.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a010",
@@ -493,7 +542,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1cRIIYW25r8By5nzcdNQC2BVrv-w3ywhn",
+      "drive_bytes": 1200011,
+      "drive_path": "Digital_Communications/Lab_Material/Lab_2_-_DSL_Transmission.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a011",
@@ -505,7 +558,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1kS0qLQFyY7moDcEuFV8iWoBwuPhjF6j8",
+      "drive_bytes": 846512,
+      "drive_path": "Digital_Communications/Lab_Material/Lab_3_-_Wireless_Communication_Systems.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a012",
@@ -517,7 +574,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1FQF5FxaGHcGqX2eqN95xRk0ti3tN6HlO",
+      "drive_bytes": 124346,
+      "drive_path": "Digital_Communications/Lab_Material/Week_Plan_Labs_Digital_Communications.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a013",
@@ -529,7 +590,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Alternate long split rendition; appears to repeat canonical digital lecture",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1k_pCJCvuWvPjiijCPVAkzSLW0qnffkV0",
+      "drive_bytes": 34077495,
+      "drive_path": "Digital_Communications/Lecture_Material/lecture-DigitalCommunicationsWS2026-split.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a014",
@@ -541,7 +606,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1mrfv0RhRV1w2SUoi9aIvZxW_cnvB2u2c",
+      "drive_bytes": 20548195,
+      "drive_path": "Digital_Communications/Lecture_Material/lecture-DigitalCommunicationsWS2026.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a015",
@@ -553,7 +622,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1gRT5LclsyVySl2ZlGXO9dwcncPYockUJ",
+      "drive_bytes": 458040,
+      "drive_path": "Digital_Communications/Previous_Exams/17_18_WiSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a016",
@@ -565,7 +638,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1Ievq5cjeWpGrM4PRRuUPFIHm1sJuTtCn",
+      "drive_bytes": 707697,
+      "drive_path": "Digital_Communications/Previous_Exams/17_18_WiSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a017",
@@ -577,7 +654,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1OumkroaCpl2X-TkFdTUgcMpEK8uxAKR9",
+      "drive_bytes": 253853,
+      "drive_path": "Digital_Communications/Previous_Exams/17_SoSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a018",
@@ -589,7 +670,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1xcAgu59k2JWz1XCYFB6fuXKP6ZyxP3cE",
+      "drive_bytes": 734250,
+      "drive_path": "Digital_Communications/Previous_Exams/17_SoSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a019",
@@ -601,7 +686,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "19weH3gKQL34NMeSB4-k-kcLdua1WwUCT",
+      "drive_bytes": 178973,
+      "drive_path": "Digital_Communications/Previous_Exams/18_19_WiSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a020",
@@ -613,7 +702,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1CepFux_hTQJb4gZUBYGSNT6v9uGcyS1N",
+      "drive_bytes": 324891,
+      "drive_path": "Digital_Communications/Previous_Exams/18_19_WiSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a021",
@@ -625,7 +718,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1RbuHAVPyro8QRMh_bAIhD1TCZ_KPPbEr",
+      "drive_bytes": 269221,
+      "drive_path": "Digital_Communications/Previous_Exams/18_SoSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a022",
@@ -637,7 +734,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1WK6cehiOT5CCKq9M-vreLfD3RVlH1HNK",
+      "drive_bytes": 345163,
+      "drive_path": "Digital_Communications/Previous_Exams/18_SoSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a023",
@@ -649,7 +750,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "12JEgRiYGihte9Wv7PfkAvf5NBBXDfyOL",
+      "drive_bytes": 460987,
+      "drive_path": "Digital_Communications/Previous_Exams/19_20_WiSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a024",
@@ -661,7 +766,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "10zNcwmjfOGNFGEP0RY-YCJcsF178E-zG",
+      "drive_bytes": 923062,
+      "drive_path": "Digital_Communications/Previous_Exams/19_20_WiSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a025",
@@ -673,7 +782,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1hla-Lfb6q2ZVdnPDaShbH1pYh9TCwaDr",
+      "drive_bytes": 241984,
+      "drive_path": "Digital_Communications/Previous_Exams/19_SoSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a026",
@@ -685,7 +798,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1DZwDtplSs_aSlaqf-c5O7NspeSkrUhMI",
+      "drive_bytes": 371477,
+      "drive_path": "Digital_Communications/Previous_Exams/19_SoSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a027",
@@ -697,7 +814,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1mFIyPWBhtPhKObeCSfT8CGo1t3gCB5xy",
+      "drive_bytes": 385740,
+      "drive_path": "Digital_Communications/Previous_Exams/20_21_WiSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a028",
@@ -709,7 +830,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1AhxOxWt18RDnTGu7rzGsYqF5nEcZSxml",
+      "drive_bytes": 635898,
+      "drive_path": "Digital_Communications/Previous_Exams/20_21_WiSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a029",
@@ -721,7 +846,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1KyNeRr0wdPljji2kCNAn8VSBWX57qkHc",
+      "drive_bytes": 217606,
+      "drive_path": "Digital_Communications/Previous_Exams/20_SoSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a030",
@@ -733,7 +862,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1TCI5hVVPFH6lNvGzG75TLxBVxG9QJFer",
+      "drive_bytes": 305193,
+      "drive_path": "Digital_Communications/Previous_Exams/20_SoSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a031",
@@ -745,7 +878,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1_DdMX7Dc_pv7uE3oqFgiV49kWQ7N_VLt",
+      "drive_bytes": 269171,
+      "drive_path": "Digital_Communications/Previous_Exams/21_22_WiSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a032",
@@ -757,7 +894,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1sQgz877HOZnioieJQvtY831lpBpWLiyE",
+      "drive_bytes": 437134,
+      "drive_path": "Digital_Communications/Previous_Exams/21_22_WiSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a033",
@@ -769,7 +910,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1tSniEm2xWJAlIdr691IBTZ0_uvKuekdw",
+      "drive_bytes": 214879,
+      "drive_path": "Digital_Communications/Previous_Exams/21_SoSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a034",
@@ -781,7 +926,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1qTZjCW2tIRnFd3qraupwMVKSRy4rYJPx",
+      "drive_bytes": 343076,
+      "drive_path": "Digital_Communications/Previous_Exams/21_SoSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a035",
@@ -793,7 +942,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1un5DpCSAAvy1IhXZyvOx-ZJkWVJSrsO_",
+      "drive_bytes": 468001,
+      "drive_path": "Digital_Communications/Previous_Exams/22_23_WiSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a036",
@@ -805,7 +958,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1J_Q2t5UUbVbQhUIL19LgfTvXO7LoRh80",
+      "drive_bytes": 596625,
+      "drive_path": "Digital_Communications/Previous_Exams/22_23_WiSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a037",
@@ -817,7 +974,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1tOBo5UckBHy0z9PQIoUPsZLRDomNzsBo",
+      "drive_bytes": 364597,
+      "drive_path": "Digital_Communications/Previous_Exams/22_SoSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a038",
@@ -829,7 +990,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1ZcUr8mz0j5aJnvGzGl7OSf26iv48bFNo",
+      "drive_bytes": 598021,
+      "drive_path": "Digital_Communications/Previous_Exams/22_SoSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a039",
@@ -841,7 +1006,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1KXZtS_5xER_XiIMlguiUHfmGNQKT9o9m",
+      "drive_bytes": 346158,
+      "drive_path": "Digital_Communications/Previous_Exams/23_24_WiSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a040",
@@ -853,7 +1022,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1C0ziwmtejhLQfyh4Ogh3YwEpNNlab1ee",
+      "drive_bytes": 519926,
+      "drive_path": "Digital_Communications/Previous_Exams/23_24_WiSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a041",
@@ -865,7 +1038,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1fot31JBzGIMsqwmFhxb9QSQR5tw_Ziit",
+      "drive_bytes": 546154,
+      "drive_path": "Digital_Communications/Previous_Exams/23_SoSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a042",
@@ -877,7 +1054,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1gXpOlqHImy0fkRWqT1vw-jZPo13DLm3X",
+      "drive_bytes": 930955,
+      "drive_path": "Digital_Communications/Previous_Exams/23_SoSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a043",
@@ -889,7 +1070,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1LRn7SZA6BRmgwm6CdEgI1M3eL5nKmnE7",
+      "drive_bytes": 393694,
+      "drive_path": "Digital_Communications/Previous_Exams/24_25_WiSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a044",
@@ -901,7 +1086,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1Lm7z5yNpC6mifzGm8hLu2sF2wzkn1tMZ",
+      "drive_bytes": 497283,
+      "drive_path": "Digital_Communications/Previous_Exams/24_25_WiSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a045",
@@ -913,7 +1102,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1gtqcfU-5PZAJc_-Grf0_jXMuCepqbyx9",
+      "drive_bytes": 517932,
+      "drive_path": "Digital_Communications/Previous_Exams/24_SoSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a046",
@@ -925,7 +1118,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1Ujreb5tiFkykPdZOOn7_iWbRK1XVIGE4",
+      "drive_bytes": 630658,
+      "drive_path": "Digital_Communications/Previous_Exams/24_SoSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a047",
@@ -937,7 +1134,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1KDPu2OctGef_1MXAqkSX7TCbC8C2IkII",
+      "drive_bytes": 578307,
+      "drive_path": "Digital_Communications/Previous_Exams/25_26_WiSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a048",
@@ -949,7 +1150,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1qGfm-n_o4qMdvASdXhyKKkmSTjdXJgAj",
+      "drive_bytes": 497971,
+      "drive_path": "Digital_Communications/Previous_Exams/25_26_WiSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a049",
@@ -961,7 +1166,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1fjzxFdkKa58rD824M8YIBKdHQLqCzSQg",
+      "drive_bytes": 354894,
+      "drive_path": "Digital_Communications/Previous_Exams/25_SoSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a050",
@@ -973,7 +1182,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1-Rjt20ZFJoY4N75-1bm6gzMqBm88D_bZ",
+      "drive_bytes": 503212,
+      "drive_path": "Digital_Communications/Previous_Exams/25_SoSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a051",
@@ -985,7 +1198,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1aLx2oKOBScNbExJQcYz5tqXrHu9Z6SgW",
+      "drive_bytes": 477563,
+      "drive_path": "Digital_Communications/Previous_Exams/26_SoSe_Exam.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a052",
@@ -997,7 +1214,11 @@
       "kind": "solution",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Past exam/solution, not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1vuN9U7QWzikHMVg9k5HvyHvTex9QAYsH",
+      "drive_bytes": 549092,
+      "drive_path": "Digital_Communications/Previous_Exams/26_SoSe_Solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a053",
@@ -1009,7 +1230,11 @@
       "kind": "question",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1NGhuSNzuBKPek4KQvKVLWz9iQK0MshR0",
+      "drive_bytes": 3051658,
+      "drive_path": "Digital_Communications/Tutorial_Material/tutorials_dc.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a054",
@@ -1021,7 +1246,11 @@
       "kind": "questions-solutions",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1bX5DzEFjf8kYzziWTrJmEHruHXCn8HKp",
+      "drive_bytes": 7651210,
+      "drive_path": "Digital_Communications/Tutorial_Material/tutorials_dc_solutions.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a055",
@@ -1033,7 +1262,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Only Introduction + chapter 2 Part 1; not full course",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1J-SJiM8tecOz0oN_BIGpMejHGZVqL-D-",
+      "drive_bytes": 10928186,
+      "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_1_Introduction_121025.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a056",
@@ -1045,7 +1278,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Only Introduction + chapter 2 Part 1; not full course",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1LNZPudbcWjxQTtKIBBWyKU0TQDcEEjWt",
+      "drive_bytes": 5185453,
+      "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_2_Components_and_Grid_Models_Part_1_131025.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a057",
@@ -1057,7 +1294,11 @@
       "kind": "reference",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Supplemental book excerpt; not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "13QEkLXDgYxRsUhyOn3E5UOQWp4hI2o-k",
+      "drive_bytes": 490600,
+      "drive_path": "Microsystem_Engineering/Additional_Documents/Kasper_book_Ch12_about_Microactuators.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a058",
@@ -1069,7 +1310,11 @@
       "kind": "reference",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Supplemental book excerpt; not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1ZqIg5bidny7slIWQmo--ta7RmrD06kRu",
+      "drive_bytes": 2634706,
+      "drive_path": "Microsystem_Engineering/Additional_Documents/Kasper_book_Ch13_about_Sensors.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a059",
@@ -1081,7 +1326,11 @@
       "kind": "reference",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "Supplemental book excerpt; not lecture slide",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1sIq0Vo5VUiDPkJtr35mIIAtDDUU0cOwT",
+      "drive_bytes": 678500,
+      "drive_path": "Microsystem_Engineering/Additional_Documents/Kasper_book_Ch1_Introduction_and_Scaling.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a061",
@@ -1093,7 +1342,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1TsAeH5ao4xSu7iKl5757EsK_D9d_nxtb",
+      "drive_bytes": 484785,
+      "drive_path": "Microwave_Engineering/Exercise/Exams/Beispiel_Klausur_1.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a062",
@@ -1105,7 +1358,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1XsZyXbvODyYEJDmhxr3CPOGfy3rRublm",
+      "drive_bytes": 678513,
+      "drive_path": "Microwave_Engineering/Exercise/Exams/Beispiel_Klausur_2.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a063",
@@ -1117,7 +1374,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1IxjnBKCJCOVzZ4uulTQsxVZ1AarFDNZ5",
+      "drive_bytes": 1347151,
+      "drive_path": "Microwave_Engineering/Exercise/Exams/Exam_SS_22.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a064",
@@ -1129,7 +1390,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1HN2KDPiCG_i2d8annLJcM76dI6-P2ZZE",
+      "drive_bytes": 1111025,
+      "drive_path": "Microwave_Engineering/Exercise/Exams/Exam_SS_23.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a065",
@@ -1141,7 +1406,11 @@
       "kind": "past-exam",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "11E0j4J6X6hRz2Ij_KUM0LM2BeAn_gJMI",
+      "drive_bytes": 591356,
+      "drive_path": "Microwave_Engineering/Exercise/Exams/Exam_SS_24.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a066",
@@ -1153,7 +1422,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1ZGyWnlS5Pb0nliB7NqoXFLXIEEI2Cpu-",
+      "drive_bytes": 177508,
+      "drive_path": "Microwave_Engineering/Labortory/Certificate_form.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a067",
@@ -1165,7 +1438,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1sTFJ-xS8P1cMB2umznk_VMTdaRlL7DUL",
+      "drive_bytes": 603467,
+      "drive_path": "Microwave_Engineering/Labortory/HTF_Lab1/HFT_Lab1_Deutsch.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a068",
@@ -1177,7 +1454,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1_5SpCFNM-HqpsSzjo4d5dXUriihU8WFh",
+      "drive_bytes": 600628,
+      "drive_path": "Microwave_Engineering/Labortory/HTF_Lab1/HFT_Lab1_eng.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a069",
@@ -1189,7 +1470,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1LwTn77rLguqretEyT7sx8prgM8z26ydX",
+      "drive_bytes": 3339248,
+      "drive_path": "Microwave_Engineering/Labortory/HTF_Lab2/HF02_deu.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a070",
@@ -1201,7 +1486,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1SeTDdP_AA1tj1b1UGomdS4cU6mac2AeW",
+      "drive_bytes": 3306820,
+      "drive_path": "Microwave_Engineering/Labortory/HTF_Lab2/HF02_eng.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a071",
@@ -1213,7 +1502,11 @@
       "kind": "lab",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1hW7X5z4Z6IeSXHCMSbuF5XpfGQWE_SNZ",
+      "drive_bytes": 91048,
+      "drive_path": "Microwave_Engineering/Labortory/Implementation_Plan_Rev2.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a072",
@@ -1225,7 +1518,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "12TF6FERELZ9l6J5GmEbCq78VB4yJScpU",
+      "drive_bytes": 467362,
+      "drive_path": "Microwave_Engineering/Lecture/IHF_TUHH_Microwave-Engineering_Lecture_V5-1_Welcome.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a073",
@@ -1237,7 +1534,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1aITdwVEMe1h0b748CBXB6lREwTPoKv3j",
+      "drive_bytes": 1309855,
+      "drive_path": "Microwave_Engineering/Lecture/IHF_TUHH_Microwave-Engineering_Lecture_V5-2_Introduction.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a074",
@@ -1249,7 +1550,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1v0n_lepcslSBrd0Uhw40Dot5IWzpMrp4",
+      "drive_bytes": 3181120,
+      "drive_path": "Microwave_Engineering/Lecture/IHF_TUHH_Microwave-Engineering_Lecture_V5-3_Scattering-Parameters.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a075",
@@ -1261,7 +1566,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1dpYD51QlFVMNVjrvg5_uPuGVrTqMhf6m",
+      "drive_bytes": 1770157,
+      "drive_path": "Microwave_Engineering/Lecture/IHF_TUHH_Microwave-Engineering_Lecture_V5-4_Noise.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a076",
@@ -1273,7 +1582,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1eFhQEjfuQ2-QU7S5R1E-lnALKTAL_Xer",
+      "drive_bytes": 3957553,
+      "drive_path": "Microwave_Engineering/Lecture/IHF_TUHH_Microwave-Engineering_Lecture_V5-5_Directional-Couplers.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a077",
@@ -1285,7 +1598,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1_tGgXPeMp0VEIWCdJClTDcmZpT5QTAs2",
+      "drive_bytes": 5410744,
+      "drive_path": "Microwave_Engineering/Lecture/IHF_TUHH_Microwave-Engineering_Lecture_V5-6_Waveguides.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a078",
@@ -1297,7 +1614,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "14p4q_LwE2PJ9BqNHXPqqlsvyFogVHRg0",
+      "drive_bytes": 3585017,
+      "drive_path": "Microwave_Engineering/Lecture/IHF_TUHH_Microwave-Engineering_Lecture_V5-7_Antennas.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a079",
@@ -1309,7 +1630,11 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1UoT90EKeVn3oD6JPwOkd29lYC97RqsFk",
+      "drive_bytes": 2499950,
+      "drive_path": "Microwave_Engineering/Lecture/IHF_TUHH_Microwave-Engineering_Lecture_V5-8_Resonators.pdf",
+      "drive_visibility": "private-owner-only"
     },
     {
       "id": "a080",
@@ -1321,7 +1646,667 @@
       "kind": "lecture",
       "provenance": "TUHH 81-PDF source audit inventory",
       "note": "",
-      "recordType": "archive-index"
+      "recordType": "archive-index",
+      "drive_id": "1r1sVndWhwld4DxexN8bS0cqoEa-5-ZrC",
+      "drive_bytes": 3968036,
+      "drive_path": "Microwave_Engineering/Lecture/IHF_TUHH_Microwave-Engineering_Lecture_V5-9_Filters.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-001",
+      "subject": "shared",
+      "title": "ExamOS TUHH 5 Subjects Formula Bank 208",
+      "filename": "ExamOS_TUHH_5_Subjects_Formula_Bank_208.pdf",
+      "path": "00_Shared_Study_Handbooks/ExamOS_TUHH_5_Subjects_Formula_Bank_208.pdf",
+      "pages": null,
+      "kind": "independent-working",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1tTgtiC7KaRrx8GuDFbS63Z0WrqvuGS6S",
+      "drive_bytes": 434080,
+      "drive_path": "00_Shared_Study_Handbooks/ExamOS_TUHH_5_Subjects_Formula_Bank_208.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-002",
+      "subject": "shared",
+      "title": "TUHH EEIT 2Year Myanmar Study Exam Handbook EXPANDED",
+      "filename": "TUHH_EEIT_2Year_Myanmar_Study_Exam_Handbook_EXPANDED.pdf",
+      "path": "00_Shared_Study_Handbooks/TUHH_EEIT_2Year_Myanmar_Study_Exam_Handbook_EXPANDED.pdf",
+      "pages": null,
+      "kind": "independent-working",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1s30r3hh6_VcG87xhLriO9Q5h-m9ytWQU",
+      "drive_bytes": 3826528,
+      "drive_path": "00_Shared_Study_Handbooks/TUHH_EEIT_2Year_Myanmar_Study_Exam_Handbook_EXPANDED.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-003",
+      "subject": "control",
+      "title": "Exercise1 Sol Introduction Sheet 1",
+      "filename": "Exercise1_Sol_Introduction_Sheet_1.pdf",
+      "path": "Control_Systems/Exercises/Exercise1_Sol_Introduction_Sheet_1.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1fxBfZxjaSdMC0q54e-rYDlQuuvZd52dg",
+      "drive_bytes": 185428,
+      "drive_path": "Control_Systems/Exercises/Exercise1_Sol_Introduction_Sheet_1.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-004",
+      "subject": "control",
+      "title": "Exercise2 Introduction Sheet 2",
+      "filename": "Exercise2_Introduction_Sheet_2.pdf",
+      "path": "Control_Systems/Exercises/Exercise2_Introduction_Sheet_2.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1EOiuIcO3l4WfGzwLu5jmfTAKKK1R2PVX",
+      "drive_bytes": 159902,
+      "drive_path": "Control_Systems/Exercises/Exercise2_Introduction_Sheet_2.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-005",
+      "subject": "control",
+      "title": "CSTD Handout Exercise 1",
+      "filename": "CSTD_Handout_Exercise_1.pdf",
+      "path": "Control_Systems/Exercises/Group_E/CSTD_Handout_Exercise_1.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1B2XIEyiN85D1EVPH7Gs_UTPRtwmYv0_3",
+      "drive_bytes": 2929217,
+      "drive_path": "Control_Systems/Exercises/Group_E/CSTD_Handout_Exercise_1.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-006",
+      "subject": "control",
+      "title": "Exercise1 ppt Introduction Sheet 1",
+      "filename": "Exercise1_ppt_Introduction_Sheet_1.pdf",
+      "path": "Control_Systems/Exercises/Groups_A_+_B/Exercise1_ppt_Introduction_Sheet_1.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1zZNaMVpZDOJtJiV0cKrr-PuKyVwydCtR",
+      "drive_bytes": 1078596,
+      "drive_path": "Control_Systems/Exercises/Groups_A_+_B/Exercise1_ppt_Introduction_Sheet_1.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-007",
+      "subject": "control",
+      "title": "Exercise2 Sol Introduction Sheet 2",
+      "filename": "Exercise2_Sol_Introduction_Sheet_2.pdf",
+      "path": "Control_Systems/Exercises/Groups_A_+_B/Exercise2_Sol_Introduction_Sheet_2.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1ylD6zuyGmzfQCa0c4IBLp2ktC7ZP1Y-h",
+      "drive_bytes": 193282,
+      "drive_path": "Control_Systems/Exercises/Groups_A_+_B/Exercise2_Sol_Introduction_Sheet_2.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-008",
+      "subject": "control",
+      "title": "Exercise2 ppt Introduction Sheet 2",
+      "filename": "Exercise2_ppt_Introduction_Sheet_2.pdf",
+      "path": "Control_Systems/Exercises/Groups_A_+_B/Exercise2_ppt_Introduction_Sheet_2.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "165BEGA6BRye08X0uNtEjtpfWfD-7msZS",
+      "drive_bytes": 848038,
+      "drive_path": "Control_Systems/Exercises/Groups_A_+_B/Exercise2_ppt_Introduction_Sheet_2.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-009",
+      "subject": "control",
+      "title": "CSTD Ex1 Lecture Slides Refs",
+      "filename": "CSTD_Ex1_Lecture-Slides-Refs.pdf",
+      "path": "Control_Systems/Exercises/Groups_C_+_D/Exercise_1/CSTD_Ex1_Lecture-Slides-Refs.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1v840bnK_nlGwnJBlABA1VPqKW0z_Nfzk",
+      "drive_bytes": 776444,
+      "drive_path": "Control_Systems/Exercises/Groups_C_+_D/Exercise_1/CSTD_Ex1_Lecture-Slides-Refs.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-010",
+      "subject": "control",
+      "title": "CSTD Ex1 Lecture Slides Refs ALT Control 1",
+      "filename": "CSTD_Ex1_Lecture-Slides-Refs_ALT_Control_1.pdf",
+      "path": "Control_Systems/Exercises/Groups_C_+_D/Exercise_1/CSTD_Ex1_Lecture-Slides-Refs_ALT_Control_1.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "15nTY375BrydfB1_ON2IGI0KIJotr5cdS",
+      "drive_bytes": 705090,
+      "drive_path": "Control_Systems/Exercises/Groups_C_+_D/Exercise_1/CSTD_Ex1_Lecture-Slides-Refs_ALT_Control_1.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-011",
+      "subject": "control",
+      "title": "CSTD Ex2 Lecture Slides Refs",
+      "filename": "CSTD_Ex2_Lecture-Slides-Refs.pdf",
+      "path": "Control_Systems/Exercises/Groups_C_+_D/Exercise_2/CSTD_Ex2_Lecture-Slides-Refs.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1OH8xJgzf398EpwPXMv3sAibB7FPMKb2h",
+      "drive_bytes": 720110,
+      "drive_path": "Control_Systems/Exercises/Groups_C_+_D/Exercise_2/CSTD_Ex2_Lecture-Slides-Refs.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-012",
+      "subject": "control",
+      "title": "03 Control Systems Theory and Design",
+      "filename": "03_Control_Systems_Theory_and_Design.pdf",
+      "path": "Control_Systems/Independent_Study_Notes/03_Control_Systems_Theory_and_Design.pdf",
+      "pages": null,
+      "kind": "independent-working",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1eczPRuTH6_z5UctZzH9IcKepxvSbHVP9",
+      "drive_bytes": 176335,
+      "drive_path": "Control_Systems/Independent_Study_Notes/03_Control_Systems_Theory_and_Design.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-013",
+      "subject": "control",
+      "title": "Control Systems Myanmar Exam Handbook 2026",
+      "filename": "Control_Systems_Myanmar_Exam_Handbook_2026.pdf",
+      "path": "Control_Systems/Independent_Study_Notes/Control_Systems_Myanmar_Exam_Handbook_2026.pdf",
+      "pages": null,
+      "kind": "independent-working",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1zU-jYk4TRCsky1PZ3jGwXb-ws1XRQret",
+      "drive_bytes": 498508,
+      "drive_path": "Control_Systems/Independent_Study_Notes/Control_Systems_Myanmar_Exam_Handbook_2026.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-014",
+      "subject": "control",
+      "title": "Ctrb Obsv",
+      "filename": "Ctrb_Obsv.pdf",
+      "path": "Control_Systems/Lecture_Slides/Ctrb_Obsv.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1YSigCRM80-C2dLkc9ZUCnIQXnpQegqgW",
+      "drive_bytes": 920836,
+      "drive_path": "Control_Systems/Lecture_Slides/Ctrb_Obsv.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-016",
+      "subject": "control",
+      "title": "PrintableHandout Ctrb Obsv",
+      "filename": "PrintableHandout_Ctrb_Obsv.pdf",
+      "path": "Control_Systems/Lecture_Slides/PrintableHandout_Ctrb_Obsv.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1PNHmvi4lgWyuJ1raXTZgvRphAS2IJtI7",
+      "drive_bytes": 946694,
+      "drive_path": "Control_Systems/Lecture_Slides/PrintableHandout_Ctrb_Obsv.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-017",
+      "subject": "control",
+      "title": "PrintableHandout Introduction",
+      "filename": "PrintableHandout_Introduction.pdf",
+      "path": "Control_Systems/Lecture_Slides/PrintableHandout_Introduction.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1V1sBddFpL6bgCgUIbfbw9Kdol-Kplls3",
+      "drive_bytes": 12140294,
+      "drive_path": "Control_Systems/Lecture_Slides/PrintableHandout_Introduction.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-020",
+      "subject": "control",
+      "title": "Exercise1 Introduction Sheet 1",
+      "filename": "Exercise1_Introduction_Sheet_1.pdf",
+      "path": "Control_Systems/Exercises/Exercise1_Introduction_Sheet_1.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1034TXbfky0L5PljmD5Dw_uXwqXOgHYYF",
+      "drive_bytes": 160646,
+      "drive_path": "Control_Systems/Exercises/Exercise1_Introduction_Sheet_1.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-024",
+      "subject": "digital",
+      "title": "01 Digital Communications",
+      "filename": "01_Digital_Communications.pdf",
+      "path": "Digital_Communications/Independent_Study_Notes/01_Digital_Communications.pdf",
+      "pages": null,
+      "kind": "independent-working",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1tF3s0iz5Ljzh053faWsO8r4aGBP1T7Vf",
+      "drive_bytes": 307901,
+      "drive_path": "Digital_Communications/Independent_Study_Notes/01_Digital_Communications.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-025",
+      "subject": "digital",
+      "title": "TUHH Digital Communications Integrated 14 Calculations Illustrated EN MM",
+      "filename": "TUHH_Digital_Communications_Integrated_14_Calculations_Illustrated_EN_MM.pdf",
+      "path": "Digital_Communications/Independent_Study_Notes/TUHH_Digital_Communications_Integrated_14_Calculations_Illustrated_EN_MM.pdf",
+      "pages": null,
+      "kind": "independent-working",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1o4NXQ-Nw9o6yqVw2qkrxy_8Sx_KIjC-f",
+      "drive_bytes": 355104,
+      "drive_path": "Digital_Communications/Independent_Study_Notes/TUHH_Digital_Communications_Integrated_14_Calculations_Illustrated_EN_MM.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-032",
+      "subject": "power",
+      "title": "EES II Ch 1 Introduction 091026",
+      "filename": "EES_II_Ch_1_Introduction_091026.pdf",
+      "path": "Electrical_Power_Systems_II/Current_Lecture_Notes/EES_II_Ch_1_Introduction_091026.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1BRPb_v_hwgzyNlYiBwp3i18CM13QRs-p",
+      "drive_bytes": 8604035,
+      "drive_path": "Electrical_Power_Systems_II/Current_Lecture_Notes/EES_II_Ch_1_Introduction_091026.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-033",
+      "subject": "power",
+      "title": "EES II Ch 2 Components and Grid Models 011126 part 2",
+      "filename": "EES_II_Ch_2_Components_and_Grid_Models_011126_part_2.pdf",
+      "path": "Electrical_Power_Systems_II/Current_Lecture_Notes/EES_II_Ch_2_Components_and_Grid_Models_011126_part_2.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1KxFwtNoC1_0G6FsMCTUCPRUV217oEjqb",
+      "drive_bytes": 4886322,
+      "drive_path": "Electrical_Power_Systems_II/Current_Lecture_Notes/EES_II_Ch_2_Components_and_Grid_Models_011126_part_2.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-034",
+      "subject": "power",
+      "title": "EES II Ch 2 Components and Grid Models 121026 part 1",
+      "filename": "EES_II_Ch_2_Components_and_Grid_Models_121026_part_1.pdf",
+      "path": "Electrical_Power_Systems_II/Current_Lecture_Notes/EES_II_Ch_2_Components_and_Grid_Models_121026_part_1.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1xZLYcvypX5tlnP-EDPOjnsNqM8StflrW",
+      "drive_bytes": 3133576,
+      "drive_path": "Electrical_Power_Systems_II/Current_Lecture_Notes/EES_II_Ch_2_Components_and_Grid_Models_121026_part_1.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-035",
+      "subject": "power",
+      "title": "EES II Ch 2 Components and Grid Models 191026 p 42 to 47",
+      "filename": "EES_II_Ch_2_Components_and_Grid_Models_191026_p_42_to_47.pdf",
+      "path": "Electrical_Power_Systems_II/Current_Lecture_Notes/EES_II_Ch_2_Components_and_Grid_Models_191026_p_42_to_47.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1my6peiypB6SAHBXbngXV4BuZahsK5yWo",
+      "drive_bytes": 157743,
+      "drive_path": "Electrical_Power_Systems_II/Current_Lecture_Notes/EES_II_Ch_2_Components_and_Grid_Models_191026_p_42_to_47.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-036",
+      "subject": "power",
+      "title": "EES II Ch 2 Components and Grid Models 251026 part 2",
+      "filename": "EES_II_Ch_2_Components_and_Grid_Models_251026_part_2.pdf",
+      "path": "Electrical_Power_Systems_II/Current_Lecture_Notes/EES_II_Ch_2_Components_and_Grid_Models_251026_part_2.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1wd8FRi5N8HCCyVwWITOu6ab3E_OKTK5E",
+      "drive_bytes": 4958333,
+      "drive_path": "Electrical_Power_Systems_II/Current_Lecture_Notes/EES_II_Ch_2_Components_and_Grid_Models_251026_part_2.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-037",
+      "subject": "power",
+      "title": "02 Electrical Power Systems II",
+      "filename": "02_Electrical_Power_Systems_II.pdf",
+      "path": "Electrical_Power_Systems_II/Independent_Study_Notes/02_Electrical_Power_Systems_II.pdf",
+      "pages": null,
+      "kind": "independent-working",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1HR99NvD_UeCPCEz_VnQ4UOjhit0x_--F",
+      "drive_bytes": 130887,
+      "drive_path": "Electrical_Power_Systems_II/Independent_Study_Notes/02_Electrical_Power_Systems_II.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-038",
+      "subject": "power",
+      "title": "Intro Master Programme ETMS 091026",
+      "filename": "Intro_Master_Programme_ETMS_091026.pdf",
+      "path": "Electrical_Power_Systems_II/Introduction_Master_Programme_Electrical_Engineering_and_Information_Technology/Intro_Master_Programme_ETMS_091026.pdf",
+      "pages": null,
+      "kind": "reference",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1zlTSa9R550dfhObTfeB47L7SHxKaAutt",
+      "drive_bytes": 566820,
+      "drive_path": "Electrical_Power_Systems_II/Introduction_Master_Programme_Electrical_Engineering_and_Information_Technology/Intro_Master_Programme_ETMS_091026.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-041",
+      "subject": "power",
+      "title": "EES II Ch 2 Components and Grid Models Part 2 261025",
+      "filename": "EES_II_Ch_2_Components_and_Grid_Models_Part_2_261025.pdf",
+      "path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_2_Components_and_Grid_Models_Part_2_261025.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1kvjT51Sb6bHOTs_QDg6sQbtmNlkrUHMq",
+      "drive_bytes": 7689304,
+      "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_2_Components_and_Grid_Models_Part_2_261025.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-042",
+      "subject": "power",
+      "title": "EES II Ch 3 Grid Operation 110126",
+      "filename": "EES_II_Ch_3_Grid_Operation_110126.pdf",
+      "path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_3_Grid_Operation_110126.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "13sDsbzrVmGVv04WP7g9KBqMKFCF4RYoH",
+      "drive_bytes": 4022359,
+      "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_3_Grid_Operation_110126.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-043",
+      "subject": "power",
+      "title": "EES II Ch 4 Grid Control Systems 180126",
+      "filename": "EES_II_Ch_4_Grid_Control_Systems_180126.pdf",
+      "path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_4_Grid_Control_Systems_180126.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1SfT3qyU3t6-RN2dRprNU9OzqxY-ugza9",
+      "drive_bytes": 8932150,
+      "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_4_Grid_Control_Systems_180126.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-044",
+      "subject": "power",
+      "title": "EES II Ch 5 Power Flow Calculation 301125",
+      "filename": "EES_II_Ch_5_Power_Flow_Calculation_301125.pdf",
+      "path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_5_Power_Flow_Calculation_301125.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1-px_vHQhtF9Wk7tj0rfAbKEgLK9RsZKr",
+      "drive_bytes": 6223566,
+      "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_5_Power_Flow_Calculation_301125.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-045",
+      "subject": "power",
+      "title": "EES II Ch 6 Optimization 011225",
+      "filename": "EES_II_Ch_6_Optimization_011225.pdf",
+      "path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_6_Optimization_011225.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "19c9maAfIT63T8QnSFaFtFfInYcdp7w4C",
+      "drive_bytes": 2060672,
+      "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_6_Optimization_011225.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-046",
+      "subject": "power",
+      "title": "EES II Ch 7 Symm Short Circuit Calc 071225",
+      "filename": "EES_II_Ch_7_Symm_Short_Circuit_Calc_071225.pdf",
+      "path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_7_Symm_Short_Circuit_Calc_071225.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1qr1kJdhr_t99a6gqcrpLf7J77m6jS9Sw",
+      "drive_bytes": 3435583,
+      "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_7_Symm_Short_Circuit_Calc_071225.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-047",
+      "subject": "power",
+      "title": "EES II Ch 8 Asymm El Fault Calculation 081225",
+      "filename": "EES_II_Ch_8_Asymm_El_Fault_Calculation_081225.pdf",
+      "path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_8_Asymm_El_Fault_Calculation_081225.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "18bcBP3uERDs0Z1p68TdyTxmuBQoq8cfY",
+      "drive_bytes": 5295543,
+      "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_8_Asymm_El_Fault_Calculation_081225.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-048",
+      "subject": "power",
+      "title": "EES II Ch 9 State Estimation 040126",
+      "filename": "EES_II_Ch_9_State_Estimation_040126.pdf",
+      "path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_9_State_Estimation_040126.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "154mA0WTA7ITA85jEqkqhedS3C8Afzr2V",
+      "drive_bytes": 2372053,
+      "drive_path": "Electrical_Power_Systems_II/Previous_Lecture_Notes_Winter_Term_202526/EES_II_Ch_9_State_Estimation_040126.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-052",
+      "subject": "micro",
+      "title": "05 Microsystem Engineering",
+      "filename": "05_Microsystem_Engineering.pdf",
+      "path": "Microsystem_Engineering/Independent_Study_Notes/05_Microsystem_Engineering.pdf",
+      "pages": null,
+      "kind": "independent-working",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1lQGF5nS_zUgAwWaMg2I2UvMaMj6yRJlY",
+      "drive_bytes": 105993,
+      "drive_path": "Microsystem_Engineering/Independent_Study_Notes/05_Microsystem_Engineering.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-054",
+      "subject": "micro",
+      "title": "MSE 02 Scaling",
+      "filename": "MSE_-_02_-_Scaling.pdf",
+      "path": "Microsystem_Engineering/Lecture_slides/MSE_-_02_-_Scaling.pdf",
+      "pages": null,
+      "kind": "lecture",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1bacqDWtcp3r7Cj9y2i82kF1Jfj4ibMy4",
+      "drive_bytes": 2836119,
+      "drive_path": "Microsystem_Engineering/Lecture_slides/MSE_-_02_-_Scaling.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-060",
+      "subject": "microwave",
+      "title": "Exercise",
+      "filename": "Exercise.pdf",
+      "path": "Microwave_Engineering/Exercise/Exercise/Exercise.pdf",
+      "pages": null,
+      "kind": "question",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1HjuNAPs77eWapYIjzxB6XkPf7vs0EuVb",
+      "drive_bytes": 432847,
+      "drive_path": "Microwave_Engineering/Exercise/Exercise/Exercise.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-061",
+      "subject": "microwave",
+      "title": "Exercise sol",
+      "filename": "Exercise_sol.pdf",
+      "path": "Microwave_Engineering/Exercise/Exercise/Exercise_sol.pdf",
+      "pages": null,
+      "kind": "solution",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1kxue2YWIDVp-LdU7uovxHD0swEPkmrH5",
+      "drive_bytes": 1629010,
+      "drive_path": "Microwave_Engineering/Exercise/Exercise/Exercise_sol.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-062",
+      "subject": "microwave",
+      "title": "04 Microwave Engineering",
+      "filename": "04_Microwave_Engineering.pdf",
+      "path": "Microwave_Engineering/Independent_Study_Notes/04_Microwave_Engineering.pdf",
+      "pages": null,
+      "kind": "independent-working",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1BogRtgM1rNpogwnYZL9kb2hgQ-zrjcUv",
+      "drive_bytes": 440334,
+      "drive_path": "Microwave_Engineering/Independent_Study_Notes/04_Microwave_Engineering.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-066",
+      "subject": "microwave",
+      "title": "HFT Lab1 eng ALT Microwave",
+      "filename": "HFT_Lab1_eng_ALT_Microwave.pdf",
+      "path": "Microwave_Engineering/Labortory/HTF_Lab1/HFT_Lab1_eng_ALT_Microwave.pdf",
+      "pages": null,
+      "kind": "lab",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1Na1wWbViRMV_dxkIbSh0UiB54p8tbhex",
+      "drive_bytes": 600615,
+      "drive_path": "Microwave_Engineering/Labortory/HTF_Lab1/HFT_Lab1_eng_ALT_Microwave.pdf",
+      "drive_visibility": "private-owner-only"
+    },
+    {
+      "id": "drive-070",
+      "subject": "microwave",
+      "title": "Lab HF WT2627",
+      "filename": "Lab_HF_WT2627.pdf",
+      "path": "Microwave_Engineering/Labortory/Lab_HF_WT2627.pdf",
+      "pages": null,
+      "kind": "lab",
+      "provenance": "Uploaded from user-provided five-subject master ZIP",
+      "note": "Original bytes stored privately in the connected Google Drive account, accessible to the authorized owner.",
+      "recordType": "private-drive-file",
+      "drive_id": "1FPULRsb2Y0DX6P0Ax8HIv6kCcilayC9k",
+      "drive_bytes": 43655,
+      "drive_path": "Microwave_Engineering/Labortory/Lab_HF_WT2627.pdf",
+      "drive_visibility": "private-owner-only"
     }
   ]
 }
