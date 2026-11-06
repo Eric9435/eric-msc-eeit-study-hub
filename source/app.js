@@ -279,10 +279,19 @@ async function start(){
   const verified=new Map(extension.overrides.map(e=>[e.id,e]));
   const originals=new Map(reworked.overrides.map(e=>[e.id,e]));
   if(verified.size!==extension.overrides.length||originals.size!==reworked.overrides.length)throw Error('Duplicate override IDs');
-  for(const item of [...extension.overrides,...reworked.overrides]){
+  // Independently authored tutorial expansions intentionally turn heading-only sets into worked sets.
+  // Their subpart count may differ from the initial source index, but IDs and labels must be unique.
+  for(const item of extension.overrides){
    const reference=original.exercises.find(e=>e.id===item.id);
-   if(!reference||!Array.isArray(item.parts)||item.parts.length!==reference.parts.length)throw Error('Exercise override does not match source parts: '+item.id);
-   if(!item.parts.every((p,i)=>p.label===reference.parts[i].label))throw Error('Exercise override changed original subpart identifiers: '+item.id);
+   if(!reference||!Array.isArray(item.parts)||!item.parts.length)throw Error('Invalid verified exercise expansion: '+item.id);
+   const labels=item.parts.map(p=>String(p?.label||''));
+   if(labels.some(label=>!label)||new Set(labels).size!==labels.length)throw Error('Duplicate or missing verified subpart label: '+item.id);
+  }
+  // Corrections to existing practice exercises, unlike expansions, must preserve their exact subparts.
+  for(const item of reworked.overrides){
+   const reference=original.exercises.find(e=>e.id===item.id);
+   if(!reference||!Array.isArray(item.parts)||item.parts.length!==reference.parts.length)throw Error('Original practice override does not match source parts: '+item.id);
+   if(!item.parts.every((p,i)=>p.label===reference.parts[i].label))throw Error('Original practice override changed original subpart identifiers: '+item.id);
   }
   original.exercises=original.exercises.map(e=>{
     const item=originals.get(e.id)||verified.get(e.id);
