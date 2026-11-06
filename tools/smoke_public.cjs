@@ -8,6 +8,16 @@ const data=JSON.parse(fs.readFileSync(file('source/data/content.json'),'utf8'));
 assert.equal(data.subjects.length,5,'Five subjects expected');
 assert.equal(data.exercises.length,82,'Expected 82 merged exercise entries');
 assert(data.formulas.length>=69,'Expected full merged formula library');
+
+const docCatalog=JSON.parse(fs.readFileSync(file('source/data/pdf-catalog.json'),'utf8'));
+assert(docCatalog.entries.length>=90,'Expected catalog of original and archival PDF references');
+assert.equal(new Set(docCatalog.entries.map(d=>d.id)).size,docCatalog.entries.length,'Duplicate PDF catalog IDs');
+assert(docCatalog.entries.every(d=>d.id&&d.subject&&d.filename.toLowerCase().endsWith('.pdf')),'Invalid document catalog entries');
+for(const subject of data.subjects)assert(docCatalog.entries.some(d=>d.subject===subject.id),'Missing PDF catalog for '+subject.id);
+assert(docCatalog.entries.filter(d=>d.recordType==='archive-index').length>=80,'TUHH 81-file archive index incomplete');
+assert(docCatalog.entries.filter(d=>d.recordType==='library-file-identified').length>=10,'Library source PDFs not identified');
+assert(!JSON.stringify(docCatalog).includes('file_00000000'),'Private Library file IDs must not be published');
+
 const ext=JSON.parse(fs.readFileSync(file('source/data/verified-expansion.json'),'utf8'));
 assert(Array.isArray(ext.overrides)&&ext.overrides.length>=21,'Missing independent derivations');
 for(const over of ext.overrides){
@@ -62,7 +72,7 @@ assert(!JSON.stringify(ext).includes('data:image/'),'Private images in independe
 assert(!JSON.stringify(originals).includes('data:image/'),'Private images leaked into original practice data');
 assert(!JSON.stringify(sourced).includes('data:image/'),'Private images leaked into source-backed reconstruction');
 cp.execFileSync(process.execPath,[file('tools/build_public.cjs')],{cwd:root,stdio:'inherit'});
-for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','source-library.css','source-library.mjs','visuals.css','visuals.mjs','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','data/original-practice-reworked.json','data/source-backed-derivations.json','assets/favicon.svg'])
+for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','source-library.css','source-library.mjs','visuals.css','visuals.mjs','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','data/pdf-catalog.json','data/original-practice-reworked.json','data/source-backed-derivations.json','assets/favicon.svg'])
  assert(fs.existsSync(file('public/'+name)),'Missing public file '+name);
 assert(!fs.existsSync(file('public/assets/questions')),'Original course page images published');
 const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?walk(path.join(d,x.name)):[path.join(d,x.name)]);
@@ -85,6 +95,17 @@ assert(fullSource.includes('Exam-readiness status: not yet certified'),'Exam aud
 assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('original-practice-reworked.json'),'Original practice data not precached offline');
 assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('source-backed-derivations.json'),'Original tutorial reconstructions not precached offline');
 assert(index.includes('source-library.css')&&index.includes('source-library.mjs'),'Private original document library not loaded');
+
+assert(fullSource.includes("['documents','PDF Document Library'"),'PDF document navigation is missing');
+assert(fullSource.includes('data-eeit-document-library'),'PDF catalog page missing');
+assert(fullSource.includes("route==='documents'?documentLibrary()"),'PDF document route not connected');
+const pdfModule=fs.readFileSync(file('source/source-library.mjs'),'utf8');
+assert(pdfModule.includes('pdf-catalog.json'),'PDF module does not load catalog');
+assert(pdfModule.includes("KEY_PREFIX='catalog:'"),'Individual PDF keys not implemented');
+assert(pdfModule.includes('file.slice(0,5).text()'),'PDF header verification missing');
+assert(!pdfModule.includes('fetch(file'),'PDF files must remain private, not uploaded');
+assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('pdf-catalog.json'),'PDF catalog not cached by service worker');
+
 assert(fullSource.includes('data-eeit-source-shelf'),'Original PDF attachment panel missing from source tab');
 const privateModule=fs.readFileSync(file('source/source-library.mjs'),'utf8');
 assert(privateModule.includes('indexedDB')&&privateModule.includes('STORE=')&&privateModule.includes('application/pdf'),'Private source module must store PDFs locally with type restrictions');
@@ -97,4 +118,4 @@ assert(fs.readFileSync(file('source/sw.js'),'utf8').includes("'./visuals.mjs'"),
 assert(fs.readFileSync(file('source/a4-paper.css'),'utf8').includes('size:A4'),'A4 printing stylesheet missing');
 for(const old of ['enhancements.js','enhancements.css','reason-ui.js','reason-ui.css'])
  assert(!fs.existsSync(file('public/'+old)),'Retired popup asset shipped: '+old);
-console.log('PASS: 5 subjects; 82 exercise entries; '+parts+' guided subquestions including 63 original-practice calculation chains and at least 34 source-aligned tutorial solutions; '+data.formulas.length+' formulas; public build, syntax and source-rights safeguards.');
+console.log('PASS: 5 subjects; 82 exercise entries; '+parts+' guided subquestions including 63 original-practice calculation chains and at least 34 source-aligned tutorial solutions; '+data.formulas.length+' formulas; PDF catalog metadata entries, local-only PDF reader, public build, syntax and source-rights safeguards.');
