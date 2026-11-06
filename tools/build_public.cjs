@@ -9,6 +9,7 @@ fs.cpSync(source,out,{recursive:true,filter:p=>{
  if(rel==='assets/questions'||rel.startsWith('assets/questions/'))return false;
  if(rel.toLowerCase().endsWith('.pdf'))return false;
  if(rel==='cloud-config.js')return false;
+ if(['enhancements.js','enhancements.css','reason-ui.js','reason-ui.css'].includes(rel))return false;
  return true;
 }});
 const config={
