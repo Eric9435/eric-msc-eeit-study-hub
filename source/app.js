@@ -95,10 +95,10 @@ function renderSource(e) {
   return `<div class="paper"><div class="mini-label">Source wording and figures · private study materials</div>
     <h2>Exercise ${escape(e.number)} — Source reference</h2>
     <p>${escape(e.question || 'The full official question text and diagrams are not included in this public site.')}</p>
-    <div class="inline-caution"><strong>Original material is private.</strong> Instructor-owned exercise PDFs and page images are intentionally excluded from the public website. Use your legally obtained local tutorial/lecture file for the exact problem statement, givens and diagrams.</div>
+    <div class="inline-caution"><strong>Original material is private.</strong> Uploaded source PDFs are linked from the owner's private Google Drive below. Exact Question/Sample Solution page links appear only when verified against those PDFs. A related lecture is not an official exercise solution.</div>
     <div class="side-info"><span>Document</span><strong>${escape(source)}</strong></div>
     <div class="side-info"><span>Reference</span><strong>${escape(reference)}</strong></div>
-    <section class="source-archive" data-eeit-source-shelf data-course="${escape(e.subject)}" data-exercise="${escape(e.id)}" aria-label="Original course question and answer documents">
+    <section class="source-archive" data-eeit-source-shelf data-course="${escape(e.subject)}" data-exercise="${escape(e.id)}" data-source-only="${!(e.parts||[]).length}" aria-label="Original course question and answer documents">
       <h3>Original PDFs for this course</h3>
       <p>Searching the source catalog and local browser files…</p>
     </section>
