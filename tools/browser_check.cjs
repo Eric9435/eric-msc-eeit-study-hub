@@ -36,6 +36,27 @@ async function check(){
    assert(await dialog.isVisible(),'Why popup did not open');
    await desktop.keyboard.press('Escape');
    assert(!await dialog.isVisible(),'Escape failed to close dialog');
+   // Check one representative engineering visual in each of the five subjects.
+   for (const sample of [
+     ['dc-2.2','ber'],['source-eps-ex-06','bus'],['official-cstd-I1','eigen'],
+     ['official-mw-2-4','smith'],['practice-mse-spring','spring']
+   ]) {
+     await desktop.goto(url+'/#exercise/'+sample[0],{waitUntil:'domcontentloaded',timeout:60000});
+     const visual=desktop.locator('.eeit-viz-panel').first();
+     await visual.waitFor({timeout:30000});
+     assert.equal(await visual.getAttribute('data-visual-kind'),sample[1],'Wrong diagram for '+sample[0]);
+     assert.equal(await visual.locator('svg[role="img"] title').count(),1,'SVG accessibility title missing');
+     assert((await visual.locator('svg path,svg line,svg circle,svg rect').count())>1,'Visual is empty');
+   }
+   await desktop.goto(url+'/#exercise/dc-2.2',{waitUntil:'domcontentloaded',timeout:60000});
+   const slider=desktop.locator('.eeit-viz-control input[type="range"]').first();
+   await slider.waitFor({timeout:15000});
+   const chartBefore=await desktop.locator('.eeit-viz-graphic').first().innerHTML();
+   await slider.evaluate(el=>{el.value='80';el.dispatchEvent(new Event('input',{bubbles:true}));});
+   assert.notEqual(await desktop.locator('.eeit-viz-graphic').first().innerHTML(),chartBefore,'Interactive visual slider does not update geometry');
+   await desktop.goto(url+'/#exercise/source-eps-ex-10',{waitUntil:'domcontentloaded',timeout:60000});
+   await desktop.locator('.eeit-viz-panel').first().waitFor({timeout:15000});
+   assert((await desktop.locator('.eeit-viz-note').first().innerText()).includes('Reference-only'),'Source-only visuals must not claim a verified original solution');
    await desktop.locator('.topbar [data-action="theme"]').click();
    assert.equal(await desktop.locator('html').getAttribute('data-theme'),'dark','Dark theme did not apply');
    await desktop.reload({waitUntil:'domcontentloaded'});
@@ -59,7 +80,7 @@ async function check(){
    // Main study features should function even if optional remote SDK is unavailable.
    const fatal=pageErrors.filter(s=>/Uncaught|ReferenceError|SyntaxError|TypeError/.test(s) && !/firebase|network request failed/i.test(s));
    assert.deepEqual(fatal,[],'Client runtime exception: '+fatal.join(' | '));
-   console.log('PASS desktop + mobile browser: 5 subjects, full logo, subject navigation, 3 dialogs, theme persistence, mobile drawer, formula bank.');
+   console.log('PASS desktop + mobile browser: 5 subjects; accessible diagrams for all subjects, interactive graph slider, source-only disclaimer, 3 dialogs, theme persistence, mobile drawer, formula bank.');
    if(pageErrors.length)console.log('Browser messages (nonfatal): '+pageErrors.slice(0,5).join(' | '));
  }catch(err){
    if(desktop)await desktop.screenshot({path:'artifacts/eeit-browser-failure.png',fullPage:true}).catch(()=>{});
