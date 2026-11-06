@@ -314,11 +314,42 @@ document.addEventListener('change',async event=>{
  }catch(e){setHostStatus(host,'Unable to attach PDF: '+e.message,true)}
 });
 document.addEventListener('click',async event=>{
- const read=event.target.closest?.('[data-document-read]'),remove=event.target.closest?.('[data-document-remove]'),legacy=event.target.closest?.('[data-document-legacy-read]'),close=event.target.closest?.('[data-document-close]');
- const hit=read||remove||legacy||close;if(!hit)return;
+ const drive=event.target.closest?.('[data-document-drive]'),
+  read=event.target.closest?.('[data-document-read]'),
+  remove=event.target.closest?.('[data-document-remove]'),
+  legacy=event.target.closest?.('[data-document-legacy-read]'),
+  close=event.target.closest?.('[data-document-close]');
+ const hit=drive||read||remove||legacy||close;if(!hit)return;
  const host=getHost(hit);if(!host)return;
  if(close){releaseReader();host.querySelector('[data-document-reader]')?.replaceChildren();return}
  try{
+  if(drive){
+   const id=drive.dataset.documentDrive,entryId=drive.dataset.documentEntry;
+   if(!/^[A-Za-z0-9_-]{10,160}$/.test(id||''))throw Error('Invalid Drive PDF identifier');
+   const doc=await catalog(),entry=doc.entries.find(e=>e.id===entryId&&e.drive_id===id);
+   if(!entry)throw Error('Unrecognized PDF in private source catalog');
+   const page=Number(drive.dataset.documentPage)||0;
+   releaseReader();
+   const container=host.querySelector('[data-document-reader]');
+   if(!container)throw Error('PDF reader unavailable');
+   container.replaceChildren();
+   const view='https://drive.google.com/file/d/'+encodeURIComponent(id)+'/view'+(page?'#page='+page:'');
+   const preview='https://drive.google.com/file/d/'+encodeURIComponent(id)+'/preview'+(page?'#page='+page:'');
+   const header=element('div','document-reader-top');
+   header.append(element('strong','',entry.filename+(page?' · Page '+page:'')));
+   const link=element('a','document-reader-open','Open original PDF in Google Drive');
+   link.href=view;link.target='_blank';link.rel='noopener noreferrer';header.append(link);
+   const closeButton=element('button','document-secondary','Close reader');
+   closeButton.type='button';closeButton.dataset.documentClose='yes';header.append(closeButton);
+   container.append(header);
+   const frame=element('iframe','document-pdf-frame');
+   frame.title='Private original PDF: '+entry.filename;frame.loading='lazy';
+   frame.referrerPolicy='no-referrer';frame.src=preview;container.append(frame);
+   container.append(element('p','document-reader-note','Owner-restricted Google Drive: use the Google account that owns this PDF. If inline preview fails because of mobile browser cookies, use Open original PDF in Google Drive above.'));
+   activeReader=container;
+   container.scrollIntoView({behavior:'smooth',block:'nearest'});
+   return;
+  }
   if(legacy){const item=await dbOp('readonly',st=>st.get(legacy.dataset.documentLegacyRead));if(item)await readRecord(host,item);return}
   const id=(read?.dataset.documentRead||remove?.dataset.documentRemove),item=await dbOp('readonly',st=>st.get(docKey(id)));
   if(read){if(item)await readRecord(host,item,Number(read.dataset.documentPage)||null);else setHostStatus(host,'PDF not yet attached on this device.',true);return}
