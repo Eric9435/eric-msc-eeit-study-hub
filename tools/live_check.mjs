@@ -20,6 +20,12 @@ async function check(){
   assert.equal(content.exercises.length,82,'Missing exercises');
   assert.equal(content.formulas.length,69,'Missing formulas');
   assert.equal(content.exercises.reduce((n,e)=>n+(e.parts||[]).length,0),139,'Wrong number of guided exercise parts');
+  const extension=JSON.parse((await get('/data/verified-expansion.json')).bytes.toString('utf8'));
+  assert(Array.isArray(extension.overrides),'Missing independently-derived exercise expansion');
+  assert.equal(extension.overrides.length,9,'Wrong number of source-grounded overrides');
+  const map=new Map(extension.overrides.map(x=>[x.id,x]));
+  const merged=content.exercises.map(x=>map.has(x.id)?{...x,...map.get(x.id)}:x);
+  assert.equal(merged.reduce((n,e)=>n+(e.parts||[]).length,0),175,'Merged worked subparts are missing');
   const logo=(await get('/assets/eeit-study-hub-logo.webp')).bytes;
   assert(logo.length>2000 && logo.toString('ascii',0,4)==='RIFF' && logo.toString('ascii',8,12)==='WEBP','Invalid logo file');
   for(const path of ['/styles.css','/brand-ui.css','/enhancements.css','/app.js','/enhancements.js','/cloud.js','/sw.js','/manifest.webmanifest']){
@@ -28,7 +34,7 @@ async function check(){
   }
   const config=(await get('/cloud-config.js')).bytes.toString('utf8');
   assert.match(config,/window\.EEIT_FIREBASE_CONFIG\s*=\s*\{/,'Firebase web app configuration missing');
-  console.log('PASS live HTTP: website, HTML, 5 subjects, 82 exercises, 139 parts, 69 formulas, valid logo, JS/CSS assets, Firebase web configuration present.');
+  console.log('PASS live HTTP: website, HTML, 5 subjects, 82 exercises, 175 merged parts, 69 formulas, valid logo, JS/CSS assets, Firebase web configuration present.');
 }
 let error;
 for(let i=1;i<=12;i++){
