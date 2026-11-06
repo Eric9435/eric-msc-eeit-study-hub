@@ -67,7 +67,7 @@
  html,body,.main,.content{background:#fff!important;color:#111!important}
  .content:has(.a4-paper)>.eyebrow,.content:has(.a4-paper)>.buttons{display:none!important}
  .paper-reading-layout>.workspace-main>.toolbar,.paper-reading-layout>.workspace-side{display:none!important}
- .paper-reading-layout .a4-paper{width:auto!important;max-width:none!important;min-height:0!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important;overflow:visible!important}
+ .paper-reading-layout .a4-paper{width:auto!important;max-width:none!important;min-height:0!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important;overflow:visible!important;break-inside:auto!important;page-break-inside:auto!important}
  .a4-paper .paper-controls,.a4-paper .no-print{display:none!important}
  .a4-paper .paper-document-head{break-after:avoid}
  .a4-paper .paper-part{break-inside:auto}
