@@ -1,11 +1,11 @@
 /* Network-first versioned PWA: online changes must never be masked by stale exercise JS. */
-const CACHE='eeit-original-private-library-v13';
+const CACHE='eeit-pdf-catalog-v14';
 const CORE=[
  './','./index.html','./styles.css','./app.js','./visuals.mjs',
  './cloud.css','./brand-ui.css','./inline-solutions.css','./a4-paper.css','./source-library.css','./source-library.mjs',
  './visuals.css','./cloud.js','./assets/eeit-study-hub-logo.webp',
  './data/content.json','./data/verified-expansion.json',
- './data/original-practice-reworked.json','./data/source-backed-derivations.json','./manifest.webmanifest','./assets/favicon.svg'
+ './data/pdf-catalog.json','./data/original-practice-reworked.json','./data/source-backed-derivations.json','./manifest.webmanifest','./assets/favicon.svg'
 ];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
