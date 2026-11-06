@@ -34,8 +34,17 @@ for(const over of originals.overrides){
   assert(p.working.every(step=>step.label&&step.value),'Incomplete calculation step '+over.id+':'+p.label);
  }
 }
+const sourced=JSON.parse(fs.readFileSync(file('source/data/source-backed-derivations.json'),'utf8'));
+assert.equal(sourced.overrides.length,2,'Expect 2 reconstructed source-based Digital Communications tutorials');
+assert.equal(sourced.overrides.reduce((n,e)=>n+e.parts.length,0),31,'Expect 31 source-aligned Digital Communications subparts');
+for(const override of sourced.overrides){
+ const exercise=data.exercises.find(e=>e.id===override.id);
+ assert(exercise && exercise.parts.length===override.parts.length,'Source-backed reconstruction must preserve question subparts');
+ for(const p of override.parts)assert(p.method&&p.reason&&p.finalAnswer&&p.display?.length,'Unexplained original tutorial subpart: '+override.id+':'+p.label);
+}
+const sourceMap=new Map(sourced.overrides.map(e=>[e.id,e]));
 const originalMap=new Map(originals.overrides.map(e=>[e.id,e]));
-const allMerged=merged.map(e=>originalMap.has(e.id)?{...e,...originalMap.get(e.id)}:e);
+const allMerged=merged.map(e=>{const over=originalMap.get(e.id)||sourceMap.get(e.id);return over?{...e,...over}:e;});
 const bySubject=new Map(data.subjects.map(s=>[s.id,allMerged.filter(e=>e.subject===s.id)]));
 assert([...bySubject.values()].every(es=>es.some(e=>originalMap.has(e.id))),'Original worked practice missing in one of the five subjects');
 
@@ -51,8 +60,9 @@ assert(!JSON.stringify(data).includes('sourceQuestionText'),'Original instructor
 assert(!JSON.stringify(data).includes('data:image/'),'Private image data leaked');
 assert(!JSON.stringify(ext).includes('data:image/'),'Private images in independent derivations');
 assert(!JSON.stringify(originals).includes('data:image/'),'Private images leaked into original practice data');
+assert(!JSON.stringify(sourced).includes('data:image/'),'Private images leaked into source-backed reconstruction');
 cp.execFileSync(process.execPath,[file('tools/build_public.cjs')],{cwd:root,stdio:'inherit'});
-for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','visuals.css','visuals.mjs','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','data/original-practice-reworked.json','assets/favicon.svg'])
+for(const name of ['index.html','app.js','cloud.js','cloud-config.js','styles.css','cloud.css','brand-ui.css','inline-solutions.css','a4-paper.css','visuals.css','visuals.mjs','assets/eeit-study-hub-logo.webp','sw.js','data/content.json','data/verified-expansion.json','data/original-practice-reworked.json','data/source-backed-derivations.json','assets/favicon.svg'])
  assert(fs.existsSync(file('public/'+name)),'Missing public file '+name);
 assert(!fs.existsSync(file('public/assets/questions')),'Original course page images published');
 const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(x=>x.isDirectory()?walk(path.join(d,x.name)):[path.join(d,x.name)]);
@@ -70,7 +80,10 @@ assert(!fullSource.includes('Overall Solution / Final Answer Summary'),'Old shor
 assert(index.includes('a4-paper.css'),'A4 white-paper CSS not referenced');
 assert(fullSource.includes('paper-workline-label'),'Given-to-check step rendering missing');
 assert(fullSource.includes('original-practice-reworked.json'),'Original practice data not fetched');
+assert(fullSource.includes('source-backed-derivations.json'),'Source-backed tutorial reconstruction not fetched');
+assert(fullSource.includes('Exam-readiness status: not yet certified'),'Exam audit is missing the proper caveat');
 assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('original-practice-reworked.json'),'Original practice data not precached offline');
+assert(fs.readFileSync(file('source/sw.js'),'utf8').includes('source-backed-derivations.json'),'Original tutorial reconstructions not precached offline');
 assert(index.includes('visuals.css'),'Visual stylesheet not loaded');
 assert(fs.readFileSync(file('source/app.js'),'utf8').includes("from './visuals.mjs'"),'Visual module is not imported');
 assert(fs.readFileSync(file('source/app.js'),'utf8').includes('renderVisual(e,visualSettings.get(e.id))'),'Exercise page lacks visual panel');
@@ -78,4 +91,4 @@ assert(fs.readFileSync(file('source/sw.js'),'utf8').includes("'./visuals.mjs'"),
 assert(fs.readFileSync(file('source/a4-paper.css'),'utf8').includes('size:A4'),'A4 printing stylesheet missing');
 for(const old of ['enhancements.js','enhancements.css','reason-ui.js','reason-ui.css'])
  assert(!fs.existsSync(file('public/'+old)),'Retired popup asset shipped: '+old);
-console.log('PASS: 5 subjects; 82 exercise entries; '+parts+' guided subquestions including 63 explicit original-practice calculation chains; '+data.formulas.length+' formulas; public build, syntax and source-rights safeguards.');
+console.log('PASS: 5 subjects; 82 exercise entries; '+parts+' guided subquestions including 63 original-practice calculation chains and 31 source-aligned tutorial solutions; '+data.formulas.length+' formulas; public build, syntax and source-rights safeguards.');
