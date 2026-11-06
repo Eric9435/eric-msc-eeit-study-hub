@@ -71,9 +71,9 @@ The website loads `inline-solutions.css` and the revised `app.js` only for worke
 
 ## Independent exercise expansion — 6 November 2026
 
-The additive `source/data/verified-expansion.json` supplies **15 reviewed exercise overrides** (89 fully written subparts) covering all five subjects. The app merges these by exercise ID with the original content at runtime; the existing exercise IDs, personal progress, references, and optional Firebase/cloud wiring remain unchanged. The PWA caches this data for offline sessions.
+The additive `source/data/verified-expansion.json` supplies **21 independently derived exercise overrides** (143 fully written subparts) covering all five subjects. The app merges these by exercise ID with the original content at runtime; the existing exercise IDs, personal progress, references, and optional Firebase/cloud wiring remain unchanged. The PWA caches this data for offline sessions.
 
-Verified expansion coverage: Digital Communications OFDM 4.1 (a–j), 5G NR 4.2 (a–f), LTE 4.3 (a–e), CDMA 5.1 (a–g), Equalization 3.1 (a–k), MAP/ML 3.2 (a–k) and Viterbi 3.3 (a–h); Electrical Power Systems II symbolic PST, per-unit, three-bus Y-bus, and Newton–Raphson Jacobian worked examples; Control Systems I.2 state-space and system tuples; Microwave Engineering 1.2 full link budget (a–c) and 1.3 coax fields (a–g); Microsystem Engineering new independent mass–spring practice (a–c). Numerical examples introduced for teaching are clearly labelled illustrative and are not claimed to be professor originals.
+Verified expansion coverage: Digital Communications OFDM 4.1 (a–j), 5G NR 4.2 (a–f), LTE 4.3 (a–e), CDMA 5.1 (a–g), Equalization 3.1 (a–k), MAP/ML 3.2 (a–k), Viterbi 3.3 (a–h), Linear Modulation 2.1 (a–o), QPSK/16-QAM Error Probability 2.2 (a–g), Receiver Phase Offset 2.3 (a–e), DAPSK 2.5 (a–e), JANUS 2.6 (a–m) and OQPSK/MSK 2.7 (a–i); Electrical Power Systems II symbolic PST, per-unit, three-bus Y-bus, and Newton–Raphson Jacobian worked examples; Control Systems I.2 state-space and system tuples; Microwave Engineering 1.2 full link budget (a–c) and 1.3 coax fields (a–g); Microsystem Engineering new independent mass–spring practice (a–c). Numerical examples introduced for teaching are clearly labelled illustrative and are not claimed to be professor originals.
 
 **Important:** Existing source-only exercises and legacy unreviewed subparts are deliberately not relabelled solved. For the reviewed additions, each revised subpart contains study calculation expressions, a reason, the solving method, and an inline final-answer section. Several original tutorial questions require private figures or additional source information; they have not been invented.
 
@@ -82,3 +82,7 @@ Run `node tools/smoke_public.cjs` for consistency checks, build and security/cop
 ## Solution-audit status
 
 The available course exercise library and independently written practice do **not** establish that all official problems have complete validated worked answers. This UI change preserves existing course exercise IDs and sync storage without adding invented givens or figures. All recorded solutions are displayed inline; missing written methods/final answers are visibly labelled pending review. Before marking the full bank mathematically complete, compare every numerical result and assumption against the original private question sheet and correct any legacy mathematical errors.
+
+### Latest coverage QA
+
+Across the original 82 study-exercise entries, **69** now have guided worked parts with **277** individual subparts. **13** remain source-only (including 3 genuine heading-only placeholders in the original Digital Communications tutorial, which cannot be independently solved without a question). Original legacy worked parts outside the 21 reviewed expansion entries are not claimed to have undergone a comprehensive independent source audit.
