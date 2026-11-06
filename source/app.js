@@ -99,7 +99,7 @@ function readinessAudit(){
   <p class="exam-audit-footnote">Documented means a method, reason, equations and answer are present. Independent verification of every official numerical value, figures, source completeness and examination scope must still be completed. Original instructor-owned PDFs are not publicly hosted.</p>
  </section>`;
 }
-function exerciseRow(e){const dc=e.subject==='digital',worked=Boolean(e.parts?.length),d=(e.parts||[]).filter(p=>read('completed',e.id+':'+p.label)).length;return `<button class="exercise-row" data-action="open" data-id="${escape(e.id)}"><div class="exercise-num">${escape(e.number)}</div><div class="exercise-info"><h3>${escape(e.title)}</h3><p>${escape(subject(e.subject)?.title||'Custom subject')} · ${escape(e.topic||'Practice')} ${worked?'· '+d+'/'+e.parts.length+' reviewed':''}</p></div><div class="exercise-right">${badge(worked?'Worked solution':'Original questions only',worked?'green':'amber')}${icon('chevron',18)}</div></button>`;}
+function exerciseRow(e){const dc=e.subject==='digital',worked=Boolean(e.parts?.length),d=(e.parts||[]).filter(p=>read('completed',e.id+':'+p.label)).length;return `<button class="exercise-row" data-action="open" data-id="${escape(e.id)}"><div class="exercise-num">${escape(e.number)}</div><div class="exercise-info"><h3>${escape(e.title)}</h3><p>${escape(subject(e.subject)?.title||'Custom subject')} · ${escape(e.topic||'Practice')} ${worked?'· '+d+'/'+e.parts.length+' reviewed':''}</p></div><div class="exercise-right">${badge(e.contentProvenance==='chatgpt-project-practice'?'Project practice':worked?'Worked solution':'Original questions only',worked?'green':'amber')}${icon('chevron',18)}</div></button>`;}
 function library(){let arr=allExercises().filter(x=>(filterSubject==='all'||x.subject===filterSubject)&&(filterState==='all'||(filterState==='worked'?x.parts?.length:filterState==='questions'?!x.parts?.length:filterState==='reviewed'?(x.parts||[]).some(p=>read('completed',x.id+':'+p.label)):true))&&(!keyword||[x.title,x.number,x.topic,subject(x.subject)?.title].join(' ').toLowerCase().includes(keyword.toLowerCase())));
 return `<div class="eyebrow">Your library</div><h1 class="page-title">Exercise Library</h1><p class="page-sub">Explore exercises across all five subjects, with self-authored examples and worked answers clearly distinguished from question-only references.</p>
 <div class="toolbar"><input data-action="search" data-search-input placeholder="Search by topic, number or title" value="${escape(keyword)}"><select aria-label="Filter by subject" data-action="subject-filter">${[['all','All subjects'],...base.subjects.map(s=>[s.id,s.title])].map(([v,t])=>`<option value="${v}" ${filterSubject===v?'selected':''}>${escape(t)}</option>`).join('')}</select><select aria-label="Filter by availability" data-action="state-filter">${[['all','All availability'],['worked','With worked answers'],['questions','Questions only'],['reviewed','Reviewed parts']].map(([v,t])=>`<option value="${v}" ${filterState===v?'selected':''}>${t}</option>`).join('')}</select><button class="btn btn-primary" data-action="new-exercise">${icon('plus',16)} Add exercise</button></div>
@@ -323,10 +323,10 @@ document.addEventListener('keydown',event=>{
 });
 async function start(){
  try{
-  const [r,extra,practice,sourceWork]=await Promise.all([fetch('data/content.json'),fetch('data/verified-expansion.json'),fetch('data/original-practice-reworked.json'),fetch('data/source-backed-derivations.json')]);
-  if(!r.ok||!extra.ok||!practice.ok||!sourceWork.ok)throw Error('Unable to load all study exercise data');
-  const [original,extension,reworked,sourceDerived]=await Promise.all([r.json(),extra.json(),practice.json(),sourceWork.json()]);
-  if(!Array.isArray(original.exercises)||!Array.isArray(extension.overrides)||!Array.isArray(reworked.overrides)||!Array.isArray(sourceDerived.overrides))throw Error('Invalid exercise data');
+  const [r,extra,practice,sourceWork,projectPractice]=await Promise.all([fetch('data/content.json'),fetch('data/verified-expansion.json'),fetch('data/original-practice-reworked.json'),fetch('data/source-backed-derivations.json'),fetch('data/project-practice.json')]);
+  if(!r.ok||!extra.ok||!practice.ok||!sourceWork.ok||!projectPractice.ok)throw Error('Unable to load all study exercise data');
+  const [original,extension,reworked,sourceDerived,projectArchive]=await Promise.all([r.json(),extra.json(),practice.json(),sourceWork.json(),projectPractice.json()]);
+  if(!Array.isArray(original.exercises)||!Array.isArray(extension.overrides)||!Array.isArray(reworked.overrides)||!Array.isArray(sourceDerived.overrides)||!Array.isArray(projectArchive.exercises))throw Error('Invalid exercise data');
   const verified=new Map(extension.overrides.map(e=>[e.id,e]));
   const originals=new Map(reworked.overrides.map(e=>[e.id,e]));
   const sourceMap=new Map(sourceDerived.overrides.map(e=>[e.id,e]));
@@ -358,6 +358,12 @@ async function start(){
     const item=originals.get(e.id)||sourceMap.get(e.id)||verified.get(e.id);
     return item?{...e,...item,parts:item.parts}:e;
   });
+  const knownIds=new Set(original.exercises.map(e=>e.id));
+  for(const item of projectArchive.exercises){
+   if(!item||typeof item.id!=='string'||knownIds.has(item.id)||item.subject!=='micro'||item.contentProvenance!=='chatgpt-project-practice'||!Array.isArray(item.parts)||!item.parts.length)throw Error('Invalid reconstructed project exercise');
+   if(!item.parts.every(p=>p.label&&p.question&&p.method&&p.reason&&p.finalAnswer&&p.working?.length>=4))throw Error('Incomplete project practice calculation: '+item.id);
+   knownIds.add(item.id);original.exercises.push(item);
+  }
   base=original;setRoute();
   if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
  }catch(e){$('#app').innerHTML=`<div class="loading">${escape(e.message)}. Run the site using a local web server (see README.md).</div>`;}
