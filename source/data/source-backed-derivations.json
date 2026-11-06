@@ -1265,6 +1265,10 @@
             {
               "label": "Decibel check",
               "value": "P_L,dBm=10 log₁₀(40.7495/0.001) =46.1012 dBm."
+            },
+            {
+              "label": "Sanity check of absorbed-power factor",
+              "value": "(1−r_L²)/(1−r_Q5 r_L)²≈0.99937; P_L≈(9.03043²/2)×0.99937 W. Load mismatch reduces delivered power slightly."
             }
           ],
           "equations": [
@@ -1296,6 +1300,10 @@
             {
               "label": "Check from dBm",
               "value": "P_Q≈7.399 dBm; P_L≈46.101 dBm; a_B≈7.399−46.101=−38.702 dB."
+            },
+            {
+              "label": "Sign check",
+              "value": "P_L>P_Q, therefore attenuation 10log₁₀(P_Q/P_L)<0, equivalent to positive operating power gain."
             }
           ],
           "equations": [
@@ -1474,6 +1482,10 @@
             {
               "label": "Matched isolated-port interpretation",
               "value": "The main external two-port (ports 1 and 12) has no input/output reflection for identical amplifiers."
+            },
+            {
+              "label": "Cancellation verification",
+              "value": "S11=(ρin−ρin)/2=0 and S44=(ρout−ρout)/2=0; balanced paths cancel the reflections."
             }
           ],
           "equations": [
@@ -1505,6 +1517,10 @@
             {
               "label": "Identical amplifier result",
               "value": "S_reduced=[[0,jσ],[jA,0]]."
+            },
+            {
+              "label": "Termination check",
+              "value": "a₂=a₁₁=0 for matched isolated loads, so no extra returning wave changes the retained 2×2 block."
             }
           ],
           "equations": [
