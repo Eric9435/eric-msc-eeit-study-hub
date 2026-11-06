@@ -1,0 +1,1236 @@
+{
+  "revision": "2026-11-06-independent-derivations-1",
+  "description": "Verified subquestions from supplied course sources; illustrative numeric examples expressly labelled",
+  "overrides": [
+    {
+      "id": "dc-4.1",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Official Digital Communications question 4.1 (a–j) re-derived; conditional assumptions declared.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Single-carrier versus multicarrier",
+          "question": "Explain frequency-selective channels in the time and frequency domains.",
+          "equations": [
+            "B_single ≈ B_total; T_single ≈ 1/B_total",
+            "B_sub ≈ B_total/N; T_useful ≈ N/B_total",
+            "H(f) ≈ H_k within one sufficiently narrow subcarrier"
+          ],
+          "display": [
+            {
+              "latex": "B_single ≈ B_total; T_single ≈ 1/B_total",
+              "html": "<div class=\"verified-equation\" role=\"math\">B_single ≈ B_total; T_single ≈ 1/B_total</div>"
+            },
+            {
+              "latex": "B_sub ≈ B_total/N; T_useful ≈ N/B_total",
+              "html": "<div class=\"verified-equation\" role=\"math\">B_sub ≈ B_total/N; T_useful ≈ N/B_total</div>"
+            },
+            {
+              "latex": "H(f) ≈ H_k within one sufficiently narrow subcarrier",
+              "html": "<div class=\"verified-equation\" role=\"math\">H(f) ≈ H_k within one sufficiently narrow subcarrier</div>"
+            }
+          ],
+          "reason": "Subcarrier တစ်ခုစီ bandwidth ကျဉ်းသွားရင် channel gain ကို တစ်ခုချင်းစီမှာ constant နီးပါးယူနိုင်တယ်။ Symbol ကြာချိန်ရှည်လို့ delay spread / symbol duration ratio လျော့တယ်။",
+          "method": "Single carrier သည် bandwidth အပြည့်သုံး၍ short symbols ပို့သည်။ Multicarrier တွင် bandwidth ကို N ခုခွဲပြီး complex symbols များ parallel ပို့သည်။ Narrow subband တစ်ခုစီကို flat channel လို approximate လုပ်နိုင်၊ time domain တွင် multipath delay နှင့် သက်ဆိုင်သော ISI ပမာဏ လျော့ကျသည်။",
+          "finalAnswer": "Each narrow subcarrier sees approximately flat fading; useful symbol duration increases.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "b",
+          "title": "OFDM defining conditions",
+          "question": "State the OFDM orthogonality requirement and practical transmit/receive operations.",
+          "equations": [
+            "Δf = 1/T_u",
+            "∫₀^Tᵤ exp[j2π(k−m)t/Tᵤ] dt = 0   (k ≠ m)",
+            "TX: map → IFFT → add CP; RX: remove CP → FFT → detect"
+          ],
+          "display": [
+            {
+              "latex": "Δf = 1/T_u",
+              "html": "<div class=\"verified-equation\" role=\"math\">Δf = 1/T_u</div>"
+            },
+            {
+              "latex": "∫₀^Tᵤ exp[j2π(k−m)t/Tᵤ] dt = 0   (k ≠ m)",
+              "html": "<div class=\"verified-equation\" role=\"math\">∫₀^Tᵤ exp[j2π(k−m)t/Tᵤ] dt = 0   (k ≠ m)</div>"
+            },
+            {
+              "latex": "TX: map → IFFT → add CP; RX: remove CP → FFT → detect",
+              "html": "<div class=\"verified-equation\" role=\"math\">TX: map → IFFT → add CP; RX: remove CP → FFT → detect</div>"
+            }
+          ],
+          "reason": "Subcarriers spectrum တွေ overlap ဖြစ်ပေမဲ့ Δf =1/Tᵤ ကြောင့် symbol interval အတွင်း inner product သုည ဖြစ်ပြီး သီးသန့် decode လုပ်နိုင်တယ်။",
+          "method": "Subcarrier k နှင့် m ၏ complex exponential ကို conjugate ဖြင့်မြှောက်ပြီး Tᵤ အတွင်း integrate လုပ်ပါ။ k−m သုညမဟုတ်သော integer ဖြစ်လျှင် exponential full-cycle integration 0 ဖြစ်သည်။ IFFT/FFT သည် အားလုံးကို တစ်ပြိုင်နက်တွက်ရန်အသုံးပြုသည်။",
+          "finalAnswer": "Orthogonal spacing Δf=1/Tᵤ with IFFT/FFT and usually a cyclic prefix.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "c",
+          "title": "OFDM power spectral density",
+          "question": "Describe the OFDM PSD and how to sketch it for rectangular time-domain windowing.",
+          "equations": [
+            "G_k(f) = Tᵤ sinc[πTᵤ(f−kΔf)] · phase",
+            "S(f) ∝ ∑ₖ E[|dₖ|²] · Tᵤ² sinc²[πTᵤ(f−kΔf)]",
+            "Δf = 1/Tᵤ"
+          ],
+          "display": [
+            {
+              "latex": "G_k(f) = Tᵤ sinc[πTᵤ(f−kΔf)] · phase",
+              "html": "<div class=\"verified-equation\" role=\"math\">G_k(f) = Tᵤ sinc[πTᵤ(f−kΔf)] · phase</div>"
+            },
+            {
+              "latex": "S(f) ∝ ∑ₖ E[|dₖ|²] · Tᵤ² sinc²[πTᵤ(f−kΔf)]",
+              "html": "<div class=\"verified-equation\" role=\"math\">S(f) ∝ ∑ₖ E[|dₖ|²] · Tᵤ² sinc²[πTᵤ(f−kΔf)]</div>"
+            },
+            {
+              "latex": "Δf = 1/Tᵤ",
+              "html": "<div class=\"verified-equation\" role=\"math\">Δf = 1/Tᵤ</div>"
+            }
+          ],
+          "reason": "Rectangular pulse ကို Fourier transform လုပ်လျှင် sinc ဖြစ်လို့ subcarrier တစ်ခုစီရဲ့ PSD က sinc² လိုပုံစံဖြစ်တယ်။",
+          "method": "Frequency axis ပေါ်တွင် kΔf နေရာတိုင်းမှာ sinc² peak တစ်ခုစီ ရေးဆွဲပါ။ Null spacing = Δf၊ neighboring peaks သည် အချင်းချင်း nulls မှာ ရောက်သော်လည်း sidelobes overlap ဖြစ်နိုင်သည်။ Actual PSD scaling သည် symbol normalisation နှင့် CP အပေါ် မူတည်သည်။",
+          "finalAnswer": "Overlapping sinc² spectra centered at integer multiples of Δf.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "d",
+          "title": "OFDM signal processing chain",
+          "question": "Explain the purpose of transmitter/receiver blocks.",
+          "equations": [
+            "d = [d₀,…,d_{N−1}]ᵀ",
+            "s_n = (1/N) ∑ₖ dₖ · exp(j2πkn/N)",
+            "d̂_k = ∑ₙ r_n · exp(−j2πkn/N)"
+          ],
+          "display": [
+            {
+              "latex": "d = [d₀,…,d_{N−1}]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">d = [d₀,…,d_{N−1}]ᵀ</div>"
+            },
+            {
+              "latex": "s_n = (1/N) ∑ₖ dₖ · exp(j2πkn/N)",
+              "html": "<div class=\"verified-equation\" role=\"math\">s_n = (1/N) ∑ₖ dₖ · exp(j2πkn/N)</div>"
+            },
+            {
+              "latex": "d̂_k = ∑ₙ r_n · exp(−j2πkn/N)",
+              "html": "<div class=\"verified-equation\" role=\"math\">d̂_k = ∑ₙ r_n · exp(−j2πkn/N)</div>"
+            }
+          ],
+          "reason": "IFFT က frequency symbols ကို time samples ပြောင်းတယ်။ Cyclic prefix က channel memory အတွက် guard interval ပေးပြီး FFT က subcarrier တွေကို ပြန်ခွဲတယ်။",
+          "method": "TX: bits → coding/mapping → serial-parallel → N-point IFFT → copy last D samples to front (CP) → D/A/RF. RX: synchronization → remove D-prefix → FFT → channel estimation/equalization → symbols/bits. Normalization 1/N convention ရှင်းစွာ သတ်မှတ်ထားသည်။",
+          "finalAnswer": "An IFFT/FFT pair changes between subcarrier symbols and OFDM samples.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "e",
+          "title": "Guard interval and ISI",
+          "question": "Explain the cyclic prefix condition for a channel with D samples of memory.",
+          "equations": [
+            "h = [h₀,h₁,…,h_D]",
+            "N_CP ≥ D",
+            "y_n = ∑_{ℓ=0}^{D} h_ℓ s_{(n−ℓ) mod N}"
+          ],
+          "display": [
+            {
+              "latex": "h = [h₀,h₁,…,h_D]",
+              "html": "<div class=\"verified-equation\" role=\"math\">h = [h₀,h₁,…,h_D]</div>"
+            },
+            {
+              "latex": "N_CP ≥ D",
+              "html": "<div class=\"verified-equation\" role=\"math\">N_CP ≥ D</div>"
+            },
+            {
+              "latex": "y_n = ∑_{ℓ=0}^{D} h_ℓ s_{(n−ℓ) mod N}",
+              "html": "<div class=\"verified-equation\" role=\"math\">y_n = ∑_{ℓ=0}^{D} h_ℓ s_{(n−ℓ) mod N}</div>"
+            }
+          ],
+          "reason": "ရှေ့က symbol tail က နောက် symbol ထဲ ဝင်နိုင်တာကြောင့် CP ဖြည့်ရတယ်။ CP လုံလောက်ရင် CP ဖြုတ်ပြီးနောက် linear convolution က N-periodic circular convolution ဖြစ်သွားတယ်။",
+          "method": "Channel impulse response length D+1 ဖြစ်လျှင် maximum delay D samples ဖြစ်သည်။ Copy-and-prefix length ≥ D၊ receiver တွင် prefix ကို စွန့်ပစ်၍ remaining N samples ကို FFT လုပ်ပါ။ CP မလုံလောက်ပါက ISI/ICI ဖြစ်နိုင်သည်။",
+          "finalAnswer": "Use a cyclic prefix of at least D samples (assuming synchronization and channel conditions hold).",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "f",
+          "title": "DFT and IDFT matrix form",
+          "question": "Write matrix-vector transform expressions for an N-symbol block.",
+          "equations": [
+            "F_{k,n} = exp(−j2πkn/N)",
+            "d = F s",
+            "s = (1/N) Fᴴ d; FᴴF = N I"
+          ],
+          "display": [
+            {
+              "latex": "F_{k,n} = exp(−j2πkn/N)",
+              "html": "<div class=\"verified-equation\" role=\"math\">F_{k,n} = exp(−j2πkn/N)</div>"
+            },
+            {
+              "latex": "d = F s",
+              "html": "<div class=\"verified-equation\" role=\"math\">d = F s</div>"
+            },
+            {
+              "latex": "s = (1/N) Fᴴ d; FᴴF = N I",
+              "html": "<div class=\"verified-equation\" role=\"math\">s = (1/N) Fᴴ d; FᴴF = N I</div>"
+            }
+          ],
+          "reason": "DFT coefficient တွေကို matrix F ထဲထည့်ရင် matrix multiplication တစ်ကြောင်းနဲ့ FFT/IFFT ကို ရေးလို့ရတယ်။",
+          "method": "F ၏ row k,column n = exp(−j2πkn/N) အဖြစ် သတ်မှတ်ပါ။ Column vector s ကို transform လုပ်၍ d=Fs; conjugate transpose ကိုသုံးကာ s=(1/N)Fᴴd။ Unit-norm convention သုံးရင် F နှင့် Fᴴ တို့ကို 1/√N ဖြင့် scale လုပ်သည်။",
+          "finalAnswer": "d=Fs and s=Fᴴd/N under the unnormalised DFT convention.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "g",
+          "title": "Linear convolution matrix",
+          "question": "Express full received block as a convolution-matrix product.",
+          "equations": [
+            "ŝ ∈ ℂ^(N+D); h=[h₀,…,h_D]",
+            "Ĥ_{r,c} = h_{r−c} if 0≤r−c≤D; else 0",
+            "ŷ = Ĥ ŝ; Ĥ ∈ ℂ^((N+2D)×(N+D))"
+          ],
+          "display": [
+            {
+              "latex": "ŝ ∈ ℂ^(N+D); h=[h₀,…,h_D]",
+              "html": "<div class=\"verified-equation\" role=\"math\">ŝ ∈ ℂ^(N+D); h=[h₀,…,h_D]</div>"
+            },
+            {
+              "latex": "Ĥ_{r,c} = h_{r−c} if 0≤r−c≤D; else 0",
+              "html": "<div class=\"verified-equation\" role=\"math\">Ĥ_{r,c} = h_{r−c} if 0≤r−c≤D; else 0</div>"
+            },
+            {
+              "latex": "ŷ = Ĥ ŝ; Ĥ ∈ ℂ^((N+2D)×(N+D))",
+              "html": "<div class=\"verified-equation\" role=\"math\">ŷ = Ĥ ŝ; Ĥ ∈ ℂ^((N+2D)×(N+D))</div>"
+            }
+          ],
+          "reason": "Convolution အတွက် y_r က input sample အချို့နဲ့ channel tap တွေရဲ့ product ပေါင်းခြင်းဖြစ်ပြီး Toeplitz matrix ထဲ စနစ်တကျ ထည့်ရေးနိုင်တယ်။",
+          "method": "Input length N+D၊ channel length D+1 ဖြစ်လျှင် output length (N+D)+(D+1)−1=N+2D ဖြစ်သည်။ Row r,column c တွင် lag r−c ထည့်၍ valid range မှာ h coefficient၊ မဟုတ်ရင် 0 ထည့်ပါ။",
+          "finalAnswer": "Full linear-convolution matrix size (N+2D) × (N+D).",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "h",
+          "title": "Circular channel after CP removal",
+          "question": "Construct the effective N×N channel matrix.",
+          "equations": [
+            "y = H_circ s",
+            "(H_circ)_{n,m} = h_{(n−m) mod N} if (n−m) mod N ≤ D; else 0",
+            "H_circ = circ(h₀,h₁,…,h_D,0,…,0)"
+          ],
+          "display": [
+            {
+              "latex": "y = H_circ s",
+              "html": "<div class=\"verified-equation\" role=\"math\">y = H_circ s</div>"
+            },
+            {
+              "latex": "(H_circ)_{n,m} = h_{(n−m) mod N} if (n−m) mod N ≤ D; else 0",
+              "html": "<div class=\"verified-equation\" role=\"math\">(H_circ)_{n,m} = h_{(n−m) mod N} if (n−m) mod N ≤ D; else 0</div>"
+            },
+            {
+              "latex": "H_circ = circ(h₀,h₁,…,h_D,0,…,0)",
+              "html": "<div class=\"verified-equation\" role=\"math\">H_circ = circ(h₀,h₁,…,h_D,0,…,0)</div>"
+            }
+          ],
+          "reason": "CP ကို ဖြုတ်ပြီး N samples ထဲမှာ channel memory က block အတွင်း wrap ဖြစ်သွားလို့ H matrix ဟာ circulant ဖြစ်တယ်။",
+          "method": "သတ်မှတ်ချက် CP≥D ဖြစ်ရမယ်။ CP removal ပြီး y_n=∑_{ℓ=0}^{D} h_ℓ s_{(n−ℓ) mod N} ဖြစ်သည်။ ဒီ equation က row တစ်ခုကို နောက် row မှာ cyclic shift လုပ်ထားတဲ့ H_circ ကို သတ်မှတ်ပေးသည်။",
+          "finalAnswer": "The post-CP effective channel is circulant (not merely Toeplitz).",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "i",
+          "title": "Frequency-domain diagonalization",
+          "question": "Show that each OFDM subcarrier is multiplied by one channel coefficient.",
+          "equations": [
+            "λ_k = ∑_{ℓ=0}^{D} h_ℓ exp(−j2πkℓ/N)",
+            "F H_circ F⁻¹ = diag(λ₀,…,λ_{N−1})",
+            "Y_k = λ_k d_k"
+          ],
+          "display": [
+            {
+              "latex": "λ_k = ∑_{ℓ=0}^{D} h_ℓ exp(−j2πkℓ/N)",
+              "html": "<div class=\"verified-equation\" role=\"math\">λ_k = ∑_{ℓ=0}^{D} h_ℓ exp(−j2πkℓ/N)</div>"
+            },
+            {
+              "latex": "F H_circ F⁻¹ = diag(λ₀,…,λ_{N−1})",
+              "html": "<div class=\"verified-equation\" role=\"math\">F H_circ F⁻¹ = diag(λ₀,…,λ_{N−1})</div>"
+            },
+            {
+              "latex": "Y_k = λ_k d_k",
+              "html": "<div class=\"verified-equation\" role=\"math\">Y_k = λ_k d_k</div>"
+            }
+          ],
+          "reason": "Circulant matrix ကို DFT basis နဲ့ diagonalize လုပ်နိုင်တာကြောင့် channel mixing ပြဿနာကို subcarrier တစ်ခုစီ scalar multiplication အဖြစ် ပြောင်းနိုင်တယ်။",
+          "method": "y=H_circ s ကို DFT apply: Y=F H_circ F⁻¹ d။ Circulant eigenvectors က DFT modes ဖြစ်လို့ middle product diagonal matrix ဖြစ်သည်။ k-th element က Y_k=λ_k d_k။ λ_k သည် impulse-response DFT ဖြစ်သည်။",
+          "finalAnswer": "Each subcarrier obeys Y_k = λ_k d_k in the noiseless CP-valid model.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "j",
+          "title": "One-tap equalization",
+          "question": "Explain zero forcing and the problem of deep fades.",
+          "equations": [
+            "Y_k = λ_k d_k + W_k",
+            "d̂_k(ZF) = Y_k/λ_k   (λ_k ≠ 0)",
+            "d̂_k(MMSE) = λ_k*Y_k/(|λ_k|² + σ_W²/E_s)"
+          ],
+          "display": [
+            {
+              "latex": "Y_k = λ_k d_k + W_k",
+              "html": "<div class=\"verified-equation\" role=\"math\">Y_k = λ_k d_k + W_k</div>"
+            },
+            {
+              "latex": "d̂_k(ZF) = Y_k/λ_k   (λ_k ≠ 0)",
+              "html": "<div class=\"verified-equation\" role=\"math\">d̂_k(ZF) = Y_k/λ_k   (λ_k ≠ 0)</div>"
+            },
+            {
+              "latex": "d̂_k(MMSE) = λ_k*Y_k/(|λ_k|² + σ_W²/E_s)",
+              "html": "<div class=\"verified-equation\" role=\"math\">d̂_k(MMSE) = λ_k*Y_k/(|λ_k|² + σ_W²/E_s)</div>"
+            }
+          ],
+          "reason": "Deep fade မှာ |λ| သေးရင် ZF က noise ကို အရမ်းမြှောက်လို့ MMSE က noise/gain trade-off ကို ချိန်ပေးတယ်။",
+          "method": "Channel estimate λ_k ကို pilot များမှ ရယူပါ။ Channel scalar ကို subcarrier တစ်ခုချင်းစီ divide လုပ်ခြင်း ZF ဖြစ်သည်။ AWGN နဲ့ symbol energy E_s ကိုသိရင် MMSE denominator မှာ noise-to-signal ratio ထည့်ပါ။",
+          "finalAnswer": "One complex equalizer coefficient per subcarrier.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        }
+      ]
+    },
+    {
+      "id": "source-eps-ex-04",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Symbolic derivation of lecture transformer example; no unstated numerical data invented.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Complex turns ratio and phase shift",
+          "question": "For ideal phase-shifting transformer ū=a+jb, express magnitude, phase, and secondary voltage.",
+          "equations": [
+            "ū = a + j b = |ū| exp(jδ)",
+            "|ū|=√(a²+b²); δ=atan2(b,a)",
+            "U_s = U_i/ū"
+          ],
+          "display": [
+            {
+              "latex": "ū = a + j b = |ū| exp(jδ)",
+              "html": "<div class=\"verified-equation\" role=\"math\">ū = a + j b = |ū| exp(jδ)</div>"
+            },
+            {
+              "latex": "|ū|=√(a²+b²); δ=atan2(b,a)",
+              "html": "<div class=\"verified-equation\" role=\"math\">|ū|=√(a²+b²); δ=atan2(b,a)</div>"
+            },
+            {
+              "latex": "U_s = U_i/ū",
+              "html": "<div class=\"verified-equation\" role=\"math\">U_s = U_i/ū</div>"
+            }
+          ],
+          "reason": "Transformer ratio ကို complex number သုံးထားတဲ့အတွက် magnitude က voltage scaling၊ angle က phase shift ကို တစ်ပြိုင်နက် ကိုယ်စားပြုတယ်။",
+          "method": "ū magnitude ကို Pythagoras နဲ့၊ phase ကို atan2(b,a) နဲ့တွက်ပါ။ Primary Ui=ū Us ဆိုလျှင် secondary Us=Ui/ū ဖြစ်သည်။ အခြား ratio convention သုံးလျှင် reciprocal ဖြစ်နိုင်သည်။",
+          "finalAnswer": "U_s=U_i/(a+jb); phase shift equals −arg(ū) from i to s.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "b",
+          "title": "Ideal power and current relations",
+          "question": "Verify ideal transformer power invariance with complex phasors.",
+          "equations": [
+            "U_i = ū U_s; I_i = I_j/ū*",
+            "U_i I_i* = (ū U_s)(I_j*/ū) = U_s I_j*",
+            "S_primary = S_secondary"
+          ],
+          "display": [
+            {
+              "latex": "U_i = ū U_s; I_i = I_j/ū*",
+              "html": "<div class=\"verified-equation\" role=\"math\">U_i = ū U_s; I_i = I_j/ū*</div>"
+            },
+            {
+              "latex": "U_i I_i* = (ū U_s)(I_j*/ū) = U_s I_j*",
+              "html": "<div class=\"verified-equation\" role=\"math\">U_i I_i* = (ū U_s)(I_j*/ū) = U_s I_j*</div>"
+            },
+            {
+              "latex": "S_primary = S_secondary",
+              "html": "<div class=\"verified-equation\" role=\"math\">S_primary = S_secondary</div>"
+            }
+          ],
+          "reason": "AC complex power က S=U I* ဖြစ်လို့ conjugate ပါတယ်။ Current ratio တွင် ū* သုံးမှ ideal transformer မှာ power conserved ဖြစ်တယ်။",
+          "method": "I_i=I_j/ū* အဖြစ်ယူပြီး complex conjugate လုပ်လျှင် I_i*=I_j*/ū။ ထို့နောက် Ui=ūUs ဖြင့် multiply လုပ်သောအခါ ū cancel ဖြစ်သည်။ Current reference directions ကို 동일 orientation အဖြစ်ယူထားသည်။",
+          "finalAnswer": "Ideal transformer conserves complex power before series-impedance losses.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "c",
+          "title": "Asymmetric Y-bus contribution",
+          "question": "Derive branch terminal currents for series impedance Zₖ and transformer tap ū.",
+          "equations": [
+            "y=1/Zₖ; ū=a+jb",
+            "I_i = y U_i/|ū|² − y U_j/ū*",
+            "I_j(bus injection) = −y U_i/ū + y U_j",
+            "Y_branch = [[y/|ū|², −y/ū*], [−y/ū, y]]"
+          ],
+          "display": [
+            {
+              "latex": "y=1/Zₖ; ū=a+jb",
+              "html": "<div class=\"verified-equation\" role=\"math\">y=1/Zₖ; ū=a+jb</div>"
+            },
+            {
+              "latex": "I_i = y U_i/|ū|² − y U_j/ū*",
+              "html": "<div class=\"verified-equation\" role=\"math\">I_i = y U_i/|ū|² − y U_j/ū*</div>"
+            },
+            {
+              "latex": "I_j(bus injection) = −y U_i/ū + y U_j",
+              "html": "<div class=\"verified-equation\" role=\"math\">I_j(bus injection) = −y U_i/ū + y U_j</div>"
+            },
+            {
+              "latex": "Y_branch = [[y/|ū|², −y/ū*], [−y/ū, y]]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Y_branch = [[y/|ū|², −y/ū*], [−y/ū, y]]</div>"
+            }
+          ],
+          "reason": "Complex tap ရှိတဲ့ branch မှာ from-side နဲ့ to-side diagonal admittance မတူလို့ Y matrix က asymmetric ဖြစ်နိုင်တယ်။",
+          "method": "Series current I_series=(Ui/ū−Uj)/Zk အဖြစ်ရေးပါ။ From-bus current=I_series/ū*၊ to-bus injection=−I_series ဖြစ်သည်။ Ii,Ij coefficients ကို စု၍ 2×2 nodal admittance matrix ရပါမယ်။ Shunt admittances ကို ဒီ simplification ထဲ မထည့်ထားပါ။",
+          "finalAnswer": "Y_ii=y/|ū|², Y_ij=−y/ū*, Y_ji=−y/ū, Y_jj=y.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        }
+      ]
+    },
+    {
+      "id": "source-eps-ex-05",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Source provides symbolic formulas; numerical examples are newly generated and explicitly marked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Correct per-unit bases",
+          "question": "Derive base impedance and base current using three-phase S_B and line-to-line U_B.",
+          "equations": [
+            "Z_B = U_B²/S_B",
+            "I_B = S_B/(√3 U_B)",
+            "U_pu=U/U_B; I_pu=I/I_B; Z_pu=Z/Z_B"
+          ],
+          "display": [
+            {
+              "latex": "Z_B = U_B²/S_B",
+              "html": "<div class=\"verified-equation\" role=\"math\">Z_B = U_B²/S_B</div>"
+            },
+            {
+              "latex": "I_B = S_B/(√3 U_B)",
+              "html": "<div class=\"verified-equation\" role=\"math\">I_B = S_B/(√3 U_B)</div>"
+            },
+            {
+              "latex": "U_pu=U/U_B; I_pu=I/I_B; Z_pu=Z/Z_B",
+              "html": "<div class=\"verified-equation\" role=\"math\">U_pu=U/U_B; I_pu=I/I_B; Z_pu=Z/Z_B</div>"
+            }
+          ],
+          "reason": "Line-to-line voltage နဲ့ 3-phase apparent power သုံးနေချိန် √3 ကို current formula ထဲ မမေ့ရပါ။ Impedance base က U²/S ဖြစ်တယ်။",
+          "method": "Three-phase S=√3 U_LL I_L မှ I_B ကိုဖြေပါ။ Single-phase base: U_phase=U_LL/√3၊ S_phase=S_total/3 ကို Z=U_phase²/S_phase ထဲ ထည့်သောအခါ √3 factors cancel ဖြစ်၍ U_LL²/S_total ရသည်။",
+          "finalAnswer": "I_B=S_B/(√3U_B), Z_B=U_B²/S_B.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "b",
+          "title": "Numerical base conversion example",
+          "question": "Independent illustrative example (not fixed source numbers): S_B=100 MVA, U_B=110 kV, Z=50 Ω. Find bases and Z_pu.",
+          "equations": [
+            "Z_B=(110×10³)²/(100×10⁶)=121 Ω",
+            "I_B=(100×10⁶)/(√3·110×10³)=524.864 A",
+            "Z_pu=50/121=0.413223 p.u."
+          ],
+          "display": [
+            {
+              "latex": "Z_B=(110×10³)²/(100×10⁶)=121 Ω",
+              "html": "<div class=\"verified-equation\" role=\"math\">Z_B=(110×10³)²/(100×10⁶)=121 Ω</div>"
+            },
+            {
+              "latex": "I_B=(100×10⁶)/(√3·110×10³)=524.864 A",
+              "html": "<div class=\"verified-equation\" role=\"math\">I_B=(100×10⁶)/(√3·110×10³)=524.864 A</div>"
+            },
+            {
+              "latex": "Z_pu=50/121=0.413223 p.u.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Z_pu=50/121=0.413223 p.u.</div>"
+            }
+          ],
+          "reason": "MVA, kV ကို unit မမှားဘဲ SI သို့ ပြောင်းရမယ်။ 50 Ω ကို 121 Ω base နဲ့စားရင် per-unit ရတယ်။",
+          "method": "(110e3)²/100e6=121; current=100e6/(√3·110e3)≈524.864; per-unit impedance=50/121။ ဒီ numeric values တွေက formula သင်ခန်းစာအတွက် အသစ်ဖန်တီးထားတဲ့ example ဖြစ်သည်။",
+          "finalAnswer": "Z_B=121 Ω; I_B≈524.864 A; Z_pu≈0.413223.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "c",
+          "title": "Change of per-unit base",
+          "question": "Convert impedance p.u. between two consistent system bases.",
+          "equations": [
+            "Z_pu,new = Z_pu,old·(S_B,new/S_B,old)·(U_B,old/U_B,new)²",
+            "0.10 p.u. at (50 MVA,110 kV) → (100 MVA,110 kV)",
+            "Z_pu,new = 0.10·(100/50)·(110/110)²=0.20 p.u."
+          ],
+          "display": [
+            {
+              "latex": "Z_pu,new = Z_pu,old·(S_B,new/S_B,old)·(U_B,old/U_B,new)²",
+              "html": "<div class=\"verified-equation\" role=\"math\">Z_pu,new = Z_pu,old·(S_B,new/S_B,old)·(U_B,old/U_B,new)²</div>"
+            },
+            {
+              "latex": "0.10 p.u. at (50 MVA,110 kV) → (100 MVA,110 kV)",
+              "html": "<div class=\"verified-equation\" role=\"math\">0.10 p.u. at (50 MVA,110 kV) → (100 MVA,110 kV)</div>"
+            },
+            {
+              "latex": "Z_pu,new = 0.10·(100/50)·(110/110)²=0.20 p.u.",
+              "html": "<div class=\"verified-equation\" role=\"math\">Z_pu,new = 0.10·(100/50)·(110/110)²=0.20 p.u.</div>"
+            }
+          ],
+          "reason": "Physical Z က မပြောင်းဘူး။ Base impedance ပြောင်းလို့ Zpu အသစ်ရတာပါ။",
+          "method": "Old physical impedance=Zpu,old·Uold²/Sold။ New per-unit = that impedance·Snew/Unew²။ နှစ်ခုတစ်ဆက်ရေးရင် conversion formula ရသည်။",
+          "finalAnswer": "0.10 p.u. on 50 MVA becomes 0.20 p.u. on 100 MVA at the same voltage base.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "d",
+          "title": "Line versus phase voltage",
+          "question": "Show per-unit line-to-line and phase-voltage consistency.",
+          "equations": [
+            "U_phase,B=U_LL,B/√3",
+            "U_phase,pu=(U_LL/√3)/(U_LL,B/√3)=U_LL/U_LL,B",
+            "S_phase,pu=(S_3ph/3)/(S_3ph,B/3)=S_3ph/S_3ph,B"
+          ],
+          "display": [
+            {
+              "latex": "U_phase,B=U_LL,B/√3",
+              "html": "<div class=\"verified-equation\" role=\"math\">U_phase,B=U_LL,B/√3</div>"
+            },
+            {
+              "latex": "U_phase,pu=(U_LL/√3)/(U_LL,B/√3)=U_LL/U_LL,B",
+              "html": "<div class=\"verified-equation\" role=\"math\">U_phase,pu=(U_LL/√3)/(U_LL,B/√3)=U_LL/U_LL,B</div>"
+            },
+            {
+              "latex": "S_phase,pu=(S_3ph/3)/(S_3ph,B/3)=S_3ph/S_3ph,B",
+              "html": "<div class=\"verified-equation\" role=\"math\">S_phase,pu=(S_3ph/3)/(S_3ph,B/3)=S_3ph/S_3ph,B</div>"
+            }
+          ],
+          "reason": "Star-connected balanced three-phase စနစ်မှာ √3 နဲ့ 3 တွေ numerator/denominator တူတူပါလို့ cancel ဖြစ်တယ်။",
+          "method": "အဓိက assumption က balanced three-phase system နှင့် voltage bases consistent ဖြစ်ရမယ်။ Equal physical quantities ကို correct same-type base နဲ့ normalize လုပ်ပါ။",
+          "finalAnswer": "Per-unit phase and line values agree when bases are consistently defined.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        }
+      ]
+    },
+    {
+      "id": "source-eps-ex-06",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Lecture-sourced Y-bus structure; numerical chain independently constructed and KCL checked.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Three-node nodal admittance",
+          "question": "For chain m—i—l with series admittances Y_mi and Y_il, derive Y-bus, ignoring shunts.",
+          "equations": [
+            "Y = [[Y_mi,−Y_mi,0], [−Y_mi,Y_mi+Y_il,−Y_il], [0,−Y_il,Y_il]]",
+            "Diagonal: sum of incident admittances",
+            "Off-diagonal: negative direct-branch admittance"
+          ],
+          "display": [
+            {
+              "latex": "Y = [[Y_mi,−Y_mi,0], [−Y_mi,Y_mi+Y_il,−Y_il], [0,−Y_il,Y_il]]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Y = [[Y_mi,−Y_mi,0], [−Y_mi,Y_mi+Y_il,−Y_il], [0,−Y_il,Y_il]]</div>"
+            },
+            {
+              "latex": "Diagonal: sum of incident admittances",
+              "html": "<div class=\"verified-equation\" role=\"math\">Diagonal: sum of incident admittances</div>"
+            },
+            {
+              "latex": "Off-diagonal: negative direct-branch admittance",
+              "html": "<div class=\"verified-equation\" role=\"math\">Off-diagonal: negative direct-branch admittance</div>"
+            }
+          ],
+          "reason": "Node တစ်ခုမှာ ချိတ်ထားတဲ့ branch admittance တွေကို diagonal တွင်ပေါင်း၊ အခြား node သို့ branch ကို negative နဲ့ off diagonal ထည့်တယ်။",
+          "method": "KCL အရ I_m=Y_mi(U_m−U_i), I_i=Y_mi(U_i−U_m)+Y_il(U_i−U_l), I_l=Y_il(U_l−U_i)။ Coefficients ကို column (U_m,U_i,U_l) အလိုက် စု၍ 3×3 Y ရသည်။",
+          "finalAnswer": "Y is symmetric for reciprocal series branches with no off-nominal tap.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "b",
+          "title": "Add π-model shunt admittances",
+          "question": "Modify the three-node Y-bus if line π models include shunts.",
+          "equations": [
+            "Y_mm = Y_mi + Y_m0",
+            "Y_ii = Y_mi + Y_il + Y_i0",
+            "Y_ll = Y_il + Y_l0; off-diagonals unchanged"
+          ],
+          "display": [
+            {
+              "latex": "Y_mm = Y_mi + Y_m0",
+              "html": "<div class=\"verified-equation\" role=\"math\">Y_mm = Y_mi + Y_m0</div>"
+            },
+            {
+              "latex": "Y_ii = Y_mi + Y_il + Y_i0",
+              "html": "<div class=\"verified-equation\" role=\"math\">Y_ii = Y_mi + Y_il + Y_i0</div>"
+            },
+            {
+              "latex": "Y_ll = Y_il + Y_l0; off-diagonals unchanged",
+              "html": "<div class=\"verified-equation\" role=\"math\">Y_ll = Y_il + Y_l0; off-diagonals unchanged</div>"
+            }
+          ],
+          "reason": "Shunt က ground သို့ current စီးစေပြီး node တစ်ခုထဲမှာပဲ ရှိတာကြောင့် diagonal admittance သာတိုးတယ်။",
+          "method": "π-model half shunts ကို သက်ဆိုင်ရာ bus diagonal admittance ထဲ ထည့်ပါ။ Node-to-node series terms သည် ထို branch ၏ negative series admittance အဖြစ်သာ ကျန်သည်။",
+          "finalAnswer": "Add bus shunts to Y diagonal; retain off-diagonal branch terms.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "c",
+          "title": "Independently checked numeric Y-bus",
+          "question": "Illustrative chain: Y_mi=−j10, Y_il=−j5 p.u.; no shunts. Build matrix and test Y·1=0.",
+          "equations": [
+            "Y = [[−j10,j10,0], [j10,−j15,j5], [0,j5,−j5]]",
+            "Y·[1,1,1]ᵀ = [0,0,0]ᵀ",
+            "For U=[1.02,1.00,0.98]ᵀ, I=YU=[−j0.20,+j0.10,+j0.10]ᵀ p.u."
+          ],
+          "display": [
+            {
+              "latex": "Y = [[−j10,j10,0], [j10,−j15,j5], [0,j5,−j5]]",
+              "html": "<div class=\"verified-equation\" role=\"math\">Y = [[−j10,j10,0], [j10,−j15,j5], [0,j5,−j5]]</div>"
+            },
+            {
+              "latex": "Y·[1,1,1]ᵀ = [0,0,0]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">Y·[1,1,1]ᵀ = [0,0,0]ᵀ</div>"
+            },
+            {
+              "latex": "For U=[1.02,1.00,0.98]ᵀ, I=YU=[−j0.20,+j0.10,+j0.10]ᵀ p.u.",
+              "html": "<div class=\"verified-equation\" role=\"math\">For U=[1.02,1.00,0.98]ᵀ, I=YU=[−j0.20,+j0.10,+j0.10]ᵀ p.u.</div>"
+            }
+          ],
+          "reason": "Shunt မရှိတဲ့ network မှာ voltage အားလုံးတူရင် current မစီးရဘူး။ Row sum zero နဲ့ verify လုပ်လို့ရတယ်။",
+          "method": "Y_mi=−j10 နှင့် Y_il=−j5 ကို general Y-bus ထဲ substitute လုပ်ပါ။ Row 1: (−j10)1.02+(j10)1 =−j0.2။ Row2: (j10)1.02+(−j15)1+(j5)0.98=j0.1။ Row3: (j5)1+(−j5)0.98=j0.1။ KCL check sum currents=0။",
+          "finalAnswer": "I_m=−j0.20; I_i=+j0.10; I_l=+j0.10 p.u.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        }
+      ]
+    },
+    {
+      "id": "source-eps-ex-07",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Symbolic Jacobian matching archived lecture layout; no network numeric values supplied.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Power injection in rectangular coordinates",
+          "question": "For U_i=e_i+jf_i and Y_ij=g_ij+jb_ij derive P_i,Q_i.",
+          "equations": [
+            "I_i=∑ⱼ (g_ij+jb_ij)(e_j+jf_j)",
+            "P_i=e_i∑ⱼ(g_ij e_j−b_ij f_j)+f_i∑ⱼ(g_ij f_j+b_ij e_j)",
+            "Q_i=f_i∑ⱼ(g_ij e_j−b_ij f_j)−e_i∑ⱼ(g_ij f_j+b_ij e_j)"
+          ],
+          "display": [
+            {
+              "latex": "I_i=∑ⱼ (g_ij+jb_ij)(e_j+jf_j)",
+              "html": "<div class=\"verified-equation\" role=\"math\">I_i=∑ⱼ (g_ij+jb_ij)(e_j+jf_j)</div>"
+            },
+            {
+              "latex": "P_i=e_i∑ⱼ(g_ij e_j−b_ij f_j)+f_i∑ⱼ(g_ij f_j+b_ij e_j)",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_i=e_i∑ⱼ(g_ij e_j−b_ij f_j)+f_i∑ⱼ(g_ij f_j+b_ij e_j)</div>"
+            },
+            {
+              "latex": "Q_i=f_i∑ⱼ(g_ij e_j−b_ij f_j)−e_i∑ⱼ(g_ij f_j+b_ij e_j)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Q_i=f_i∑ⱼ(g_ij e_j−b_ij f_j)−e_i∑ⱼ(g_ij f_j+b_ij e_j)</div>"
+            }
+          ],
+          "reason": "S=U·I* သုံးတာကြောင့် conjugate ကို မမေ့ရဘူး။ P ဟာ real part၊ Q ဟာ imaginary part ဖြစ်တယ်။",
+          "method": "I real part ကို Σ(g e−b f), imaginary part ကို Σ(g f+b e) ဟု သတ်မှတ်ပါ။ (e+jf)(Ireal−j Iimag) ကို expand လုပ်ပြီး P=eIreal+fIimag, Q=fIreal−eIimag ခွဲပါ။",
+          "finalAnswer": "P_i and Q_i formulas above; uses injection-sign convention.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "b",
+          "title": "Off-diagonal Jacobian derivatives",
+          "question": "Find ∂P_i/∂e_j, ∂P_i/∂f_j, ∂Q_i/∂e_j, ∂Q_i/∂f_j for j≠i.",
+          "equations": [
+            "∂P_i/∂e_j=e_i g_ij+f_i b_ij; ∂P_i/∂f_j=−e_i b_ij+f_i g_ij",
+            "∂Q_i/∂e_j=f_i g_ij−e_i b_ij; ∂Q_i/∂f_j=−f_i b_ij−e_i g_ij"
+          ],
+          "display": [
+            {
+              "latex": "∂P_i/∂e_j=e_i g_ij+f_i b_ij; ∂P_i/∂f_j=−e_i b_ij+f_i g_ij",
+              "html": "<div class=\"verified-equation\" role=\"math\">∂P_i/∂e_j=e_i g_ij+f_i b_ij; ∂P_i/∂f_j=−e_i b_ij+f_i g_ij</div>"
+            },
+            {
+              "latex": "∂Q_i/∂e_j=f_i g_ij−e_i b_ij; ∂Q_i/∂f_j=−f_i b_ij−e_i g_ij",
+              "html": "<div class=\"verified-equation\" role=\"math\">∂Q_i/∂e_j=f_i g_ij−e_i b_ij; ∂Q_i/∂f_j=−f_i b_ij−e_i g_ij</div>"
+            }
+          ],
+          "reason": "j≠i ဖြစ်ရင် e_i,f_i တွေကို constant ယူပြီး sum ထဲက j-term တစ်ခုကိုပဲ differentiate လုပ်ရတယ်။",
+          "method": "P,Q expansions မှ derivative ကို term by term ယူပါ။ Voltage at bus i သည် j≠i အတွက် constant ဖြစ်လို့ cross terms တစ်ခုစီ လွယ်ကူစွာ ရသည်။",
+          "finalAnswer": "Off-diagonal partial derivatives listed and symbolically re-derived.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "c",
+          "title": "PV-bus magnitude row",
+          "question": "Explain why a PV bus replaces the Q equation with voltage magnitude constraint.",
+          "equations": [
+            "|U_i|²=e_i²+f_i²",
+            "∂|U_i|²/∂e_i=2e_i; ∂|U_i|²/∂f_i=2f_i",
+            "For j≠i, ∂|U_i|²/∂e_j=∂|U_i|²/∂f_j=0"
+          ],
+          "display": [
+            {
+              "latex": "|U_i|²=e_i²+f_i²",
+              "html": "<div class=\"verified-equation\" role=\"math\">|U_i|²=e_i²+f_i²</div>"
+            },
+            {
+              "latex": "∂|U_i|²/∂e_i=2e_i; ∂|U_i|²/∂f_i=2f_i",
+              "html": "<div class=\"verified-equation\" role=\"math\">∂|U_i|²/∂e_i=2e_i; ∂|U_i|²/∂f_i=2f_i</div>"
+            },
+            {
+              "latex": "For j≠i, ∂|U_i|²/∂e_j=∂|U_i|²/∂f_j=0",
+              "html": "<div class=\"verified-equation\" role=\"math\">For j≠i, ∂|U_i|²/∂e_j=∂|U_i|²/∂f_j=0</div>"
+            }
+          ],
+          "reason": "PV bus မှာ Q setpoint မပေးထားဘူး။ |U| setpoint ပေးထားတာကြောင့် Q row အစား U² row ကိုသုံးရတယ်။",
+          "method": "PV-bus unknown Q_i ကို nonlinear P,Q equations ထဲ coefficient အဖြစ် မဖြေဘဲ |U_i|²−|U_ref|²=0 ကို constraint အဖြစ်သုံးပါ။ Magnitude ကို square လုပ်သည့် derivative က 2e,2f ဖြစ်သည်။",
+          "finalAnswer": "Use a voltage-squared constraint row at each PV bus.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "d",
+          "title": "Three-bus Newton unknown vector",
+          "question": "Write Jacobian dimensions for slack-1, PV-2, PQ-3 system.",
+          "equations": [
+            "x=[f₂,f₃,e₂,e₃]ᵀ",
+            "Δz=[ΔP₂,ΔP₃,Δ|U₂|²,ΔQ₃]ᵀ",
+            "J·Δx=Δz; x_next=x+Δx"
+          ],
+          "display": [
+            {
+              "latex": "x=[f₂,f₃,e₂,e₃]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">x=[f₂,f₃,e₂,e₃]ᵀ</div>"
+            },
+            {
+              "latex": "Δz=[ΔP₂,ΔP₃,Δ|U₂|²,ΔQ₃]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">Δz=[ΔP₂,ΔP₃,Δ|U₂|²,ΔQ₃]ᵀ</div>"
+            },
+            {
+              "latex": "J·Δx=Δz; x_next=x+Δx",
+              "html": "<div class=\"verified-equation\" role=\"math\">J·Δx=Δz; x_next=x+Δx</div>"
+            }
+          ],
+          "reason": "Slack bus voltage/angle ကို fixed ထားလို့ unknown vector ထဲ မထည့်ဘူး။ PV-2 မှာ P₂ နဲ့ U₂²၊ PQ-3 မှာ P₃ နဲ့ Q₃ ကို constraint သုံးတယ်။",
+          "method": "P₂,P₃, |U₂|², Q₃ ကို [f₂,f₃,e₂,e₃] အပေါ် differentiate လုပ်၍ 4×4 Jacobian ရယူပါ။ Update ကို J solve ဖြင့်လုပ်ပါ—numerical Ybus မပါသဖြင့် exact numerical voltages မဆိုပါ။",
+          "finalAnswer": "The reduced Newton–Raphson Jacobian is 4×4 for this bus classification.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        }
+      ]
+    },
+    {
+      "id": "official-mw-1-2",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Recomputed all 3 official link-budget subtasks; values checked by direct linear and logarithmic conversion.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Source sinusoidal power",
+          "question": "5 V peak-to-peak sinusoid applied to 50 Ω, no mismatch: find RMS and source power.",
+          "equations": [
+            "V_rms=V_pp/(2√2)=5/(2√2)=1.76776695 V",
+            "P_source=(1.76776695)²/50=0.0625 W=62.5 mW",
+            "P_source,dBm=10log₁₀(62.5)=17.95880017 dBm"
+          ],
+          "display": [
+            {
+              "latex": "V_rms=V_pp/(2√2)=5/(2√2)=1.76776695 V",
+              "html": "<div class=\"verified-equation\" role=\"math\">V_rms=V_pp/(2√2)=5/(2√2)=1.76776695 V</div>"
+            },
+            {
+              "latex": "P_source=(1.76776695)²/50=0.0625 W=62.5 mW",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_source=(1.76776695)²/50=0.0625 W=62.5 mW</div>"
+            },
+            {
+              "latex": "P_source,dBm=10log₁₀(62.5)=17.95880017 dBm",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_source,dBm=10log₁₀(62.5)=17.95880017 dBm</div>"
+            }
+          ],
+          "reason": "Vpp ဟာ Peak-to-peak ဖြစ်လို့ peak=Vpp/2; RMS=peak/√2 ဖြစ်တယ်။ 50Ω resistor power သည် V_rms²/R ဖြစ်တယ်။",
+          "method": "Sinusoidal voltage assumption ကိုသုံးပြီး Vrms=Vpp/(2√2) ရယူပါ။ P=V²/R၊ dBm=10log10(P/mW) သို့ပြောင်းပါ။",
+          "finalAnswer": "Source power 62.5 mW ≈17.959 dBm.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "b",
+          "title": "Power at point A",
+          "question": "Find power at A after +20 dB PA and −3 dB first BPF.",
+          "equations": [
+            "P_A,dBm=P_source,dBm+20−3",
+            "P_A,dBm=17.95880017+17=34.95880017 dBm",
+            "P_A≈3.125 W"
+          ],
+          "display": [
+            {
+              "latex": "P_A,dBm=P_source,dBm+20−3",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_A,dBm=P_source,dBm+20−3</div>"
+            },
+            {
+              "latex": "P_A,dBm=17.95880017+17=34.95880017 dBm",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_A,dBm=17.95880017+17=34.95880017 dBm</div>"
+            },
+            {
+              "latex": "P_A≈3.125 W",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_A≈3.125 W</div>"
+            }
+          ],
+          "reason": "dB ထဲမှာ amplifier gain က ပေါင်း၊ insertion loss က နှုတ်ရတယ်။ BPF ကို cable loss နဲ့ မရောထည့်ရဘူး။",
+          "method": "Source power logarithmic dBm 17.9588 ဖြစ်သည်။ +20 dB gain နှင့် 3dB insertion loss ကို အစဉ်လိုက်ထည့်ပါ။ 34.9588dBm = 10^(34.9588/10) mW ≈3125 mW။",
+          "finalAnswer": "At point A: 34.959 dBm =3.125 W.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "c",
+          "title": "Power at final ADC",
+          "question": "Apply line attenuation, LNA gain and second filter loss.",
+          "equations": [
+            "L_TL=100 m×0.24 dB/m=24 dB",
+            "P_end=34.95880017−24+10−3=17.95880017 dBm",
+            "P_end=62.5 mW=−12.04119983 dBW"
+          ],
+          "display": [
+            {
+              "latex": "L_TL=100 m×0.24 dB/m=24 dB",
+              "html": "<div class=\"verified-equation\" role=\"math\">L_TL=100 m×0.24 dB/m=24 dB</div>"
+            },
+            {
+              "latex": "P_end=34.95880017−24+10−3=17.95880017 dBm",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_end=34.95880017−24+10−3=17.95880017 dBm</div>"
+            },
+            {
+              "latex": "P_end=62.5 mW=−12.04119983 dBW",
+              "html": "<div class=\"verified-equation\" role=\"math\">P_end=62.5 mW=−12.04119983 dBW</div>"
+            }
+          ],
+          "reason": "Cable 100m မှာ 24dB လျော့တယ်။ LNA +10dB ပြန်တိုး၊ filter −3dB ထပ်လျော့လို့ total chain gain 0dB ဖြစ်သွားတယ်။",
+          "method": "P_end = P_A − line-loss + LNA-gain − BPF2-loss။ dBW = dBm−30။ Check net gain =20−3−24+10−3=0 dB ဖြစ်လို့ source နဲ့ output power တူတယ်။",
+          "finalAnswer": "End:17.9588 dBm =−12.0412 dBW =62.5 mW.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        }
+      ]
+    },
+    {
+      "id": "official-mw-1-3",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Seven original coax subtasks re-derived; sign/reference-plane conventions stated.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "Coax E and H field distributions",
+          "question": "Uniform coax with inner radius a and outer radius b, V between conductors, current I. Determine E,H for a<r<b.",
+          "equations": [
+            "E_r(r)=V/[r ln(b/a)];  E⃗=E_r r̂",
+            "H_φ(r)=I/(2πr);  H⃗=H_φ φ̂",
+            "a<r<b"
+          ],
+          "display": [
+            {
+              "latex": "E_r(r)=V/[r ln(b/a)];  E⃗=E_r r̂",
+              "html": "<div class=\"verified-equation\" role=\"math\">E_r(r)=V/[r ln(b/a)];  E⃗=E_r r̂</div>"
+            },
+            {
+              "latex": "H_φ(r)=I/(2πr);  H⃗=H_φ φ̂",
+              "html": "<div class=\"verified-equation\" role=\"math\">H_φ(r)=I/(2πr);  H⃗=H_φ φ̂</div>"
+            },
+            {
+              "latex": "a<r<b",
+              "html": "<div class=\"verified-equation\" role=\"math\">a&lt;r&lt;b</div>"
+            }
+          ],
+          "reason": "Coax radial symmetry ကြောင့် E က r direction၊ H က circular φ direction သွားတယ်။ နှစ်ခုစလုံး 1/r အတိုင်းကျဆင်းတယ်။",
+          "method": "Laplace equation in cylindrical geometry: d/dr(r dΦ/dr)=0 ⇒ Φ=C₁ln r+C₂။ Φ(a)=V, Φ(b)=0 ⇒ E=−dΦ/dr=V/[r ln(b/a)]။ Ampère ∮H·dl=I ⇒ H·(2πr)=I။",
+          "finalAnswer": "E=V/(r ln(b/a)) r̂; H=I/(2πr) φ̂.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "b",
+          "title": "Capacitance per metre",
+          "question": "Derive C′ with uniform dielectric permittivity ε.",
+          "equations": [
+            "λ=2πr ε E_r",
+            "λ=2πεV/ln(b/a)",
+            "C′=λ/V=2πε/ln(b/a)  [F/m]"
+          ],
+          "display": [
+            {
+              "latex": "λ=2πr ε E_r",
+              "html": "<div class=\"verified-equation\" role=\"math\">λ=2πr ε E_r</div>"
+            },
+            {
+              "latex": "λ=2πεV/ln(b/a)",
+              "html": "<div class=\"verified-equation\" role=\"math\">λ=2πεV/ln(b/a)</div>"
+            },
+            {
+              "latex": "C′=λ/V=2πε/ln(b/a)  [F/m]",
+              "html": "<div class=\"verified-equation\" role=\"math\">C′=λ/V=2πε/ln(b/a)  [F/m]</div>"
+            }
+          ],
+          "reason": "Charge per length λ ကို Gauss flux ဖြင့်ရပြီး voltage နဲ့စားရင် capacitance per length ရတယ်။",
+          "method": "Cylinder length 1m အတွက် Gauss flux ∮D·dA=λ၊ D=εE၊ area=2πr·1။ λ=2πεV/ln(b/a) ထည့်၍ C′=λ/V။",
+          "finalAnswer": "C′=2πε/ln(b/a).",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "c",
+          "title": "Inductance per metre",
+          "question": "Derive L′ for magnetically uniform coax dielectric μ.",
+          "equations": [
+            "H_φ(r)=I/(2πr);  B_φ=μH_φ",
+            "L′=(μ/2π) ln(b/a)  [H/m]",
+            "Magnetic energy/length=½L′I²"
+          ],
+          "display": [
+            {
+              "latex": "H_φ(r)=I/(2πr);  B_φ=μH_φ",
+              "html": "<div class=\"verified-equation\" role=\"math\">H_φ(r)=I/(2πr);  B_φ=μH_φ</div>"
+            },
+            {
+              "latex": "L′=(μ/2π) ln(b/a)  [H/m]",
+              "html": "<div class=\"verified-equation\" role=\"math\">L′=(μ/2π) ln(b/a)  [H/m]</div>"
+            },
+            {
+              "latex": "Magnetic energy/length=½L′I²",
+              "html": "<div class=\"verified-equation\" role=\"math\">Magnetic energy/length=½L′I²</div>"
+            }
+          ],
+          "reason": "Magnetic energy ∫B·H/2 dA ကို integrate လုပ်ရင် ∫dr/r ထဲက ln(b/a) ပေါ်လာတယ်။",
+          "method": "Magnetic energy per unit length = ½∫_a^b μ(I/2πr)² (2πr dr) = μI²/(4π)ln(b/a)။ ½L′I² နှင့် equate လုပ်ပါ။ Conductor internal inductance ကို ignore လုပ်ထားတယ်။",
+          "finalAnswer": "L′=μ ln(b/a)/(2π).",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "d",
+          "title": "Characteristic impedance",
+          "question": "Find lossless coax wave impedance.",
+          "equations": [
+            "Z₀=√(L′/C′)",
+            "Z₀=[ln(b/a)/(2π)]√(μ/ε)",
+            "v_p=1/√(με)"
+          ],
+          "display": [
+            {
+              "latex": "Z₀=√(L′/C′)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Z₀=√(L′/C′)</div>"
+            },
+            {
+              "latex": "Z₀=[ln(b/a)/(2π)]√(μ/ε)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Z₀=[ln(b/a)/(2π)]√(μ/ε)</div>"
+            },
+            {
+              "latex": "v_p=1/√(με)",
+              "html": "<div class=\"verified-equation\" role=\"math\">v_p=1/√(με)</div>"
+            }
+          ],
+          "reason": "Transmission line မှာ voltage/current wave ratio က √(L′/C′) ဖြစ်တယ်။ Coax geometry နဲ့ dielectric နှစ်ခုစလုံး အရေးကြီးတယ်။",
+          "method": "C′=2πε/ln(b/a), L′=μln(b/a)/(2π) ကို Z0 ထဲ substitute: sqrt[μln²(b/a)/(4π²ε)] = ln(b/a)√(μ/ε)/(2π)။",
+          "finalAnswer": "Z₀=(ln(b/a)/2π)√(μ/ε).",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "e",
+          "title": "Forward travelling E field",
+          "question": "Write the travelling-wave radial electric field without reflections.",
+          "equations": [
+            "V(z,t)=Re{V₊ exp[j(ωt−βz)]}",
+            "E⃗(r,z,t)=r̂ Re{V₊ exp[j(ωt−βz)]/[r ln(b/a)]}",
+            "β=ω√(με)"
+          ],
+          "display": [
+            {
+              "latex": "V(z,t)=Re{V₊ exp[j(ωt−βz)]}",
+              "html": "<div class=\"verified-equation\" role=\"math\">V(z,t)=Re{V₊ exp[j(ωt−βz)]}</div>"
+            },
+            {
+              "latex": "E⃗(r,z,t)=r̂ Re{V₊ exp[j(ωt−βz)]/[r ln(b/a)]}",
+              "html": "<div class=\"verified-equation\" role=\"math\">E⃗(r,z,t)=r̂ Re{V₊ exp[j(ωt−βz)]/[r ln(b/a)]}</div>"
+            },
+            {
+              "latex": "β=ω√(με)",
+              "html": "<div class=\"verified-equation\" role=\"math\">β=ω√(με)</div>"
+            }
+          ],
+          "reason": "Voltage z တစ်လျှောက် wave လိုသွားရင် radial E-field ရဲ့ amplitude က V(z,t) နဲ့အတူပြောင်းမယ်။",
+          "method": "Lossless matched line သည် forward solution e^{−jβz} တစ်ခုတည်းရှိသည်။ Static field expression ရဲ့ V ကို travelling voltage phasor V₊e^{−jβz} ဖြင့်အစားထိုးပြီး Re{·e^{jωt}} လုပ်ပါ။",
+          "finalAnswer": "Only the forward wave appears when Γ_L=0.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "f",
+          "title": "Reflected E field under mismatch",
+          "question": "Write total E field for a load reflection Γ_L at z=0, line extending to z<0.",
+          "equations": [
+            "Γ_L=(Z_L−Z₀)/(Z_L+Z₀)",
+            "V(z)=V₊(e^{−jβz}+Γ_L e^{+jβz})",
+            "E⃗(r,z,t)=r̂ Re{V(z)e^{jωt}/[r ln(b/a)]}"
+          ],
+          "display": [
+            {
+              "latex": "Γ_L=(Z_L−Z₀)/(Z_L+Z₀)",
+              "html": "<div class=\"verified-equation\" role=\"math\">Γ_L=(Z_L−Z₀)/(Z_L+Z₀)</div>"
+            },
+            {
+              "latex": "V(z)=V₊(e^{−jβz}+Γ_L e^{+jβz})",
+              "html": "<div class=\"verified-equation\" role=\"math\">V(z)=V₊(e^{−jβz}+Γ_L e^{+jβz})</div>"
+            },
+            {
+              "latex": "E⃗(r,z,t)=r̂ Re{V(z)e^{jωt}/[r ln(b/a)]}",
+              "html": "<div class=\"verified-equation\" role=\"math\">E⃗(r,z,t)=r̂ Re{V(z)e^{jωt}/[r ln(b/a)]}</div>"
+            }
+          ],
+          "reason": "Load impedance မညီရင် reflected wave ပြန်လာမယ်။ Forward နဲ့ backward exponential နှစ်ခု ပေါင်းလို့ standing wave ဖြစ်နိုင်တယ်။",
+          "method": "Load ကို z=0 သတ်မှတ်ပါ။ Forward phasor V₊e^{−jβz}၊ reflected phasor V₋e^{+jβz} ဖြစ်ပြီး V₋=Γ_LV₊။ Reference-plane choice မတူလျှင် reflected-wave phase ပြောင်းနိုင်သည်။",
+          "finalAnswer": "E field is the superposition of incident and reflected radial waves.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "g",
+          "title": "Field sketches and interpretation",
+          "question": "Describe the transverse xy-plane and longitudinal z-plane field lines for the coax.",
+          "equations": [
+            "xy plane: E⃗ radial outward; H⃗ circles coaxial axis",
+            "|E_r(r)|∝1/r, |H_φ(r)|∝1/r",
+            "z direction: travelling wave ∝cos(ωt−βz); mismatch gives standing-wave modulation"
+          ],
+          "display": [
+            {
+              "latex": "xy plane: E⃗ radial outward; H⃗ circles coaxial axis",
+              "html": "<div class=\"verified-equation\" role=\"math\">xy plane: E⃗ radial outward; H⃗ circles coaxial axis</div>"
+            },
+            {
+              "latex": "|E_r(r)|∝1/r, |H_φ(r)|∝1/r",
+              "html": "<div class=\"verified-equation\" role=\"math\">|E_r(r)|∝1/r, |H_φ(r)|∝1/r</div>"
+            },
+            {
+              "latex": "z direction: travelling wave ∝cos(ωt−βz); mismatch gives standing-wave modulation",
+              "html": "<div class=\"verified-equation\" role=\"math\">z direction: travelling wave ∝cos(ωt−βz); mismatch gives standing-wave modulation</div>"
+            }
+          ],
+          "reason": "အဝိုင်းပုံ cross-section မှာ E က center မှ outer conductor ကို radial ထွက်၊ H က ပတ်ပတ်လည်လည်။ Lengthwise view မှာ sinusoidal wave သွားတယ်။",
+          "method": "XY မှာ conductor နှစ်ခုကြား radial arrows နှင့် concentric H circles ဆွဲပါ။ Z direction မှာ phase ωt−βz ကို ကိုယ်စားပြု sine wave တစ်ခုရေးပါ။ Reflection မရှိရင် amplitude traveling-wave၊ mismatch ရှိရင် forward/backward interference ကြောင့် standing wave envelope ထပ်ဆွဲပါ။",
+          "finalAnswer": "TEM fields are transverse; energy propagates along the z-axis.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        }
+      ]
+    },
+    {
+      "id": "official-cstd-I2",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "Completes I.2 system-tuple request in addition to the two state models.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "First coupled ODE as 4-state system",
+          "question": "Two coupled second-order ODEs: v¨+a₁v˙+a₂v=a₁w˙+a₂w+bu; w¨+a₃w˙+a₄w=a₅v˙+a₆v.",
+          "equations": [
+            "x=[v,v̇,w,ẇ]ᵀ",
+            "A=[[0,1,0,0], [−a₂,−a₁,a₂,a₁], [0,0,0,1], [a₆,a₅,−a₄,−a₃]]",
+            "B=[0,b,0,0]ᵀ; C=[[1,0,0,0],[−1,0,1,0]]; D=[0,0]ᵀ"
+          ],
+          "display": [
+            {
+              "latex": "x=[v,v̇,w,ẇ]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">x=[v,v̇,w,ẇ]ᵀ</div>"
+            },
+            {
+              "latex": "A=[[0,1,0,0], [−a₂,−a₁,a₂,a₁], [0,0,0,1], [a₆,a₅,−a₄,−a₃]]",
+              "html": "<div class=\"verified-equation\" role=\"math\">A=[[0,1,0,0], [−a₂,−a₁,a₂,a₁], [0,0,0,1], [a₆,a₅,−a₄,−a₃]]</div>"
+            },
+            {
+              "latex": "B=[0,b,0,0]ᵀ; C=[[1,0,0,0],[−1,0,1,0]]; D=[0,0]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">B=[0,b,0,0]ᵀ; C=[[1,0,0,0],[−1,0,1,0]]; D=[0,0]ᵀ</div>"
+            }
+          ],
+          "reason": "Second-order ODE ၂ ခုကို first-order derivatives ၄ ခု ခွဲထုတ်တယ်။ x state order သတ်မှတ်လိုက်ရင် A ၏ column order ကို အတူတူလိုက်ရမယ်။",
+          "method": "x1=v, x2=v̇, x3=w, x4=ẇ။ ẋ1=x2; ẋ2=−a₂x1−a₁x2+a₂x3+a₁x4+bu; ẋ3=x4; ẋ4=a₆x1+a₅x2−a₄x3−a₃x4. Outputs y1=x1,y2=x3−x1။",
+          "finalAnswer": "State vector dimension 4; A 4×4, B 4×1, C 2×4, D 2×1.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "b",
+          "title": "Third-order ODE as 3-state system",
+          "question": "z⁽³⁾+a₂z¨+a₁ż+a₀z=bu; output y=z+du.",
+          "equations": [
+            "x=[z,ż,z̈]ᵀ",
+            "A=[[0,1,0],[0,0,1],[−a₀,−a₁,−a₂]]",
+            "B=[0,0,b]ᵀ; C=[1,0,0]; D=d"
+          ],
+          "display": [
+            {
+              "latex": "x=[z,ż,z̈]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">x=[z,ż,z̈]ᵀ</div>"
+            },
+            {
+              "latex": "A=[[0,1,0],[0,0,1],[−a₀,−a₁,−a₂]]",
+              "html": "<div class=\"verified-equation\" role=\"math\">A=[[0,1,0],[0,0,1],[−a₀,−a₁,−a₂]]</div>"
+            },
+            {
+              "latex": "B=[0,0,b]ᵀ; C=[1,0,0]; D=d",
+              "html": "<div class=\"verified-equation\" role=\"math\">B=[0,0,b]ᵀ; C=[1,0,0]; D=d</div>"
+            }
+          ],
+          "reason": "Companion matrix နောက်ဆုံး row က ODE coefficient negative ဖြစ်ပြီး direct feedthrough du ရှိလို့ D=d ဖြစ်တယ်။",
+          "method": "x1=z, x2=ż, x3=z̈ ⇒ ẋ1=x2,ẋ2=x3,ẋ3=−a₀x1−a₁x2−a₂x3+bu။ Output y=x1+du ဖြစ်သည်။",
+          "finalAnswer": "Companion state-space of order 3 with feedthrough d.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "c",
+          "title": "System tuple for coupled ODEs",
+          "question": "Specify T, input alphabet U, admissible input functions, state/output spaces, transition φ and output η.",
+          "equations": [
+            "T=[0,∞); U=[−1,1]; ℰ={u:T→U | u piecewise continuous}",
+            "X=ℝ⁴; Y=ℝ²",
+            "φ(t,t₀,x₀,u)=e^{A(t−t₀)}x₀+∫_{t₀}^{t}e^{A(t−τ)}Bu(τ)dτ",
+            "η(t,x,u)=[x₁,x₃−x₁]ᵀ"
+          ],
+          "display": [
+            {
+              "latex": "T=[0,∞); U=[−1,1]; ℰ={u:T→U | u piecewise continuous}",
+              "html": "<div class=\"verified-equation\" role=\"math\">T=[0,∞); U=[−1,1]; ℰ={u:T→U | u piecewise continuous}</div>"
+            },
+            {
+              "latex": "X=ℝ⁴; Y=ℝ²",
+              "html": "<div class=\"verified-equation\" role=\"math\">X=ℝ⁴; Y=ℝ²</div>"
+            },
+            {
+              "latex": "φ(t,t₀,x₀,u)=e^{A(t−t₀)}x₀+∫_{t₀}^{t}e^{A(t−τ)}Bu(τ)dτ",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ(t,t₀,x₀,u)=e^{A(t−t₀)}x₀+∫_{t₀}^{t}e^{A(t−τ)}Bu(τ)dτ</div>"
+            },
+            {
+              "latex": "η(t,x,u)=[x₁,x₃−x₁]ᵀ",
+              "html": "<div class=\"verified-equation\" role=\"math\">η(t,x,u)=[x₁,x₃−x₁]ᵀ</div>"
+            }
+          ],
+          "reason": "System tuple မှာ U symbol နှစ်မျိုးကို ခွဲရတယ်။ Allowed input values သည် interval၊ admissible input signals သည် time function set ဖြစ်တယ်။",
+          "method": "T သည် nonnegative time domain။ Input u(t) bounded |u|≤1 နှင့် piecewise continuous ဖြစ်ရမယ်။ x∈R⁴,y∈R²။ LTI flow ကို matrix exponential variation-of-constants နဲ့ရယူပြီး output ကို Cx ဖြင့်ဖော်ပြသည်။",
+          "finalAnswer": "State tuple and flow explicitly stated for System 1.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "d",
+          "title": "System tuple for third-order ODE",
+          "question": "Specify time, inputs, spaces, transition and measurement for System 2.",
+          "equations": [
+            "T=ℝ; U=[0,∞); ℰ={u:T→U | u continuous}",
+            "X=ℝ³; Y=ℝ",
+            "φ(t,t₀,x₀,u)=e^{A(t−t₀)}x₀+∫_{t₀}^{t}e^{A(t−τ)}Bu(τ)dτ",
+            "η(t,x,u)=x₁+d u"
+          ],
+          "display": [
+            {
+              "latex": "T=ℝ; U=[0,∞); ℰ={u:T→U | u continuous}",
+              "html": "<div class=\"verified-equation\" role=\"math\">T=ℝ; U=[0,∞); ℰ={u:T→U | u continuous}</div>"
+            },
+            {
+              "latex": "X=ℝ³; Y=ℝ",
+              "html": "<div class=\"verified-equation\" role=\"math\">X=ℝ³; Y=ℝ</div>"
+            },
+            {
+              "latex": "φ(t,t₀,x₀,u)=e^{A(t−t₀)}x₀+∫_{t₀}^{t}e^{A(t−τ)}Bu(τ)dτ",
+              "html": "<div class=\"verified-equation\" role=\"math\">φ(t,t₀,x₀,u)=e^{A(t−t₀)}x₀+∫_{t₀}^{t}e^{A(t−τ)}Bu(τ)dτ</div>"
+            },
+            {
+              "latex": "η(t,x,u)=x₁+d u",
+              "html": "<div class=\"verified-equation\" role=\"math\">η(t,x,u)=x₁+d u</div>"
+            }
+          ],
+          "reason": "Second system က time domain ℝ၊ input nonnegative continuous ဖြစ်တယ်။ Output မှာ input တိုက်ရိုက်ပါလို့ η=x1+du ဖြစ်တယ်။",
+          "method": "System 2 နှင့် System 1 ၏ coefficients မတူကြောင်း သတိထားပါ။ T, U, ℰ, X, Y သတ်မှတ်ပြီး matrix A,B ဖြင့် flow formula ထည့်ပါ။",
+          "finalAnswer": "State tuple and flow explicitly stated for System 2.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        }
+      ]
+    },
+    {
+      "id": "practice-mse-spring",
+      "status": "worked",
+      "verificationState": "independently-derived",
+      "verificationNote": "New self-contained follow-up practice with independently calculated values, not an official PBL.",
+      "parts": [
+        {
+          "label": "a",
+          "title": "MEMS resonant frequency",
+          "question": "Independent practice: m=2 μg, k=20 N/m; find undamped natural frequency.",
+          "equations": [
+            "m=2×10⁻⁹ kg; k=20 N/m",
+            "ω₀=√(k/m)=√(20/(2×10⁻⁹))=100000 rad/s",
+            "f₀=ω₀/(2π)=15915.4943 Hz"
+          ],
+          "display": [
+            {
+              "latex": "m=2×10⁻⁹ kg; k=20 N/m",
+              "html": "<div class=\"verified-equation\" role=\"math\">m=2×10⁻⁹ kg; k=20 N/m</div>"
+            },
+            {
+              "latex": "ω₀=√(k/m)=√(20/(2×10⁻⁹))=100000 rad/s",
+              "html": "<div class=\"verified-equation\" role=\"math\">ω₀=√(k/m)=√(20/(2×10⁻⁹))=100000 rad/s</div>"
+            },
+            {
+              "latex": "f₀=ω₀/(2π)=15915.4943 Hz",
+              "html": "<div class=\"verified-equation\" role=\"math\">f₀=ω₀/(2π)=15915.4943 Hz</div>"
+            }
+          ],
+          "reason": "μg ကို kg ပြောင်းချိန် 10⁻⁹ နဲ့မြှောက်တယ်။ Angular frequency rad/s ကို ordinary frequency Hz သို့ 2π ဖြင့်စားရတယ်။",
+          "method": "Mass spring natural mode m ẍ+kx=0။ x=Acos(ωt) substitute လုပ်ရင် ω²=k/m။ ω=√(k/m), f=ω/(2π)။",
+          "finalAnswer": "f₀≈15.9155 kHz.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "b",
+          "title": "Static displacement under 1g",
+          "question": "For a=9.81 m/s², calculate quasi-static proof-mass displacement (no damping).",
+          "equations": [
+            "F_inertial=ma=2×10⁻⁹×9.81=1.962×10⁻⁸ N",
+            "kx=F ⇒ x=F/k=9.81×10⁻¹⁰ m",
+            "x=0.981 nm"
+          ],
+          "display": [
+            {
+              "latex": "F_inertial=ma=2×10⁻⁹×9.81=1.962×10⁻⁸ N",
+              "html": "<div class=\"verified-equation\" role=\"math\">F_inertial=ma=2×10⁻⁹×9.81=1.962×10⁻⁸ N</div>"
+            },
+            {
+              "latex": "kx=F ⇒ x=F/k=9.81×10⁻¹⁰ m",
+              "html": "<div class=\"verified-equation\" role=\"math\">kx=F ⇒ x=F/k=9.81×10⁻¹⁰ m</div>"
+            },
+            {
+              "latex": "x=0.981 nm",
+              "html": "<div class=\"verified-equation\" role=\"math\">x=0.981 nm</div>"
+            }
+          ],
+          "reason": "Acceleration ခံရတဲ့ proof mass ပေါ်မှာ ma force ဖြစ်ပြီး spring force kx က balance လုပ်တယ်။ Nano unit ပြောင်းဖို့ 10⁹ နဲ့မြှောက်တယ်။",
+          "method": "Quasi-static assumption သည် excitation frequency << natural frequency ဖြစ်ရမယ်။ F=ma ကို Hooke law kx=F နဲ့ညီစေပြီး x=ma/k။",
+          "finalAnswer": "At 1g the displacement magnitude is 0.981 nm.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        },
+        {
+          "label": "c",
+          "title": "Stiffness sensitivity tradeoff",
+          "question": "What happens if stiffness doubles while mass is unchanged?",
+          "equations": [
+            "k_new=2k=40 N/m",
+            "f_new/f_old=√(k_new/k)=√2 ≈1.41421356",
+            "x_new/x_old=k/k_new=1/2 ⇒ x_new=0.4905 nm"
+          ],
+          "display": [
+            {
+              "latex": "k_new=2k=40 N/m",
+              "html": "<div class=\"verified-equation\" role=\"math\">k_new=2k=40 N/m</div>"
+            },
+            {
+              "latex": "f_new/f_old=√(k_new/k)=√2 ≈1.41421356",
+              "html": "<div class=\"verified-equation\" role=\"math\">f_new/f_old=√(k_new/k)=√2 ≈1.41421356</div>"
+            },
+            {
+              "latex": "x_new/x_old=k/k_new=1/2 ⇒ x_new=0.4905 nm",
+              "html": "<div class=\"verified-equation\" role=\"math\">x_new/x_old=k/k_new=1/2 ⇒ x_new=0.4905 nm</div>"
+            }
+          ],
+          "reason": "Spring တင်းရင် resonance frequency တိုးပေမဲ့ acceleration sensitivity x/a=m/k လျော့တယ်။ Design tradeoff ပါ။",
+          "method": "Frequency scales with √k; static displacement scales with 1/k. k double ဖြစ်တဲ့အခါ f×√2၊ x÷2 ဖြစ်သည်။",
+          "finalAnswer": "f_new≈22.508 kHz; 1g displacement ≈0.4905 nm.",
+          "verification": "Independently re-derived against source; symbolic or numerical check noted in solution"
+        }
+      ]
+    }
+  ]
+}
