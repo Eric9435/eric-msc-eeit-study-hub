@@ -46,6 +46,24 @@ function badge(text,cls='plain'){return `<span class="badge ${cls}">${escape(tex
 function navigate(id){location.hash='#'+id;}
 function showExercise(id){focusedId=id;const e=currentExercise();activePart=e.parts?.[0]?.label||'';exerciseTab=e.parts?.length?'worked':'source';hideSolution=false;study.recent=[id,...study.recent.filter(x=>x!==id)].slice(0,30);persist();navigate('exercise/'+id);}
 function notify(message){$('.toast')?.remove();const el=document.createElement('div');el.className='toast';el.textContent=message;document.body.append(el);clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.remove(),3600);}
+function showSolutionExplanation(key,kind){
+ if(!['method','reason'].includes(kind))return;
+ const e=currentExercise(),p=(e?.parts||[]).find(part=>e.id+':'+part.label===key);
+ if(!p)return;
+ document.querySelector('.eeit-explanation-modal')?.remove();
+ const dialog=document.createElement('dialog');dialog.className='eeit-explanation-modal';
+ dialog.setAttribute('aria-label',kind==='method'?'Solution method':'Why this method works');
+ const head=document.createElement('div');head.className='eeit-explanation-head';
+ const title=document.createElement('h2');title.textContent=(kind==='method'?'Method / ဖြေရှင်းနည်း':'Reason / ဘာကြောင့်')+' · '+e.number+' ('+p.label+')';
+ const close=document.createElement('button');close.type='button';close.className='btn small';close.textContent='Close';close.addEventListener('click',()=>dialog.close());
+ head.append(title,close);
+ const paragraph=document.createElement('p');paragraph.className='myanmar-text';paragraph.textContent=String(p[kind]||'A complete explanation is not documented yet.');
+ const foot=document.createElement('p');foot.className='eeit-explanation-foot';foot.textContent='Independent study explanation · verify source givens and units before an examination.';
+ dialog.append(head,paragraph,foot);document.body.append(dialog);
+ dialog.addEventListener('close',()=>dialog.remove(),{once:true});
+ dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
+ if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');
+}
 function sidebar(){const nav=[['dashboard','Dashboard','home'],['library','Exercise library','book'],['documents','PDF Document Library','file'],['formulas','Formula bank','sigma'],['progress','My progress','chart'],['settings','Settings','settings']];return `<aside class="sidebar ${sideOpen?'open':''}">
 <button type="button" data-action="navigate" data-id="dashboard" class="brand-lockup" aria-label="Eric M.Sc EEIT Study Hub, go to dashboard"><span class="brand-image-frame"><img src="assets/eeit-study-hub-logo.webp" width="76" height="76" alt=""></span><span class="brand-titles"><span class="brand-name">Eric M.Sc EEIT</span><span class="brand-sub">STUDY HUB · WS 2026/27</span></span></button>
 <div class="menu-label">Workspace</div>${nav.map(([id,title,ico])=>`<button data-action="navigate" data-id="${id}" class="nav-item ${route===id?'active':''}">${icon(ico)} ${title}</button>`).join('')}
@@ -251,6 +269,7 @@ if(a==='visual-export'){
  return;
 }
 if(a==='navigate'){modal='';navigate(id);return;}if(a==='subject'){filterSubject=id;filterState='all';keyword='';navigate('library');render();return;}if(a==='open'){showExercise(id);return;}if(a==='open-part'){showExercise(id);activePart=node.dataset.part;render();return;}if(a==='mobile-menu'){sideOpen=!sideOpen;render();return;}if(a==='mobile-close'){sideOpen=false;render();return;}
+if(a==='solution-explanation'){showSolutionExplanation(id,node.dataset.kind);return;}
 if(a==='theme'){study.theme=study.theme==='dark'?'light':'dark';persist();render();return;}
 if(a==='part'){activePart=id;hideSolution=false;render();return;}if(a==='next-part'){nextPart();return;}if(a==='tab'){exerciseTab=id;render();return;}if(a==='solution-toggle'){hideSolution=!hideSolution;render();return;}
 if(a==='complete'||a==='master'||a==='bookmark'){const type=a==='complete'?'completed':a==='master'?'mastered':'bookmarks';stamp(type,id,!read(type,id));render();return;}
