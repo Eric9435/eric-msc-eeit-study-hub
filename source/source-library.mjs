@@ -18,7 +18,7 @@ const kindTitles={
  'administrative':'Course information',
  'independent-working':'Independent worked solutions'
 };
-const courseNames={digital:'Digital Communications',power:'Electrical Power Systems II',control:'Control Systems Theory and Design',microwave:'Microwave Engineering',micro:'Microsystem Engineering'};
+const courseNames={digital:'Digital Communications',power:'Electrical Power Systems II',control:'Control Systems Theory and Design',microwave:'Microwave Engineering',micro:'Microsystem Engineering',shared:'Shared Study Handbooks'};
 function catalog(){return catalogPromise||(catalogPromise=fetch('./data/pdf-catalog.json',{cache:'no-cache'}).then(async r=>{if(!r.ok)throw Error('PDF catalog unavailable ('+r.status+')');const doc=await r.json();if(!Array.isArray(doc.entries)||doc.entries.length<80||!doc.entries.every(e=>e.id&&e.subject&&e.filename))throw Error('Invalid document catalog');return doc;}).catch(e=>{catalogPromise=null;throw e}));}
 function openDB(){return new Promise((resolve,reject)=>{
  if(!('indexedDB' in window)){reject(Error('Browser does not support IndexedDB'));return;}
@@ -43,31 +43,48 @@ const displayType=e=>kindTitles[e.kind]||e.kind;
 function setMessage(host,message,error=false){const target=host.querySelector('[data-document-message]');if(target){target.textContent=message;target.dataset.error=error?'true':'false';}}
 function releaseReader(){if(activeObjectUrl){URL.revokeObjectURL(activeObjectUrl);activeObjectUrl=null}activeReader=null;}
 function recordIndex(records){return new Map(records.filter(r=>r&&r.key).map(r=>[r.key,r]))}
-function makeCard(entry,records,exerciseId){const saved=records.get(docKey(entry.id));const article=element('article','document-entry');article.dataset.docId=entry.id;
- const intro=element('div','document-entry-intro');intro.append(element('div','document-kind',displayType(entry)));
- const name=element('h3','document-entry-title',entry.title);intro.append(name);
+function makeCard(entry,records,exerciseId){
+ const saved=records.get(docKey(entry.id)),inDrive=Boolean(entry.drive_id);
+ const article=element('article','document-entry');article.dataset.docId=entry.id;
+ const intro=element('div','document-entry-intro');
+ intro.append(element('div','document-kind',displayType(entry)));
+ intro.append(element('h3','document-entry-title',entry.title));
  intro.append(element('p','document-entry-filename',entry.filename));
  const meta=element('div','document-entry-meta');
  meta.append(element('span','',entry.pages?String(entry.pages)+' pages':'Pages not indexed'));
- meta.append(element('span','',entry.recordType==='library-file-identified'?'Named Library source':'Archived PDF reference'));
- const state=element('span',saved?'document-state-present':'document-state-missing',saved?'Saved on this device':'Not attached');meta.append(state);
- if(exerciseId&&entry.exercisePages?.[exerciseId]){
-  const refs=entry.exercisePages[exerciseId];
-  const citation=[refs.question?'Question p. '+refs.question:null,refs.solution?'Sample answer p. '+refs.solution:null].filter(Boolean).join(' · ');
+ meta.append(element('span','',inDrive?'Owner-restricted Google Drive':entry.recordType==='library-file-identified'?'Named Library source':'Archived reference'));
+ meta.append(element('span',inDrive||saved?'document-state-present':'document-state-missing',saved?'Saved locally':inDrive?'Private PDF ready':'No PDF connected'));
+ const pages=exerciseId&&entry.exercisePages?.[exerciseId];
+ if(pages){
+  const citation=[pages.question?'Question p. '+pages.question:null,pages.solution?'Sample answer p. '+pages.solution:null].filter(Boolean).join(' · ');
   if(citation)meta.append(element('span','document-page-reference',citation));
  }
  intro.append(meta);
  if(entry.note&&entry.recordType==='library-file-identified')intro.append(element('p','document-entry-note',entry.note));
  article.append(intro);
  const controls=element('div','document-entry-actions');
- const label=element('label','document-attach',saved?'Replace PDF':'Attach PDF');
- const input=element('input');input.type='file';input.accept='.pdf,application/pdf';input.dataset.documentAttach=entry.id;input.setAttribute('aria-label','Attach '+entry.title+' as PDF');label.append(input);controls.append(label);
- if(saved){const view=element('button','document-secondary','Read PDF');view.type='button';view.dataset.documentRead=entry.id;controls.append(view);
- const pages=exerciseId&&entry.exercisePages?.[exerciseId];
- if(pages){for(const [kind,page] of Object.entries(pages)){if(!page)continue;const link=element('button','document-secondary','Go to '+(kind==='question'?'question':'answer')+' p. '+page);link.type='button';link.dataset.documentRead=entry.id;link.dataset.documentPage=String(page);controls.append(link)}}
- const remove=element('button','document-secondary','Remove');remove.type='button';remove.dataset.documentRemove=entry.id;controls.append(remove)}
- article.append(controls);return article}
-const ranked=(a,b)=>{const x=a.recordType==='library-file-identified'?0:1,y=b.recordType==='library-file-identified'?0:1;return x-y||a.filename.localeCompare(b.filename)};
+ if(inDrive){
+  const open=element('button','document-attach document-cloud-read','Read original PDF');
+  open.type='button';open.dataset.documentDrive=entry.drive_id;open.dataset.documentEntry=entry.id;controls.append(open);
+  if(pages){for(const [kind,page] of Object.entries(pages)){
+   if(!Number.isInteger(page)||page<=0)continue;
+   const direct=element('button','document-secondary','Open '+(kind==='question'?'question':'solution')+' p. '+page);
+   direct.type='button';direct.dataset.documentDrive=entry.drive_id;direct.dataset.documentEntry=entry.id;direct.dataset.documentPage=String(page);controls.append(direct);
+  }}
+ }
+ const label=element('label','document-secondary document-local-attach',saved?'Replace offline PDF':'Attach offline PDF');
+ const input=element('input');input.type='file';input.accept='.pdf,application/pdf';input.dataset.documentAttach=entry.id;
+ input.setAttribute('aria-label','Attach local copy of '+entry.title);
+ label.append(input);controls.append(label);
+ if(saved){
+  const view=element('button','document-secondary','Read local PDF');view.type='button';view.dataset.documentRead=entry.id;controls.append(view);
+  const remove=element('button','document-secondary','Remove local');remove.type='button';remove.dataset.documentRemove=entry.id;controls.append(remove);
+ }
+ article.append(controls);
+ return article;
+}
+const kindOrder={'questions-solutions':0,'question':1,'solution':2,'past-exam':3,'independent-working':4,'lab':5,'lecture-example':6,'lecture':7,'reference':8,'administrative':9};
+const ranked=(a,b)=>Number(Boolean(b.drive_id))-Number(Boolean(a.drive_id))||(kindOrder[a.kind]??10)-(kindOrder[b.kind]??10)||a.filename.localeCompare(b.filename);
 function renderLibrary(host,doc,all){
  const previousSearch=host.querySelector('[data-document-search]')?.value||'';
  const previousSubject=host.querySelector('[data-document-course]')?.value||'all';
@@ -76,13 +93,14 @@ function renderLibrary(host,doc,all){
  host.replaceChildren();
  const heading=element('div','document-library-header');
  heading.append(element('h2','','Course PDF library'));
- heading.append(element('p','','Browse the 81 archived TUHH source references and identified Library PDFs. Each document has its own private attach/read control. No instructor PDF is publicly hosted.'));
+ heading.append(element('p','','Access your original exercise sheets, official sample solutions, past exams, lecture PDFs and study handbooks from your private Google Drive. Owner access is required.'));
  host.append(heading);
  const count=element('div','document-counts');
- const attached=doc.entries.filter(x=>records.has(docKey(x.id))).length;
- count.append(element('strong','',doc.entries.length+' indexed source records'));
- count.append(element('span','',attached+' attached in this browser'));
- count.append(element('span','','Local files do not sync with Google Sign-In'));
+ const attached=doc.entries.filter(x=>records.has(docKey(x.id))).length,driveCount=doc.entries.filter(x=>x.drive_id).length;
+ count.append(element('strong','',driveCount+' original PDFs in private Google Drive'));
+ count.append(element('span','',doc.entries.length+' catalog entries'));
+ count.append(element('span','',attached+' locally saved'));
+ count.append(element('span','','Sign in to the private Drive owner account to read source PDFs.'));
  host.append(count);
  const filters=element('div','document-filters');
  const search=element('input');search.type='search';search.placeholder='Search filename, chapter or type';search.value=previousSearch;search.dataset.documentSearch='yes';search.setAttribute('aria-label','Search PDF catalog');filters.append(search);
@@ -107,7 +125,7 @@ function renderLibrary(host,doc,all){
  archiveLabel.append(archiveInput);bulk.append(archiveLabel);
  host.append(bulk);
  const grid=element('div','document-list-grid');grid.dataset.documentEntries='yes';host.append(grid);
- const notice=element('p','document-library-notice','Catalog metadata is not a downloadable PDF. To read the actual source file here, attach your own copy. Course PDFs remain in your local browser storage unless you remove them or clear browser data.');host.append(notice);
+ const notice=element('p','document-library-notice','Your original PDFs are stored in private Google Drive, not publicly on GitHub or Render. Browser-local import remains optional for offline reading; clearing browser data can remove local copies only.');host.append(notice);
  const update=()=>{const q=search.value.trim().toLowerCase(),subject=sub.value,kind=type.value;grid.replaceChildren();
  const filtered=doc.entries.filter(x=>(subject==='all'||x.subject===subject)&&(kind==='all'||x.kind===kind)&&(!q||[x.filename,x.title,x.note||'',courseNames[x.subject],displayType(x)].join(' ').toLowerCase().includes(q))).sort(ranked);
  if(!filtered.length){grid.append(element('p','document-empty','No PDF records match your filters.'));return;}
@@ -120,10 +138,10 @@ function renderLibrary(host,doc,all){
  update();
  const reader=element('div','document-main-reader');reader.dataset.documentReader='yes';host.append(reader);
 }
-function renderShelf(host,doc,all){const course=host.dataset.course;const records=recordIndex(all);const entries=doc.entries.filter(e=>e.subject===course&&e.recordType==='library-file-identified').sort(ranked);const legacy=all.filter(x=>x.key===course+':question'||x.key===course+':solution');
+function renderShelf(host,doc,all){const course=host.dataset.course;const records=recordIndex(all);const entries=doc.entries.filter(e=>e.subject===course&&(e.drive_id||e.recordType==='library-file-identified')).sort((a,b)=>Number(!a.exercisePages?.[host.dataset.exercise])-Number(!b.exercisePages?.[host.dataset.exercise])||ranked(a,b)).slice(0,12);const legacy=all.filter(x=>x.key===course+':question'||x.key===course+':solution');
  host.replaceChildren();
  host.append(element('h3','','Original PDF references for this exercise'));
- host.append(element('p','source-shelf-intro','Source files are kept privately on this device. Match the original question, sample solution and independent working against the white-paper derivation.'));
+ host.append(element('p','source-shelf-intro','Original question PDFs and official answers are available in private Google Drive. Select Read original PDF; your browser may ask you to sign in to the file-owner Google account.'));
  const list=element('div','document-cards');for(const entry of entries)list.append(makeCard(entry,records,host.dataset.exercise));host.append(list);
  if(legacy.length){const section=element('div','document-legacy');section.append(element('h4','','Previously attached course files'));
  for(const item of legacy){const row=element('div','document-legacy-row');
@@ -132,7 +150,7 @@ function renderShelf(host,doc,all){const course=host.dataset.course;const record
  const link=element('a','document-all-link','See all PDFs for '+(courseNames[course]||'this subject'));link.href='#documents';host.append(link);
  const reader=element('div','document-main-reader');reader.dataset.documentReader='yes';host.append(reader);
 }
-async function refreshHost(host){if(!host.isConnected)return;try{const [doc,all]=await Promise.all([catalog(),fetchAll()]);
+async function refreshHost(host){if(!host.isConnected)return;try{const [doc,all]=await Promise.all([catalog(),fetchAll().catch(()=>[])]);
  if(!host.isConnected)return;
  if(host.hasAttribute('data-eeit-document-library'))renderLibrary(host,doc,all);
  else renderShelf(host,doc,all);
