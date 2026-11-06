@@ -35,6 +35,10 @@ async function check(){
   assert(originalPractice.overrides.every(e=>e.parts.every(p=>p.working?.length>=4)),'Original solutions lack full calculation sequences');
   const practiceIds=new Set(originalPractice.overrides.map(x=>x.id));
   assert(content.subjects.every(s=>content.exercises.some(e=>e.subject===s.id&&practiceIds.has(e.id))),'An engineering subject lacks reworked practice');
+  const sourceDerived=JSON.parse((await get('/data/source-backed-derivations.json')).bytes.toString('utf8'));
+  assert.equal(sourceDerived.overrides.length,2,'Missing reconstructed original tutorial sets');
+  assert.equal(sourceDerived.overrides.reduce((n,e)=>n+e.parts.length,0),31,'Source-aligned tutorial set is incomplete');
+  assert(sourceDerived.overrides.every(e=>e.parts.every(p=>p.method&&p.finalAnswer&&p.display?.length)),'Source-aligned tutorial method/formula missing');
   const logo=(await get('/assets/eeit-study-hub-logo.webp')).bytes;
   assert(logo.length>2000 && logo.toString('ascii',0,4)==='RIFF' && logo.toString('ascii',8,12)==='WEBP','Invalid logo file');
   for(const path of ['/styles.css','/brand-ui.css','/inline-solutions.css','/a4-paper.css','/visuals.css','/visuals.mjs','/app.js','/cloud.js','/sw.js','/manifest.webmanifest']){
@@ -48,11 +52,13 @@ async function check(){
   assert(/javascript|ecmascript/.test(visualAsset.response.headers.get('content-type')||''),'Visual module must be served with JavaScript MIME, got '+visualAsset.response.headers.get('content-type'));
   assert(visualAsset.bytes.toString('utf8').includes('createVisualEngine'),'Wrong live visuals module asset');
   assert(app.includes('original-practice-reworked.json'),'Original calculations not loaded by client');
+  assert(app.includes('source-backed-derivations.json'),'Original tutorial answer data not loaded by client');
+  assert(app.includes('not yet certified'),'Exam readiness must be presented honestly');
   assert(app.includes('paper-workline-label'),'Step-by-step working not rendered');
   assert(!app.includes('showPartExplanation('),'Obsolete popup still deployed');
   const config=(await get('/cloud-config.js')).bytes.toString('utf8');
   assert.match(config,/window\.EEIT_FIREBASE_CONFIG\s*=\s*\{/,'Firebase web app configuration missing');
-  console.log('PASS live HTTP: website, HTML, 5 subjects, 82 exercises, 63 original-practice full derivations, at least 277 merged parts, 69 formulas, valid logo, JS/CSS assets, Firebase web configuration present.');
+  console.log('PASS live HTTP: website, HTML, 5 subjects, 82 exercises, 63 original-practice derivations, 31 source-aligned original tutorial parts, at least 277 guided parts, 69 formulas, valid logo, JS/CSS assets, Firebase web configuration present.');
 }
 let error;
 for(let i=1;i<=12;i++){
